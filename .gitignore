@@ -12,6 +12,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# THe folder where i collect inspiration/resources for this project
+refs/
 
 # environment variables
 .env
