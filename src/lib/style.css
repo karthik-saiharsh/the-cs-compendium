@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: "departure";
+    src: url("DepartureMono-Regular.otf");
+}
+
+* {
+    user-select: none;
+}
+
+@theme {
+    --font-departure: departure;
+    --color-primary-bg: #222222;
+    --color-primary-fgo: #6b6b57;
+    --color-primary-fgt: #ffa133;
+    --color-fg-main: #c0c0c0;
+}
+
+.dotted-grid {
+    /* background-color: white; */
+    background-image: radial-gradient(#6b6b5740 1px, transparent 1px);
+    background-size: 20px 20px;
+    /* Adjust this to change dot spacing */
+}

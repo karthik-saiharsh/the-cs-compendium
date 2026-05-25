@@ -1,0 +1,6 @@
+---
+import Content from "../../layout/Content.astro";
+import * as greatPost from "./content.md";
+---
+
+<Content title={greatPost.frontmatter.title} author={greatPost.frontmatter.author} date={greatPost.frontmatter.date} />

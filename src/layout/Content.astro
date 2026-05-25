@@ -1,0 +1,33 @@
+---
+import "../lib/style.css";
+
+const { title, author, date } = Astro.props;
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+    </head>
+    <body class={`bg-primary-bg dotted-grid my-10 flex flex-col items-center`}>
+        <div class="text-center">
+            <h1 class="font-departure font-bold text-primary-fgt text-5xl mb-5">
+                {title}
+            </h1>
+            <span class="flex text-center justify-center gap-10">
+                <h2 class="text-fg-main font-departure text-balance font-bold">
+                    Author: {author}
+                </h2>
+
+                <h2 class="text-fg-main font-departure text-balance font-bold">
+                    Date: {date}
+                </h2>
+            </span>
+        </div>
+        <slot />
+    </body>
+</html>

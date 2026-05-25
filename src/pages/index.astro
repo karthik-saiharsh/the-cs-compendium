@@ -1,17 +1,33 @@
 ---
-
+import "../lib/style.css";
+import Base from "../layout/Base.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base
+	title="The CS Compendium"
+	className="h-screen w-screen flex flex-col gap-5 justify-center items-center"
+>
+	<h1 class="text-primary-fgt font-departure text-6xl font-bold text-center">
+		The CS Compendium
+	</h1>
+	<h2 class="text-primary-fgo font-bold font-departure text-2xl text-center">
+		Created By: Karthik Saiharsh
+	</h2>
+
+	<div
+		class="flex max-sm:flex-col justify-center items-center gap-5 px-5 font-departure"
+	>
+		<a
+			class="text-base text-fg-main hover:text-primary-fgt hover:scale-110 transition-all ease-in-out"
+			href="">[ About ]</a
+		>
+		<a
+			class="text-base text-fg-main hover:text-primary-fgt hover:scale-105 transition-all ease-in-out"
+			href="./contents">[ Browser Contents ]</a
+		>
+		<a
+			class="text-base text-fg-main hover:text-primary-fgt hover:scale-105 transition-all ease-in-out"
+			href="">[ Contribute ]</a
+		>
+	</div>
+</Base>
