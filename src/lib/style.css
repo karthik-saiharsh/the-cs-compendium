@@ -11,10 +11,10 @@
 
 @theme {
     --font-departure: departure;
-    --color-primary-bg: #222222;
-    --color-primary-fgo: #6b6b57;
-    --color-primary-fgt: #ffa133;
-    --color-fg-main: #c0c0c0;
+    --color-primary-bg: #eeeeee;
+    --color-primary-fgo: #444444;
+    --color-primary-fgt: #8aa788;
+    --color-primary-fgth: #444444;
 }
 
 .dotted-grid {
@@ -22,4 +22,71 @@
     background-image: radial-gradient(#6b6b5740 1px, transparent 1px);
     background-size: 20px 20px;
     /* Adjust this to change dot spacing */
+}
+
+:where(.markdown-content) {
+    line-height: 1.85;
+}
+
+:where(.markdown-content) :where(h1) {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-block: 0 0.75rem;
+}
+
+:where(.markdown-content) :where(h2) {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-block: 1.5rem 0.75rem;
+}
+
+:where(.markdown-content) :where(h3) {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-block: 1.25rem 0.5rem;
+}
+
+:where(.markdown-content) :where(p, ul, ol, blockquote, pre) {
+    margin-block: 0 1rem;
+}
+
+:where(.markdown-content) :where(ul, ol) {
+    padding-inline-start: 1.5rem;
+}
+
+:where(.markdown-content) :where(ul) {
+    list-style: disc;
+}
+
+:where(.markdown-content) :where(ol) {
+    list-style: decimal;
+}
+
+:where(.markdown-content) :where(li + li) {
+    margin-top: 0.35rem;
+}
+
+:where(.markdown-content) :where(a) {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+}
+
+:where(.markdown-content) :where(strong) {
+    font-weight: 700;
+}
+
+:where(.markdown-content) :where(em) {
+    font-style: italic;
+}
+
+:where(.markdown-content) :where(blockquote) {
+    padding-inline-start: 1rem;
+    border: 2px solid currentColor;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    opacity: 0.9;
+    font-size: 1.5rem;
 }

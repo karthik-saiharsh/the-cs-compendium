@@ -28,6 +28,8 @@ const { title, author, date } = Astro.props;
                 </h2>
             </span>
         </div>
-        <slot />
+        <div class="markdown-content">
+            <slot />
+        </div>
     </body>
 </html>
