@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 @import "tailwindcss";
 
 @font-face {
     font-family: "departure";
     src: url("DepartureMono-Regular.otf");
 }
+
 
 * {
     user-select: none;
@@ -33,6 +35,8 @@
     font-weight: 700;
     line-height: 1.15;
     margin-block: 0 0.75rem;
+    font-family: departure;
+    text-decoration: underline;
 }
 
 :where(.markdown-content) :where(h2) {
@@ -40,6 +44,8 @@
     font-weight: 700;
     line-height: 1.25;
     margin-block: 1.5rem 0.75rem;
+    font-family: departure;
+    text-decoration: underline;
 }
 
 :where(.markdown-content) :where(h3) {
@@ -47,10 +53,13 @@
     font-weight: 700;
     line-height: 1.3;
     margin-block: 1.25rem 0.5rem;
+    font-family: departure;
+    text-decoration: underline;
 }
 
 :where(.markdown-content) :where(p, ul, ol, blockquote, pre) {
     margin-block: 0 1rem;
+    font-family: "IBM Plex Mono";
 }
 
 :where(.markdown-content) :where(ul, ol) {
@@ -75,7 +84,7 @@
 }
 
 :where(.markdown-content) :where(strong) {
-    font-weight: 700;
+    font-weight: bolder;
 }
 
 :where(.markdown-content) :where(em) {
@@ -85,8 +94,19 @@
 :where(.markdown-content) :where(blockquote) {
     padding-inline-start: 1rem;
     border: 2px solid currentColor;
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 1.5rem;
     opacity: 0.9;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: departure;
+}
+
+:where(.markdown-content) :where(blockquote, blockquote *) {
+    font-family: departure;
+}
+
+:where(.markdown-content) :where(img) {
+    border-radius: 2rem;
+
 }
