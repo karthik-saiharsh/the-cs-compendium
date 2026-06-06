@@ -29,6 +29,9 @@
 
 :where(.markdown-content) {
     line-height: 1.85;
+    overflow: visible;
+    /* allow container to expand to show full content */
+    word-break: break-word;
 }
 
 :where(.markdown-content) :where(h1) {
@@ -41,7 +44,7 @@
 }
 
 :where(.markdown-content) :where(h2) {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     line-height: 1.25;
     margin-block: 1.5rem 0.75rem;
@@ -117,10 +120,23 @@
 }
 
 :where(.markdown-content) :where(img) {
-    border-radius: 1.5rem;
-    box-shadow: 4px 4px 20px 0px #00000030;
+    border-radius: 1.2rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
     margin: 3rem 0rem 3rem 0rem;
     border: 1px solid var(--color-primary-fgo)
+}
+
+/* Make images and tables responsive so they don't force inner scrolling */
+:where(.markdown-content) :where(img) {
+    max-width: 100%;
+    height: auto;
+}
+
+:where(.markdown-content) :where(table) {
+    width: 100%;
+    max-width: 100%;
+    border: 1px solid var(--color-primary-fgo);
+    margin: 3rem 0rem 3rem 0rem;
 }
 
 /* Markdown table styling */
@@ -133,9 +149,9 @@
     background: white;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
     border-radius: 0.75rem;
-    overflow: hidden;
-    display: block;
-    /* enables horizontal scroll on small screens */
+    /* allow the table to behave like a normal table while letting
+       the surrounding .markdown-content handle horizontal scrolling */
+    table-layout: auto;
 }
 
 :where(.markdown-content) :where(th, td) {
@@ -164,7 +180,7 @@
 /* Make very wide tables scroll horizontally on small screens */
 :where(.markdown-content) :where(table) {
     max-width: 100%;
-    overflow: auto;
+    /* rely on the markdown container's horizontal scrolling */
 }
 
 /* Ensure code blocks inside table cells wrap and look tidy */
@@ -181,4 +197,46 @@
     background-color: #ffffff;
     padding: 2px 3px 3px 7px;
     border-radius: 5px;
+}
+
+/* Fix rounded corners & shadow clipping for tables */
+:where(.markdown-content) :where(table) {
+    /* ensure background and radius are respected */
+    border-collapse: separate;
+    border-radius: 0.75rem;
+    background-clip: padding-box;
+}
+
+:where(.markdown-content) :where(table tr:first-child th:first-child, table tr:first-child td:first-child) {
+    border-top-left-radius: 0.75rem;
+}
+
+:where(.markdown-content) :where(table tr:first-child th:last-child, table tr:first-child td:last-child) {
+    border-top-right-radius: 0.75rem;
+}
+
+:where(.markdown-content) :where(table tr:last-child td:first-child, table tr:last-child th:first-child) {
+    border-bottom-left-radius: 0.75rem;
+}
+
+:where(.markdown-content) :where(table tr:last-child td:last-child, table tr:last-child th:last-child) {
+    border-bottom-right-radius: 0.75rem;
+}
+
+/* Let header backgrounds respect the radius and avoid corner overflow */
+:where(.markdown-content) :where(th) {
+    background-clip: padding-box;
+}
+
+/* Keep table cells transparent so the table background shows through rounded corners */
+:where(.markdown-content) :where(td) {
+    background: transparent;
+}
+
+.btn-cont {
+    @apply w-full h-fit flex justify-center items-center gap-5
+}
+
+.next-button {
+    @apply decoration-0 font-departure text-balance bg-primary-bg text-primary-fgo px-4 py-1 rounded-lg cursor-pointer border-2 border-primary-fgo hover:scale-105 active:scale-95 transition-all ease-in-out
 }
