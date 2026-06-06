@@ -13,6 +13,7 @@
 
 @theme {
     --font-departure: departure;
+    --font-ibm-mono: "IBM Plex Mono";
     --color-primary-bg: #eeeeee;
     --color-primary-fgo: #444444;
     --color-primary-fgt: #8aa788;
@@ -54,6 +55,15 @@
     line-height: 1.3;
     margin-block: 1.25rem 0.5rem;
     font-family: departure;
+    text-decoration: underline;
+}
+
+:where(.markdown-content) :where(h4) {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-block: 1.25rem 0.5rem;
+    font-family: "IBM Plex Mono";
     text-decoration: underline;
 }
 
@@ -107,6 +117,68 @@
 }
 
 :where(.markdown-content) :where(img) {
-    border-radius: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 4px 4px 20px 0px #00000030;
+    margin: 3rem 0rem 3rem 0rem;
+    border: 1px solid var(--color-primary-fgo)
+}
 
+/* Markdown table styling */
+:where(.markdown-content) :where(table) {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 1.25rem 0;
+    font-family: "IBM Plex Mono";
+    background: white;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    display: block;
+    /* enables horizontal scroll on small screens */
+}
+
+:where(.markdown-content) :where(th, td) {
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    text-align: left;
+    vertical-align: middle;
+    font-size: 0.95rem;
+}
+
+:where(.markdown-content) :where(th) {
+    background: linear-gradient(180deg, #fafafa, #f2f2f2);
+    font-weight: 700;
+    color: var(--color-primary-fgo);
+}
+
+:where(.markdown-content) :where(tbody tr:nth-child(odd)) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+:where(.markdown-content) :where(tbody tr:hover) {
+    background-color: rgba(138, 167, 136, 0.07);
+    /* subtle green hover */
+}
+
+/* Make very wide tables scroll horizontally on small screens */
+:where(.markdown-content) :where(table) {
+    max-width: 100%;
+    overflow: auto;
+}
+
+/* Ensure code blocks inside table cells wrap and look tidy */
+:where(.markdown-content) :where(td pre, td code) {
+    font-family: "IBM Plex Mono";
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+:where(.markdown-content) :where(code) {
+    font-family: "IBM Plex Mono";
+    white-space: pre-wrap;
+    word-break: break-word;
+    background-color: #ffffff;
+    padding: 2px 3px 3px 7px;
+    border-radius: 5px;
 }
