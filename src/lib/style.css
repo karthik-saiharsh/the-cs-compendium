@@ -120,10 +120,11 @@
 }
 
 :where(.markdown-content) :where(img) {
-    border-radius: 1.2rem;
+    /* border-radius: 1.2rem;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
     margin: 3rem 0rem 3rem 0rem;
-    border: 1px solid var(--color-primary-fgo)
+    border: 1px solid var(--color-primary-fgo) */
+    @apply rounded-[1.2rem] max-sm:rounded-lg shadow-[0px_6px_18px_rgba(0,0,0,0.1)] my-12 border border-primary-fgo
 }
 
 /* Make images and tables responsive so they don't force inner scrolling */
