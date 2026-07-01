@@ -1,0 +1,102 @@
+---
+import Base from "../layout/Base.astro";
+
+type ResourceModule = {
+    frontmatter?: {
+        title?: string;
+        heading?: string;
+        description?: string;
+    };
+};
+
+const resourceModules = import.meta.glob<ResourceModule>("./*/1.md", {
+    eager: true,
+});
+
+const resources = Object.entries(resourceModules)
+    .map(([path, module]) => {
+        const folder = path.split("/")[1];
+        const frontmatter = module.frontmatter ?? {};
+
+        return {
+            folder,
+            title: frontmatter.title ?? folder,
+            description:
+                frontmatter.description ??
+                `Open the first chapter in the ${folder} resource.`,
+            href: `/${folder}/1`,
+        };
+    })
+    .sort((left, right) => left.folder.localeCompare(right.folder));
+---
+
+<Base
+    title="The CS Compendium - Contents"
+    className="min-h-screen w-screen flex flex-col items-center justify-center px-6 py-10"
+>
+    <div
+        class="w-full max-w-5xl rounded-4xl border border-primary-fgt/20 bg-primary-bg/80 px-6 py-8 shadow-sm backdrop-blur-sm md:px-10 md:py-10"
+    >
+        <div class="max-w-2xl">
+            <p
+                class="text-primary-fgth font-departure text-sm uppercase tracking-[0.28em]"
+            >
+                Contents
+            </p>
+            <h1
+                class="mt-3 text-4xl font-departure font-bold text-primary-fgt md:text-6xl"
+            >
+                The CS Compendium
+            </h1>
+            <p
+                class="mt-4 max-w-xl text-base leading-8 text-primary-fgo md:text-lg font-ibm-mono"
+            >
+              Browser below, my solutions and explanations to various leetcode problems grouped by topic :)
+            </p>
+        </div>
+
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {
+                resources.map((resource) => (
+                    <a
+                        href={resource.href}
+                        class="group rounded-2xl border border-primary-fgt/15 bg-white/70 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-primary-fgt/35 hover:shadow-md"
+                    >
+                        <div class="flex items-center justify-between gap-4">
+                            <div>
+                                <p class="font-departure text-xs uppercase tracking-[0.22em] text-primary-fgth">
+                                    Resource
+                                </p>
+                                <h2 class="mt-2 text-2xl font-departure font-bold text-primary-fgo">
+                                    {resource.folder}
+                                </h2>
+                            </div>
+                            <span class="text-2xl text-primary-fgt transition-transform duration-200 group-hover:translate-x-1">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="lucide lucide-move-right-icon lucide-move-right"
+                                >
+                                    <>
+                                        <path d="M18 8L22 12L18 16" />
+                                        <path d="M2 12H22" />
+                                    </>
+                                </svg>
+                            </span>
+                        </div>
+                        <p class="mt-4 text-sm leading-7 text-primary-fgo font-ibm-mono">
+                            {resource.description}
+                        </p>
+                    </a>
+                ))
+            }
+        </div>
+    </div>
+</Base>
