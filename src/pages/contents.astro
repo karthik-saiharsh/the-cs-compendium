@@ -13,21 +13,24 @@ const resourceModules = import.meta.glob<ResourceModule>("./*/1.md", {
     eager: true,
 });
 
-const resources = Object.entries(resourceModules)
-    .map(([path, module]) => {
+const resources = [
+    ...Object.entries(resourceModules).map(([path, module]) => {
         const folder = path.split("/")[1];
         const frontmatter = module.frontmatter ?? {};
-
         return {
             folder,
-            title: frontmatter.title ?? folder,
             description:
                 frontmatter.description ??
                 `Open the first chapter in the ${folder} resource.`,
             href: `/${folder}/1`,
         };
-    })
-    .sort((left, right) => left.folder.localeCompare(right.folder));
+    }),
+    {
+        folder: "leetcode",
+        description: "Browse LeetCode solutions grouped by topic.",
+        href: "/leetcode/contents",
+    },
+].sort((left, right) => left.folder.localeCompare(right.folder));
 ---
 
 <Base

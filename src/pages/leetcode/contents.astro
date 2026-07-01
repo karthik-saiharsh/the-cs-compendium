@@ -1,5 +1,5 @@
 ---
-import Base from "../layout/Base.astro";
+import Base from "../../layout/Base.astro";
 
 type ResourceModule = {
     frontmatter?: {
@@ -24,7 +24,7 @@ const resources = Object.entries(resourceModules)
             description:
                 frontmatter.description ??
                 `Open the first chapter in the ${folder} resource.`,
-            href: `/${folder}/1`,
+            href: `/leetcode/${folder}/1`,
         };
     })
     .sort((left, right) => left.folder.localeCompare(right.folder));
