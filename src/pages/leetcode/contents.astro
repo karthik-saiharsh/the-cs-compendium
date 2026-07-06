@@ -1,33 +1,16 @@
 ---
 import Base from "../../layout/Base.astro";
 
-type ResourceModule = {
-    frontmatter?: {
-        title?: string;
-        heading?: string;
-        description?: string;
-    };
-};
+const files = import.meta.glob("./*.md", {eager: true, import: "frontmatter",});
 
-const resourceModules = import.meta.glob<ResourceModule>("./*/1.md", {
-    eager: true,
-});
+let resources = []
 
-const resources = Object.entries(resourceModules)
-    .map(([path, module]) => {
-        const folder = path.split("/")[1];
-        const frontmatter = module.frontmatter ?? {};
 
-        return {
-            folder,
-            title: frontmatter.title ?? folder,
-            description:
-                frontmatter.description ??
-                `Open the first chapter in the ${folder} resource.`,
-            href: `/leetcode/${folder}/1`,
-        };
-    })
-    .sort((left, right) => left.folder.localeCompare(right.folder));
+for(const name of Object.keys(files)){
+  const resourceName = name.substring(2, name.lastIndexOf("."));
+  resources.push({name:resourceName, href:`/leetcode/${resourceName}`, subtitle: files[name].title});
+}
+
 ---
 
 <Base
@@ -46,12 +29,12 @@ const resources = Object.entries(resourceModules)
             <h1
                 class="mt-3 text-4xl font-departure font-bold text-primary-fgt md:text-6xl"
             >
-                The CS Compendium
+              LeetCode Problems
             </h1>
             <p
                 class="mt-4 max-w-xl text-base leading-8 text-primary-fgo md:text-lg font-ibm-mono"
             >
-              Browser below, my solutions and explanations to various leetcode problems grouped by topic :)
+              Browser below, my solutions and explanations to various leetcode problems :)
             </p>
         </div>
 
@@ -65,10 +48,10 @@ const resources = Object.entries(resourceModules)
                         <div class="flex items-center justify-between gap-4">
                             <div>
                                 <p class="font-departure text-xs uppercase tracking-[0.22em] text-primary-fgth">
-                                    Resource
+                                   Problem 
                                 </p>
                                 <h2 class="mt-2 text-2xl font-departure font-bold text-primary-fgo">
-                                    {resource.folder}
+                                    {resource.name}
                                 </h2>
                             </div>
                             <span class="text-2xl text-primary-fgt transition-transform duration-200 group-hover:translate-x-1">
@@ -92,7 +75,7 @@ const resources = Object.entries(resourceModules)
                             </span>
                         </div>
                         <p class="mt-4 text-sm leading-7 text-primary-fgo font-ibm-mono">
-                            {resource.description}
+                            {resource.subtitle}
                         </p>
                     </a>
                 ))
