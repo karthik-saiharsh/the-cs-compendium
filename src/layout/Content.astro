@@ -4,23 +4,32 @@ const { frontmatter } = Astro.props;
 ---
 
 <Base
-    title={frontmatter.title}
-    className="min-h-screen w-screen flex flex-col gap-8 justify-center items-center px-6 py-10"
+  title={frontmatter.title}
+  className="min-h-screen w-screen flex flex-col gap-8 justify-center items-center px-6 py-10"
 >
-    <h1
-        class="text-primary-fgt font-departure text-6xl max-md:text-5xl max-sm:text-4xl font-bold text-center"
-    >
-        {frontmatter.heading}
-    </h1>
-    <h2 class="font-departure text-balance max-sm:text-sm">Author: {frontmatter.author}</h2>
+  <h1
+    class="text-primary-fgt font-departure text-6xl max-md:text-5xl max-sm:text-4xl font-bold text-center"
+  >
+    {frontmatter.heading}
+  </h1>
+  <h2 class="font-departure text-balance max-sm:text-sm">
+    Author: {frontmatter.author}
+  </h2>
+  {
+    frontmatter.source && (
+      <h2 class="font-departure text-balance max-sm:text-sm">
+        Learnt From: {frontmatter.source}
+      </h2>
+    )
+  }
 
-    <div
-        class="w-full max-w-3xl rounded-3xl border border-primary-fgt/20 bg-primary-bg/80 px-6 py-8 text-primary-fgo shadow-sm backdrop-blur-sm md:px-10 md:py-10"
+  <div
+    class="w-full max-w-3xl rounded-3xl border border-primary-fgt/20 bg-primary-bg/80 px-6 py-8 text-primary-fgo shadow-sm backdrop-blur-sm md:px-10 md:py-10"
+  >
+    <article
+      class="markdown-content space-y-5 text-left text-base leading-8 md:text-lg"
     >
-        <article
-            class="markdown-content space-y-5 text-left text-base leading-8 md:text-lg"
-        >
-            <slot />
-        </article>
-    </div>
+      <slot />
+    </article>
+  </div>
 </Base>

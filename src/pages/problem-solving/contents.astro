@@ -1,5 +1,5 @@
 ---
-import Base from "../layout/Base.astro";
+import Base from "../../layout/Base.astro";
 
 type ResourceModule = {
   frontmatter?: {
@@ -25,16 +25,11 @@ const resources = [
       href: `/${folder}/1`,
     };
   }),
-  {
-    folder: "problem-solving",
-    description: "Browse my solutions to various coding problems.",
-    href: "/problem-solving/contents",
-  },
 ].sort((left, right) => left.folder.localeCompare(right.folder));
 ---
 
 <Base
-  title="The CS Compendium - Contents"
+  title="Problem Solving - Contents"
   className="min-h-screen w-screen flex flex-col items-center justify-center px-6 py-10"
 >
   <div
@@ -49,17 +44,17 @@ const resources = [
       <h1
         class="mt-3 text-4xl font-departure font-bold text-primary-fgt md:text-6xl"
       >
-        The CS Compendium
+        Problem Solving
       </h1>
       <p
         class="mt-4 max-w-xl text-base leading-8 text-primary-fgo md:text-lg font-ibm-mono"
       >
-        Browse the available resources below. Each card opens the first page of
-        that resource.
+        This Page contains my solutions to various Coding Problems.
+        My source of these questions was <a class="underline" target="_blank" href="https://a2zdsa.pages.dev/">This</a>
       </p>
     </div>
 
-    <div class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3 mb-5">
+    <div class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
       {
         resources.map((resource) => (
           <a
@@ -102,6 +97,6 @@ const resources = [
         ))
       }
     </div>
-    <a href="/" class="next-button">Go Back</a>
+    <a href="/contents" class="next-button">Go Back</a>
   </div>
 </Base>
