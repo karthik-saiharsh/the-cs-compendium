@@ -22,7 +22,7 @@ const resources = [
       description:
         frontmatter.description ??
         `Open the first chapter in the ${folder} resource.`,
-      href: `/${folder}/1`,
+      href: `./${folder}/1`,
     };
   }),
 ].sort((left, right) => left.folder.localeCompare(right.folder));
@@ -54,7 +54,7 @@ const resources = [
       </p>
     </div>
 
-    <div class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    <div class="mt-8 mb-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
       {
         resources.map((resource) => (
           <a

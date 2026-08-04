@@ -77,7 +77,7 @@ freopen("output.txt", "w", stdout);
 `fopen` creates a new stream and you have to read from it, while `freopen` reuses an existing stream, `stdin` and `stdout` in this case
 
 <div class="btn-cont">
-    <a href="/contents" class="next-button">Contents</a>
+    <a href="./1" class="next-button">Contents</a>
     <a href="/" class="next-button">Home</a>
-    <a href="/oops/2" class="next-button">Next</a>
+    <a href="" class="next-button">Next</a>
 </div>
