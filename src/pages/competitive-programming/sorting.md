@@ -109,5 +109,5 @@ cout << r.second - r.first << "\n";
 <div class="btn-cont">
     <a href="./1" class="next-button">Contents</a>
     <a href="./basic-techniques" class="next-button">Back</a>
-    <a href="./data-structures.md" class="next-button">Next</a>
+    <a href="./data-structures" class="next-button">Next</a>
 </div>

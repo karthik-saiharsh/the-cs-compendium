@@ -143,6 +143,6 @@ dq.pop_front(); // Remove from the front
 
 <div class="btn-cont">
     <a href="./1" class="next-button">Contents</a>
-    <a href="./sorting.md" class="next-button">Back</a>
+    <a href="./sorting" class="next-button">Back</a>
     <a href="" class="next-button">Next</a>
 </div>
