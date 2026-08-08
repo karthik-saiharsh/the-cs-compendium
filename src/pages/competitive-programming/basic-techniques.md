@@ -87,5 +87,5 @@ if(abs(a-b) < 1e-9) cout << "a and b are equal\n";
 <div class="btn-cont">
     <a href="./1" class="next-button">Contents</a>
     <a href="/" class="next-button">Home</a>
-    <a href="./sorting.md" class="next-button">Next</a>
+    <a href="./sorting" class="next-button">Next</a>
 </div>
