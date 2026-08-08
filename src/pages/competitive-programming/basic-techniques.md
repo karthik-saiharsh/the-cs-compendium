@@ -76,8 +76,16 @@ freopen("output.txt", "w", stdout);
 
 `fopen` creates a new stream and you have to read from it, while `freopen` reuses an existing stream, `stdin` and `stdout` in this case
 
+### Tips
+
+- It is risky to compare floating point numbers with the == operator, because it is possible that the values should be equal but they are not because of precision errors. So, a better way to compare numbers is to do the following:
+
+```cpp
+if(abs(a-b) < 1e-9) cout << "a and b are equal\n";
+```
+
 <div class="btn-cont">
     <a href="./1" class="next-button">Contents</a>
     <a href="/" class="next-button">Home</a>
-    <a href="" class="next-button">Next</a>
+    <a href="./sorting.md" class="next-button">Next</a>
 </div>
