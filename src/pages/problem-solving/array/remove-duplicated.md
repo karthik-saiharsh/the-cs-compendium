@@ -45,5 +45,5 @@ public:
 <div class="btn-cont">
     <a href="../contents" class="next-button">Contents</a>
     <a href="./check-array-sorted-and-rotated" class="next-button">Back</a>
-    <a href="" class="next-button">Next</a>
+    <a href="./rotate-array" class="next-button">Next</a>
 </div>
