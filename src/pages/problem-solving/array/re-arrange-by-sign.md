@@ -34,5 +34,5 @@ vector<int> rearrangeArray(vector<int>& nums) {
 <div class="btn-cont">
     <a href="../contents" class="next-button">Contents</a>
     <a href="./next-permutation" class="next-button">Back</a>
-    <a href="" class="next-button">Next</a>
+    <a href="./rotate-image" class="next-button">Next</a>
 </div>
