@@ -60,6 +60,6 @@ public:
 <div class="btn-cont">
     <a href="../contents" class="next-button">Contents</a>
     <a href="./rotate-array" class="next-button">Back</a>
-    <a href="" class="next-button">Next</a>
+    <a href="./max-consecutive-ones" class="next-button">Next</a>
 </div>
 
