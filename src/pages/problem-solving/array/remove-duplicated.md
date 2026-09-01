@@ -1,7 +1,7 @@
 ---
 layout: ../../../layout/Content.astro
 title: Remove Duplicates from Sorted Array
-heading: Remove Duplicates from Sorted Array (Easy)
+heading: Remove Duplicates from Sorted Array
 author: Karthik Saiharsh
 ---
 

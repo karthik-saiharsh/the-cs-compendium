@@ -1,7 +1,7 @@
 ---
 layout: ../../../layout/Content.astro
 title: Single Number
-heading: Single Number (Easy Problem)
+heading: Single Number
 author: Karthik Saiharsh
 ---
 

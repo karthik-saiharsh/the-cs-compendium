@@ -1,7 +1,7 @@
 ---
 layout: ../../../layout/Content.astro
 title: Subarray Sum Equals K
-heading: Subarray Sum Equals K (Easy Problem)
+heading: Subarray Sum Equals K
 author: Karthik Saiharsh
 ---
 

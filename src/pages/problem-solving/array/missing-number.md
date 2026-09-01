@@ -1,7 +1,7 @@
 ---
 layout: ../../../layout/Content.astro
 title: Missing Number
-heading: Missing Number (Easy Problem)
+heading: Missing Number
 author: Karthik Saiharsh
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: ../../../layout/Content.astro
 title: Max Consecutive Ones
-heading: Max Consecutive Ones (Easy Problem)
+heading: Max Consecutive Ones
 author: Karthik Saiharsh
 ---
 

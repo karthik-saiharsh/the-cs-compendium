@@ -1,7 +1,7 @@
 ---
 layout: ../../../layout/Content.astro
 title: Largest Element in an Array
-heading: Largest Element in an Array (Easy Problem)
+heading: Largest Element in an Array
 author: Karthik Saiharsh
 ---
 

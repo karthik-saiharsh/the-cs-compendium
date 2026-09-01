@@ -1,7 +1,7 @@
 ---
 layout: ../../../layout/Content.astro
 title: Rotate Array
-heading: Rotate Array (Easy Problem)
+heading: Rotate Array
 author: Karthik Saiharsh
 ---
 

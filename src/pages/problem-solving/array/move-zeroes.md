@@ -1,7 +1,7 @@
 ---
 layout: ../../../layout/Content.astro
 title: Move Zeroes
-heading: Move Zeroes (Easy Problem)
+heading: Move Zeroes
 author: Karthik Saiharsh
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: ../../../layout/Content.astro
 title: Second Largest Element in an Array
-heading: Second Largest Element in an Array (Easy Problem)
+heading: Second Largest Element in an Array
 author: Karthik Saiharsh
 ---
 
