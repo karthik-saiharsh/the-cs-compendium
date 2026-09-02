@@ -141,8 +141,58 @@ dq.pop_back(); // Remove from the end
 dq.pop_front(); // Remove from the front
 ```
 
+## Stack
+
+A Stack is a First in Last Out (FILO) data structure and can do push and pop in `O(1)` time.
+
+```cpp
+stack<int> s;
+s.push(3);
+int n = s.pop();
+cout << s.top() << endl;
+```
+
+## Queue
+
+A Queue is First in First Out (FIFO) data structure with `O(1)` addition and removal times.
+
+```cpp
+queue<int> q;
+q.push(3);
+cout << q.front() << endl;
+int n = q.pop();
+```
+
+## Priority Queues
+
+By default the priority Que keeps the maximum element at the front.(Max-Heap).
+
+```cpp
+priority_queue<int> q;
+
+q.push(3);
+q.push(4);
+q.puhs(5);
+
+cout << q.top();
+
+q.pop();
+```
+
+To make it behave like a Min-Heap, one can pass in a comparator operator
+
+General Structure of a `priority_queue` definition is `std::priority_queue<Type, Container, Comparator> pq`
+
+```cpp
+priority_queue<int, vector<int>, greater<int>> q;
+```
+
+For those of you wondering how passing in `std::greater` as the comparator makes in a Min-Heap, the underlying implementation of the Data Structure swaps a Parent and Child if the comparator return `True`.
+
+So when we use the `std::greater` as the comparator, the swap will happen if `parent > child`, meaning the child will now be at the top if child is smaller than the parent, thereby making it a Min-Heap. By default if no comparator is provided `std::less` is used (Max-Heap).
+
 <div class="btn-cont">
     <a href="./1" class="next-button">Contents</a>
     <a href="./sorting" class="next-button">Back</a>
-    <a href="" class="next-button">Next</a>
+    <a href="./complete-search" class="next-button">Next</a>
 </div>
