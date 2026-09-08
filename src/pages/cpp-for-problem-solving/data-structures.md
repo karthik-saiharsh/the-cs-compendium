@@ -1,7 +1,7 @@
 ---
 layout: ../../layout/Content.astro
-title: Competitive Programming - Data Structures
-heading: Competitive Programming -Data Structures
+title: C++ for Problem Solving - Data Structures
+heading: DC++ for Problem Solvin - Data Structures
 author: Karthik Saiharsh
 source: Competitive Programmer’s Handbook by Antti Laaksonen
 ---

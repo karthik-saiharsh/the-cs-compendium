@@ -1,7 +1,7 @@
 ---
 layout: ../../layout/Content.astro
-title: Competitive Programming - Basic Techniques
-heading: Competitive Programming - Basic Techniques
+title: C++ for Problem Solving - Basic Techniques
+heading: C++ for Problem Solving - Basic Techniques
 author: Karthik Saiharsh
 source: Competitive Programmer’s Handbook by Antti Laaksonen
 ---

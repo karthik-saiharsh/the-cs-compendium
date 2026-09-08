@@ -1,7 +1,7 @@
 ---
 layout: ../../layout/Content.astro
-title: Competitive Programming - Complete Search
-heading: Competitive Programming - Complete Search
+title: C++ for Problem Solving - Complete Search
+heading: C++ for Problem Solving - Complete Search
 author: Karthik Saiharsh
 source: Competitive Programmer’s Handbook by Antti Laaksonen
 ---

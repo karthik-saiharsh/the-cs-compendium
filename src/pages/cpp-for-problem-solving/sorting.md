@@ -1,7 +1,7 @@
 ---
 layout: ../../layout/Content.astro
-title: Competitive Programming - Sorting
-heading: Competitive Programming - Sorting
+title: C++ for Problem Solving - Sorting
+heading: C++ for Problem Solving - Sorting
 author: Karthik Saiharsh
 source: Competitive Programmer’s Handbook by Antti Laaksonen
 ---
@@ -15,6 +15,13 @@ int x=2, y=3;
 x = x ^ y;
 y = x ^ y;
 x = x ^ y;
+```
+
+C++ Also has a built in `swap` method
+
+```cpp
+int a=10, b=20;
+swap(a, b);
 ```
 
 ## Sorting in C++
