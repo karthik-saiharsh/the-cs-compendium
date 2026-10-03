@@ -1,7 +1,7 @@
 ---
 layout: ../../layout/Content.astro
-title: C++ for Problem Solving - Data Structures
-heading: DC++ for Problem Solvin - Data Structures
+title: C++ for Problem Solving
+heading: Data Structures
 author: Karthik Saiharsh
 source: Competitive Programmer’s Handbook by Antti Laaksonen
 ---
@@ -190,9 +190,3 @@ priority_queue<int, vector<int>, greater<int>> q;
 For those of you wondering how passing in `std::greater` as the comparator makes in a Min-Heap, the underlying implementation of the Data Structure swaps a Parent and Child if the comparator return `True`.
 
 So when we use the `std::greater` as the comparator, the swap will happen if `parent > child`, meaning the child will now be at the top if child is smaller than the parent, thereby making it a Min-Heap. By default if no comparator is provided `std::less` is used (Max-Heap).
-
-<div class="btn-cont">
-    <a href="./1" class="next-button">Contents</a>
-    <a href="./sorting" class="next-button">Back</a>
-    <a href="./complete-search" class="next-button">Next</a>
-</div>

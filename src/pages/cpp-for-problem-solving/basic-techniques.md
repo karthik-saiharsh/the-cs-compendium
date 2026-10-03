@@ -1,7 +1,7 @@
 ---
 layout: ../../layout/Content.astro
-title: C++ for Problem Solving - Basic Techniques
-heading: C++ for Problem Solving - Basic Techniques
+title: C++ for Problem Solving
+heading: Basic Techniques
 author: Karthik Saiharsh
 source: Competitive Programmer’s Handbook by Antti Laaksonen
 ---
@@ -83,9 +83,3 @@ freopen("output.txt", "w", stdout);
 ```cpp
 if(abs(a-b) < 1e-9) cout << "a and b are equal\n";
 ```
-
-<div class="btn-cont">
-    <a href="./1" class="next-button">Contents</a>
-    <a href="/" class="next-button">Home</a>
-    <a href="./sorting" class="next-button">Next</a>
-</div>

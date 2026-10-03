@@ -27,8 +27,3 @@ int largest(vector<int> &arr) {
 }
 ```
 
-<div class="btn-cont">
-    <a href="../contents" class="next-button">Contents</a>
-    <a href="./1" class="next-button">Back</a>
-    <a href="./second-largest-element" class="next-button">Next</a>
-</div>

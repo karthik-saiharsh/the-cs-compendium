@@ -44,9 +44,3 @@ int subarraySum(vector<int>& nums, int k) {
     return ans;
 }
 ```
-
-<div class="btn-cont">
-    <a href="../contents" class="next-button">Contents</a>
-    <a href="./single-number" class="next-button">Back</a>
-    <a href="./search-2d-matrix" class="next-button">Next</a>
-</div>

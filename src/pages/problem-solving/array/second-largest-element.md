@@ -36,8 +36,3 @@ int getSecondLargest(vector<int> &arr) {
 }
 ```
 
-<div class="btn-cont">
-    <a href="../contents" class="next-button">Contents</a>
-    <a href="./largest-element-in-array" class="next-button">Back</a>
-    <a href="./check-array-sorted-and-rotated" class="next-button">Next</a>
-</div>

@@ -96,8 +96,3 @@ public:
 
 > You are walking down a path collecting coins (1s). When you hit a wall (0), you put your current coins into a high-score ledger, drop your bag, and start over.
 
-<div class="btn-cont">
-    <a href="../contents" class="next-button">Contents</a>
-    <a href="./move-zeroes" class="next-button">Back</a>
-    <a href="./missing-number" class="next-button">Next</a>
-</div>

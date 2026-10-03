@@ -59,9 +59,3 @@ public:
 - What if the duplicates appear three times instead of two? The XOR trick fails because `x ^ x ^ x = x`. The pairs don't cleanly vanish. Instead, you have to count the occurrences of each bit across all numbers and take the total modulo 3.
 
 - What if there are two unique numbers instead of one? The final XOR result will be the XOR of the two unique numbers combined. You then have to find a set bit in that combined result and use it to partition the array into two separate buckets, effectively turning the problem into two distinct "Single Number" problems.
-
-<div class="btn-cont">
-    <a href="../contents" class="next-button">Contents</a>
-    <a href="./missing-number" class="next-button">Back</a>
-    <a href="./subarray-sum-k" class="next-button">Next</a>
-</div>

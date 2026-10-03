@@ -67,9 +67,3 @@ public:
     }
 };
 ```
-
-<div class="btn-cont">
-    <a href="../contents" class="next-button">Contents</a>
-    <a href="./search-2d-matrix" class="next-button">Back</a>
-    <a href="./maximum-subarray" class="next-button">Next</a>
-</div>

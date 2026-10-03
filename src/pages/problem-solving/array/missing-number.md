@@ -50,9 +50,3 @@ public:
 - What if the array wasn't `0` to `n`, but `1` to `n`, and the array was unsorted? You use the exact same logic. You just offset your expected values to match the bounds.
 
 - What if you couldn't use extra space, but the array was sorted? You would pivot to Binary Search. The moment `nums[i] != i`, you've found the start of the missing gap.
-
-<div class="btn-cont">
-    <a href="../contents" class="next-button">Contents</a>
-    <a href="./max-consecutive-ones" class="next-button">Back</a>
-    <a href="./single-number" class="next-button">Next</a>
-</div>

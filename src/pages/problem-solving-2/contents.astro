@@ -21,15 +21,15 @@ const resources = [
       folder,
       description:
         frontmatter.description ??
-        `For each problem opened, click on the Question(heading) to open the corresponding problem on leetcode.`,
-      href: `./${folder}/contents`,
+        `Click to See Problems in ${folder}`,
+      href: `./${folder}/contents`
     };
   }),
 ].sort((left, right) => left.folder.localeCompare(right.folder));
 ---
 
 <Base
-  title="Problem Solving - Contents"
+  title="Problem Solving II - Contents"
   className="min-h-screen w-screen flex flex-col items-center justify-center px-6 py-10"
 >
   <div
@@ -49,12 +49,13 @@ const resources = [
       <p
         class="mt-4 max-w-xl text-base leading-8 text-primary-fgo md:text-lg font-ibm-mono"
       >
-        This Page contains my solutions to various Coding Problems.
-        My source of these questions was <a class="underline" target="_blank" href="https://a2zdsa.pages.dev/">This</a>
+        A collection of Programming Problems worked out in Java, inspired from <a href="https://www.amazon.in/Elements-Programming-Interviews-Java-Insiders/dp/1517671272" class="underline" target="_blank">this</a> book.
+        Consider this a quick revision to the problems presented in the book.
+        Find in here, the solutions for each problem in both Java and C++ along with a quick idea and summary of the problem and the method for every problem.
       </p>
     </div>
 
-    <div class="mt-8 mb-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    <div class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3 mb-5">
       {
         resources.map((resource) => (
           <a

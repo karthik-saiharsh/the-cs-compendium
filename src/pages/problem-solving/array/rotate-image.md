@@ -24,9 +24,3 @@ void rotate(vector<vector<int>>& matrix) {
     }
 }
 ```
-
-<div class="btn-cont">
-    <a href="../contents" class="next-button">Contents</a>
-    <a href="./re-arrange-by-sign" class="next-button">Back</a>
-    <a href="" class="next-button">Next</a>
-</div>

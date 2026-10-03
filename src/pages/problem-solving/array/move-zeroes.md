@@ -57,9 +57,5 @@ public:
 
 > Read aggressively, write conservatively. The space between a fast read pointer and a slow write pointer is your temporary garbage bin (the zeros). Whenever you find good data, swap it with the front of the garbage bin.
 
-<div class="btn-cont">
-    <a href="../contents" class="next-button">Contents</a>
-    <a href="./rotate-array" class="next-button">Back</a>
-    <a href="./max-consecutive-ones" class="next-button">Next</a>
-</div>
+
 

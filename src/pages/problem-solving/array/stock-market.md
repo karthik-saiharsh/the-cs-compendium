@@ -28,9 +28,3 @@ int maxProfit(vector<int>& prices) {
     return ans;
 }
 ```
-
-<div class="btn-cont">
-    <a href="../contents" class="next-button">Contents</a>
-    <a href="./maximum-subarray" class="next-button">Back</a>
-    <a href="./next-permutation" class="next-button">Next</a>
-</div>

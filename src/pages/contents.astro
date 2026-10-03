@@ -9,27 +9,19 @@ type ResourceModule = {
   };
 };
 
-const resourceModules = import.meta.glob<ResourceModule>("./*/1.md", {
+const resourceModules = import.meta.glob<ResourceModule>("./*/contents.astro", {
   eager: true,
 });
 
 const resources = [
   ...Object.entries(resourceModules).map(([path, module]) => {
     const folder = path.split("/")[1];
-    const frontmatter = module.frontmatter ?? {};
     return {
       folder,
-      description:
-        frontmatter.description ??
-        `Open the first chapter in the ${folder} resource.`,
-      href: `./${folder}/1`,
+      description: `Click to open ${folder}`,
+      href: `./${folder}/contents`,
     };
   }),
-  {
-    folder: "problem-solving",
-    description: "Browse my solutions to various coding problems.",
-    href: "/problem-solving/contents",
-  },
 ].sort((left, right) => left.folder.localeCompare(right.folder));
 ---
 

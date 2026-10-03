@@ -1,7 +1,7 @@
 ---
 layout: ../../layout/Content.astro
-title: C++ for Problem Solving - Complete Search
-heading: C++ for Problem Solving - Complete Search
+title: C++ for Problem Solving
+heading: Complete Search
 author: Karthik Saiharsh
 source: Competitive Programmer’s Handbook by Antti Laaksonen
 ---
@@ -120,8 +120,3 @@ do {
 } while(next_permutation(arr.begin(), arr.end()));
 ```
 
-<div class="btn-cont">
-    <a href="./1" class="next-button">Contents</a>
-    <a href="./data-structures" class="next-button">Back</a>
-    <a href="" class="next-button">Next</a>
-</div>

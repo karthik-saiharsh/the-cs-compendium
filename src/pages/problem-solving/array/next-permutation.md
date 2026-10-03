@@ -54,9 +54,3 @@ void nextPermutation(vector<int>& nums) {
     reverse(nums.begin()+i+1, nums.end());
 }
 ```
-
-<div class="btn-cont">
-    <a href="../contents" class="next-button">Contents</a>
-    <a href="./stock-market" class="next-button">Back</a>
-    <a href="./re-arrange-by-sign" class="next-button">Next</a>
-</div>

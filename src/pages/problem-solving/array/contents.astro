@@ -1,5 +1,5 @@
 ---
-import Base from "../../layout/Base.astro";
+import Base from "../../../layout/Base.astro";
 
 type ResourceModule = {
   frontmatter?: {
@@ -9,7 +9,7 @@ type ResourceModule = {
   };
 };
 
-const resourceModules = import.meta.glob<ResourceModule>("./*/contents.astro", {
+const resourceModules = import.meta.glob<ResourceModule>("./*.md", {
   eager: true,
 });
 
@@ -19,17 +19,17 @@ const resources = [
     const frontmatter = module.frontmatter ?? {};
     return {
       folder,
+      title: frontmatter.title,
       description:
-        frontmatter.description ??
-        `For each problem opened, click on the Question(heading) to open the corresponding problem on leetcode.`,
-      href: `./${folder}/contents`,
+        frontmatter.heading,
+      href: `./${folder}`.slice(0, -3)
     };
   }),
 ].sort((left, right) => left.folder.localeCompare(right.folder));
 ---
 
 <Base
-  title="Problem Solving - Contents"
+  title="Primitive Types"
   className="min-h-screen w-screen flex flex-col items-center justify-center px-6 py-10"
 >
   <div
@@ -44,17 +44,18 @@ const resources = [
       <h1
         class="mt-3 text-4xl font-departure font-bold text-primary-fgt md:text-6xl"
       >
-        Problem Solving
+        Array Questions
       </h1>
       <p
         class="mt-4 max-w-xl text-base leading-8 text-primary-fgo md:text-lg font-ibm-mono"
       >
-        This Page contains my solutions to various Coding Problems.
-        My source of these questions was <a class="underline" target="_blank" href="https://a2zdsa.pages.dev/">This</a>
+        For each question, you will only find the solution.
+        The question itself is not explained here unless the source of the actual question isnt't included.
+        For every problem in this collection, if the page for the problem has a heading that reads "Question", it is a clickable link to the actual question source on leetcode.
       </p>
     </div>
 
-    <div class="mt-8 mb-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    <div class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3 mb-5">
       {
         resources.map((resource) => (
           <a
@@ -67,7 +68,7 @@ const resources = [
                   Resource
                 </p>
                 <h2 class="mt-2 text-2xl font-departure font-bold text-primary-fgo">
-                  {resource.folder}
+                  {resource.description}
                 </h2>
               </div>
               <span class="text-2xl text-primary-fgt transition-transform duration-200 group-hover:translate-x-1">
@@ -91,7 +92,7 @@ const resources = [
               </span>
             </div>
             <p class="mt-4 text-sm leading-7 text-primary-fgo font-ibm-mono">
-              {resource.description}
+              {resource.title}
             </p>
           </a>
         ))

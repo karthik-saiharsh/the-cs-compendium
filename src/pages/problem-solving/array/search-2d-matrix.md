@@ -55,9 +55,3 @@ bool searchMatrix(vector<vector<int>>& matrix, int target) {
     return false;
 }
 ```
-
-<div class="btn-cont">
-    <a href="../contents" class="next-button">Contents</a>
-    <a href="./subarray-sum-k" class="next-button">Back</a>
-    <a href="./majority-element" class="next-button">Next</a>
-</div>

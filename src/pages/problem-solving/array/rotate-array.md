@@ -66,10 +66,3 @@ public:
     }
 };
 ```
-
-<div class="btn-cont">
-    <a href="../contents" class="next-button">Contents</a>
-    <a href="./remove-duplicated" class="next-button">Back</a>
-    <a href="./move-zeroes" class="next-button">Next</a>
-</div>
-
