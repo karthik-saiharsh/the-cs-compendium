@@ -1,0 +1,3127 @@
+{
+ "title": "Java Mastery Question Bank",
+ "description": "240 Java questions with answers and explanations, organized by topic.",
+ "count": 240,
+ "questions": [
+  {
+   "id": 1,
+   "section": "Fundamentals and operators",
+   "question": "What is the output? int x = 5; System.out.println(x++ + ++x);",
+   "options": [
+    "11",
+    "13",
+    "12",
+    "10"
+   ],
+   "correctIndex": 2,
+   "explanation": "x++ evaluates to 5, then x becomes 6. ++x increments it to 7 and evaluates to 7. The sum is 12."
+  },
+  {
+   "id": 2,
+   "section": "Fundamentals and operators",
+   "question": "What is the output? int x = 10; System.out.println(x++ + x++);",
+   "options": [
+    "20",
+    "21",
+    "22",
+    "11"
+   ],
+   "correctIndex": 1,
+   "explanation": "Operands are evaluated left to right: the first yields 10, the second yields 11."
+  },
+  {
+   "id": 3,
+   "section": "Fundamentals and operators",
+   "question": "What is the output? int x = 0; boolean result = false && (++x > 0); System.out.println(x);",
+   "options": [
+    "1",
+    "false",
+    "0",
+    "Compilation error"
+   ],
+   "correctIndex": 2,
+   "explanation": "&& short-circuits when its left operand is false, so the right operand is not evaluated."
+  },
+  {
+   "id": 4,
+   "section": "Fundamentals and operators",
+   "question": "What is the output? int x = 0; boolean result = true || (++x > 0); System.out.println(x);",
+   "options": [
+    "1",
+    "true",
+    "0",
+    "Compilation error"
+   ],
+   "correctIndex": 2,
+   "explanation": "|| short-circuits when its left operand is true."
+  },
+  {
+   "id": 5,
+   "section": "Fundamentals and operators",
+   "question": "What is the difference between && and & for booleans?",
+   "options": [
+    "& short-circuits; && evaluates both operands.",
+    "&& short-circuits; & evaluates both operands.",
+    "They are identical for booleans; only precedence differs.",
+    "&& works only on ints; & works only on booleans."
+   ],
+   "correctIndex": 1,
+   "explanation": "Both can combine booleans, but only && skips the right operand when the left operand determines the result."
+  },
+  {
+   "id": 6,
+   "section": "Fundamentals and operators",
+   "question": "What is the difference between || and | for booleans?",
+   "options": [
+    "| short-circuits; || evaluates both operands.",
+    "They are identical for booleans; only precedence differs.",
+    "|| short-circuits; | evaluates both operands.",
+    "|| works only on ints; | works only on booleans."
+   ],
+   "correctIndex": 2,
+   "explanation": "|| skips the right operand when the left operand is true; | evaluates both."
+  },
+  {
+   "id": 7,
+   "section": "Fundamentals and operators",
+   "question": "Does Java have the general comma operator found in C/C++?",
+   "options": [
+    "No; Java only allows commas as separators, such as in for-loop headers and argument lists.",
+    "Yes, anywhere an expression is allowed.",
+    "Yes, but only inside method calls.",
+    "Yes, but only in switch statements."
+   ],
+   "correctIndex": 0,
+   "explanation": "Java uses commas as separators in syntax such as argument lists and declarations, but it has no general C/C++-style comma operator."
+  },
+  {
+   "id": 8,
+   "section": "Fundamentals and operators",
+   "question": "What is printed by System.out.println(10 / 3); and System.out.println(10 / 3.0);?",
+   "options": [
+    "3.0, then 3.3333333333333335",
+    "3, then 3.0",
+    "3, then 3.3333333333333335",
+    "3, then 3"
+   ],
+   "correctIndex": 2,
+   "explanation": "Integer division truncates the fractional part; floating-point division preserves an approximate fraction."
+  },
+  {
+   "id": 9,
+   "section": "Fundamentals and operators",
+   "question": "What is printed by System.out.println(-7 / 2); and System.out.println(-7 % 2);?",
+   "options": [
+    "-4, then 1",
+    "-3, then -1",
+    "-3, then 1",
+    "-4, then -1"
+   ],
+   "correctIndex": 1,
+   "explanation": "Integer division truncates toward zero; the remainder has the sign of the dividend."
+  },
+  {
+   "id": 10,
+   "section": "Fundamentals and operators",
+   "question": "What is the output? System.out.println(1 + 2 + \"Java\" + 3 + 4);",
+   "options": [
+    "12Java34",
+    "3Java7",
+    "3Java34",
+    "1Java34"
+   ],
+   "correctIndex": 2,
+   "explanation": "Evaluation proceeds left to right. After string concatenation begins, subsequent + operations concatenate strings."
+  },
+  {
+   "id": 11,
+   "section": "Fundamentals and operators",
+   "question": "What is the output? System.out.println(\"Java\" + 1 + 2); System.out.println(1 + 2 + \"Java\");",
+   "options": [
+    "Java12, then 3Java",
+    "Java3, then 3Java",
+    "Java12, then 12Java",
+    "Java3, then 12Java"
+   ],
+   "correctIndex": 0,
+   "explanation": "The first expression begins with a string; the second performs integer addition before concatenation."
+  },
+  {
+   "id": 12,
+   "section": "Fundamentals and operators",
+   "question": "What is the output? System.out.println(10 > 5 ? 1 : 2.5);",
+   "options": [
+    "1",
+    "2.5",
+    "Compilation error",
+    "1.0"
+   ],
+   "correctIndex": 3,
+   "explanation": "The conditional expression's numeric type is double, so the integer branch is promoted."
+  },
+  {
+   "id": 13,
+   "section": "Fundamentals and operators",
+   "question": "What is the output? int x = 5; x += 2.5; System.out.println(x);",
+   "options": [
+    "7.5",
+    "8",
+    "Compilation error",
+    "7"
+   ],
+   "correctIndex": 3,
+   "explanation": "Compound assignment includes an implicit conversion back to the left-hand type."
+  },
+  {
+   "id": 14,
+   "section": "Fundamentals and operators",
+   "question": "Does this compile? int x = 5; x = x + 2.5;",
+   "options": [
+    "Yes; x becomes 7 after implicit narrowing.",
+    "Yes; x becomes 7.5 because x is promoted to double.",
+    "Yes, but it throws an exception at runtime.",
+    "No; the double result needs an explicit cast to be assigned to an int."
+   ],
+   "correctIndex": 3,
+   "explanation": "The expression is double and cannot be implicitly narrowed to int in an ordinary assignment."
+  },
+  {
+   "id": 15,
+   "section": "Fundamentals and operators",
+   "question": "What is the result of System.out.println(0.1 + 0.2 == 0.3);?",
+   "options": [
+    "true",
+    "Compilation error",
+    "false",
+    "ArithmeticException at runtime"
+   ],
+   "correctIndex": 2,
+   "explanation": "These decimal fractions are generally not represented exactly in binary floating point."
+  },
+  {
+   "id": 16,
+   "section": "Fundamentals and operators",
+   "question": "What happens when int x = 10; System.out.println(x / 0); executes?",
+   "options": [
+    "Infinity",
+    "NaN",
+    "Compilation error",
+    "ArithmeticException at runtime"
+   ],
+   "correctIndex": 3,
+   "explanation": "Integer division by zero throws ArithmeticException."
+  },
+  {
+   "id": 17,
+   "section": "Fundamentals and operators",
+   "question": "What is printed by 1.0 / 0.0 and 0.0 / 0.0?",
+   "options": [
+    "ArithmeticException for both",
+    "NaN, then Infinity",
+    "Infinity, then NaN",
+    "Infinity, then Infinity"
+   ],
+   "correctIndex": 2,
+   "explanation": "Floating-point division follows IEEE 754 behavior; positive finite divided by positive zero yields positive infinity, and zero divided by zero yields NaN."
+  },
+  {
+   "id": 18,
+   "section": "Fundamentals and operators",
+   "question": "What are the results of 5 & 3, 5 | 3, and 5 ^ 3?",
+   "options": [
+    "1, 6, 7",
+    "7, 1, 6",
+    "1, 7, 2",
+    "1, 7, 6"
+   ],
+   "correctIndex": 3,
+   "explanation": "These are bitwise AND, OR, and XOR."
+  },
+  {
+   "id": 19,
+   "section": "Fundamentals and operators",
+   "question": "What are the results of 1 << 3 and 16 >> 2?",
+   "options": [
+    "8 and 8",
+    "3 and 2",
+    "8 and 4",
+    "4 and 8"
+   ],
+   "correctIndex": 2,
+   "explanation": "The operators shift bits left and arithmetic-right, respectively."
+  },
+  {
+   "id": 20,
+   "section": "Fundamentals and operators",
+   "question": "What is the difference between >> and >>> in Java?",
+   "options": [
+    ">>> preserves the sign bit; >> always fills with zeros.",
+    ">> works on int only; >>> works on long only.",
+    ">> is arithmetic right shift; >>> is logical right shift with zero-fill.",
+    ">> shifts left; >>> shifts right."
+   ],
+   "correctIndex": 2,
+   "explanation": "For signed integers, >> preserves the sign bit while >>> fills leftmost positions with zeroes."
+  },
+  {
+   "id": 21,
+   "section": "Types and conversions",
+   "question": "How many primitive types does Java have, and what are they?",
+   "options": [
+    "Eight: byte, short, int, long, float, double, char, String.",
+    "Nine: byte, short, int, long, float, double, char, boolean, String.",
+    "Eight: byte, short, int, long, float, double, char, boolean.",
+    "Seven: byte, short, int, long, float, double, boolean."
+   ],
+   "correctIndex": 2,
+   "explanation": "These are Java's eight primitive types."
+  },
+  {
+   "id": 22,
+   "section": "Types and conversions",
+   "question": "What are default values for instance fields, and do local variables get defaults?",
+   "options": [
+    "Both fields and local variables receive type-specific defaults.",
+    "Fields receive type-specific defaults; local variables must be definitely assigned before use.",
+    "Neither fields nor local variables get defaults; both must be assigned.",
+    "Local variables get defaults; fields must be assigned before use."
+   ],
+   "correctIndex": 1,
+   "explanation": "Numeric primitives default to zero, char to '\\u0000', boolean to false, and references to null."
+  },
+  {
+   "id": 23,
+   "section": "Types and conversions",
+   "question": "Does Java char always represent one complete Unicode character?",
+   "options": [
+    "Yes. char is a 32-bit Unicode code point.",
+    "Yes. char is an 8-bit ASCII value.",
+    "No. char is a 32-bit UTF-32 code unit.",
+    "No. char is a 16-bit UTF-16 code unit."
+   ],
+   "correctIndex": 3,
+   "explanation": "Some Unicode code points require a surrogate pair of two char values."
+  },
+  {
+   "id": 24,
+   "section": "Types and conversions",
+   "question": "What is printed by char c = 'A'; System.out.println(c + 1); System.out.println((char)(c + 1));?",
+   "options": [
+    "B, then B",
+    "66, then B",
+    "A1, then B",
+    "66, then 66"
+   ],
+   "correctIndex": 1,
+   "explanation": "Arithmetic promotes char to int; the cast converts the result back to char."
+  },
+  {
+   "id": 25,
+   "section": "Types and conversions",
+   "question": "What is printed by byte b = 127; b++; System.out.println(b);?",
+   "options": [
+    "128",
+    "127",
+    "-128",
+    "ArithmeticException"
+   ],
+   "correctIndex": 2,
+   "explanation": "Increment narrows the result back to the signed 8-bit byte type, wrapping around."
+  },
+  {
+   "id": 26,
+   "section": "Types and conversions",
+   "question": "Does byte b = 10; b = b + 1; compile?",
+   "options": [
+    "Yes; the literal 1 is a byte so the sum stays a byte.",
+    "No; b + 1 is an int and needs an explicit cast to be assigned back to byte.",
+    "Yes, but it throws an exception at runtime.",
+    "Yes; the compiler narrows automatically because the value fits in a byte."
+   ],
+   "correctIndex": 1,
+   "explanation": "The addition is performed as int and needs an explicit narrowing conversion."
+  },
+  {
+   "id": 27,
+   "section": "Types and conversions",
+   "question": "Does byte b = 10; b += 1; compile?",
+   "options": [
+    "No; b + 1 is an int and needs an explicit cast.",
+    "Yes; compound assignment includes an implicit cast.",
+    "No; byte does not support += at all.",
+    "Yes, but only if b is declared final."
+   ],
+   "correctIndex": 1,
+   "explanation": "Compound assignment includes implicit narrowing conversion."
+  },
+  {
+   "id": 28,
+   "section": "Types and conversions",
+   "question": "What are autoboxing and unboxing?",
+   "options": [
+    "Automatic conversion between a primitive and its corresponding wrapper type.",
+    "Converting a primitive to a String and back automatically.",
+    "Implicit casting between int and long during arithmetic.",
+    "Automatically moving objects between the stack and the heap."
+   ],
+   "correctIndex": 0,
+   "explanation": "For example, int can be boxed to Integer and Integer unboxed to int."
+  },
+  {
+   "id": 29,
+   "section": "Types and conversions",
+   "question": "What happens when Integer n = null; int x = n; executes?",
+   "options": [
+    "x becomes 0",
+    "ArithmeticException",
+    "Compilation error",
+    "NullPointerException"
+   ],
+   "correctIndex": 3,
+   "explanation": "Unboxing a null wrapper reference throws NullPointerException."
+  },
+  {
+   "id": 30,
+   "section": "Types and conversions",
+   "question": "What is printed by Integer a = 100; Integer b = 100; System.out.println(a == b);?",
+   "options": [
+    "false",
+    "Compilation error",
+    "NullPointerException",
+    "true"
+   ],
+   "correctIndex": 3,
+   "explanation": "Java guarantees caching for boxed constant integer values from -128 through 127."
+  },
+  {
+   "id": 31,
+   "section": "Types and conversions",
+   "question": "For separately boxed Integer values of 1000, is a == b guaranteed true or false?",
+   "options": [
+    "Neither result is guaranteed; == compares references.",
+    "Always true, because == on Integer compares values.",
+    "Always false, because boxed values are never cached.",
+    "It always fails to compile for boxed comparison."
+   ],
+   "correctIndex": 0,
+   "explanation": "The language does not require identical wrapper objects for values outside the mandatory cache range. Use equals() for value comparison."
+  },
+  {
+   "id": 32,
+   "section": "Types and conversions",
+   "question": "What is the difference between == and equals() for objects?",
+   "options": [
+    "== compares contents; equals() compares references.",
+    "== compares references; equals() follows the class's equality implementation.",
+    "They are identical for all objects.",
+    "== works only on primitives; equals() works only on strings."
+   ],
+   "correctIndex": 1,
+   "explanation": "Object's default equals() is identity-based, but many classes override it for value equality."
+  },
+  {
+   "id": 33,
+   "section": "Types and conversions",
+   "question": "What is the difference between widening and narrowing conversions?",
+   "options": [
+    "Widening needs a cast and may lose data; narrowing is implicit and safe.",
+    "Widening converts to a broader type; narrowing may lose information and usually requires a cast.",
+    "Widening converts between objects; narrowing converts between primitives.",
+    "Widening applies only to int; narrowing applies only to double."
+   ],
+   "correctIndex": 1,
+   "explanation": "For example, int to long is widening, while double to int is narrowing."
+  },
+  {
+   "id": 34,
+   "section": "Types and conversions",
+   "question": "What is printed by (int) 3.9 and (int) -3.9?",
+   "options": [
+    "3 and -4",
+    "3 and -3",
+    "4 and -4",
+    "4 and -3"
+   ],
+   "correctIndex": 1,
+   "explanation": "Floating-point to integer casts truncate toward zero."
+  },
+  {
+   "id": 35,
+   "section": "Strings",
+   "question": "What is printed by String a = \"hello\"; String b = \"hello\"; followed by a == b and a.equals(b)?",
+   "options": [
+    "false, then true",
+    "true, then false",
+    "true, then true",
+    "false, then false"
+   ],
+   "correctIndex": 2,
+   "explanation": "Identical string literals are interned, and their contents are equal."
+  },
+  {
+   "id": 36,
+   "section": "Strings",
+   "question": "What is printed when two separately constructed new String(\"hello\") objects are compared with == and equals()?",
+   "options": [
+    "true, then true",
+    "true, then false",
+    "false, then false",
+    "false, then true"
+   ],
+   "correctIndex": 3,
+   "explanation": "They are distinct objects but contain equal text."
+  },
+  {
+   "id": 37,
+   "section": "Strings",
+   "question": "What is printed by String a = \"Ja\" + \"va\"; String b = \"Java\"; System.out.println(a == b);?",
+   "options": [
+    "false",
+    "true",
+    "Compilation error",
+    "It depends on the JVM"
+   ],
+   "correctIndex": 1,
+   "explanation": "Compile-time constant string concatenation is evaluated at compile time and uses the interned string."
+  },
+  {
+   "id": 38,
+   "section": "Strings",
+   "question": "For String a = \"Java\"; String b = a + \"!\"; String c = \"Java!\";, what is b == c?",
+   "options": [
+    "true, because both strings have the same characters",
+    "false in this example",
+    "true, because the compiler interns b",
+    "Compilation error"
+   ],
+   "correctIndex": 1,
+   "explanation": "Concatenation involving a variable creates a string not guaranteed to be identical to the literal; equals() compares contents."
+  },
+  {
+   "id": 39,
+   "section": "Strings",
+   "question": "How do you obtain the canonical interned string instance?",
+   "options": [
+    "Call canonical().",
+    "Call String.valueOf().",
+    "Call toString().",
+    "Call intern()."
+   ],
+   "correctIndex": 3,
+   "explanation": "intern() returns the canonical pooled representation."
+  },
+  {
+   "id": 40,
+   "section": "Strings",
+   "question": "What does it mean that String is immutable?",
+   "options": [
+    "Its variable cannot be reassigned once declared.",
+    "It cannot be compared with ==.",
+    "Its contents cannot change after construction.",
+    "Its length is fixed but its characters can be replaced."
+   ],
+   "correctIndex": 2,
+   "explanation": "Immutability enables safe sharing, predictable hashing, pooling, and thread-safe use of string state."
+  },
+  {
+   "id": 41,
+   "section": "Strings",
+   "question": "Compare String, StringBuilder, and StringBuffer.",
+   "options": [
+    "String is mutable; StringBuilder and StringBuffer are immutable.",
+    "StringBuilder is synchronized, StringBuffer is unsynchronized, and String is immutable.",
+    "All three are immutable and differ only in memory usage.",
+    "String is immutable; StringBuilder is mutable and unsynchronized; StringBuffer is mutable with synchronized methods."
+   ],
+   "correctIndex": 3,
+   "explanation": "StringBuilder is generally preferred for local string construction; synchronization does not make arbitrary multi-operation logic automatically safe."
+  },
+  {
+   "id": 42,
+   "section": "Strings",
+   "question": "What is printed by String s = \"hello\"; s.toUpperCase(); System.out.println(s);?",
+   "options": [
+    "HELLO",
+    "null",
+    "hello",
+    "Compilation error"
+   ],
+   "correctIndex": 2,
+   "explanation": "toUpperCase() returns a new string rather than modifying the original."
+  },
+  {
+   "id": 43,
+   "section": "Strings",
+   "question": "What does String.length() count compared with codePointCount()?",
+   "options": [
+    "length() counts UTF-16 code units; codePointCount() counts Unicode code points in a range.",
+    "length() counts code points; codePointCount() counts UTF-16 code units.",
+    "length() counts bytes; codePointCount() counts characters.",
+    "They always return the same value."
+   ],
+   "correctIndex": 0,
+   "explanation": "A supplementary Unicode code point occupies two UTF-16 code units."
+  },
+  {
+   "id": 44,
+   "section": "Arrays and references",
+   "question": "If int[] a = {1,2,3}; int[] b = a; b[0] = 9;, what is a[0]?",
+   "options": [
+    "1",
+    "0",
+    "9",
+    "ArrayIndexOutOfBoundsException"
+   ],
+   "correctIndex": 2,
+   "explanation": "Both variables refer to the same array object."
+  },
+  {
+   "id": 45,
+   "section": "Arrays and references",
+   "question": "What is the initial value of a[0] for int[] a = new int[3]?",
+   "options": [
+    "null",
+    "-1",
+    "0",
+    "Undefined until assigned"
+   ],
+   "correctIndex": 2,
+   "explanation": "Array elements are initialized to their type's default value."
+  },
+  {
+   "id": 46,
+   "section": "Arrays and references",
+   "question": "What happens when int[] a = null; System.out.println(a.length); executes?",
+   "options": [
+    "0",
+    "ArrayIndexOutOfBoundsException",
+    "NullPointerException",
+    "Compilation error"
+   ],
+   "correctIndex": 2,
+   "explanation": "Dereferencing a null array reference throws NullPointerException."
+  },
+  {
+   "id": 47,
+   "section": "Arrays and references",
+   "question": "Does Java support jagged multidimensional arrays?",
+   "options": [
+    "No; all rows must have the same length.",
+    "No; only rectangular arrays are supported.",
+    "Yes, but only for arrays of objects, not primitives.",
+    "Yes; rows of a multidimensional array can have different lengths."
+   ],
+   "correctIndex": 3,
+   "explanation": "A multidimensional array is an array of arrays, whose rows can have different lengths."
+  },
+  {
+   "id": 48,
+   "section": "Arrays and references",
+   "question": "How can you print an int array's elements in readable form?",
+   "options": [
+    "Use array.toString().",
+    "Use System.out.println(array) directly.",
+    "Use array.print().",
+    "Use Arrays.toString(array)."
+   ],
+   "correctIndex": 3,
+   "explanation": "Printing the array reference directly does not print its elements."
+  },
+  {
+   "id": 49,
+   "section": "Arrays and references",
+   "question": "Can Dog[] be assigned to Animal[] when Dog extends Animal?",
+   "options": [
+    "No; array types are invariant in Java.",
+    "Yes; Java arrays are covariant.",
+    "Yes; but only with an explicit cast.",
+    "No; Dog[] and Animal[] are unrelated types."
+   ],
+   "correctIndex": 1,
+   "explanation": "The runtime array type still enforces its actual component type."
+  },
+  {
+   "id": 50,
+   "section": "Arrays and references",
+   "question": "What happens with Object[] a = new String[1]; a[0] = 42;?",
+   "options": [
+    "ClassCastException at runtime",
+    "ArrayStoreException at runtime",
+    "Compilation error",
+    "It stores the string '42'"
+   ],
+   "correctIndex": 1,
+   "explanation": "The actual array can store only String values, even though the reference type is Object[]."
+  },
+  {
+   "id": 51,
+   "section": "Classes and constructors",
+   "question": "What is the difference between a class and an object?",
+   "options": [
+    "A class defines a type; an object is a runtime instance.",
+    "A class is a runtime instance; an object is a type definition.",
+    "They are the same thing.",
+    "A class holds only static members; an object holds instance members."
+   ],
+   "correctIndex": 0,
+   "explanation": "Classes define fields and methods; objects hold instance state."
+  },
+  {
+   "id": 52,
+   "section": "Classes and constructors",
+   "question": "Can Java constructors be overloaded?",
+   "options": [
+    "No; constructors share the class name so they cannot be overloaded.",
+    "Yes, but only if they have different return types.",
+    "Yes, but only one may be public.",
+    "Yes, by using different parameter lists."
+   ],
+   "correctIndex": 3,
+   "explanation": "Constructors are not distinguished by return type."
+  },
+  {
+   "id": 53,
+   "section": "Classes and constructors",
+   "question": "Does a constructor have a return type?",
+   "options": [
+    "Yes, it returns the new object.",
+    "Yes, always void.",
+    "Yes, it returns the class type.",
+    "No; it has only the class name and parameters."
+   ],
+   "correctIndex": 3,
+   "explanation": "A declaration with the class name and a return type is a method, not a constructor."
+  },
+  {
+   "id": 54,
+   "section": "Classes and constructors",
+   "question": "When does the compiler provide a default no-argument constructor?",
+   "options": [
+    "Always, even if other constructors are declared.",
+    "When the class declares no fields.",
+    "When the class declares no constructors.",
+    "When the class is declared public."
+   ],
+   "correctIndex": 2,
+   "explanation": "Declaring any constructor suppresses automatic generation of the default constructor."
+  },
+  {
+   "id": 55,
+   "section": "Classes and constructors",
+   "question": "Can a constructor be private, and why?",
+   "options": [
+    "No; constructors must be public or package-private.",
+    "Yes; it can control object creation, support factories or singleton patterns, or prevent instantiation.",
+    "Yes, but then the class can never be instantiated by any code.",
+    "No; private constructors are allowed only in enums."
+   ],
+   "correctIndex": 1,
+   "explanation": "Private constructors are accessible only where Java's access rules permit."
+  },
+  {
+   "id": 56,
+   "section": "Classes and constructors",
+   "question": "Can a constructor be static, final, or abstract?",
+   "options": [
+    "No; none of these modifiers are allowed on constructors.",
+    "Yes, any of them is allowed.",
+    "Only final is allowed.",
+    "Only static is allowed, for factories."
+   ],
+   "correctIndex": 0,
+   "explanation": "Those modifiers do not apply to constructors."
+  },
+  {
+   "id": 57,
+   "section": "Classes and constructors",
+   "question": "Can a top-level class be private?",
+   "options": [
+    "Yes; private restricts it to its own file.",
+    "Yes; private makes it package-private.",
+    "No; a nested class can be private.",
+    "No; and nested classes cannot be private either."
+   ],
+   "correctIndex": 2,
+   "explanation": "Top-level classes can use public or package-private access."
+  },
+  {
+   "id": 58,
+   "section": "Classes and constructors",
+   "question": "Can a top-level class be static?",
+   "options": [
+    "No; only nested classes can be static.",
+    "Yes; it makes the class a singleton.",
+    "Yes; it allows access without instantiation.",
+    "Only if it has no constructors."
+   ],
+   "correctIndex": 0,
+   "explanation": "A nested class can be static; a top-level class cannot."
+  },
+  {
+   "id": 59,
+   "section": "Classes and constructors",
+   "question": "How does a static nested class differ from a non-static inner class?",
+   "options": [
+    "A static nested class holds an enclosing instance; an inner class does not.",
+    "A static nested class cannot have instance members; an inner class can.",
+    "They are identical except for syntax.",
+    "An inner class is associated with an enclosing instance; a static nested class is not."
+   ],
+   "correctIndex": 3,
+   "explanation": "A static nested class does not require an enclosing object to be instantiated."
+  },
+  {
+   "id": 60,
+   "section": "Classes and constructors",
+   "question": "If static int x = 10 is declared in A, then a.x = 20, what does b.x print for another A instance b?",
+   "options": [
+    "10",
+    "20",
+    "0",
+    "Compilation error"
+   ],
+   "correctIndex": 1,
+   "explanation": "A static field belongs to the class and is shared by instances."
+  },
+  {
+   "id": 61,
+   "section": "Classes and constructors",
+   "question": "What is the difference between static and instance methods?",
+   "options": [
+    "Static methods have this; instance methods do not.",
+    "Static methods can be overridden; instance methods cannot.",
+    "Instance methods belong to the class; static methods belong to each object.",
+    "Static methods belong to the class; instance methods execute in an object context and have this."
+   ],
+   "correctIndex": 3,
+   "explanation": "Static methods cannot directly access instance members without an object reference."
+  },
+  {
+   "id": 62,
+   "section": "Classes and constructors",
+   "question": "Can a static method directly access an instance variable?",
+   "options": [
+    "Yes, because instance variables are shared by all objects.",
+    "Yes, but only if the variable is public.",
+    "No; it needs an object reference to access instance variables.",
+    "Yes, by using this."
+   ],
+   "correctIndex": 2,
+   "explanation": "It needs an object reference to access instance state."
+  },
+  {
+   "id": 63,
+   "section": "Classes and constructors",
+   "question": "What does this refer to?",
+   "options": [
+    "The current class.",
+    "The superclass object.",
+    "The most recently created object.",
+    "The current object."
+   ],
+   "correctIndex": 3,
+   "explanation": "It can distinguish fields from parameters and invoke another constructor using this(...)."
+  },
+  {
+   "id": 64,
+   "section": "Classes and constructors",
+   "question": "What is super used for?",
+   "options": [
+    "Accessing superclass implementations or invoking a superclass constructor.",
+    "Referring to the current object's fields.",
+    "Declaring a class abstract.",
+    "Calling a static method of a subclass."
+   ],
+   "correctIndex": 0,
+   "explanation": "super(...) invokes a superclass constructor."
+  },
+  {
+   "id": 65,
+   "section": "Classes and constructors",
+   "question": "Can a constructor contain both this(...) and super(...) as explicit constructor invocations?",
+   "options": [
+    "Yes; this(...) must come first and super(...) second.",
+    "Yes, but only in a private constructor.",
+    "No; neither is allowed explicitly in Java.",
+    "No; only one explicit constructor invocation is allowed."
+   ],
+   "correctIndex": 3,
+   "explanation": "Traditional syntax requires it to be first; Java 25 flexible constructor bodies permit certain statements before it."
+  },
+  {
+   "id": 66,
+   "section": "Classes and constructors",
+   "question": "What is constructor chaining?",
+   "options": [
+    "A constructor calling an overridden method.",
+    "One constructor invokes another constructor in the same class or a superclass.",
+    "Creating a chain of objects with linked references.",
+    "Declaring multiple constructors with different parameters."
+   ],
+   "correctIndex": 1,
+   "explanation": "It supports reuse of initialization logic and proper superclass initialization."
+  },
+  {
+   "id": 67,
+   "section": "Classes and constructors",
+   "question": "In what order do instance field initializers and initializer blocks run?",
+   "options": [
+    "In reverse textual order, before superclass initialization.",
+    "In textual order, after superclass initialization and before the remaining constructor body.",
+    "Initializer blocks first, then field initializers, then superclass initialization.",
+    "Before superclass initialization, in textual order."
+   ],
+   "correctIndex": 1,
+   "explanation": "The order applies to the instance initialization sequence for that class."
+  },
+  {
+   "id": 68,
+   "section": "Classes and constructors",
+   "question": "At a high level, what happens during object creation?",
+   "options": [
+    "Memory is allocated, fields receive defaults, superclass and instance initialization run, then constructor bodies execute.",
+    "Fields get defaults, constructor bodies run, then memory is allocated.",
+    "Superclass constructors run after the subclass constructor body.",
+    "Memory is allocated and constructors run, but fields are left uninitialized."
+   ],
+   "correctIndex": 0,
+   "explanation": "Static initialization is part of class initialization rather than each object's creation."
+  },
+  {
+   "id": 69,
+   "section": "Access modifiers",
+   "question": "What are Java's four access levels?",
+   "options": [
+    "public, protected, default, and final.",
+    "public, private, static, and abstract.",
+    "public, private, package, and global.",
+    "public, protected, package-private, and private."
+   ],
+   "correctIndex": 3,
+   "explanation": "Package-private is represented by omitting an access modifier."
+  },
+  {
+   "id": 70,
+   "section": "Access modifiers",
+   "question": "What does package-private mean?",
+   "options": [
+    "Accessible only within the same class.",
+    "Accessible within the same package, subject to Java's other rules.",
+    "Accessible from any package.",
+    "Accessible only in subclasses."
+   ],
+   "correctIndex": 1,
+   "explanation": "No access modifier gives package-level access."
+  },
+  {
+   "id": 71,
+   "section": "Access modifiers",
+   "question": "What does protected mean?",
+   "options": [
+    "Accessible within the package and in qualifying subclass contexts outside it.",
+    "Accessible only in the same class.",
+    "Accessible only within the same package.",
+    "Accessible only from subclasses in the same package."
+   ],
+   "correctIndex": 0,
+   "explanation": "Cross-package subclass access has specific restrictions."
+  },
+  {
+   "id": 72,
+   "section": "Access modifiers",
+   "question": "Can a private method be overridden?",
+   "options": [
+    "Yes, using the @Override annotation.",
+    "Yes, but only in a nested class.",
+    "Yes, if the subclass is in the same package.",
+    "No; private methods are not inherited, so they cannot be overridden."
+   ],
+   "correctIndex": 3,
+   "explanation": "Private methods are not inherited as overridable methods; a same-signature subclass method is separate."
+  },
+  {
+   "id": 73,
+   "section": "Access modifiers",
+   "question": "Can a class have private fields and public methods?",
+   "options": [
+    "No; fields and methods must share the same access level.",
+    "No; public methods cannot access private fields.",
+    "Yes; fields are typically private with public accessor methods.",
+    "Only in abstract classes."
+   ],
+   "correctIndex": 2,
+   "explanation": "This is a common encapsulation pattern."
+  },
+  {
+   "id": 74,
+   "section": "Access modifiers",
+   "question": "Can code inside a class access a private field on another instance of that same class?",
+   "options": [
+    "No; private fields are accessible only through the same instance.",
+    "No; only through getters.",
+    "Yes; private is class-scoped, not instance-scoped.",
+    "Only if the class is final."
+   ],
+   "correctIndex": 2,
+   "explanation": "Private access is based on class access rights, not only the current object."
+  },
+  {
+   "id": 75,
+   "section": "Access modifiers",
+   "question": "Does final on an object reference make the object immutable?",
+   "options": [
+    "Yes; final makes the object immutable.",
+    "No; it prevents reassignment of the reference, not mutation of the referenced object.",
+    "Yes; final prevents the object's fields from changing.",
+    "No; final prevents the object from being garbage collected."
+   ],
+   "correctIndex": 1,
+   "explanation": "A final StringBuilder reference can still call append()."
+  },
+  {
+   "id": 76,
+   "section": "Access modifiers",
+   "question": "Distinguish final, finally, and finalize().",
+   "options": [
+    "final is a modifier; finally is an exception-handling block; finalize() is a deprecated legacy cleanup hook.",
+    "final is an exception block; finally is a modifier; finalize() is a garbage collection method.",
+    "All three are modifiers that prevent inheritance, overriding, and reassignment.",
+    "final is a modifier; finally is a cleanup hook; finalize() is an exception-handling block."
+   ],
+   "correctIndex": 0,
+   "explanation": "finalize() is deprecated for removal and should not be used for resource management."
+  },
+  {
+   "id": 77,
+   "section": "Inheritance and polymorphism",
+   "question": "What is method overloading?",
+   "options": [
+    "Methods with the same name and same parameters in a subclass.",
+    "Methods share a name but have different parameter lists.",
+    "Methods with different names but identical parameter lists.",
+    "A subclass replaces a superclass method with the same signature."
+   ],
+   "correctIndex": 1,
+   "explanation": "Return type alone cannot distinguish overloads."
+  },
+  {
+   "id": 78,
+   "section": "Inheritance and polymorphism",
+   "question": "What is method overriding?",
+   "options": [
+    "Methods in the same class share a name but have different parameters.",
+    "A subclass declares a static method with the same name as the superclass.",
+    "A class declares a method with the same name but a different return type.",
+    "A subclass provides a compatible implementation of an inherited instance method."
+   ],
+   "correctIndex": 3,
+   "explanation": "Normal overridable instance calls dispatch according to the runtime object type."
+  },
+  {
+   "id": 79,
+   "section": "Inheritance and polymorphism",
+   "question": "If A has show() printing A, B extends A overrides show() to print B, and A obj = new B(); obj.show() is called, what prints?",
+   "options": [
+    "A",
+    "AB",
+    "Compilation error",
+    "B"
+   ],
+   "correctIndex": 3,
+   "explanation": "Overridden instance methods use dynamic dispatch based on the runtime object."
+  },
+  {
+   "id": 80,
+   "section": "Inheritance and polymorphism",
+   "question": "If A overloads show(Object) and show(String), and Object x = \"hello\"; new A().show(x) is called, which overload is selected?",
+   "options": [
+    "show(String)",
+    "Compilation error (ambiguous)",
+    "show(Object)",
+    "The overload is chosen at runtime from the object's type"
+   ],
+   "correctIndex": 2,
+   "explanation": "Overload resolution uses the compile-time type of the argument."
+  },
+  {
+   "id": 81,
+   "section": "Inheritance and polymorphism",
+   "question": "If A and B each declare static show(), and A obj = new B(); obj.show() is called, which body runs?",
+   "options": [
+    "B's static show()",
+    "Compilation error",
+    "It depends on the runtime type of obj",
+    "A's static show()"
+   ],
+   "correctIndex": 3,
+   "explanation": "Static methods are hidden, not overridden; selection uses the compile-time type."
+  },
+  {
+   "id": 82,
+   "section": "Inheritance and polymorphism",
+   "question": "Can a static method and an instance method override one another with the same signature?",
+   "options": [
+    "Yes; the static method replaces the instance method.",
+    "No; a static method cannot override an instance method, nor vice versa.",
+    "Yes, but only if both are in the same package.",
+    "Yes, if the static method is declared final."
+   ],
+   "correctIndex": 1,
+   "explanation": "The declarations conflict and cause a compile-time error."
+  },
+  {
+   "id": 83,
+   "section": "Inheritance and polymorphism",
+   "question": "Can an overriding method reduce visibility?",
+   "options": [
+    "No; an overriding method cannot have weaker access than the overridden one.",
+    "Yes; overriding methods may reduce visibility.",
+    "Yes, but only from public to protected.",
+    "Yes, but only for static methods."
+   ],
+   "correctIndex": 0,
+   "explanation": "The override cannot be less accessible than the overridden method."
+  },
+  {
+   "id": 84,
+   "section": "Inheritance and polymorphism",
+   "question": "Can an overriding method declare broader checked exceptions?",
+   "options": [
+    "Yes; overriding methods may declare any checked exception.",
+    "No; it cannot declare new or broader checked exceptions than the overridden method.",
+    "Yes, but only if declared with throws Exception.",
+    "Yes, but only for abstract methods."
+   ],
+   "correctIndex": 1,
+   "explanation": "It may declare narrower checked exceptions or none; unchecked exceptions are not restricted in the same way."
+  },
+  {
+   "id": 85,
+   "section": "Inheritance and polymorphism",
+   "question": "Can an overriding method change its return type?",
+   "options": [
+    "No; the return type must always match exactly.",
+    "It may use a covariant reference return type; primitive return types must match.",
+    "Yes; both primitive and reference return types may change freely.",
+    "Yes; but only primitive return types may be widened."
+   ],
+   "correctIndex": 1,
+   "explanation": "The replacement reference type must be a subtype of the original return type."
+  },
+  {
+   "id": 86,
+   "section": "Inheritance and polymorphism",
+   "question": "If A has int x=10, B extends A with int x=20, and A obj = new B(); what does obj.x print?",
+   "options": [
+    "20",
+    "10",
+    "0",
+    "Compilation error"
+   ],
+   "correctIndex": 1,
+   "explanation": "Fields are hidden, not dynamically overridden; field access uses the compile-time reference type."
+  },
+  {
+   "id": 87,
+   "section": "Inheritance and polymorphism",
+   "question": "A superclass constructor calls an overridable method, and the subclass override prints an int field initialized to 10. What can it print during superclass construction?",
+   "options": [
+    "10",
+    "null",
+    "0",
+    "A compilation error"
+   ],
+   "correctIndex": 2,
+   "explanation": "The override can run before subclass field initializers, so the field still has its default value."
+  },
+  {
+   "id": 88,
+   "section": "Inheritance and polymorphism",
+   "question": "What is polymorphism?",
+   "options": [
+    "Defining multiple classes with the same name in different packages.",
+    "Using a common supertype for different concrete objects while overridden methods behave according to runtime type.",
+    "Using one class name for several unrelated variables.",
+    "Overloading methods so the compiler picks one by argument types."
+   ],
+   "correctIndex": 1,
+   "explanation": "Dynamic dispatch enables subtype-specific behavior through a common API."
+  },
+  {
+   "id": 89,
+   "section": "Inheritance and polymorphism",
+   "question": "Does Java support multiple inheritance of classes?",
+   "options": [
+    "Yes; a class may extend multiple classes.",
+    "Yes, but only with abstract classes.",
+    "No; a class can implement multiple interfaces.",
+    "No; and a class cannot implement multiple interfaces either."
+   ],
+   "correctIndex": 2,
+   "explanation": "Java classes have one direct superclass."
+  },
+  {
+   "id": 90,
+   "section": "Inheritance and polymorphism",
+   "question": "Are constructors inherited?",
+   "options": [
+    "Yes; subclasses inherit all accessible constructors.",
+    "No; constructors are not inherited by subclasses.",
+    "Only public constructors are inherited.",
+    "Only no-argument constructors are inherited."
+   ],
+   "correctIndex": 1,
+   "explanation": "A subclass constructor must invoke an appropriate superclass constructor, explicitly or implicitly."
+  },
+  {
+   "id": 91,
+   "section": "Inheritance and polymorphism",
+   "question": "What if a superclass has only parameterized constructors and a subclass declares no constructor?",
+   "options": [
+    "It compiles; the subclass gets a default constructor that skips super().",
+    "It compiles; the superclass constructors are inherited by the subclass.",
+    "A runtime exception is thrown when the subclass is instantiated.",
+    "Compilation fails if the generated no-argument subclass constructor cannot call an accessible super()."
+   ],
+   "correctIndex": 3,
+   "explanation": "The compiler-generated default constructor attempts a no-argument superclass invocation."
+  },
+  {
+   "id": 92,
+   "section": "Inheritance and polymorphism",
+   "question": "What is the difference between instanceof and a cast?",
+   "options": [
+    "instanceof throws ClassCastException when incompatible; a cast returns false.",
+    "They are identical operations written differently.",
+    "instanceof converts the object; a cast only tests compatibility.",
+    "instanceof tests type compatibility; an incompatible non-null reference cast throws ClassCastException."
+   ],
+   "correctIndex": 3,
+   "explanation": "instanceof returns false for null."
+  },
+  {
+   "id": 93,
+   "section": "Inheritance and polymorphism",
+   "question": "What does null instanceof String evaluate to?",
+   "options": [
+    "true",
+    "NullPointerException",
+    "false",
+    "Compilation error"
+   ],
+   "correctIndex": 2,
+   "explanation": "Null is not an instance of any reference type."
+  },
+  {
+   "id": 94,
+   "section": "Inheritance and polymorphism",
+   "question": "Can a final class be extended?",
+   "options": [
+    "Yes, using the extends keyword.",
+    "Yes, but only within the same package.",
+    "No; a final class cannot be subclassed.",
+    "Yes, but only by an abstract class."
+   ],
+   "correctIndex": 2,
+   "explanation": "final prevents subclassing."
+  },
+  {
+   "id": 95,
+   "section": "Inheritance and polymorphism",
+   "question": "Can a final instance method be overridden?",
+   "options": [
+    "Yes; final only prevents reassignment.",
+    "Yes, but only in a subclass in the same package.",
+    "Yes, if the override is also declared final.",
+    "No; a final method cannot be overridden."
+   ],
+   "correctIndex": 3,
+   "explanation": "final prevents overriding."
+  },
+  {
+   "id": 96,
+   "section": "Abstract classes and interfaces",
+   "question": "Can an abstract class contain no abstract methods?",
+   "options": [
+    "Yes; an abstract class may declare zero abstract methods.",
+    "No; abstract classes must have at least one abstract method.",
+    "No; it would then be an interface.",
+    "Only if it is declared final."
+   ],
+   "correctIndex": 0,
+   "explanation": "It may be abstract simply to prevent direct instantiation."
+  },
+  {
+   "id": 97,
+   "section": "Abstract classes and interfaces",
+   "question": "Can an abstract class have a constructor?",
+   "options": [
+    "No; abstract classes cannot have constructors.",
+    "Only if all methods are abstract.",
+    "Yes; it runs when a subclass is constructed.",
+    "Only a private constructor is allowed."
+   ],
+   "correctIndex": 2,
+   "explanation": "Its constructor runs during construction of a concrete subclass object."
+  },
+  {
+   "id": 98,
+   "section": "Abstract classes and interfaces",
+   "question": "Can an abstract class be instantiated directly?",
+   "options": [
+    "Yes, using the new keyword.",
+    "Yes, but only if it has no abstract methods.",
+    "No; it can only be instantiated through a concrete subclass.",
+    "Yes, if it has a public constructor."
+   ],
+   "correctIndex": 2,
+   "explanation": "Concrete subclasses can be instantiated and referenced through the abstract type."
+  },
+  {
+   "id": 99,
+   "section": "Abstract classes and interfaces",
+   "question": "Can an abstract method be private, static, or final?",
+   "options": [
+    "Yes; abstract methods may be private, static, or final.",
+    "No; those modifiers conflict with the need to be overridden.",
+    "Only private is allowed.",
+    "Only static is allowed."
+   ],
+   "correctIndex": 1,
+   "explanation": "Those modifiers conflict with the requirement that an implementation be supplied through inheritance."
+  },
+  {
+   "id": 100,
+   "section": "Abstract classes and interfaces",
+   "question": "Can interfaces contain implemented methods?",
+   "options": [
+    "No; interfaces can only have abstract methods.",
+    "Yes: default, static, and (since Java 9) private methods.",
+    "Only default methods are allowed.",
+    "Yes, but only static and abstract methods."
+   ],
+   "correctIndex": 1,
+   "explanation": "Interfaces may also declare abstract instance methods."
+  },
+  {
+   "id": 101,
+   "section": "Abstract classes and interfaces",
+   "question": "What modifiers are implicit for interface fields?",
+   "options": [
+    "private static final",
+    "protected static",
+    "public static final",
+    "public final"
+   ],
+   "correctIndex": 2,
+   "explanation": "Interface fields are constants and must be initialized at declaration."
+  },
+  {
+   "id": 102,
+   "section": "Abstract classes and interfaces",
+   "question": "Are all interface methods necessarily public?",
+   "options": [
+    "Yes; all interface methods are public.",
+    "No; since Java 9, interface methods may be private.",
+    "No; they are package-private by default.",
+    "Yes; except for static methods, which are private."
+   ],
+   "correctIndex": 1,
+   "explanation": "Java 9+ permits private interface methods; ordinary abstract and default methods are public."
+  },
+  {
+   "id": 103,
+   "section": "Abstract classes and interfaces",
+   "question": "What must a class do if it inherits conflicting default methods from two interfaces?",
+   "options": [
+    "Nothing; the compiler picks the first interface listed.",
+    "Nothing; the compiler picks the one declared in the alphabetically earlier interface.",
+    "Resolve the conflict, usually by overriding the method.",
+    "It must mark the method final."
+   ],
+   "correctIndex": 2,
+   "explanation": "A concrete class must disambiguate conflicting interface defaults."
+  },
+  {
+   "id": 104,
+   "section": "Abstract classes and interfaces",
+   "question": "When a superclass implementation conflicts with an interface default method, which takes precedence?",
+   "options": [
+    "The interface default method.",
+    "Whichever was declared first in the source file.",
+    "The superclass implementation.",
+    "A compile error is always reported."
+   ],
+   "correctIndex": 2,
+   "explanation": "Class methods take priority over interface default methods."
+  },
+  {
+   "id": 105,
+   "section": "Abstract classes and interfaces",
+   "question": "Can an interface extend multiple interfaces?",
+   "options": [
+    "Yes.",
+    "No; interfaces can extend only one interface.",
+    "Yes, but only if they are in the same package.",
+    "No; only classes can extend multiple types."
+   ],
+   "correctIndex": 0,
+   "explanation": "Interfaces support multiple inheritance of type."
+  },
+  {
+   "id": 106,
+   "section": "Abstract classes and interfaces",
+   "question": "How does an abstract class differ from an interface?",
+   "options": [
+    "An abstract class cannot have constructors; an interface can.",
+    "An abstract class cannot have methods; an interface can.",
+    "An abstract class can have instance state and constructors; an interface supports multiple inheritance of type and contracts.",
+    "They are identical; both can be extended by multiple classes."
+   ],
+   "correctIndex": 2,
+   "explanation": "Interfaces can also provide default and static behavior."
+  },
+  {
+   "id": 107,
+   "section": "Abstract classes and interfaces",
+   "question": "What is a functional interface?",
+   "options": [
+    "An interface with no methods.",
+    "An interface with only default methods.",
+    "An interface with exactly one abstract method under the Java functional-interface rules.",
+    "An interface that can be instantiated using new."
+   ],
+   "correctIndex": 2,
+   "explanation": "It can be implemented by a lambda or method reference."
+  },
+  {
+   "id": 108,
+   "section": "Abstract classes and interfaces",
+   "question": "Is @FunctionalInterface required for lambda compatibility?",
+   "options": [
+    "Yes; lambdas require the annotation.",
+    "No; it is only a compile-time check, not required for lambda use.",
+    "Yes, but only for generic interfaces.",
+    "Only inside the java.util.function package."
+   ],
+   "correctIndex": 1,
+   "explanation": "The annotation asks the compiler to verify the interface's functional-interface status."
+  },
+  {
+   "id": 109,
+   "section": "Abstract classes and interfaces",
+   "question": "What is a sealed class or interface?",
+   "options": [
+    "A class that cannot have any subclasses.",
+    "A type that restricts which types may directly extend or implement it.",
+    "A class whose fields cannot be modified.",
+    "An interface that is hidden from other packages."
+   ],
+   "correctIndex": 1,
+   "explanation": "Permitted direct subtypes declare an appropriate status such as final, sealed, or non-sealed."
+  },
+  {
+   "id": 110,
+   "section": "Abstract classes and interfaces",
+   "question": "What does a Java record provide compared with a regular class?",
+   "options": [
+    "A class whose fields can be modified through generated setters.",
+    "A class that supports multiple inheritance.",
+    "A concise data-oriented class with generated component accessors and equals, hashCode, and toString implementations.",
+    "A class that can be instantiated without constructors."
+   ],
+   "correctIndex": 2,
+   "explanation": "Records are implicitly final and have final component fields, though referenced objects may be mutable."
+  },
+  {
+   "id": 111,
+   "section": "Exceptions",
+   "question": "What is the difference between checked and unchecked exceptions?",
+   "options": [
+    "Checked exceptions must be caught or declared; RuntimeException and Error subclasses are unchecked.",
+    "Checked exceptions are unchecked at runtime; unchecked are caught at compile time.",
+    "Unchecked exceptions must be declared; checked ones need not be.",
+    "Checked exceptions extend Error; unchecked ones extend Exception."
+   ],
+   "correctIndex": 0,
+   "explanation": "Unchecked exceptions do not have the catch-or-declare requirement."
+  },
+  {
+   "id": 112,
+   "section": "Exceptions",
+   "question": "What is the difference between throw and throws?",
+   "options": [
+    "throw declares exceptions; throws raises an exception object.",
+    "They are interchangeable keywords.",
+    "throw throws an object; throws declares possible propagated exceptions.",
+    "throw is used in method signatures; throws is used in try blocks."
+   ],
+   "correctIndex": 2,
+   "explanation": "One is an executable statement; the other is part of a method or constructor declaration."
+  },
+  {
+   "id": 113,
+   "section": "Exceptions",
+   "question": "Does void test(){ throw new Exception(); } compile without a throws clause or catch?",
+   "options": [
+    "No; a checked exception must be caught or declared.",
+    "Yes; Exception is unchecked.",
+    "Yes, but with a warning.",
+    "Yes, if the method is void."
+   ],
+   "correctIndex": 0,
+   "explanation": "Exception is checked and must be caught or declared."
+  },
+  {
+   "id": 114,
+   "section": "Exceptions",
+   "question": "Does void test(){ throw new RuntimeException(); } compile without a throws clause?",
+   "options": [
+    "No; RuntimeException must be declared.",
+    "No; it must be caught.",
+    "Yes, but only with a warning.",
+    "Yes; RuntimeException is unchecked."
+   ],
+   "correctIndex": 3,
+   "explanation": "RuntimeException is unchecked."
+  },
+  {
+   "id": 115,
+   "section": "Exceptions",
+   "question": "What prints when a try block prints A, returns, and finally prints B?",
+   "options": [
+    "B, then A",
+    "A, then B",
+    "A only",
+    "A, then B, then a runtime exception"
+   ],
+   "correctIndex": 1,
+   "explanation": "The finally block normally runs while control leaves the try statement."
+  },
+  {
+   "id": 116,
+   "section": "Exceptions",
+   "question": "If try returns 1 and finally returns 2, what does the method return?",
+   "options": [
+    "1",
+    "Compilation error",
+    "2",
+    "It throws an exception"
+   ],
+   "correctIndex": 2,
+   "explanation": "A return from finally overrides the pending return; this is discouraged."
+  },
+  {
+   "id": 117,
+   "section": "Exceptions",
+   "question": "Does finally absolutely always execute?",
+   "options": [
+    "Yes; it always runs in every possible situation.",
+    "Yes; even when the JVM exits via System.exit().",
+    "No; but only when an exception is thrown in try.",
+    "No; for example System.exit() or JVM termination can prevent it."
+   ],
+   "correctIndex": 3,
+   "explanation": "Abrupt JVM or process termination, machine failure, or never reaching the exit path can prevent it."
+  },
+  {
+   "id": 118,
+   "section": "Exceptions",
+   "question": "Can try appear without catch?",
+   "options": [
+    "No; try must always have a catch.",
+    "Yes, but only with a throws clause.",
+    "No; try needs both catch and finally.",
+    "Yes; with finally or in a valid try-with-resources statement."
+   ],
+   "correctIndex": 3,
+   "explanation": "A catch block is not mandatory in those forms."
+  },
+  {
+   "id": 119,
+   "section": "Exceptions",
+   "question": "In what order should related exception types be caught?",
+   "options": [
+    "More general types before more specific types.",
+    "Alphabetical order.",
+    "More specific types before more general types.",
+    "Order does not matter."
+   ],
+   "correctIndex": 2,
+   "explanation": "A later catch for a subtype may be unreachable after a broader catch."
+  },
+  {
+   "id": 120,
+   "section": "Exceptions",
+   "question": "What happens if a catch block throws another exception?",
+   "options": [
+    "It is automatically swallowed.",
+    "The finally block is skipped.",
+    "The original exception replaces it.",
+    "The new exception propagates unless handled by an enclosing handler."
+   ],
+   "correctIndex": 3,
+   "explanation": "The original can be retained as a cause or suppressed exception where appropriate."
+  },
+  {
+   "id": 121,
+   "section": "Exceptions",
+   "question": "What is try-with-resources?",
+   "options": [
+    "A construct that catches all exceptions.",
+    "A try block that executes multiple resource threads.",
+    "A construct that automatically closes AutoCloseable resources when leaving the statement.",
+    "A try block with automatic retry."
+   ],
+   "correctIndex": 2,
+   "explanation": "Resources are closed even when the body throws."
+  },
+  {
+   "id": 122,
+   "section": "Exceptions",
+   "question": "If a try-with-resources body and close() both throw, which is usually primary?",
+   "options": [
+    "The close() exception; the body exception is suppressed.",
+    "Both are thrown at once.",
+    "The body exception; close exceptions are suppressed.",
+    "Neither; the exceptions are ignored."
+   ],
+   "correctIndex": 2,
+   "explanation": "Suppressed exceptions preserve cleanup failures without replacing the primary failure."
+  },
+  {
+   "id": 123,
+   "section": "Exceptions",
+   "question": "What does Throwable.getSuppressed() return?",
+   "options": [
+    "The exceptions suppressed by that throwable.",
+    "The exceptions that caused this one.",
+    "The exceptions that were handled by a catch block.",
+    "The stack trace elements."
+   ],
+   "correctIndex": 0,
+   "explanation": "Try-with-resources commonly uses suppression for exceptions thrown during closing."
+  },
+  {
+   "id": 124,
+   "section": "Exceptions",
+   "question": "How do Exception and Error differ?",
+   "options": [
+    "Error extends Exception; both are recoverable.",
+    "Exception extends Error; both are unchecked.",
+    "They are unrelated hierarchies.",
+    "Both extend Throwable; Error generally indicates serious problems applications are not ordinarily expected to recover from."
+   ],
+   "correctIndex": 3,
+   "explanation": "Exception commonly represents conditions application code may handle."
+  },
+  {
+   "id": 125,
+   "section": "Exceptions",
+   "question": "Can Java catch Throwable?",
+   "options": [
+    "No; Throwable cannot be caught.",
+    "Yes, but catching it indiscriminately is usually poor practice.",
+    "Yes, and it is recommended as a default handler.",
+    "Only in the main method."
+   ],
+   "correctIndex": 1,
+   "explanation": "It includes serious Error subclasses such as OutOfMemoryError."
+  },
+  {
+   "id": 126,
+   "section": "Exceptions",
+   "question": "What is exception propagation?",
+   "options": [
+    "An exception is rethrown automatically after the finally block.",
+    "An unhandled exception travels up the call stack until a matching handler is found or the thread terminates.",
+    "An exception travels to the next catch block in the same method.",
+    "An exception is automatically logged and ignored."
+   ],
+   "correctIndex": 1,
+   "explanation": "Each caller can handle it or allow it to continue propagating."
+  },
+  {
+   "id": 127,
+   "section": "Object equality and hashing",
+   "question": "What contract connects equals() and hashCode()?",
+   "options": [
+    "Equal hash codes imply equal objects.",
+    "Unequal objects must have unequal hash codes.",
+    "Objects with equal hash codes must always be equal.",
+    "Equal objects must have equal hash codes; unequal objects may share a hash code."
+   ],
+   "correctIndex": 3,
+   "explanation": "Hash-based collections depend on this contract."
+  },
+  {
+   "id": 128,
+   "section": "Object equality and hashing",
+   "question": "What can go wrong if equals() is overridden but hashCode() is not?",
+   "options": [
+    "Nothing; hashCode() is derived from equals() automatically.",
+    "A compile error is reported.",
+    "Objects can no longer be compared with ==.",
+    "Hash-based collections may fail to find equal objects or may behave unexpectedly."
+   ],
+   "correctIndex": 3,
+   "explanation": "Equal objects can end up in different hash buckets if their hash codes differ."
+  },
+  {
+   "id": 129,
+   "section": "Object equality and hashing",
+   "question": "What properties should equals() satisfy?",
+   "options": [
+    "Reflexivity only.",
+    "Symmetry and consistency, but not transitivity.",
+    "Reflexivity, symmetry, transitivity, consistency, and false when compared with null.",
+    "They must always return true for non-null arguments."
+   ],
+   "correctIndex": 2,
+   "explanation": "These properties make equality reliable across APIs and collections."
+  },
+  {
+   "id": 130,
+   "section": "Object equality and hashing",
+   "question": "For two new String(\"x\") objects, what do equals() and hashCode()== comparison return?",
+   "options": [
+    "true and false",
+    "false and true",
+    "false and false",
+    "true and true"
+   ],
+   "correctIndex": 3,
+   "explanation": "Equal strings compare equal and have equal hash codes."
+  },
+  {
+   "id": 131,
+   "section": "Object equality and hashing",
+   "question": "What is toString() used for?",
+   "options": [
+    "Generating the object's hash code.",
+    "A string representation of an object.",
+    "Cloning the object.",
+    "Comparing objects for equality."
+   ],
+   "correctIndex": 1,
+   "explanation": "Object's default representation is not a stable output contract."
+  },
+  {
+   "id": 132,
+   "section": "Object equality and hashing",
+   "question": "What does Object.getClass() return?",
+   "options": [
+    "The declared type of the variable.",
+    "The superclass of the object.",
+    "The runtime class of the object.",
+    "The name of the package."
+   ],
+   "correctIndex": 2,
+   "explanation": "getClass() is final and cannot be overridden."
+  },
+  {
+   "id": 133,
+   "section": "Object equality and hashing",
+   "question": "Is == appropriate for comparing enum constants?",
+   "options": [
+    "Yes; each enum constant is a singleton, so == is safe and idiomatic.",
+    "No; equals() must be used.",
+    "Only inside switch statements.",
+    "Only for enums with no fields."
+   ],
+   "correctIndex": 0,
+   "explanation": "Each enum constant is a unique instance, making identity comparison idiomatic."
+  },
+  {
+   "id": 134,
+   "section": "Object equality and hashing",
+   "question": "Why can mutating a HashMap key cause lookup problems?",
+   "options": [
+    "If mutation changes equals() or hashCode(), lookup may search the wrong bucket.",
+    "The key's memory address changes.",
+    "HashMap always throws ConcurrentModificationException.",
+    "Mutation prevents the key from being garbage collected."
+   ],
+   "correctIndex": 0,
+   "explanation": "Immutable keys are safer in hash-based collections."
+  },
+  {
+   "id": 135,
+   "section": "Generics",
+   "question": "What do Java generics provide?",
+   "options": [
+    "Runtime type checking and added casts.",
+    "Faster execution through specialization.",
+    "Support for multiple inheritance.",
+    "Compile-time type safety and fewer explicit casts."
+   ],
+   "correctIndex": 3,
+   "explanation": "Parameterized types catch many type mismatches before runtime."
+  },
+  {
+   "id": 136,
+   "section": "Generics",
+   "question": "Is List<String> a subtype of List<Object>?",
+   "options": [
+    "Yes; because String is a subtype of Object.",
+    "No; Java generics are invariant.",
+    "Yes, but only when read-only.",
+    "Yes, via covariance."
+   ],
+   "correctIndex": 1,
+   "explanation": "Allowing this assignment would let non-String objects enter a list intended for strings."
+  },
+  {
+   "id": 137,
+   "section": "Generics",
+   "question": "Does List<Object> x = new ArrayList<String>(); compile?",
+   "options": [
+    "No; it fails to compile because generics are invariant.",
+    "Yes; ArrayList<String> is a List<Object>.",
+    "Yes, with an unchecked warning.",
+    "Yes, but add() will fail."
+   ],
+   "correctIndex": 0,
+   "explanation": "The generic type arguments are incompatible."
+  },
+  {
+   "id": 138,
+   "section": "Generics",
+   "question": "What does ? extends Number permit when reading from a collection?",
+   "options": [
+    "Values can be added as Number, but not read.",
+    "Values can be read and added freely.",
+    "Only null can be read.",
+    "Values can be read as Number, but adding a non-null Number is generally unsafe."
+   ],
+   "correctIndex": 3,
+   "explanation": "The exact subtype is unknown, so an arbitrary Number might violate the collection's type."
+  },
+  {
+   "id": 139,
+   "section": "Generics",
+   "question": "What does ? super Integer permit?",
+   "options": [
+    "Only reading is allowed.",
+    "Only Number values can be added.",
+    "Neither adding nor reading is allowed.",
+    "Integer values can be added; retrieved elements are generally typed as Object."
+   ],
+   "correctIndex": 3,
+   "explanation": "The actual collection element type may be Integer or a supertype."
+  },
+  {
+   "id": 140,
+   "section": "Generics",
+   "question": "What does PECS mean?",
+   "options": [
+    "Producer Extends, Consumer Super.",
+    "Producer Super, Consumer Extends.",
+    "Produce Everything, Consume Safely.",
+    "Public Extends, Private Super."
+   ],
+   "correctIndex": 0,
+   "explanation": "Use extends for sources of T and super for destinations that consume T, as a practical guideline."
+  },
+  {
+   "id": 141,
+   "section": "Generics",
+   "question": "Why can't a generic class directly use new T()?",
+   "options": [
+    "Because T may be an interface.",
+    "The concrete type argument is generally unavailable at runtime due to type erasure.",
+    "Because generics are only available at compile time for primitives.",
+    "Because new is disallowed in generic classes."
+   ],
+   "correctIndex": 1,
+   "explanation": "A factory or suitable Class<T> token is a common alternative."
+  },
+  {
+   "id": 142,
+   "section": "Generics",
+   "question": "Can you create new List<String>[10]?",
+   "options": [
+    "Yes; it works like any other generic array.",
+    "No.",
+    "Yes, but only with a raw cast.",
+    "Only if the list is final."
+   ],
+   "correctIndex": 1,
+   "explanation": "Generic array creation with a non-reifiable component type is prohibited."
+  },
+  {
+   "id": 143,
+   "section": "Generics",
+   "question": "What is type erasure?",
+   "options": [
+    "Generic types become interfaces at runtime.",
+    "The compiler duplicates classes per type argument.",
+    "Type arguments are stored in each object's header.",
+    "Most generic type parameters are removed from ordinary runtime representations after compile-time checking."
+   ],
+   "correctIndex": 3,
+   "explanation": "The compiler inserts casts and bridge methods as needed; some generic metadata remains available through reflection."
+  },
+  {
+   "id": 144,
+   "section": "Generics",
+   "question": "What is a raw type?",
+   "options": [
+    "A generic type with a wildcard.",
+    "A generic class with only primitives.",
+    "A generic type used without type arguments, such as List.",
+    "A type that cannot be instantiated."
+   ],
+   "correctIndex": 2,
+   "explanation": "Raw types support backward compatibility but weaken type checking."
+  },
+  {
+   "id": 145,
+   "section": "Generics",
+   "question": "What is heap pollution?",
+   "options": [
+    "A heap that has no free memory.",
+    "A heap full of unreachable objects.",
+    "A parameterized variable refers to an object not of the expected parameterized type.",
+    "A garbage collection pause."
+   ],
+   "correctIndex": 2,
+   "explanation": "Raw types and unchecked operations can cause it."
+  },
+  {
+   "id": 146,
+   "section": "Generics",
+   "question": "Can a generic class declare a static field of its class type parameter T?",
+   "options": [
+    "No.",
+    "Yes; each instantiation has its own static field.",
+    "Yes, but only if T is bounded.",
+    "Yes, but only if the field is final."
+   ],
+   "correctIndex": 0,
+   "explanation": "A static member belongs to the generic class, not a particular type parameterization."
+  },
+  {
+   "id": 147,
+   "section": "Generics",
+   "question": "What is a bridge method?",
+   "options": [
+    "A method that skips type checks.",
+    "A method that connects two classes in different packages.",
+    "A compiler-generated method that preserves polymorphism after type erasure or covariant return changes.",
+    "A method that is invoked only by reflection."
+   ],
+   "correctIndex": 2,
+   "explanation": "It helps maintain correct overriding behavior after compilation."
+  },
+  {
+   "id": 148,
+   "section": "Collections",
+   "question": "Compare ArrayList and LinkedList.",
+   "options": [
+    "ArrayList is efficient for end insertion only; LinkedList for indexed access.",
+    "ArrayList offers efficient indexed access; LinkedList has linear indexed access and efficient end operations.",
+    "ArrayList is synchronized; LinkedList is not.",
+    "LinkedList is always faster than ArrayList for both access and insertion."
+   ],
+   "correctIndex": 1,
+   "explanation": "LinkedList insertion/deletion is only efficient when the relevant node or position is already available."
+  },
+  {
+   "id": 149,
+   "section": "Collections",
+   "question": "Compare HashSet and TreeSet.",
+   "options": [
+    "HashSet sorts elements; TreeSet uses hashing.",
+    "TreeSet allows duplicates; HashSet does not.",
+    "HashSet is hash-based without sorted iteration; TreeSet keeps elements sorted.",
+    "They are identical aside from names."
+   ],
+   "correctIndex": 2,
+   "explanation": "TreeSet basic operations are generally logarithmic time."
+  },
+  {
+   "id": 150,
+   "section": "Collections",
+   "question": "Can HashSet retain duplicate elements according to equals()?",
+   "options": [
+    "Yes; duplicates are allowed.",
+    "Yes, but only if the elements are strings.",
+    "No.",
+    "Only if hashCode() differs."
+   ],
+   "correctIndex": 2,
+   "explanation": "Hash codes help locate candidates and equals() determines equality."
+  },
+  {
+   "id": 151,
+   "section": "Collections",
+   "question": "Can HashMap contain null keys and values?",
+   "options": [
+    "Yes; one null key and multiple null values are allowed.",
+    "No; HashMap does not allow null keys or values.",
+    "Only null values, not null keys.",
+    "Only multiple null keys."
+   ],
+   "correctIndex": 0,
+   "explanation": "Other maps, such as ConcurrentHashMap, have different null restrictions."
+  },
+  {
+   "id": 152,
+   "section": "Collections",
+   "question": "What happens when the same key is inserted into HashMap twice?",
+   "options": [
+    "An exception is thrown.",
+    "The earlier value is kept.",
+    "Both values are stored as a list.",
+    "The later value replaces the earlier value for that key."
+   ],
+   "correctIndex": 3,
+   "explanation": "A map stores at most one mapping per key according to its equality rules."
+  },
+  {
+   "id": 153,
+   "section": "Collections",
+   "question": "Compare HashMap and TreeMap.",
+   "options": [
+    "HashMap is hash-based without guaranteed sorted order; TreeMap sorts keys.",
+    "TreeMap is hash-based; HashMap sorts keys.",
+    "HashMap sorts keys; TreeMap guarantees insertion order.",
+    "Both sort keys in the same way."
+   ],
+   "correctIndex": 0,
+   "explanation": "TreeMap uses natural ordering or a comparator."
+  },
+  {
+   "id": 154,
+   "section": "Collections",
+   "question": "Compare Comparable and Comparator.",
+   "options": [
+    "Comparable is an external ordering; Comparator is the natural ordering.",
+    "Comparable works only on strings.",
+    "They are interchangeable names for the same interface.",
+    "Comparable defines natural ordering via compareTo(); Comparator defines an external ordering via compare()."
+   ],
+   "correctIndex": 3,
+   "explanation": "Comparators allow multiple orderings for one type."
+  },
+  {
+   "id": 155,
+   "section": "Collections",
+   "question": "How does ListIterator differ from Iterator?",
+   "options": [
+    "ListIterator supports backward traversal, replacement, insertion, and index operations in addition to forward traversal.",
+    "ListIterator is forward-only.",
+    "ListIterator supports only removal.",
+    "ListIterator works on any Collection, including Set."
+   ],
+   "correctIndex": 0,
+   "explanation": "Iterator provides forward traversal and optional removal."
+  },
+  {
+   "id": 156,
+   "section": "Collections",
+   "question": "What is a fail-fast iterator?",
+   "options": [
+    "An iterator that never throws exceptions.",
+    "An iterator that can iterate in reverse.",
+    "An iterator that locks the collection.",
+    "An iterator that may throw ConcurrentModificationException after certain external structural modifications."
+   ],
+   "correctIndex": 3,
+   "explanation": "Fail-fast behavior is best-effort bug detection, not thread safety."
+  },
+  {
+   "id": 157,
+   "section": "Collections",
+   "question": "Compare Collections.unmodifiableList() and List.of().",
+   "options": [
+    "The former is an unmodifiable view of a backing list; List.of() returns an unmodifiable list and rejects null elements.",
+    "unmodifiableList() returns a deeply immutable copy; List.of() returns a view.",
+    "List.of() returns a modifiable list; unmodifiableList() does not.",
+    "They are identical in behavior and null handling."
+   ],
+   "correctIndex": 0,
+   "explanation": "Neither makes mutable elements themselves immutable."
+  },
+  {
+   "id": 158,
+   "section": "Collections",
+   "question": "Does an unmodifiable collection guarantee deeply immutable contents?",
+   "options": [
+    "No.",
+    "Yes; contents are deeply immutable.",
+    "Yes, but only for primitive wrapper types.",
+    "Only if the collection is sorted."
+   ],
+   "correctIndex": 0,
+   "explanation": "Elements may be mutable, and an unmodifiable view may reflect changes to its backing collection."
+  },
+  {
+   "id": 159,
+   "section": "Collections",
+   "question": "What happens when add() is called on a list returned by List.of()?",
+   "options": [
+    "The element is added.",
+    "NullPointerException",
+    "UnsupportedOperationException",
+    "IllegalArgumentException"
+   ],
+   "correctIndex": 2,
+   "explanation": "List.of() returns an unmodifiable list."
+  },
+  {
+   "id": 160,
+   "section": "Collections",
+   "question": "What is the difference between Queue and Deque?",
+   "options": [
+    "Queue commonly models processing order; Deque supports insertion and removal at both ends.",
+    "Queue is for sorted data; Deque is for unsorted data.",
+    "Deque is a queue that allows only removal at both ends.",
+    "They are identical interfaces."
+   ],
+   "correctIndex": 0,
+   "explanation": "Deque can implement queue-like or stack-like behavior."
+  },
+  {
+   "id": 161,
+   "section": "Collections",
+   "question": "Compare HashMap and ConcurrentHashMap.",
+   "options": [
+    "HashMap is thread-safe and rejects nulls; ConcurrentHashMap allows them but is not thread-safe.",
+    "ConcurrentHashMap is designed for concurrent access and rejects null keys/values; HashMap is not safe for unsynchronized concurrent structural modification.",
+    "They are identical except for the package name.",
+    "ConcurrentHashMap keeps keys sorted; HashMap does not."
+   ],
+   "correctIndex": 1,
+   "explanation": "Choose a concurrent map when concurrent access requirements call for it."
+  },
+  {
+   "id": 162,
+   "section": "Collections",
+   "question": "What does computeIfAbsent() do?",
+   "options": [
+    "It removes a key if its value is null.",
+    "It computes and associates a value when a key is absent or mapped to null, subject to the map contract.",
+    "It always replaces the existing value with a newly computed one.",
+    "It throws an exception when the key is absent."
+   ],
+   "correctIndex": 1,
+   "explanation": "It returns the existing or computed value, or null if no non-null value is established."
+  },
+  {
+   "id": 163,
+   "section": "Lambdas and streams",
+   "question": "What is a lambda expression?",
+   "options": [
+    "A class with a single method declared inside another class.",
+    "A named method that is stored in a variable.",
+    "A compile-time annotation for functional programming.",
+    "A concise implementation of a functional interface."
+   ],
+   "correctIndex": 3,
+   "explanation": "For example, Runnable r = () -> System.out.println(\"Hello\")."
+  },
+  {
+   "id": 164,
+   "section": "Lambdas and streams",
+   "question": "What is a method reference?",
+   "options": [
+    "A pointer to a memory address of a method.",
+    "A reflection call to a method by name at runtime.",
+    "A way to rename an existing method.",
+    "A compact reference to an existing method or constructor where a functional interface is expected."
+   ],
+   "correctIndex": 3,
+   "explanation": "For example, names.forEach(System.out::println)."
+  },
+  {
+   "id": 165,
+   "section": "Lambdas and streams",
+   "question": "Can a lambda reassign a captured local variable?",
+   "options": [
+    "No; a captured local must be final or effectively final.",
+    "Yes; lambdas can reassign captured locals freely.",
+    "Yes, but only if the variable is volatile.",
+    "Only inside static methods."
+   ],
+   "correctIndex": 0,
+   "explanation": "A lambda can read an effectively final local variable."
+  },
+  {
+   "id": 166,
+   "section": "Lambdas and streams",
+   "question": "Does int x=10; Runnable r=()->System.out.println(x); x++; compile?",
+   "options": [
+    "No; x is not effectively final, so the lambda cannot capture it.",
+    "Yes; it prints 10.",
+    "Yes; it prints 11.",
+    "Yes, but throws an exception at runtime."
+   ],
+   "correctIndex": 0,
+   "explanation": "Modifying x means it is not effectively final."
+  },
+  {
+   "id": 167,
+   "section": "Lambdas and streams",
+   "question": "Can a lambda mutate an array referenced by an effectively final local variable?",
+   "options": [
+    "No; arrays are immutable when captured.",
+    "No; the array reference must be reassigned.",
+    "Yes; the reference is effectively final, so the array elements may change.",
+    "Only if the array is declared volatile."
+   ],
+   "correctIndex": 2,
+   "explanation": "The reference cannot be reassigned, but the referenced array's contents can change."
+  },
+  {
+   "id": 168,
+   "section": "Lambdas and streams",
+   "question": "What is the difference between stream map() and filter()?",
+   "options": [
+    "map retains elements matching a predicate; filter transforms them.",
+    "They are identical; only the names differ.",
+    "map works only on numbers; filter works only on strings.",
+    "map transforms elements; filter retains elements satisfying a predicate."
+   ],
+   "correctIndex": 3,
+   "explanation": "They perform different intermediate pipeline operations."
+  },
+  {
+   "id": 169,
+   "section": "Lambdas and streams",
+   "question": "What is the difference between intermediate and terminal stream operations?",
+   "options": [
+    "Intermediate operations build a generally lazy pipeline; terminal operations trigger processing.",
+    "Intermediate operations trigger processing; terminal operations build the pipeline.",
+    "Intermediate operations run eagerly; terminal operations run lazily.",
+    "Both run eagerly in the order declared."
+   ],
+   "correctIndex": 0,
+   "explanation": "Examples of terminal operations include collect(), count(), and forEach()."
+  },
+  {
+   "id": 170,
+   "section": "Lambdas and streams",
+   "question": "What does Stream.of(1,2,3).filter(n -> { System.out.print(n); return n > 1; }).findFirst() print?",
+   "options": [
+    "1",
+    "12",
+    "123",
+    "23"
+   ],
+   "correctIndex": 1,
+   "explanation": "The pipeline evaluates elements as needed and stops after finding the first matching element, 2."
+  },
+  {
+   "id": 171,
+   "section": "Lambdas and streams",
+   "question": "Can a stream be reused after a terminal operation?",
+   "options": [
+    "No; reuse may throw IllegalStateException.",
+    "Yes; a stream can be reused any number of times.",
+    "Yes, but only for sequential streams.",
+    "Yes, after calling reset()."
+   ],
+   "correctIndex": 0,
+   "explanation": "A stream is intended for one use."
+  },
+  {
+   "id": 172,
+   "section": "Lambdas and streams",
+   "question": "Compare findFirst() and findAny().",
+   "options": [
+    "findFirst returns the last element; findAny returns the first.",
+    "findFirst requests the first element in encounter order; findAny permits any element.",
+    "findFirst works only on sorted streams; findAny on unsorted.",
+    "They are identical in every case."
+   ],
+   "correctIndex": 1,
+   "explanation": "findAny can provide more flexibility for parallel processing."
+  },
+  {
+   "id": 173,
+   "section": "Lambdas and streams",
+   "question": "Compare Optional.orElse(value) and orElseGet(supplier).",
+   "options": [
+    "orElse evaluates lazily; orElseGet evaluates eagerly.",
+    "They are identical in behavior.",
+    "orElse accepts a supplier; orElseGet accepts a value.",
+    "orElse evaluates its argument eagerly; orElseGet invokes its supplier only when empty."
+   ],
+   "correctIndex": 3,
+   "explanation": "Use a supplier to defer potentially expensive default computation."
+  },
+  {
+   "id": 174,
+   "section": "Lambdas and streams",
+   "question": "If Optional.of(\"Java\").orElse(getDefault()) is evaluated and getDefault() prints called, what prints?",
+   "options": [
+    "called, then Java",
+    "Java, then called",
+    "Java only",
+    "called only"
+   ],
+   "correctIndex": 0,
+   "explanation": "The orElse argument is evaluated before the method call even though the optional has a value."
+  },
+  {
+   "id": 175,
+   "section": "Lambdas and streams",
+   "question": "Compare Stream.reduce() and collect().",
+   "options": [
+    "reduce combines values into a result; collect performs a mutable reduction into a result container.",
+    "reduce is a mutable reduction; collect is an immutable reduction.",
+    "They are the same operation under different names.",
+    "reduce works only on parallel streams; collect on sequential streams."
+   ],
+   "correctIndex": 0,
+   "explanation": "For example, collect can accumulate stream elements into a list."
+  },
+  {
+   "id": 176,
+   "section": "Lambdas and streams",
+   "question": "What is a parallel stream?",
+   "options": [
+    "A stream that may process elements concurrently, commonly using the common fork/join pool.",
+    "A stream that always uses a dedicated thread per element.",
+    "A stream that processes elements on the GPU.",
+    "A stream that reads from multiple files simultaneously."
+   ],
+   "correctIndex": 0,
+   "explanation": "Parallel execution is not always faster and shared mutable state can make it unsafe."
+  },
+  {
+   "id": 177,
+   "section": "Lambdas and streams",
+   "question": "Why should stream side effects be used carefully?",
+   "options": [
+    "Laziness, permitted reordering, and parallel execution can cause unexpected results or races.",
+    "Side effects are always forbidden in streams.",
+    "Streams do not allow any lambda expressions.",
+    "Streams cannot call methods that have side effects."
+   ],
+   "correctIndex": 0,
+   "explanation": "Prefer stateless transformations and explicit collection where appropriate."
+  },
+  {
+   "id": 178,
+   "section": "Lambdas and streams",
+   "question": "How do Arrays.stream(intArray) and Stream.of(intArray) differ for a primitive int array?",
+   "options": [
+    "Both yield a Stream<int[]> for a primitive int array.",
+    "Arrays.stream(intArray) yields an IntStream; Stream.of(intArray) yields a Stream<int[]> when the array is passed as one argument.",
+    "Both yield an IntStream of its elements.",
+    "Arrays.stream yields a Stream<int[]>; Stream.of yields an IntStream."
+   ],
+   "correctIndex": 1,
+   "explanation": "Primitive arrays need the primitive stream APIs for element-wise primitive processing."
+  },
+  {
+   "id": 179,
+   "section": "JVM and memory",
+   "question": "Conceptually, how do stack and heap memory differ?",
+   "options": [
+    "The stack holds objects; the heap holds method frames.",
+    "Each thread has its own JVM stack for frames; objects and arrays are generally allocated on the heap.",
+    "Stack and heap are shared by all threads in the same way.",
+    "The heap is per thread; the stack is global."
+   ],
+   "correctIndex": 1,
+   "explanation": "Actual physical placement can vary with JVM optimizations."
+  },
+  {
+   "id": 180,
+   "section": "JVM and memory",
+   "question": "When is an object eligible for garbage collection?",
+   "options": [
+    "When it is set to null explicitly.",
+    "When it is no longer reachable through the runtime's relevant reachability mechanisms, subject to reference and finalization details.",
+    "When its method returns.",
+    "When System.gc() is called on it."
+   ],
+   "correctIndex": 1,
+   "explanation": "Eligibility does not mean immediate collection."
+  },
+  {
+   "id": 181,
+   "section": "JVM and memory",
+   "question": "Can Java programs have memory leaks despite garbage collection?",
+   "options": [
+    "No; garbage collection prevents all leaks.",
+    "Only in native code.",
+    "Only if finalize() is not overridden.",
+    "Yes; for example, objects kept reachable through forgotten references."
+   ],
+   "correctIndex": 3,
+   "explanation": "Unintended retained references, such as unbounded caches or listeners, can keep objects reachable."
+  },
+  {
+   "id": 182,
+   "section": "JVM and memory",
+   "question": "Does System.gc() guarantee immediate garbage collection?",
+   "options": [
+    "No; it is only a hint to the JVM.",
+    "Yes; the collection runs immediately.",
+    "Yes, but only for the young generation.",
+    "Yes, if the heap is full."
+   ],
+   "correctIndex": 0,
+   "explanation": "It is only a request or suggestion to the JVM."
+  },
+  {
+   "id": 183,
+   "section": "JVM and memory",
+   "question": "Compare OutOfMemoryError and StackOverflowError.",
+   "options": [
+    "OutOfMemoryError means stack overflow; StackOverflowError means heap exhaustion.",
+    "They are the same error under different names.",
+    "OutOfMemoryError indicates a required memory allocation cannot be satisfied; StackOverflowError commonly means a thread stack exceeded its limit.",
+    "Both occur only in recursive methods."
+   ],
+   "correctIndex": 2,
+   "explanation": "Deep recursion is a common cause of StackOverflowError."
+  },
+  {
+   "id": 184,
+   "section": "JVM and memory",
+   "question": "If a method receives an int[] and changes a[0], can the caller observe it?",
+   "options": [
+    "No; arrays are passed by deep copy.",
+    "No; changes are lost when the method returns.",
+    "Yes, because the copied reference still points to the same array.",
+    "Only if the array is declared final."
+   ],
+   "correctIndex": 2,
+   "explanation": "Java passes the reference value by value; both references designate the same object."
+  },
+  {
+   "id": 185,
+   "section": "JVM and memory",
+   "question": "Can a Java method swap two caller variables by swapping its parameters?",
+   "options": [
+    "No; parameters are copies of the caller's values.",
+    "Yes; Java passes primitives by reference.",
+    "Yes, but only for objects.",
+    "Yes, if the parameters are final."
+   ],
+   "correctIndex": 0,
+   "explanation": "Reassigning local parameter variables does not reassign the caller's variables."
+  },
+  {
+   "id": 186,
+   "section": "JVM and memory",
+   "question": "Does two references failing == imply the referenced objects are collectible?",
+   "options": [
+    "No.",
+    "Yes; the objects are definitely unreachable.",
+    "Yes; they will be collected immediately.",
+    "Yes, if the references are null."
+   ],
+   "correctIndex": 0,
+   "explanation": "Identity comparison is unrelated to whether objects remain reachable."
+  },
+  {
+   "id": 187,
+   "section": "JVM and memory",
+   "question": "When does class initialization execute static initializers?",
+   "options": [
+    "Every time an object is created.",
+    "As part of class initialization, coordinated once per defining class loader under normal JVM operation.",
+    "Once at JVM startup for all classes.",
+    "Every time a static method is called."
+   ],
+   "correctIndex": 1,
+   "explanation": "Static initialization is not repeated for each instance."
+  },
+  {
+   "id": 188,
+   "section": "JVM and memory",
+   "question": "What are loading, linking, and initialization?",
+   "options": [
+    "Loading runs static initializers; linking reads bytecode; initialization allocates memory.",
+    "Loading compiles source; linking verifies it; initialization executes main().",
+    "They are three names for the same step.",
+    "Loading obtains the class representation; linking includes verification, preparation, and resolution; initialization runs class initialization code."
+   ],
+   "correctIndex": 3,
+   "explanation": "They are distinct phases of class lifecycle."
+  },
+  {
+   "id": 189,
+   "section": "JVM and memory",
+   "question": "Can two class loaders load classes with the same fully qualified name as different types?",
+   "options": [
+    "No; the JVM forbids duplicate class names.",
+    "Yes; they are treated as distinct runtime types.",
+    "Only if they are in different packages.",
+    "Only for interface types."
+   ],
+   "correctIndex": 1,
+   "explanation": "Class identity depends on binary name and defining class loader."
+  },
+  {
+   "id": 190,
+   "section": "JVM and memory",
+   "question": "What does the JIT compiler do?",
+   "options": [
+    "It converts Java source code to bytecode.",
+    "It converts bytecode to Java source at runtime.",
+    "It compiles frequently executed bytecode into native machine code at runtime where beneficial.",
+    "It manages memory allocation for objects."
+   ],
+   "correctIndex": 2,
+   "explanation": "The JVM can use interpretation and runtime compilation strategies."
+  },
+  {
+   "id": 191,
+   "section": "Concurrency",
+   "question": "How does a process differ from a thread?",
+   "options": [
+    "A process shares memory with other processes; threads have separate address spaces.",
+    "A process is a lightweight thread.",
+    "A process has its own operating-system-managed address space and resources; threads within it typically share process memory.",
+    "They are the same concept under different names."
+   ],
+   "correctIndex": 2,
+   "explanation": "Threads maintain separate execution state while sharing much of the process's resources."
+  },
+  {
+   "id": 192,
+   "section": "Concurrency",
+   "question": "What is the difference between Thread.start() and Thread.run()?",
+   "options": [
+    "start() calls run() on the current thread; run() starts a new thread.",
+    "They are identical.",
+    "start() initiates a new thread; calling run() directly is an ordinary method call.",
+    "run() starts a daemon thread; start() starts a user thread."
+   ],
+   "correctIndex": 2,
+   "explanation": "Direct run() does not create a new thread of execution."
+  },
+  {
+   "id": 193,
+   "section": "Concurrency",
+   "question": "What does synchronized provide?",
+   "options": [
+    "Atomic operations on primitives without locks.",
+    "Monitor-based mutual exclusion and memory-visibility guarantees.",
+    "Automatic thread creation.",
+    "Lock-free memory allocation."
+   ],
+   "correctIndex": 1,
+   "explanation": "Synchronization actions on the same monitor establish happens-before relationships."
+  },
+  {
+   "id": 194,
+   "section": "Concurrency",
+   "question": "Which monitor is locked by a synchronized instance method versus a static synchronized method?",
+   "options": [
+    "The Class object for both.",
+    "The receiver object for both.",
+    "The thread object for instance methods; the Class object for static methods.",
+    "The receiver object for an instance method; the declaring class's Class object for a static method."
+   ],
+   "correctIndex": 3,
+   "explanation": "They use different monitors."
+  },
+  {
+   "id": 195,
+   "section": "Concurrency",
+   "question": "Can two threads simultaneously execute synchronized instance methods on the same object's monitor?",
+   "options": [
+    "Yes; synchronized allows concurrent access.",
+    "Yes, if the threads are in the same ThreadGroup.",
+    "Only if one of the methods is static.",
+    "No; the monitor can be held by only one thread at a time (aside from reentrancy)."
+   ],
+   "correctIndex": 3,
+   "explanation": "Only one thread at a time can hold that monitor."
+  },
+  {
+   "id": 196,
+   "section": "Concurrency",
+   "question": "What is a race condition?",
+   "options": [
+    "A bug caused by too many threads being created.",
+    "A correctness problem dependent on timing or interleaving of insufficiently coordinated operations.",
+    "A compile-time error for conflicting variables.",
+    "A deadlock between two threads."
+   ],
+   "correctIndex": 1,
+   "explanation": "Proper synchronization or atomic operations can prevent relevant races."
+  },
+  {
+   "id": 197,
+   "section": "Concurrency",
+   "question": "Is count++ thread-safe on a shared plain int?",
+   "options": [
+    "Yes; increment is atomic for int.",
+    "Yes, but only on 64-bit JVMs.",
+    "No; it is a read-modify-write sequence that can interleave.",
+    "Yes, if the variable is a local."
+   ],
+   "correctIndex": 2,
+   "explanation": "It is a read-modify-write operation and concurrent updates can be lost."
+  },
+  {
+   "id": 198,
+   "section": "Concurrency",
+   "question": "Does volatile make count++ atomic?",
+   "options": [
+    "Yes; volatile makes all operations atomic.",
+    "Yes, but only for int.",
+    "No; volatile does not make a compound read-modify-write atomic.",
+    "Only on 64-bit JVMs."
+   ],
+   "correctIndex": 2,
+   "explanation": "volatile provides visibility and ordering for the field, not atomicity for compound operations."
+  },
+  {
+   "id": 199,
+   "section": "Concurrency",
+   "question": "Compare volatile and synchronized.",
+   "options": [
+    "volatile provides mutual exclusion; synchronized provides only visibility.",
+    "They are identical.",
+    "volatile gives field visibility and ordering; synchronized also provides mutual exclusion and monitor-based visibility guarantees.",
+    "volatile can be used on methods; synchronized only on fields."
+   ],
+   "correctIndex": 2,
+   "explanation": "Use synchronization or atomics for compound state updates."
+  },
+  {
+   "id": 200,
+   "section": "Concurrency",
+   "question": "What is deadlock?",
+   "options": [
+    "A thread that is waiting for I/O.",
+    "A thread that runs indefinitely.",
+    "A thread that has been interrupted.",
+    "Threads are permanently blocked waiting on resources held by one another in a dependency cycle."
+   ],
+   "correctIndex": 3,
+   "explanation": "Consistent lock ordering can prevent common deadlock patterns."
+  },
+  {
+   "id": 201,
+   "section": "Concurrency",
+   "question": "How do wait() and sleep() differ?",
+   "options": [
+    "sleep() releases the monitor; wait() does not.",
+    "wait() releases the monitor it waits on; sleep() does not release monitors held by the sleeping thread.",
+    "Both release the monitor.",
+    "Neither releases the monitor."
+   ],
+   "correctIndex": 1,
+   "explanation": "wait() must be called while holding the relevant object's monitor."
+  },
+  {
+   "id": 202,
+   "section": "Concurrency",
+   "question": "Why call wait() inside a loop?",
+   "options": [
+    "To make the thread sleep longer.",
+    "To make wait() non-interruptible.",
+    "To avoid InterruptedException.",
+    "Spurious wakeups are allowed and the condition may change before the monitor is reacquired."
+   ],
+   "correctIndex": 3,
+   "explanation": "Recheck the condition after waking."
+  },
+  {
+   "id": 203,
+   "section": "Concurrency",
+   "question": "Compare notify() and notifyAll().",
+   "options": [
+    "notify wakes all waiting threads; notifyAll wakes one.",
+    "They are identical.",
+    "notify wakes one waiting thread; notifyAll wakes all threads waiting on that monitor.",
+    "notify wakes threads waiting on any monitor."
+   ],
+   "correctIndex": 2,
+   "explanation": "Awakened threads still need to reacquire the monitor."
+  },
+  {
+   "id": 204,
+   "section": "Concurrency",
+   "question": "What does Thread.join() do?",
+   "options": [
+    "Starts another thread.",
+    "Waits for another thread to terminate.",
+    "Interrupts another thread.",
+    "Merges two threads into one."
+   ],
+   "correctIndex": 1,
+   "explanation": "It coordinates completion between threads."
+  },
+  {
+   "id": 205,
+   "section": "Concurrency",
+   "question": "What is a daemon thread?",
+   "options": [
+    "A background thread that alone does not prevent JVM exit after all started non-daemon threads terminate.",
+    "A thread that runs only on a daemon process.",
+    "A thread with the highest priority.",
+    "A thread that cannot be interrupted."
+   ],
+   "correctIndex": 0,
+   "explanation": "Daemon threads are not a substitute for orderly resource cleanup."
+  },
+  {
+   "id": 206,
+   "section": "Concurrency",
+   "question": "Compare Runnable and Callable.",
+   "options": [
+    "Runnable returns a result; Callable does not.",
+    "Both return a result.",
+    "Runnable has no result and cannot declare checked exceptions in run(); Callable returns a result and can throw checked exceptions.",
+    "Callable cannot throw checked exceptions; Runnable can."
+   ],
+   "correctIndex": 2,
+   "explanation": "Callable is useful when tasks produce results."
+  },
+  {
+   "id": 207,
+   "section": "Concurrency",
+   "question": "What is ExecutorService used for?",
+   "options": [
+    "Compiling Java source in parallel.",
+    "Serializing objects to the disk.",
+    "Managing task execution and thread reuse separately from low-level thread creation.",
+    "Managing network sockets."
+   ],
+   "correctIndex": 2,
+   "explanation": "It supports task submission, lifecycle management, and result handling."
+  },
+  {
+   "id": 208,
+   "section": "Concurrency",
+   "question": "Compare Future and CompletableFuture.",
+   "options": [
+    "Future is composable; CompletableFuture is only a blocking result.",
+    "Future represents an asynchronous result; CompletableFuture adds composable dependent stages and callback-style pipelines.",
+    "They are identical.",
+    "CompletableFuture is synchronous; Future is asynchronous."
+   ],
+   "correctIndex": 1,
+   "explanation": "CompletableFuture supports more expressive asynchronous workflows."
+  },
+  {
+   "id": 209,
+   "section": "Concurrency",
+   "question": "What does AtomicInteger provide?",
+   "options": [
+    "Thread-local variables.",
+    "Synchronized collections.",
+    "Automatic memory management.",
+    "Atomic operations such as incrementAndGet() and compareAndSet()."
+   ],
+   "correctIndex": 3,
+   "explanation": "These operations avoid lost updates for the operations they make atomic."
+  },
+  {
+   "id": 210,
+   "section": "Concurrency",
+   "question": "What is the Java Memory Model?",
+   "options": [
+    "The rules for how the garbage collector works.",
+    "The rules governing visibility, ordering, and synchronization between threads.",
+    "The layout of the JVM heap.",
+    "The rules for class loading."
+   ],
+   "correctIndex": 1,
+   "explanation": "Happens-before relationships are central to its guarantees."
+  },
+  {
+   "id": 211,
+   "section": "Interview traps",
+   "question": "What is printed by System.out.println(\"A\" == \"A\"); and System.out.println(new String(\"A\") == \"A\");?",
+   "options": [
+    "true, then true",
+    "true, then false",
+    "false, then true",
+    "false, then false"
+   ],
+   "correctIndex": 1,
+   "explanation": "The literals are interned; the new String is a distinct object."
+  },
+  {
+   "id": 212,
+   "section": "Interview traps",
+   "question": "Does calling show(null) compile if overloads show(String) and show(Integer) both exist?",
+   "options": [
+    "Yes; the String overload is chosen.",
+    "No; the call is ambiguous.",
+    "Yes; the Integer overload is chosen.",
+    "Yes; a NullPointerException is thrown at runtime."
+   ],
+   "correctIndex": 1,
+   "explanation": "Neither String nor Integer is a subtype of the other, so neither overload is more specific."
+  },
+  {
+   "id": 213,
+   "section": "Interview traps",
+   "question": "If overloads show(Object) and show(String) exist, which is chosen for show(null)?",
+   "options": [
+    "show(Object)",
+    "show(String)",
+    "Compilation error (ambiguous)",
+    "A NullPointerException at runtime"
+   ],
+   "correctIndex": 1,
+   "explanation": "String is more specific than Object."
+  },
+  {
+   "id": 214,
+   "section": "Interview traps",
+   "question": "Compare String.valueOf((Object)null) and ((String)null).toString().",
+   "options": [
+    "Both return 'null'.",
+    "Both throw NullPointerException.",
+    "The first throws NullPointerException; the second returns 'null'.",
+    "The first returns \"null\"; the second throws NullPointerException."
+   ],
+   "correctIndex": 3,
+   "explanation": "String.valueOf(Object) handles a null reference, whereas invoking a method on null fails. An uncast String.valueOf(null) call can be ambiguous."
+  },
+  {
+   "id": 215,
+   "section": "Interview traps",
+   "question": "What is the result of int x = 10; System.out.println(x == 10.0);?",
+   "options": [
+    "false",
+    "Compilation error",
+    "true",
+    "ClassCastException at runtime"
+   ],
+   "correctIndex": 2,
+   "explanation": "Numeric promotion permits comparison after converting the integer to a compatible floating-point type."
+  },
+  {
+   "id": 216,
+   "section": "Interview traps",
+   "question": "How do break and continue differ?",
+   "options": [
+    "break skips to the next iteration; continue exits the loop.",
+    "break exits the relevant loop or switch; continue advances to the next iteration of the relevant loop.",
+    "They are identical.",
+    "break exits the method; continue exits the loop."
+   ],
+   "correctIndex": 1,
+   "explanation": "Labeled forms can target an enclosing statement or loop."
+  },
+  {
+   "id": 217,
+   "section": "Interview traps",
+   "question": "What does a for loop with i=0; i<3; i++ print when it prints i each iteration?",
+   "options": [
+    "123",
+    "012",
+    "0123",
+    "01"
+   ],
+   "correctIndex": 1,
+   "explanation": "Initialization runs once, the condition is checked before each iteration, and the update follows each completed iteration."
+  },
+  {
+   "id": 218,
+   "section": "Interview traps",
+   "question": "How do for and while loops differ conceptually?",
+   "options": [
+    "for loops can only iterate over collections; while loops cannot.",
+    "while loops always execute at least once.",
+    "They are identical in every way.",
+    "for groups initialization, condition, and update; while emphasizes a condition-controlled loop."
+   ],
+   "correctIndex": 3,
+   "explanation": "Neither form is inherently faster in all circumstances."
+  },
+  {
+   "id": 219,
+   "section": "Interview traps",
+   "question": "How does do-while differ from while?",
+   "options": [
+    "do-while checks before the body; while checks after.",
+    "They are identical.",
+    "do-while checks after the body and executes at least once; while checks first.",
+    "while executes at least once; do-while may execute zero times."
+   ],
+   "correctIndex": 2,
+   "explanation": "The condition's position determines whether the body can be skipped."
+  },
+  {
+   "id": 220,
+   "section": "Interview traps",
+   "question": "Since which Java version can switch use String values?",
+   "options": [
+    "Java 5",
+    "Java 8",
+    "Java 11",
+    "Java 7"
+   ],
+   "correctIndex": 3,
+   "explanation": "String support in switch was introduced in Java 7."
+  },
+  {
+   "id": 221,
+   "section": "Interview traps",
+   "question": "Compare == and equalsIgnoreCase() for strings.",
+   "options": [
+    "== compares contents; equalsIgnoreCase() compares references.",
+    "Both are case-sensitive.",
+    "They are identical.",
+    "== compares reference identity; equalsIgnoreCase() compares contents without distinguishing case under its rules."
+   ],
+   "correctIndex": 3,
+   "explanation": "Use a content comparison rather than identity when checking textual equality."
+  },
+  {
+   "id": 222,
+   "section": "Interview traps",
+   "question": "Is Java pass-by-reference or pass-by-value?",
+   "options": [
+    "Always pass-by-reference.",
+    "Always pass-by-value, including when the copied value is an object reference.",
+    "Pass-by-reference for objects; pass-by-value for primitives.",
+    "Pass-by-name for objects."
+   ],
+   "correctIndex": 1,
+   "explanation": "Reassigning a parameter does not reassign the caller's variable."
+  },
+  {
+   "id": 223,
+   "section": "Interview traps",
+   "question": "Can an interface be implemented using an anonymous class?",
+   "options": [
+    "Yes; an anonymous class can implement an interface.",
+    "No; interfaces can only be implemented by named classes.",
+    "Only if the interface has default methods.",
+    "Only for functional interfaces."
+   ],
+   "correctIndex": 0,
+   "explanation": "An anonymous class can provide required interface method implementations."
+  },
+  {
+   "id": 224,
+   "section": "Interview traps",
+   "question": "Can a lambda replace every anonymous class?",
+   "options": [
+    "Yes; lambdas can replace all anonymous classes.",
+    "Yes, but only inside static methods.",
+    "No; for instance, lambdas cannot implement interfaces with multiple abstract methods.",
+    "Yes, if the class has a single method."
+   ],
+   "correctIndex": 2,
+   "explanation": "Lambdas require a functional interface and have different this semantics; anonymous classes can declare extra state and methods."
+  },
+  {
+   "id": 225,
+   "section": "Interview traps",
+   "question": "What does var mean in Java?",
+   "options": [
+    "Local variable type inference; the variable still has a static type inferred from its initializer.",
+    "Declares a variable whose type can change at runtime.",
+    "Declares a dynamically typed variable.",
+    "Declares an untyped variable like in JavaScript."
+   ],
+   "correctIndex": 0,
+   "explanation": "Introduced in Java 10; var is not a dynamic type and is not allowed for fields or method parameters."
+  },
+  {
+   "id": 226,
+   "section": "Interview traps",
+   "question": "How do var x = \"Java\" and Object y = \"Java\" differ in static type?",
+   "options": [
+    "Both are Object.",
+    "x is Object; y is String.",
+    "x is String; y is Object.",
+    "Both are String."
+   ],
+   "correctIndex": 2,
+   "explanation": "var infers the initializer's static type; Object explicitly declares the broader type."
+  },
+  {
+   "id": 227,
+   "section": "Interview traps",
+   "question": "What does pattern matching for instanceof allow?",
+   "options": [
+    "Casting without checks.",
+    "Declaring variables without types.",
+    "A type test and conditional pattern-variable declaration in one expression.",
+    "Skipping null checks."
+   ],
+   "correctIndex": 2,
+   "explanation": "Pattern-variable scope depends on flow analysis and whether the pattern is definitely matched."
+  },
+  {
+   "id": 228,
+   "section": "Interview traps",
+   "question": "In which Java version did pattern matching for switch become permanent?",
+   "options": [
+    "Java 17",
+    "Java 14",
+    "Java 21",
+    "Java 11"
+   ],
+   "correctIndex": 2,
+   "explanation": "Pattern matching for switch was finalized in Java 21."
+  },
+  {
+   "id": 229,
+   "section": "Interview traps",
+   "question": "How does Objects.equals(a,b) differ from a == b when references may be null?",
+   "options": [
+    "Objects.equals safely handles null and delegates to equals(); == tests identity.",
+    "Objects.equals throws NullPointerException on null; == does not.",
+    "They are identical.",
+    "Objects.equals compares identity; == delegates to equals()."
+   ],
+   "correctIndex": 0,
+   "explanation": "Objects.equals(null, null) returns true and one-null comparisons return false."
+  },
+  {
+   "id": 230,
+   "section": "Interview traps",
+   "question": "Can Java declare a normal named method directly inside another method?",
+   "options": [
+    "Yes; a method may declare nested methods.",
+    "Yes, but only static methods.",
+    "No; use a lambda or local class instead.",
+    "Yes, but only private methods."
+   ],
+   "correctIndex": 2,
+   "explanation": "Local classes, anonymous classes, and lambdas are possible, but ordinary nested method declarations are not."
+  },
+  {
+   "id": 231,
+   "section": "Advanced scenarios",
+   "question": "If class A has a static initializer printing A, an instance initializer printing B, and a constructor printing C, what does new A(); new A(); print?",
+   "options": [
+    "ABCBC",
+    "ABC",
+    "ABCABC",
+    "BCBC"
+   ],
+   "correctIndex": 0,
+   "explanation": "The static initializer runs once; instance initialization and the constructor run for each object."
+  },
+  {
+   "id": 232,
+   "section": "Advanced scenarios",
+   "question": "If Parent's constructor prints P and Child's constructor prints C, what does new Child() print when Child extends Parent?",
+   "options": [
+    "PC",
+    "CP",
+    "P only",
+    "C only"
+   ],
+   "correctIndex": 0,
+   "explanation": "The superclass constructor runs before the subclass constructor body."
+  },
+  {
+   "id": 233,
+   "section": "Advanced scenarios",
+   "question": "Why does class B extends A fail to compile if A declares only a private no-argument constructor and B declares no constructor?",
+   "options": [
+    "Classes with a private constructor must be declared final.",
+    "B must be declared abstract.",
+    "B's implicit constructor cannot access A().",
+    "A private constructor makes A an interface."
+   ],
+   "correctIndex": 2,
+   "explanation": "The subclass needs an accessible superclass constructor."
+  },
+  {
+   "id": 234,
+   "section": "Advanced scenarios",
+   "question": "If A overloads f(Number) and f(Integer), Number n = 10; new A().f(n) calls which overload?",
+   "options": [
+    "f(Integer)",
+    "Compilation error (ambiguous)",
+    "A ClassCastException at runtime",
+    "f(Number)"
+   ],
+   "correctIndex": 3,
+   "explanation": "Overload resolution uses the compile-time type Number."
+  },
+  {
+   "id": 235,
+   "section": "Advanced scenarios",
+   "question": "What is the risk of removing from an ArrayList directly inside an enhanced for loop?",
+   "options": [
+    "The loop skips elements silently without errors.",
+    "Always an ArrayIndexOutOfBoundsException.",
+    "ConcurrentModificationException may occur.",
+    "An IllegalStateException is always thrown."
+   ],
+   "correctIndex": 2,
+   "explanation": "The collection is structurally modified outside the iterator; use Iterator.remove() or an appropriate collection operation."
+  },
+  {
+   "id": 236,
+   "section": "Advanced scenarios",
+   "question": "Is a counter with volatile int count and count++ thread-safe?",
+   "options": [
+    "No; count++ is still a non-atomic read-modify-write.",
+    "Yes; volatile makes increment atomic.",
+    "Yes, but only on a single-core CPU.",
+    "Yes, if the field is private."
+   ],
+   "correctIndex": 0,
+   "explanation": "The increment is a compound read-modify-write operation; use atomic operations or synchronization."
+  },
+  {
+   "id": 237,
+   "section": "Advanced scenarios",
+   "question": "What does map.getOrDefault(\"x\", 0) return after a HashMap maps \"x\" to 1?",
+   "options": [
+    "0",
+    "null",
+    "1",
+    "Throws NoSuchElementException"
+   ],
+   "correctIndex": 2,
+   "explanation": "getOrDefault returns the mapped value when the key is mapped."
+  },
+  {
+   "id": 238,
+   "section": "Advanced scenarios",
+   "question": "If a RuntimeException with message A is caught and finally prints B, what is printed?",
+   "options": [
+    "A only",
+    "B, then A",
+    "A, then B",
+    "B only"
+   ],
+   "correctIndex": 2,
+   "explanation": "The catch prints the message and finally runs afterward."
+  },
+  {
+   "id": 239,
+   "section": "Advanced scenarios",
+   "question": "Does a class compile if it implements two interfaces that define conflicting default methods with the same signature but does not override the method?",
+   "options": [
+    "Yes; the compiler picks the first one.",
+    "Yes; the compiler picks the one from the alphabetically earlier interface.",
+    "Yes; both are called.",
+    "No; the class must override the method to resolve the conflict."
+   ],
+   "correctIndex": 3,
+   "explanation": "The class must resolve the conflict, typically by overriding the method."
+  },
+  {
+   "id": 240,
+   "section": "Advanced scenarios",
+   "question": "Why distinguish a Java language guarantee from a common JVM implementation detail?",
+   "options": [
+    "Because everything the JVM does is specified.",
+    "Because implementation details are always the same across JVMs.",
+    "Only specified behavior is guaranteed across conforming implementations; implementation details may vary.",
+    "Because language rules do not apply on the JVM."
+   ],
+   "correctIndex": 2,
+   "explanation": "Interview answers should separate specification guarantees from observed behavior on one JVM."
+  }
+ ]
+}

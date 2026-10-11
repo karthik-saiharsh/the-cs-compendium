@@ -1,0 +1,2919 @@
+{
+ "title": "Backend, Express.js, FastAPI, and API Design Question Bank",
+ "description": "A curated question bank spanning HTTP/API fundamentals, Express.js, FastAPI, async execution, API security, databases, distributed systems, testing, deployment, debugging, and system design.",
+ "count": 224,
+ "questions": [
+  {
+   "id": "backend-api-001",
+   "section": "HTTP, networking, and API fundamentals",
+   "question": "What is an API?",
+   "options": [
+    "A database schema that defines how tables relate.",
+    "A defined interface through which software systems exchange data or invoke capabilities.",
+    "A graphical toolkit for building user interfaces.",
+    "A protocol that encrypts traffic between servers."
+   ],
+   "correctIndex": 1,
+   "explanation": "An API contract includes operations, inputs, outputs, errors, and behavioral guarantees."
+  },
+  {
+   "id": "backend-api-002",
+   "section": "HTTP, networking, and API fundamentals",
+   "question": "What is the difference between an API and a REST API?",
+   "options": [
+    "API is the broad concept; REST is an architectural style with constraints such as resource-oriented interfaces and stateless requests.",
+    "An API is always RESTful; REST is a synonym for any HTTP API.",
+    "REST is a transport protocol; an API is a data format.",
+    "An API is a database; REST is a query language."
+   ],
+   "correctIndex": 0,
+   "explanation": "Not every JSON-over-HTTP endpoint is meaningfully RESTful."
+  },
+  {
+   "id": "backend-api-003",
+   "section": "HTTP, networking, and API fundamentals",
+   "question": "What happens during a typical HTTP request?",
+   "options": [
+    "A client resolves the host, establishes transport security as needed, sends an HTTP request, and receives a response through possible proxies and servers.",
+    "The server opens a connection to the client and pushes the response.",
+    "The client sends only a hostname and the server returns a file.",
+    "The browser compiles the request into binary and sends it over UDP."
+   ],
+   "correctIndex": 0,
+   "explanation": "Latency can come from DNS, connection setup, TLS, network transit, server work, and response transfer."
+  },
+  {
+   "id": "backend-api-004",
+   "section": "HTTP, networking, and API fundamentals",
+   "question": "What is the difference between HTTP/1.1, HTTP/2, and HTTP/3?",
+   "options": [
+    "HTTP/1.1 uses QUIC; HTTP/2 uses UDP; HTTP/3 uses TCP.",
+    "They differ only in the status codes they support.",
+    "HTTP/1.1 commonly uses multiple TCP connections; HTTP/2 multiplexes streams over TCP; HTTP/3 uses QUIC over UDP.",
+    "HTTP/2 multiplexes over UDP; HTTP/3 uses multiple TCP connections."
+   ],
+   "correctIndex": 2,
+   "explanation": "Deployment details and proxy support matter; application semantics remain largely HTTP-based."
+  },
+  {
+   "id": "backend-api-005",
+   "section": "HTTP, networking, and API fundamentals",
+   "question": "What is the difference between a safe and an idempotent HTTP method?",
+   "options": [
+    "Safe methods always modify data; idempotent methods never do.",
+    "Safe methods may be repeated; idempotent methods may not.",
+    "Safe methods are intended to be read-only; idempotent methods have the same intended effect when repeated.",
+    "They are synonyms for the same property."
+   ],
+   "correctIndex": 2,
+   "explanation": "GET is safe and idempotent; PUT and DELETE are idempotent but not safe; POST is not inherently idempotent."
+  },
+  {
+   "id": "backend-api-006",
+   "section": "HTTP, networking, and API fundamentals",
+   "question": "When should GET, POST, PUT, PATCH, and DELETE be used?",
+   "options": [
+    "GET creates, POST retrieves, PUT patches, PATCH replaces, DELETE archives.",
+    "GET and POST are interchangeable; PUT and PATCH are never used.",
+    "POST deletes, DELETE creates, GET updates, PUT retrieves, PATCH removes.",
+    "GET retrieves, POST submits/processes, PUT replaces a resource representation, PATCH applies partial modifications, and DELETE requests removal."
+   ],
+   "correctIndex": 3,
+   "explanation": "Define behavior and retry semantics explicitly, especially for PATCH and POST."
+  },
+  {
+   "id": "backend-api-007",
+   "section": "HTTP, networking, and API fundamentals",
+   "question": "What is the difference between PUT and PATCH?",
+   "options": [
+    "PUT applies a partial change; PATCH replaces the entire representation.",
+    "They are identical in every way.",
+    "PUT conventionally replaces the target representation; PATCH applies a partial change described by the request body.",
+    "PUT is only for creating; PATCH is only for deleting."
+   ],
+   "correctIndex": 2,
+   "explanation": "A PATCH format may have its own rules for missing fields, nulls, and atomicity."
+  },
+  {
+   "id": "backend-api-008",
+   "section": "HTTP, networking, and API fundamentals",
+   "question": "What is the difference between 401 and 403?",
+   "options": [
+    "401 means the user lacks permission; 403 means the credentials are missing.",
+    "Both mean the resource was not found.",
+    "401 indicates valid authentication credentials are absent or unacceptable; 403 means the request is understood but refused.",
+    "401 means server error; 403 means client error."
+   ],
+   "correctIndex": 2,
+   "explanation": "A service may use 404 to avoid revealing whether a protected resource exists."
+  },
+  {
+   "id": "backend-api-009",
+   "section": "HTTP, networking, and API fundamentals",
+   "question": "When should an API return 201, 202, 204, or 304?",
+   "options": [
+    "201 means redirected, 202 means failed, 204 means created, 304 means gone.",
+    "201 means partial content, 202 means conflict, 204 means error, 304 means moved.",
+    "201 means created, 202 accepted for processing, 204 success with no response content, and 304 not modified for conditional retrieval.",
+    "All four indicate server errors."
+   ],
+   "correctIndex": 2,
+   "explanation": "Choose codes based on protocol semantics rather than convenience."
+  },
+  {
+   "id": "backend-api-010",
+   "section": "HTTP, networking, and API fundamentals",
+   "question": "What is the difference between 400, 409, 422, and 429?",
+   "options": [
+    "400 means unauthorized, 409 means not found, 422 means server error, 429 means created.",
+    "All four mean the server is overloaded.",
+    "400 indicates a bad request, 409 a conflict with current resource state, 422 semantically invalid content in common API conventions, and 429 rate limiting.",
+    "400 is a rate limit, 409 a bad request, 422 a conflict, 429 invalid content."
+   ],
+   "correctIndex": 2,
+   "explanation": "Use one consistent validation/error convention and document it."
+  },
+  {
+   "id": "backend-api-011",
+   "section": "HTTP, networking, and API fundamentals",
+   "question": "What is content negotiation?",
+   "options": [
+    "Compressing responses with gzip automatically.",
+    "Client and server use headers such as Accept and Content-Type to agree on representation formats.",
+    "Choosing the database that stores the response.",
+    "Selecting which server handles the request."
+   ],
+   "correctIndex": 1,
+   "explanation": "Content-Type describes the sent representation; Accept describes acceptable response formats."
+  },
+  {
+   "id": "backend-api-012",
+   "section": "HTTP, networking, and API fundamentals",
+   "question": "What is CORS?",
+   "options": [
+    "A server-side firewall that blocks unknown IP addresses.",
+    "A protocol for encrypting cross-origin traffic.",
+    "A browser security mechanism that controls whether frontend code can read cross-origin responses.",
+    "A caching header for static assets."
+   ],
+   "correctIndex": 2,
+   "explanation": "CORS is not authentication and does not prevent non-browser clients from calling an endpoint."
+  },
+  {
+   "id": "backend-api-013",
+   "section": "HTTP, networking, and API fundamentals",
+   "question": "What is the difference between cookies, headers, and query parameters for credentials?",
+   "options": [
+    "Credentials are commonly sent in authorization headers or secure cookies; query parameters are usually unsuitable because URLs are widely logged and retained.",
+    "Query parameters are the preferred way to send credentials.",
+    "Cookies must never be used for credentials.",
+    "Headers are never logged, so credentials may be put anywhere."
+   ],
+   "correctIndex": 0,
+   "explanation": "Cookie-based auth also requires appropriate CSRF defenses when credentials are ambiently attached."
+  },
+  {
+   "id": "backend-api-014",
+   "section": "HTTP, networking, and API fundamentals",
+   "question": "What is a reverse proxy?",
+   "options": [
+    "A server that stores database backups.",
+    "An intermediary that receives client traffic and forwards requests to backend services.",
+    "A client-side proxy that hides the user's IP.",
+    "A firewall that blocks incoming requests."
+   ],
+   "correctIndex": 1,
+   "explanation": "It can provide TLS termination, routing, buffering, compression, and access controls."
+  },
+  {
+   "id": "backend-api-015",
+   "section": "HTTP, networking, and API fundamentals",
+   "question": "What are ETags and conditional requests?",
+   "options": [
+    "An ETag is an encryption key; conditional requests use it to decrypt responses.",
+    "An ETag identifies a representation version; clients can use If-None-Match or If-Match for cache validation or optimistic concurrency.",
+    "An ETag is a session ID used to authenticate users.",
+    "An ETag is a timestamp that makes the response expire."
+   ],
+   "correctIndex": 1,
+   "explanation": "Conditional requests can reduce transfer and prevent lost updates."
+  },
+  {
+   "id": "backend-api-016",
+   "section": "HTTP, networking, and API fundamentals",
+   "question": "What is the difference between Cache-Control: no-cache and no-store?",
+   "options": [
+    "no-cache permits storage but requires validation before reuse; no-store instructs caches not to store the response.",
+    "no-cache forbids storing; no-store permits storing but requires validation.",
+    "Both mean the response may be cached indefinitely.",
+    "They are identical."
+   ],
+   "correctIndex": 0,
+   "explanation": "Sensitive response policies should be selected deliberately."
+  },
+  {
+   "id": "backend-api-017",
+   "section": "HTTP, networking, and API fundamentals",
+   "question": "What is pagination and why does it matter?",
+   "options": [
+    "Pagination divides large result sets into bounded responses.",
+    "Compressing responses to reduce bandwidth.",
+    "Encrypting results before sending them.",
+    "Sorting results by relevance."
+   ],
+   "correctIndex": 0,
+   "explanation": "It limits resource use and makes latency more predictable; cursor pagination often behaves better under concurrent changes."
+  },
+  {
+   "id": "backend-api-018",
+   "section": "HTTP, networking, and API fundamentals",
+   "question": "What is cursor pagination versus offset pagination?",
+   "options": [
+    "Offset pagination skips a count of rows; cursor pagination continues from an ordered position or key.",
+    "Offset pagination uses an opaque key; cursor pagination skips rows by count.",
+    "They are identical.",
+    "Cursor pagination is used only for text search."
+   ],
+   "correctIndex": 0,
+   "explanation": "Offsets can become expensive and inconsistent as data changes; cursors need stable ordering and opaque validation."
+  },
+  {
+   "id": "backend-api-019",
+   "section": "HTTP, networking, and API fundamentals",
+   "question": "What is API versioning?",
+   "options": [
+    "Encrypting API requests with a version key.",
+    "A strategy for evolving contracts while managing compatibility, often via paths, headers, or media types.",
+    "Renaming endpoints to avoid collisions.",
+    "Compressing payloads between versions."
+   ],
+   "correctIndex": 1,
+   "explanation": "Versioning is not a substitute for backward-compatible additive changes and deprecation policy."
+  },
+  {
+   "id": "backend-api-020",
+   "section": "HTTP, networking, and API fundamentals",
+   "question": "What makes an API contract good?",
+   "options": [
+    "It is as short as possible and has no documentation.",
+    "It defines schemas, authentication, authorization expectations, status codes, error formats, pagination, limits, and compatibility rules.",
+    "It exposes the database schema directly.",
+    "It changes behavior frequently without notice."
+   ],
+   "correctIndex": 1,
+   "explanation": "OpenAPI can formalize much of the HTTP interface."
+  },
+  {
+   "id": "backend-api-021",
+   "section": "REST design and API contracts",
+   "question": "What is a resource in REST design?",
+   "options": [
+    "A database table row stored with a primary key.",
+    "A conceptual entity exposed through a stable identifier and standard interface.",
+    "A function that runs on the server.",
+    "A route handler registered with the framework."
+   ],
+   "correctIndex": 1,
+   "explanation": "Prefer nouns and resource relationships over RPC-style action names where appropriate."
+  },
+  {
+   "id": "backend-api-022",
+   "section": "REST design and API contracts",
+   "question": "How should nested resources be modeled?",
+   "options": [
+    "Always nest resources as deeply as possible.",
+    "Never nest; always use flat URLs.",
+    "Use random IDs in the path to hide structure.",
+    "Use nesting when it expresses a real relationship and keep URLs from becoming excessively deep."
+   ],
+   "correctIndex": 3,
+   "explanation": "A child resource may also need a globally addressable route."
+  },
+  {
+   "id": "backend-api-023",
+   "section": "REST design and API contracts",
+   "question": "What is HATEOAS?",
+   "options": [
+    "A cache control directive for hypermedia assets.",
+    "A format for encrypting links in responses.",
+    "Hypermedia as the engine of application state: responses provide links or actions that guide the client.",
+    "A method for streaming HTML pages."
+   ],
+   "correctIndex": 2,
+   "explanation": "It is a REST constraint often omitted by APIs described as REST-like."
+  },
+  {
+   "id": "backend-api-024",
+   "section": "REST design and API contracts",
+   "question": "How should validation errors be structured?",
+   "options": [
+    "Return only a plain-text message with no structure.",
+    "Return a stack trace so clients can debug.",
+    "Return a stable error envelope with a machine-readable code, human-readable message, and field-level details where useful.",
+    "Return HTTP 200 with an empty body."
+   ],
+   "correctIndex": 2,
+   "explanation": "Avoid leaking stack traces, SQL, tokens, or internal topology."
+  },
+  {
+   "id": "backend-api-025",
+   "section": "REST design and API contracts",
+   "question": "What is an idempotency key?",
+   "options": [
+    "A client-supplied unique key used to recognize retries of a logical operation.",
+    "A secret key that signs requests.",
+    "A key that encrypts the request body.",
+    "An ID that identifies a user session."
+   ],
+   "correctIndex": 0,
+   "explanation": "Persist the key, request identity, and result atomically enough to prevent duplicate side effects."
+  },
+  {
+   "id": "backend-api-026",
+   "section": "REST design and API contracts",
+   "question": "How should an API handle unknown JSON fields?",
+   "options": [
+    "Always accept and store them in the database.",
+    "Always crash the server.",
+    "Never think about it; frameworks decide automatically.",
+    "Choose and document whether to reject, ignore, or preserve them based on compatibility and security requirements."
+   ],
+   "correctIndex": 3,
+   "explanation": "Silently accepting sensitive or misspelled fields can hide client bugs."
+  },
+  {
+   "id": "backend-api-027",
+   "section": "REST design and API contracts",
+   "question": "What is mass assignment?",
+   "options": [
+    "Binding arbitrary client-supplied fields directly onto a domain object or database model.",
+    "Splitting a request across multiple servers.",
+    "Assigning roles to users in bulk.",
+    "Mapping a form to multiple routes."
+   ],
+   "correctIndex": 0,
+   "explanation": "Use explicit input schemas and allowlists; never trust client fields like role or accountId."
+  },
+  {
+   "id": "backend-api-028",
+   "section": "REST design and API contracts",
+   "question": "What is an API deprecation strategy?",
+   "options": [
+    "Removing old versions immediately without warning.",
+    "Hiding old endpoints from documentation only.",
+    "Never removing anything.",
+    "Announce timelines, provide migration guidance, measure usage, and remove obsolete versions according to policy."
+   ],
+   "correctIndex": 3,
+   "explanation": "Deprecation should be observable and coordinated with consumers."
+  },
+  {
+   "id": "backend-api-029",
+   "section": "REST design and API contracts",
+   "question": "What is OpenAPI used for?",
+   "options": [
+    "Running unit tests for API endpoints.",
+    "Encrypting HTTP requests.",
+    "A language-neutral description of HTTP API paths, operations, schemas, responses, and security schemes.",
+    "Generating database migrations."
+   ],
+   "correctIndex": 2,
+   "explanation": "It supports interactive docs, client generation, validation, and contract testing."
+  },
+  {
+   "id": "backend-api-030",
+   "section": "REST design and API contracts",
+   "question": "What is contract testing?",
+   "options": [
+    "Testing the speed of a provider's API under load.",
+    "Testing that the database schema matches the code.",
+    "Testing the UI of an API client.",
+    "Testing that a provider and its consumers agree on request/response behavior."
+   ],
+   "correctIndex": 3,
+   "explanation": "It complements unit and end-to-end tests, particularly for independently deployed services."
+  },
+  {
+   "id": "backend-api-031",
+   "section": "REST design and API contracts",
+   "question": "What is the difference between REST, GraphQL, and gRPC?",
+   "options": [
+    "REST uses Protobuf; GraphQL uses HTTP verbs; gRPC uses resources.",
+    "They are all different names for the same thing.",
+    "REST commonly uses resource-oriented HTTP; GraphQL lets clients request typed selections; gRPC commonly uses Protobuf and RPC over HTTP/2.",
+    "gRPC is a database; REST and GraphQL are web frameworks."
+   ],
+   "correctIndex": 2,
+   "explanation": "Choose based on client needs, streaming, tooling, interoperability, and operational constraints."
+  },
+  {
+   "id": "backend-api-032",
+   "section": "REST design and API contracts",
+   "question": "When should an API return 202 Accepted?",
+   "options": [
+    "When the request is invalid.",
+    "When the response is cached.",
+    "When the request was fully completed.",
+    "When work has been accepted but is not complete, often with a job/resource identifier and a way to check status."
+   ],
+   "correctIndex": 3,
+   "explanation": "Acceptance does not guarantee eventual success; define retry and failure visibility."
+  },
+  {
+   "id": "backend-api-033",
+   "section": "REST design and API contracts",
+   "question": "How should filtering and sorting be designed?",
+   "options": [
+    "Allow any field and operator, including raw SQL fragments.",
+    "Accept sort fields without validation.",
+    "Expose documented, allowlisted fields and bounded filter syntax; use deterministic ordering with a unique tie-breaker.",
+    "Return results in random order for fairness."
+   ],
+   "correctIndex": 2,
+   "explanation": "Never interpolate arbitrary client field names into SQL."
+  },
+  {
+   "id": "backend-api-034",
+   "section": "REST design and API contracts",
+   "question": "Why should API errors have stable machine-readable codes?",
+   "options": [
+    "Because humans never read error messages.",
+    "Clients can handle error categories without parsing human prose.",
+    "Because HTTP status codes are always unreliable.",
+    "Because it makes the response larger."
+   ],
+   "correctIndex": 1,
+   "explanation": "Messages can change or be localized while codes remain stable."
+  },
+  {
+   "id": "backend-api-035",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "What is Express.js?",
+   "options": [
+    "A Python web framework for building APIs.",
+    "A frontend library for building UIs.",
+    "A database for storing JSON documents.",
+    "A minimalist Node.js web framework centered on routing and middleware."
+   ],
+   "correctIndex": 3,
+   "explanation": "It leaves many architectural decisions and integrations to the application."
+  },
+  {
+   "id": "backend-api-036",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "What is middleware in Express?",
+   "options": [
+    "A database layer that stores request data.",
+    "A function in the request-response pipeline that can inspect or modify request/response state, end the response, or pass control onward.",
+    "A template engine for rendering HTML.",
+    "A function that runs only on startup."
+   ],
+   "correctIndex": 1,
+   "explanation": "Ordering matters; middleware that neither responds nor calls next can hang a request."
+  },
+  {
+   "id": "backend-api-037",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "What is the difference between app.use and app.get?",
+   "options": [
+    "app.use handles only GET; app.get handles all methods.",
+    "app.use mounts middleware for matching paths and methods broadly; app.get registers a GET route handler.",
+    "app.use defines a template; app.get defines a database query.",
+    "They are identical."
+   ],
+   "correctIndex": 1,
+   "explanation": "Mount paths and registration order affect which handlers run."
+  },
+  {
+   "id": "backend-api-038",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "What does next() do?",
+   "options": [
+    "It ends the response immediately.",
+    "It restarts the server.",
+    "It logs an error and exits.",
+    "It passes control to the next matching middleware or route handler."
+   ],
+   "correctIndex": 3,
+   "explanation": "Calling it after sending a response can cause duplicate-response errors."
+  },
+  {
+   "id": "backend-api-039",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "What does next(err) do?",
+   "options": [
+    "It sends a 200 response.",
+    "It switches processing to error-handling middleware, skipping ordinary handlers.",
+    "It skips the error handler and ends the response.",
+    "It restarts the application."
+   ],
+   "correctIndex": 1,
+   "explanation": "Error middleware has the four-argument signature (err, req, res, next)."
+  },
+  {
+   "id": "backend-api-040",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "Why does middleware order matter?",
+   "options": [
+    "Order does not matter; Express sorts middleware automatically.",
+    "Requests pass through registered matching middleware in sequence.",
+    "Only the first middleware runs.",
+    "Middleware runs in alphabetical order."
+   ],
+   "correctIndex": 1,
+   "explanation": "For example, body parsing must happen before handlers that read parsed bodies, and error handlers belong after routes."
+  },
+  {
+   "id": "backend-api-041",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "What does express.json() do?",
+   "options": [
+    "It parses supported JSON request bodies and populates req.body.",
+    "Serializes responses to JSON.",
+    "Reads static JSON files from disk.",
+    "Validates JSON schemas automatically."
+   ],
+   "correctIndex": 0,
+   "explanation": "Set body-size limits and validate parsed data; parsed input remains untrusted."
+  },
+  {
+   "id": "backend-api-042",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "How does Express routing work?",
+   "options": [
+    "Routes are matched at random from the registered list.",
+    "Routes are matched by alphabetical path order.",
+    "Only the last registered route is used.",
+    "Routes match an HTTP method and path, then invoke handlers in registration order."
+   ],
+   "correctIndex": 3,
+   "explanation": "Routers can encapsulate route groups and be mounted under prefixes."
+  },
+  {
+   "id": "backend-api-043",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "What is express.Router()?",
+   "options": [
+    "A database connection pool.",
+    "A template renderer.",
+    "A modular routing object with its own middleware and route handlers.",
+    "A logger for HTTP requests."
+   ],
+   "correctIndex": 2,
+   "explanation": "It supports feature-based organization and shared route-level policies."
+  },
+  {
+   "id": "backend-api-044",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "How do you serve static files?",
+   "options": [
+    "Use express.static with a controlled directory and deliberate cache/header configuration.",
+    "Use `fs.readFile` for every request.",
+    "Use `app.get('*')` to send all files.",
+    "Static files cannot be served by Express."
+   ],
+   "correctIndex": 0,
+   "explanation": "Avoid exposing secrets or upload directories accidentally."
+  },
+  {
+   "id": "backend-api-045",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "What is the difference between req.params, req.query, and req.body?",
+   "options": [
+    "params is query data, query is the body, and body is the path.",
+    "params are path captures, query is URL query data, and body contains parsed request payload data.",
+    "They are identical.",
+    "params holds headers; query holds cookies; body holds the URL."
+   ],
+   "correctIndex": 1,
+   "explanation": "Validate all three at the trust boundary."
+  },
+  {
+   "id": "backend-api-046",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "How does Express 5 handle rejected async route handlers?",
+   "options": [
+    "Rejected promises are ignored unless caught manually.",
+    "The process always crashes.",
+    "Only synchronous errors are supported.",
+    "Returned Promise rejections and thrown errors in Promise-returning handlers are forwarded to error handling automatically."
+   ],
+   "correctIndex": 3,
+   "explanation": "Express 4 generally needs explicit forwarding or a wrapper for async failures."
+  },
+  {
+   "id": "backend-api-047",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "What changed in Express 5 route path syntax?",
+   "options": [
+    "Nothing changed; Express 5 uses exactly the same syntax as Express 4.",
+    "Routes now require regular expressions.",
+    "Route paths must always end with a slash.",
+    "Some path-pattern syntax changed, including wildcard and optional segment conventions."
+   ],
+   "correctIndex": 3,
+   "explanation": "Review the migration guide and tests rather than assuming every Express 4 pattern works unchanged."
+  },
+  {
+   "id": "backend-api-048",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "How do you implement centralized error handling in Express?",
+   "options": [
+    "Use typed or categorized application errors and a final error middleware that maps them to safe HTTP responses.",
+    "Handle errors only with try/catch in each route.",
+    "Let the server crash and restart.",
+    "Always return a stack trace to the client."
+   ],
+   "correctIndex": 0,
+   "explanation": "Log diagnostic details server-side and avoid exposing internal errors."
+  },
+  {
+   "id": "backend-api-049",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "Why must an Express handler not send two responses?",
+   "options": [
+    "Because a second response is faster.",
+    "A response can generally be completed only once; a second send or header mutation may throw or be ignored.",
+    "Because HTTP supports multiple responses per request.",
+    "Because the browser merges them."
+   ],
+   "correctIndex": 1,
+   "explanation": "Return after sending or structure branches so each request has one response path."
+  },
+  {
+   "id": "backend-api-050",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "What is the difference between res.send, res.json, and res.end?",
+   "options": [
+    "send runs queries; json validates schemas; end logs requests.",
+    "They are identical.",
+    "json sends HTML; send sends files; end redirects.",
+    "send sends a response body, json serializes a value as JSON, and end completes the response without necessarily sending a body."
+   ],
+   "correctIndex": 3,
+   "explanation": "Set status and headers before ending the response."
+  },
+  {
+   "id": "backend-api-051",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "How should an Express app handle 404s?",
+   "options": [
+    "Return 200 with an empty body.",
+    "After normal routes, add a fallback handler for requests that did not match.",
+    "Redirect every unknown route to the home page.",
+    "Crash the server."
+   ],
+   "correctIndex": 1,
+   "explanation": "A 404 is not necessarily an exception and should have a deliberate API error format."
+  },
+  {
+   "id": "backend-api-052",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "How should you validate Express request data?",
+   "options": [
+    "Trust the client and skip validation.",
+    "Validate only on the frontend.",
+    "Validate only the body, never the query.",
+    "Use a schema validator or explicit parsing layer for path, query, headers, and body inputs."
+   ],
+   "correctIndex": 3,
+   "explanation": "TypeScript types disappear at runtime and do not validate client data."
+  },
+  {
+   "id": "backend-api-053",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "How do you structure a maintainable Express backend?",
+   "options": [
+    "Put all logic in a single file for simplicity.",
+    "Separate routing/controllers, business services, data access, schemas, configuration, and cross-cutting middleware according to complexity.",
+    "Put business logic directly in route handlers.",
+    "Use global variables for state."
+   ],
+   "correctIndex": 1,
+   "explanation": "Avoid controllers containing all business and persistence logic."
+  },
+  {
+   "id": "backend-api-054",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "How should an Express app shut down gracefully?",
+   "options": [
+    "Kill the process immediately.",
+    "Stop accepting new connections, drain in-flight requests, close database and queue clients, and exit within a bounded deadline.",
+    "Close the database before stopping connections.",
+    "Ignore in-flight requests."
+   ],
+   "correctIndex": 1,
+   "explanation": "Handle termination signals and platform shutdown timeouts."
+  },
+  {
+   "id": "backend-api-055",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "What is the Express trust proxy setting?",
+   "options": [
+    "A setting that encrypts proxy traffic.",
+    "It controls whether Express trusts forwarded headers from proxies to derive client IP, protocol, and host.",
+    "A setting that disables all proxies.",
+    "A setting that logs proxy errors."
+   ],
+   "correctIndex": 1,
+   "explanation": "Configure it to match the actual proxy topology; overly broad trust can enable spoofing."
+  },
+  {
+   "id": "backend-api-056",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "What is the difference between process-level error handlers and request error middleware?",
+   "options": [
+    "Process-level handlers handle request errors; middleware handles uncaught exceptions.",
+    "They are identical.",
+    "Middleware catches only network errors.",
+    "Request middleware handles errors within the HTTP pipeline; process-level handlers observe uncaught exceptions or unhandled rejections."
+   ],
+   "correctIndex": 3,
+   "explanation": "Do not assume a process-level handler makes an unsafe process healthy; log and use a deliberate restart strategy."
+  },
+  {
+   "id": "backend-api-057",
+   "section": "Node.js and Express.js fundamentals",
+   "question": "How can Express support dependency injection without a framework?",
+   "options": [
+    "Construct services and adapters at the composition root and pass them to routers or handlers.",
+    "It is impossible without a DI framework.",
+    "By using global variables inside handlers.",
+    "By importing everything from a single file."
+   ],
+   "correctIndex": 0,
+   "explanation": "This improves testing and reduces hidden global state."
+  },
+  {
+   "id": "backend-api-058",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "What is FastAPI?",
+   "options": [
+    "A JavaScript framework for building UIs.",
+    "A Python web framework for APIs built around type hints, validation, dependency injection, and ASGI.",
+    "A database ORM for Python.",
+    "A templating engine for HTML."
+   ],
+   "correctIndex": 1,
+   "explanation": "It can generate OpenAPI documentation from route declarations and schemas."
+  },
+  {
+   "id": "backend-api-059",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "What is ASGI and how does it differ from WSGI?",
+   "options": [
+    "ASGI is synchronous only; WSGI supports async.",
+    "They are identical.",
+    "WSGI supports WebSockets natively; ASGI does not.",
+    "ASGI supports asynchronous applications and protocols beyond basic synchronous HTTP, while WSGI is a synchronous Python web-server interface."
+   ],
+   "correctIndex": 3,
+   "explanation": "FastAPI is commonly served by an ASGI server."
+  },
+  {
+   "id": "backend-api-060",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "What is a path operation function?",
+   "options": [
+    "A function registered for a path and HTTP method, often with a decorator such as @app.get.",
+    "A database query function.",
+    "A background worker task.",
+    "A middleware that logs requests."
+   ],
+   "correctIndex": 0,
+   "explanation": "FastAPI inspects annotations and parameters to build validation and documentation behavior."
+  },
+  {
+   "id": "backend-api-061",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "How does FastAPI distinguish path, query, and body parameters?",
+   "options": [
+    "Everything is a path parameter by default.",
+    "Path names match route placeholders; simple typed parameters often become query parameters; Pydantic models commonly represent request bodies.",
+    "Everything must be a query parameter.",
+    "The body is read only from headers."
+   ],
+   "correctIndex": 1,
+   "explanation": "Use explicit parameter declarations when ambiguity or API clarity warrants them."
+  },
+  {
+   "id": "backend-api-062",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "What is Pydantic used for in FastAPI?",
+   "options": [
+    "Rendering HTML templates.",
+    "Routing requests to handlers.",
+    "Parsing, validating, and serializing data according to declared models and types.",
+    "Managing database connections."
+   ],
+   "correctIndex": 2,
+   "explanation": "Validation is a runtime boundary; do not confuse it with database constraints or authorization."
+  },
+  {
+   "id": "backend-api-063",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "What is Depends?",
+   "options": [
+    "A decorator that registers routes.",
+    "A function that runs only in tests.",
+    "A database migration tool.",
+    "FastAPI's dependency injection mechanism for providing shared logic or resources to route handlers and other dependencies."
+   ],
+   "correctIndex": 3,
+   "explanation": "Dependencies can compose, declare requirements, and be overridden in tests."
+  },
+  {
+   "id": "backend-api-064",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "What is a dependency with yield used for?",
+   "options": [
+    "It provides a resource and performs cleanup after the dependent operation, such as closing a database session.",
+    "Declaring request body models.",
+    "Defining response headers.",
+    "Running a function on every request."
+   ],
+   "correctIndex": 0,
+   "explanation": "Use try/finally or context-manager semantics so cleanup is reliable."
+  },
+  {
+   "id": "backend-api-065",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "What does response_model do?",
+   "options": [
+    "It defines the HTTP method used by the route.",
+    "It selects the database table.",
+    "It sets the cache duration.",
+    "It declares the output schema used for validation, serialization, and API documentation."
+   ],
+   "correctIndex": 3,
+   "explanation": "It can help prevent accidental exposure of fields not included in the public model."
+  },
+  {
+   "id": "backend-api-066",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "What is the difference between HTTPException and a validation error?",
+   "options": [
+    "HTTPException is raised by the framework for invalid input; validation errors are raised manually.",
+    "HTTPException explicitly raises an HTTP error response; request validation errors are generated when input fails declared constraints.",
+    "They are identical.",
+    "Validation errors are always 500."
+   ],
+   "correctIndex": 1,
+   "explanation": "Customize handlers only when doing so preserves clear status codes and error contracts."
+  },
+  {
+   "id": "backend-api-067",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "What are APIRouter and include_router used for?",
+   "options": [
+    "They split route declarations into modules and include them in an application with prefixes, tags, and dependencies.",
+    "Running background tasks.",
+    "Managing database sessions.",
+    "Creating WebSocket connections."
+   ],
+   "correctIndex": 0,
+   "explanation": "They help organize larger services by feature or resource."
+  },
+  {
+   "id": "backend-api-068",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "How does FastAPI generate interactive API docs?",
+   "options": [
+    "By reading the source code at runtime and printing it.",
+    "By running tests and displaying results.",
+    "By reading docstrings only.",
+    "It creates an OpenAPI schema and serves interactive documentation interfaces based on the schema."
+   ],
+   "correctIndex": 3,
+   "explanation": "Keep schemas accurate and avoid publishing sensitive internal endpoints unintentionally."
+  },
+  {
+   "id": "backend-api-069",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "How should configuration and secrets be managed in FastAPI?",
+   "options": [
+    "Hard-code them in source for simplicity.",
+    "Commit them to the repository.",
+    "Return them in API responses.",
+    "Load configuration from environment or a secrets manager, validate settings at startup, and keep secrets out of source control and responses."
+   ],
+   "correctIndex": 3,
+   "explanation": "Avoid hard-coding credentials or exposing them through public settings endpoints."
+  },
+  {
+   "id": "backend-api-070",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "How do you define custom exception handlers?",
+   "options": [
+    "Register handlers for exception classes or framework exception types and return consistent safe responses.",
+    "Using try/except in every route only.",
+    "Editing the framework's source code.",
+    "Using global variables."
+   ],
+   "correctIndex": 0,
+   "explanation": "Keep error shape consistent across validation, domain, and unexpected failures."
+  },
+  {
+   "id": "backend-api-071",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "What is the lifespan mechanism in FastAPI?",
+   "options": [
+    "A way to cache route results.",
+    "A way to spawn background threads per request.",
+    "An application lifecycle hook for startup and shutdown resource management.",
+    "A way to define request validators."
+   ],
+   "correctIndex": 2,
+   "explanation": "Use it for shared clients and pools, not per-request resources."
+  },
+  {
+   "id": "backend-api-072",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "How can FastAPI dependencies be overridden in tests?",
+   "options": [
+    "By editing the source code.",
+    "By restarting the server with different flags.",
+    "Use the app's dependency override mechanism to replace production dependencies with controlled fakes or test resources.",
+    "They cannot be overridden."
+   ],
+   "correctIndex": 2,
+   "explanation": "Reset overrides and isolate shared state between tests."
+  },
+  {
+   "id": "backend-api-073",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "What is BackgroundTasks in FastAPI suitable for?",
+   "options": [
+    "Long-running data processing jobs requiring retries and queues.",
+    "Small tasks that can run after sending a response within the application process.",
+    "Scheduling jobs across a cluster of machines.",
+    "Persisting jobs durably across restarts."
+   ],
+   "correctIndex": 1,
+   "explanation": "It is not a durable distributed job queue; important work may need a worker system."
+  },
+  {
+   "id": "backend-api-074",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "How should file uploads be handled in FastAPI?",
+   "options": [
+    "Use supported upload types, enforce size and content constraints, and stream or store safely.",
+    "Read the entire upload into memory without limits.",
+    "Trust the file name and content type provided by the client.",
+    "Store files in a publicly writable directory."
+   ],
+   "correctIndex": 0,
+   "explanation": "Do not trust filenames or client-provided content types."
+  },
+  {
+   "id": "backend-api-075",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "How do you return a streaming response?",
+   "options": [
+    "Collect the whole result in memory and send it at once.",
+    "Use a normal JSON response.",
+    "Streaming is not supported.",
+    "Use a streaming response with an iterator or async iterator appropriate to the workload."
+   ],
+   "correctIndex": 3,
+   "explanation": "Manage backpressure, cancellation, resource cleanup, and proxy buffering."
+  },
+  {
+   "id": "backend-api-076",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "What is a lifespan-scoped resource versus a request-scoped resource?",
+   "options": [
+    "Lifespan resources are created per request; request-scoped resources are shared by the process.",
+    "Lifespan resources are shared for the application process; request-scoped resources are created and cleaned up for a request or dependency scope.",
+    "Both are shared by every request in the process.",
+    "Both are recreated on every function call."
+   ],
+   "correctIndex": 1,
+   "explanation": "Database sessions should generally not be shared concurrently across unrelated requests."
+  },
+  {
+   "id": "backend-api-077",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "How should FastAPI route functions be typed?",
+   "options": [
+    "Annotations are ignored; FastAPI infers types at runtime from the data.",
+    "Only return types need annotations; parameters are never typed.",
+    "Use Python type annotations and request/response models to express and validate the API contract.",
+    "Type annotations are valid only for class methods."
+   ],
+   "correctIndex": 2,
+   "explanation": "Annotations improve tooling and validation but do not enforce authorization rules."
+  },
+  {
+   "id": "backend-api-078",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "Can a synchronous def endpoint work in FastAPI?",
+   "options": [
+    "Yes; FastAPI runs synchronous path operations and dependencies in a thread pool rather than blocking the event loop directly.",
+    "No; FastAPI supports only async def endpoints.",
+    "Yes, but it blocks the event loop for all requests.",
+    "Yes, but only in debug mode."
+   ],
+   "correctIndex": 0,
+   "explanation": "A sync function called directly from an async function can still block the event loop."
+  },
+  {
+   "id": "backend-api-079",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "How do tags, summaries, and response declarations help?",
+   "options": [
+    "They improve generated OpenAPI documentation and clarify operation contracts.",
+    "They affect runtime performance by caching responses.",
+    "They change the database queries issued.",
+    "They encrypt the API's responses."
+   ],
+   "correctIndex": 0,
+   "explanation": "Document success and important error responses, not only the happy path."
+  },
+  {
+   "id": "backend-api-080",
+   "section": "FastAPI and Python backend fundamentals",
+   "question": "How should large FastAPI applications be organized?",
+   "options": [
+    "Put all routes in a single file for simplicity.",
+    "Create one router per HTTP method.",
+    "Avoid using routers altogether.",
+    "Use an application factory or central composition module, routers by feature, shared schemas, services, repositories, and explicit configuration."
+   ],
+   "correctIndex": 3,
+   "explanation": "Avoid circular imports and excessive global state."
+  },
+  {
+   "id": "backend-api-081",
+   "section": "Async execution and concurrency",
+   "question": "What is the difference between concurrency and parallelism?",
+   "options": [
+    "Concurrency structures overlapping work; parallelism executes work simultaneously on multiple execution resources.",
+    "Concurrency means using multiple CPU cores; parallelism means interleaving tasks.",
+    "They are the same concept.",
+    "Concurrency requires multiple machines; parallelism requires one."
+   ],
+   "correctIndex": 0,
+   "explanation": "Async I/O often provides concurrency without CPU parallelism."
+  },
+  {
+   "id": "backend-api-082",
+   "section": "Async execution and concurrency",
+   "question": "What does async/await do in Python?",
+   "options": [
+    "It defines coroutines and suspends a coroutine at await points so the event loop can run other work.",
+    "It runs code in separate threads automatically.",
+    "It makes synchronous functions run in parallel on multiple cores.",
+    "It compiles Python to machine code."
+   ],
+   "correctIndex": 0,
+   "explanation": "It does not automatically make blocking code non-blocking."
+  },
+  {
+   "id": "backend-api-083",
+   "section": "Async execution and concurrency",
+   "question": "What is the Node.js event loop?",
+   "options": [
+    "A loop that runs Node.js worker threads for CPU-bound work.",
+    "A loop that restarts the process when it crashes.",
+    "A loop that polls the filesystem for changes.",
+    "A runtime mechanism that schedules callbacks and I/O completion around JavaScript execution."
+   ],
+   "correctIndex": 3,
+   "explanation": "Long synchronous callbacks block progress for other requests."
+  },
+  {
+   "id": "backend-api-084",
+   "section": "Async execution and concurrency",
+   "question": "What happens if you call blocking I/O in an async FastAPI endpoint?",
+   "options": [
+    "It runs in a separate thread automatically.",
+    "It is automatically converted into async I/O.",
+    "It can block the event-loop thread and delay unrelated requests.",
+    "Nothing; blocking calls are always safe in async code."
+   ],
+   "correctIndex": 2,
+   "explanation": "Use an async-compatible client, a thread pool for blocking I/O, or a separate worker as appropriate."
+  },
+  {
+   "id": "backend-api-085",
+   "section": "Async execution and concurrency",
+   "question": "When should you use async def versus def in FastAPI?",
+   "options": [
+    "Use def for I/O with await; use async def for CPU-heavy code.",
+    "Always use async def, regardless of the work.",
+    "Always use def; async is never needed.",
+    "Use async def with awaitable I/O; use def for synchronous work that FastAPI can dispatch to a thread pool."
+   ],
+   "correctIndex": 3,
+   "explanation": "Do not add async syntax to CPU-bound work expecting it to become faster."
+  },
+  {
+   "id": "backend-api-086",
+   "section": "Async execution and concurrency",
+   "question": "What is Promise.all versus sequential awaits in Node.js?",
+   "options": [
+    "Promise.all starts/awaits independent promises together and rejects when one rejects; sequential awaits wait one operation at a time.",
+    "Promise.all runs each promise sequentially; sequential awaits run them concurrently.",
+    "They are identical.",
+    "Promise.all always succeeds even if one promise rejects."
+   ],
+   "correctIndex": 0,
+   "explanation": "Use concurrency for independent I/O, with limits for large fan-outs."
+  },
+  {
+   "id": "backend-api-087",
+   "section": "Async execution and concurrency",
+   "question": "What is asyncio.gather?",
+   "options": [
+    "It schedules multiple awaitables concurrently and returns results in input order when successful.",
+    "It runs functions one after another.",
+    "It spawns threads for each awaitable.",
+    "It cancels all awaitables after the first completes."
+   ],
+   "correctIndex": 0,
+   "explanation": "By default, the first exception propagates but other awaitables may continue; cancellation and cleanup require thought."
+  },
+  {
+   "id": "backend-api-088",
+   "section": "Async execution and concurrency",
+   "question": "What is a race condition?",
+   "options": [
+    "Correctness depends on timing or interleaving of operations.",
+    "A bug that occurs only at compile time.",
+    "A security flaw caused by weak encryption.",
+    "A deadlock between two threads."
+   ],
+   "correctIndex": 0,
+   "explanation": "Protect shared state with atomic database operations, locks, version checks, or queue partitioning as appropriate."
+  },
+  {
+   "id": "backend-api-089",
+   "section": "Async execution and concurrency",
+   "question": "What is a thread pool and when is it useful?",
+   "options": [
+    "An unbounded number of threads created per request.",
+    "A group of processes running on separate machines.",
+    "A bounded set of worker threads for blocking work or functions that cannot run on the event loop.",
+    "A set of coroutines scheduled on the event loop."
+   ],
+   "correctIndex": 2,
+   "explanation": "Unbounded thread creation can exhaust resources; CPU-heavy Python may need processes or native code."
+  },
+  {
+   "id": "backend-api-090",
+   "section": "Async execution and concurrency",
+   "question": "How do you limit concurrent outgoing requests?",
+   "options": [
+    "Use a semaphore, bounded worker pool, queue, or client-specific connection limits.",
+    "Spawn a new task for each request with no limit.",
+    "Disable timeouts so requests can complete.",
+    "Rely on the operating system to throttle requests."
+   ],
+   "correctIndex": 0,
+   "explanation": "Bound concurrency to protect both the service and downstream dependencies."
+  },
+  {
+   "id": "backend-api-091",
+   "section": "Async execution and concurrency",
+   "question": "What is backpressure?",
+   "options": [
+    "Caching responses to reduce load.",
+    "Compressing responses before sending.",
+    "Retrying failed requests automatically.",
+    "A way to prevent producers from overwhelming consumers or downstream buffers."
+   ],
+   "correctIndex": 3,
+   "explanation": "Use bounded queues, stream flow control, and explicit overload behavior."
+  },
+  {
+   "id": "backend-api-092",
+   "section": "Async execution and concurrency",
+   "question": "How should cancellation be handled?",
+   "options": [
+    "Ignore cancellation signals and continue running.",
+    "Catch cancellation and always suppress it.",
+    "Kill the process whenever a task is cancelled.",
+    "Propagate cancellation, release resources in finally/cleanup blocks, and avoid swallowing cancellation signals."
+   ],
+   "correctIndex": 3,
+   "explanation": "Client disconnects and request timeouts should not leave expensive work running unnecessarily."
+  },
+  {
+   "id": "backend-api-093",
+   "section": "Async execution and concurrency",
+   "question": "What is a CPU-bound workload?",
+   "options": [
+    "Work dominated by waiting on network or disk I/O.",
+    "Work that uses only memory.",
+    "Work dominated by computation rather than waiting on I/O.",
+    "Work that runs in the background."
+   ],
+   "correctIndex": 2,
+   "explanation": "Move it to process workers, task queues, optimized native libraries, or dedicated compute services when needed."
+  },
+  {
+   "id": "backend-api-094",
+   "section": "Async execution and concurrency",
+   "question": "Why are fire-and-forget tasks risky?",
+   "options": [
+    "They always run slower than awaited tasks.",
+    "They cannot access the database.",
+    "Failures may be lost, work may be cancelled at process shutdown, and retries or durability may be absent.",
+    "They always use more memory."
+   ],
+   "correctIndex": 2,
+   "explanation": "Use a durable queue for business-critical asynchronous work."
+  },
+  {
+   "id": "backend-api-095",
+   "section": "Async execution and concurrency",
+   "question": "How do timeouts differ across client, server, and database layers?",
+   "options": [
+    "Each limits a different part of the operation and can interact to create orphaned work or inconsistent outcomes.",
+    "They are all identical and interchangeable.",
+    "Only the client timeout matters; others are ignored.",
+    "Timeouts apply only to database queries."
+   ],
+   "correctIndex": 0,
+   "explanation": "Set a coherent deadline budget and propagate cancellation where possible."
+  },
+  {
+   "id": "backend-api-096",
+   "section": "Authentication, authorization, and API security",
+   "question": "What is the difference between authentication and authorization?",
+   "options": [
+    "Authentication decides what a user may do; authorization identifies the user.",
+    "They are the same concept.",
+    "Authentication is for APIs; authorization is for pages.",
+    "Authentication establishes who the caller is; authorization decides what that identity may do to a resource or operation."
+   ],
+   "correctIndex": 3,
+   "explanation": "Both must be enforced server-side."
+  },
+  {
+   "id": "backend-api-097",
+   "section": "Authentication, authorization, and API security",
+   "question": "What is broken object-level authorization (BOLA)?",
+   "options": [
+    "A user can bypass rate limits by changing IP addresses.",
+    "A user can read server logs through an API.",
+    "An attacker can overload the server with requests.",
+    "A caller can access another user's object by manipulating an identifier without a proper ownership or permission check."
+   ],
+   "correctIndex": 3,
+   "explanation": "Check authorization on every object access, not just at login or route entry."
+  },
+  {
+   "id": "backend-api-098",
+   "section": "Authentication, authorization, and API security",
+   "question": "What is broken function-level authorization?",
+   "options": [
+    "A user can invoke an operation beyond their role or privileges.",
+    "A user can access another user's object by changing an ID.",
+    "A function call is slow due to missing indexes.",
+    "A function crashes due to a bug."
+   ],
+   "correctIndex": 0,
+   "explanation": "Enforce permissions for each action on the server, including administrative endpoints."
+  },
+  {
+   "id": "backend-api-099",
+   "section": "Authentication, authorization, and API security",
+   "question": "What is JWT and what are its risks?",
+   "options": [
+    "A database format for storing user sessions.",
+    "A JSON Web Token is a compact claims format that may be signed or encrypted depending on the design.",
+    "An encrypted file format for passwords.",
+    "A protocol for authenticating servers."
+   ],
+   "correctIndex": 1,
+   "explanation": "A signed JWT is not confidential; validate signature, issuer, audience, expiry, and allowed algorithms."
+  },
+  {
+   "id": "backend-api-100",
+   "section": "Authentication, authorization, and API security",
+   "question": "What is the difference between access and refresh tokens?",
+   "options": [
+    "Access tokens are long-lived and used only to renew refresh tokens.",
+    "They are identical.",
+    "Refresh tokens are used on every API request.",
+    "Access tokens are short-lived credentials for APIs; refresh tokens obtain new access tokens under controlled conditions."
+   ],
+   "correctIndex": 3,
+   "explanation": "Protect refresh tokens, rotate or revoke them where appropriate, and detect reuse if supported."
+  },
+  {
+   "id": "backend-api-101",
+   "section": "Authentication, authorization, and API security",
+   "question": "Where should browser tokens be stored?",
+   "options": [
+    "Always in localStorage, because it is the safest option.",
+    "Always in the URL query string.",
+    "The choice depends on the threat model; HttpOnly Secure SameSite cookies reduce script access, while browser storage is readable by injected scripts.",
+    "In global variables so they never persist."
+   ],
+   "correctIndex": 2,
+   "explanation": "Cookie authentication needs CSRF considerations; no storage choice eliminates XSS risk."
+  },
+  {
+   "id": "backend-api-102",
+   "section": "Authentication, authorization, and API security",
+   "question": "What is CSRF?",
+   "options": [
+    "Cross-site scripting that steals cookies.",
+    "A flaw that allows reading other users' files.",
+    "An attack that overloads a server with traffic.",
+    "Cross-site request forgery abuses a browser's automatic attachment of credentials to make an unwanted authenticated request."
+   ],
+   "correctIndex": 3,
+   "explanation": "Use SameSite cookies, CSRF tokens or origin checks where appropriate, and avoid unsafe state changes via GET."
+  },
+  {
+   "id": "backend-api-103",
+   "section": "Authentication, authorization, and API security",
+   "question": "What is XSS and why does it matter to APIs?",
+   "options": [
+    "An attack that injects SQL into queries.",
+    "An attack that forges requests using the browser's cookies.",
+    "An attack that overwhelms the server.",
+    "Cross-site scripting executes attacker-controlled script in a user's browser and may steal accessible credentials or perform actions."
+   ],
+   "correctIndex": 3,
+   "explanation": "Validate and encode output, sanitize allowed HTML, and use a suitable Content Security Policy."
+  },
+  {
+   "id": "backend-api-104",
+   "section": "Authentication, authorization, and API security",
+   "question": "What is SQL injection?",
+   "options": [
+    "Executing scripts in the user's browser.",
+    "Forging cross-site requests.",
+    "Untrusted input changes the meaning of a SQL statement.",
+    "Overloading the database with queries."
+   ],
+   "correctIndex": 2,
+   "explanation": "Use parameterized queries and allowlist dynamic identifiers; escaping alone is fragile."
+  },
+  {
+   "id": "backend-api-105",
+   "section": "Authentication, authorization, and API security",
+   "question": "What is SSRF?",
+   "options": [
+    "A server is tricked into making requests to attacker-chosen destinations, potentially reaching internal services or metadata endpoints.",
+    "A browser tricked into sending cookies to another site.",
+    "An attacker injecting scripts into pages.",
+    "An attacker guessing passwords."
+   ],
+   "correctIndex": 0,
+   "explanation": "Validate destinations, restrict egress, handle redirects carefully, and block private/reserved address ranges."
+  },
+  {
+   "id": "backend-api-106",
+   "section": "Authentication, authorization, and API security",
+   "question": "What is rate limiting?",
+   "options": [
+    "Compressing API responses.",
+    "Encrypting API responses.",
+    "Caching API responses.",
+    "Restricting request frequency or resource consumption by an identity, IP, token, or business action."
+   ],
+   "correctIndex": 3,
+   "explanation": "Use shared/distributed state when the app runs on multiple instances and define 429 behavior."
+  },
+  {
+   "id": "backend-api-107",
+   "section": "Authentication, authorization, and API security",
+   "question": "What is brute-force protection?",
+   "options": [
+    "Encrypting stored passwords.",
+    "Using HTTPS for every request.",
+    "Storing sessions in cookies.",
+    "Controls that slow or detect repeated credential guesses, such as rate limits, progressive delays, and risk-based checks."
+   ],
+   "correctIndex": 3,
+   "explanation": "Avoid account-lockout policies that let attackers deny service to victims."
+  },
+  {
+   "id": "backend-api-108",
+   "section": "Authentication, authorization, and API security",
+   "question": "What is password hashing?",
+   "options": [
+    "Encrypting passwords with a reversible key so they can be recovered.",
+    "Using a password-specific, salted, deliberately expensive hashing algorithm to verify passwords without storing plaintext.",
+    "Storing passwords in plaintext in a protected database.",
+    "Encoding passwords with Base64."
+   ],
+   "correctIndex": 1,
+   "explanation": "Use established Argon2id, scrypt, or bcrypt implementations and tune cost appropriately."
+  },
+  {
+   "id": "backend-api-109",
+   "section": "Authentication, authorization, and API security",
+   "question": "Why is encryption not a substitute for password hashing?",
+   "options": [
+    "Because encryption is slower than hashing.",
+    "Because hashing is always reversible.",
+    "Because encryption cannot be used for strings.",
+    "Encryption is reversible with a key; password verification should use a one-way password hashing scheme."
+   ],
+   "correctIndex": 3,
+   "explanation": "Never store plaintext passwords or reversible passwords."
+  },
+  {
+   "id": "backend-api-110",
+   "section": "Authentication, authorization, and API security",
+   "question": "What is secret rotation?",
+   "options": [
+    "Backing up secrets to a secure vault.",
+    "Replacing credentials periodically or after exposure and ensuring consumers can transition safely.",
+    "Encrypting secrets with a stronger algorithm.",
+    "Deleting unused secrets permanently."
+   ],
+   "correctIndex": 1,
+   "explanation": "Plan overlap, revocation, audit, and automated secret distribution."
+  },
+  {
+   "id": "backend-api-111",
+   "section": "Authentication, authorization, and API security",
+   "question": "What are security headers?",
+   "options": [
+    "Headers that compress HTTP responses.",
+    "HTTP headers that constrain browser behavior or reduce information leakage, such as HSTS, CSP, and nosniff.",
+    "Headers that carry user credentials.",
+    "Headers that tell caches how long to store responses."
+   ],
+   "correctIndex": 1,
+   "explanation": "Configure them based on deployment and avoid copying policies blindly."
+  },
+  {
+   "id": "backend-api-112",
+   "section": "Authentication, authorization, and API security",
+   "question": "What is the principle of least privilege?",
+   "options": [
+    "Give each user, service, and process only the permissions needed for its task.",
+    "Give every user admin access to avoid errors.",
+    "Give permissions only when users ask for them.",
+    "Share one privileged account among all services."
+   ],
+   "correctIndex": 0,
+   "explanation": "Use it for database roles, cloud IAM, API scopes, and filesystem access."
+  },
+  {
+   "id": "backend-api-113",
+   "section": "Authentication, authorization, and API security",
+   "question": "Why are CORS and authorization different?",
+   "options": [
+    "They are the same mechanism with different names.",
+    "CORS authorizes users; authorization controls browsers.",
+    "CORS governs browser script access to responses; authorization decides whether a request may perform an operation.",
+    "CORS blocks server-to-server requests."
+   ],
+   "correctIndex": 2,
+   "explanation": "A request from curl or a malicious server is not stopped by browser CORS policy."
+  },
+  {
+   "id": "backend-api-114",
+   "section": "Authentication, authorization, and API security",
+   "question": "How should webhook signatures be checked?",
+   "options": [
+    "Compare the signature with `==` after parsing the JSON body.",
+    "Verify a cryptographic signature over the exact raw payload and relevant headers, use constant-time comparison, and check timestamp/replay rules if provided.",
+    "Check only that the request comes from a known IP address.",
+    "Trust the request if it has the right header name."
+   ],
+   "correctIndex": 1,
+   "explanation": "Parsing and reserializing JSON before verification can change the signed bytes."
+  },
+  {
+   "id": "backend-api-115",
+   "section": "Authentication, authorization, and API security",
+   "question": "What is unsafe consumption of third-party APIs?",
+   "options": [
+    "Using third-party APIs without any API keys.",
+    "Calling a third-party API from the frontend only.",
+    "Using third-party APIs in development only.",
+    "Trusting external service responses without adequate validation, timeout, access, or data-handling controls."
+   ],
+   "correctIndex": 3,
+   "explanation": "Treat third-party responses as untrusted input and protect against SSRF and supply-chain risks."
+  },
+  {
+   "id": "backend-api-116",
+   "section": "Authentication, authorization, and API security",
+   "question": "How should sensitive data be logged?",
+   "options": [
+    "Log necessary metadata while redacting credentials, personal data, payment secrets, and request bodies that may contain them.",
+    "Log full request bodies and headers for debugging.",
+    "Never log anything in production.",
+    "Log passwords only in debug mode."
+   ],
+   "correctIndex": 0,
+   "explanation": "Use structured logs and access controls with retention policies."
+  },
+  {
+   "id": "backend-api-117",
+   "section": "Authentication, authorization, and API security",
+   "question": "What is API inventory management?",
+   "options": [
+    "Counting the number of requests per endpoint.",
+    "Storing API responses in a cache.",
+    "Maintaining an accurate list of API versions, endpoints, owners, and exposure levels.",
+    "Generating API documentation from code."
+   ],
+   "correctIndex": 2,
+   "explanation": "Forgotten and deprecated endpoints can remain attack surfaces."
+  },
+  {
+   "id": "backend-api-118",
+   "section": "Databases, transactions, and data modeling",
+   "question": "What is a database transaction?",
+   "options": [
+    "A single SQL query that reads data.",
+    "A copy of a table for backup.",
+    "A stored procedure that runs on a schedule.",
+    "A unit of work that commits or rolls back according to database transaction semantics."
+   ],
+   "correctIndex": 3,
+   "explanation": "A transaction should preserve required invariants even when operations fail."
+  },
+  {
+   "id": "backend-api-119",
+   "section": "Databases, transactions, and data modeling",
+   "question": "What does ACID mean?",
+   "options": [
+    "Asynchronous, Cached, Indexed, Distributed.",
+    "Atomicity, consistency, isolation, and durability.",
+    "Atomicity, Concurrency, Indexing, Distribution.",
+    "Availability, Consistency, Isolation, Durability."
+   ],
+   "correctIndex": 1,
+   "explanation": "The exact isolation behavior and guarantees depend on the database and configuration."
+  },
+  {
+   "id": "backend-api-120",
+   "section": "Databases, transactions, and data modeling",
+   "question": "What is a database index?",
+   "options": [
+    "A backup copy of a table.",
+    "A constraint that enforces unique values.",
+    "A stored procedure that runs on writes.",
+    "A data structure that speeds selected reads or ordering at the cost of storage and write overhead."
+   ],
+   "correctIndex": 3,
+   "explanation": "Indexes should follow query patterns and be validated with query plans."
+  },
+  {
+   "id": "backend-api-121",
+   "section": "Databases, transactions, and data modeling",
+   "question": "What is a composite index?",
+   "options": [
+    "An index that spans multiple tables.",
+    "An index that stores encrypted values.",
+    "An index over multiple columns whose usefulness depends on column order and query predicates.",
+    "An index that is automatically created for primary keys."
+   ],
+   "correctIndex": 2,
+   "explanation": "A leading-column mismatch can prevent the expected index use."
+  },
+  {
+   "id": "backend-api-122",
+   "section": "Databases, transactions, and data modeling",
+   "question": "What is an N+1 query problem?",
+   "options": [
+    "A query that returns N+1 columns.",
+    "One query fetches a list and then a separate query is issued for each item or relationship.",
+    "A query that joins N+1 tables.",
+    "A query that runs N+1 times on a replica."
+   ],
+   "correctIndex": 1,
+   "explanation": "Use joins, eager loading, batching, or carefully designed data loaders."
+  },
+  {
+   "id": "backend-api-123",
+   "section": "Databases, transactions, and data modeling",
+   "question": "What is a connection pool?",
+   "options": [
+    "A group of database servers for load balancing.",
+    "A bounded set of reusable database connections.",
+    "A list of pending queries.",
+    "A cache of query results."
+   ],
+   "correctIndex": 1,
+   "explanation": "Size it relative to application instances and database limits; too many pools can overload the database."
+  },
+  {
+   "id": "backend-api-124",
+   "section": "Databases, transactions, and data modeling",
+   "question": "What is transaction isolation?",
+   "options": [
+    "Encrypting data across transactions.",
+    "Splitting a transaction into multiple parts.",
+    "Rules governing visibility of concurrent transactions and anomalies they can observe.",
+    "Compressing transaction logs."
+   ],
+   "correctIndex": 2,
+   "explanation": "Understand the selected database's actual isolation implementation, not just the level name."
+  },
+  {
+   "id": "backend-api-125",
+   "section": "Databases, transactions, and data modeling",
+   "question": "What is a lost update?",
+   "options": [
+    "A write that is lost because the server crashed.",
+    "Two concurrent writers overwrite one another because each acts on stale state.",
+    "A transaction that is rolled back after a timeout.",
+    "A row that is deleted by mistake."
+   ],
+   "correctIndex": 1,
+   "explanation": "Use optimistic version checks, atomic updates, or suitable locking."
+  },
+  {
+   "id": "backend-api-126",
+   "section": "Databases, transactions, and data modeling",
+   "question": "What is optimistic concurrency control?",
+   "options": [
+    "Locking rows before reading them.",
+    "Running every transaction one at a time.",
+    "Preventing writes with a global lock.",
+    "Allow concurrent work but detect conflicting updates using a version, timestamp, or conditional write."
+   ],
+   "correctIndex": 3,
+   "explanation": "Return a conflict/precondition failure and let the client retry or reconcile."
+  },
+  {
+   "id": "backend-api-127",
+   "section": "Databases, transactions, and data modeling",
+   "question": "What is pessimistic locking?",
+   "options": [
+    "Allowing concurrent changes and checking for conflicts later.",
+    "Locking data to prevent conflicting work while a transaction proceeds.",
+    "Never allowing any transaction to run.",
+    "Caching reads to avoid locks."
+   ],
+   "correctIndex": 1,
+   "explanation": "Keep lock duration short and consider deadlocks and throughput impact."
+  },
+  {
+   "id": "backend-api-128",
+   "section": "Databases, transactions, and data modeling",
+   "question": "What is a deadlock?",
+   "options": [
+    "A query that runs too slowly.",
+    "A transaction that is rolled back.",
+    "A connection that has timed out.",
+    "Operations wait cyclically for resources held by one another."
+   ],
+   "correctIndex": 3,
+   "explanation": "Keep transactions short, acquire locks consistently, and retry known transient deadlock failures safely."
+  },
+  {
+   "id": "backend-api-129",
+   "section": "Databases, transactions, and data modeling",
+   "question": "What is a database migration?",
+   "options": [
+    "A backup of the database stored offline.",
+    "A copy of production data used for testing.",
+    "A script that deletes old rows.",
+    "A versioned change to schema or data applied across environments."
+   ],
+   "correctIndex": 3,
+   "explanation": "Use expand-and-contract patterns for changes that must coexist with old and new application versions."
+  },
+  {
+   "id": "backend-api-130",
+   "section": "Databases, transactions, and data modeling",
+   "question": "What is the difference between normalization and denormalization?",
+   "options": [
+    "Normalization duplicates data for faster reads; denormalization removes duplication.",
+    "They are identical.",
+    "Normalization encrypts data; denormalization compresses it.",
+    "Normalization reduces duplication and update anomalies; denormalization duplicates or precomputes data to improve particular reads."
+   ],
+   "correctIndex": 3,
+   "explanation": "Denormalization creates consistency and maintenance responsibilities."
+  },
+  {
+   "id": "backend-api-131",
+   "section": "Databases, transactions, and data modeling",
+   "question": "What is the repository pattern?",
+   "options": [
+    "An abstraction that encapsulates persistence operations behind an interface.",
+    "A pattern that caches database results in memory.",
+    "A pattern that generates SQL automatically.",
+    "A pattern that replicates data across servers."
+   ],
+   "correctIndex": 0,
+   "explanation": "It can aid testing and separation, but avoid adding layers that merely forward every call without value."
+  },
+  {
+   "id": "backend-api-132",
+   "section": "Databases, transactions, and data modeling",
+   "question": "What is the unit-of-work pattern?",
+   "options": [
+    "A mechanism that groups changes and coordinates their commit as one transaction.",
+    "A pattern that splits a database into multiple shards.",
+    "A pattern that runs unit tests against a database.",
+    "A pattern that merges two tables."
+   ],
+   "correctIndex": 0,
+   "explanation": "It helps define transaction boundaries across related operations."
+  },
+  {
+   "id": "backend-api-133",
+   "section": "Databases, transactions, and data modeling",
+   "question": "Why is a database constraint important if the API validates input?",
+   "options": [
+    "Because constraints are slower than API validation.",
+    "Multiple application instances, scripts, and races can bypass API checks; database constraints protect invariants at the data layer.",
+    "Because the API should never validate input.",
+    "Because databases cannot store invalid data."
+   ],
+   "correctIndex": 1,
+   "explanation": "Use unique, foreign-key, check, and not-null constraints where appropriate."
+  },
+  {
+   "id": "backend-api-134",
+   "section": "Databases, transactions, and data modeling",
+   "question": "What is soft deletion?",
+   "options": [
+    "Permanently deleting a row from disk.",
+    "Marking a record deleted instead of physically removing it.",
+    "Encrypting a row so it cannot be read.",
+    "Moving a row to a backup server."
+   ],
+   "correctIndex": 1,
+   "explanation": "Define uniqueness, retention, restore behavior, and how every query filters deleted records."
+  },
+  {
+   "id": "backend-api-135",
+   "section": "Databases, transactions, and data modeling",
+   "question": "What is a database transaction boundary?",
+   "options": [
+    "The point where the database connection opens.",
+    "The set of operations that must succeed or fail together to preserve a business invariant.",
+    "The point where results are returned to the client.",
+    "The point where the server restarts."
+   ],
+   "correctIndex": 1,
+   "explanation": "Do not keep a transaction open while waiting on slow external network calls unless the design explicitly requires it."
+  },
+  {
+   "id": "backend-api-136",
+   "section": "Databases, transactions, and data modeling",
+   "question": "What is the transactional outbox pattern?",
+   "options": [
+    "Publish an event first, then write to the database later.",
+    "Write to the database and the message broker in two separate, uncoordinated steps.",
+    "Persist a domain change and an event record in one database transaction, then publish the event asynchronously.",
+    "Skip the database and write only to the message broker."
+   ],
+   "correctIndex": 2,
+   "explanation": "It avoids the dual-write gap but requires relay retries and duplicate-safe consumers."
+  },
+  {
+   "id": "backend-api-137",
+   "section": "Databases, transactions, and data modeling",
+   "question": "What is eventual consistency?",
+   "options": [
+    "All replicas always agree at every moment.",
+    "Replicas or services may temporarily disagree but converge if updates stop and propagation succeeds.",
+    "Replicas never agree with each other.",
+    "Data is stored only on one node."
+   ],
+   "correctIndex": 1,
+   "explanation": "Expose pending states and define read-after-write expectations."
+  },
+  {
+   "id": "backend-api-138",
+   "section": "Architecture, distributed systems, and reliability",
+   "question": "What is a monolith versus a microservice architecture?",
+   "options": [
+    "A monolith splits services; microservices combine them into one.",
+    "A monolith deploys a system as one application unit; microservices split capabilities into independently deployable services.",
+    "They are the same architecture.",
+    "A monolith runs on many machines; microservices run on one."
+   ],
+   "correctIndex": 1,
+   "explanation": "Microservices add network, data ownership, deployment, and observability complexity."
+  },
+  {
+   "id": "backend-api-139",
+   "section": "Architecture, distributed systems, and reliability",
+   "question": "When should a team choose a modular monolith?",
+   "options": [
+    "When the team wants maximum independent deployment per service.",
+    "When clear internal boundaries are needed without paying the operational cost of distributed services.",
+    "When every module needs its own database.",
+    "When the system must run on hundreds of machines."
+   ],
+   "correctIndex": 1,
+   "explanation": "It can preserve simple deployment while preparing for later extraction if evidence supports it."
+  },
+  {
+   "id": "backend-api-140",
+   "section": "Architecture, distributed systems, and reliability",
+   "question": "What is a message queue?",
+   "options": [
+    "A database table storing requests.",
+    "A cache that stores responses.",
+    "A load balancer for HTTP traffic.",
+    "A brokered mechanism for asynchronous communication between producers and consumers."
+   ],
+   "correctIndex": 3,
+   "explanation": "It decouples latency and availability but introduces delivery, ordering, and retry semantics."
+  },
+  {
+   "id": "backend-api-141",
+   "section": "Architecture, distributed systems, and reliability",
+   "question": "What is at-least-once delivery?",
+   "options": [
+    "A message is delivered exactly once, never more.",
+    "A message may be lost but never duplicated.",
+    "A message is delivered at most one time.",
+    "A message may be delivered more than once but should not be silently lost under the system's guarantees."
+   ],
+   "correctIndex": 3,
+   "explanation": "Consumers must be idempotent or deduplicate messages."
+  },
+  {
+   "id": "backend-api-142",
+   "section": "Architecture, distributed systems, and reliability",
+   "question": "Can a distributed system guarantee exactly-once side effects easily?",
+   "options": [
+    "Yes; it is trivial across any set of systems.",
+    "Yes, by using a single message queue.",
+    "Yes, if the network is reliable.",
+    "Not generally across arbitrary systems; apparent exactly-once behavior is usually built from transactions, deduplication, idempotency, and carefully scoped guarantees."
+   ],
+   "correctIndex": 3,
+   "explanation": "Be precise about what is guaranteed and within which boundary."
+  },
+  {
+   "id": "backend-api-143",
+   "section": "Architecture, distributed systems, and reliability",
+   "question": "What is a circuit breaker?",
+   "options": [
+    "A security feature that disables a user's account.",
+    "A load balancer that routes traffic.",
+    "A mechanism that temporarily stops calls to a failing dependency after a threshold and later probes recovery.",
+    "A cache that stores failing requests."
+   ],
+   "correctIndex": 2,
+   "explanation": "It can prevent cascading failures but needs sensible thresholds and fallback behavior."
+  },
+  {
+   "id": "backend-api-144",
+   "section": "Architecture, distributed systems, and reliability",
+   "question": "What is a retry storm?",
+   "options": [
+    "A flood of requests from an attacker.",
+    "A burst of cache misses.",
+    "A crash that restarts many services.",
+    "Many clients retry simultaneously and amplify load on an already failing service."
+   ],
+   "correctIndex": 3,
+   "explanation": "Use bounded retries, exponential backoff, jitter, and retry budgets."
+  },
+  {
+   "id": "backend-api-145",
+   "section": "Architecture, distributed systems, and reliability",
+   "question": "What is exponential backoff with jitter?",
+   "options": [
+    "Retrying immediately without waiting.",
+    "Retrying at a fixed interval every time.",
+    "Retrying only once and then giving up.",
+    "Increasing delays between retries with randomized variation."
+   ],
+   "correctIndex": 3,
+   "explanation": "Jitter reduces synchronized retry bursts; cap both delay and attempt count."
+  },
+  {
+   "id": "backend-api-146",
+   "section": "Architecture, distributed systems, and reliability",
+   "question": "What is a bulkhead pattern?",
+   "options": [
+    "A security rule that blocks bad actors.",
+    "Isolating resource pools or workloads so one failing dependency does not consume all capacity.",
+    "A caching strategy for static content.",
+    "A technique for compressing responses."
+   ],
+   "correctIndex": 1,
+   "explanation": "Separate concurrency limits and queues for workloads with different risk profiles."
+  },
+  {
+   "id": "backend-api-147",
+   "section": "Architecture, distributed systems, and reliability",
+   "question": "What is graceful degradation?",
+   "options": [
+    "Crashing the whole service when a component fails.",
+    "Providing reduced but useful functionality when optional dependencies or features fail.",
+    "Returning only error pages to users.",
+    "Disabling monitoring during failures."
+   ],
+   "correctIndex": 1,
+   "explanation": "Distinguish critical data from optional recommendations, analytics, or enrichment."
+  },
+  {
+   "id": "backend-api-148",
+   "section": "Architecture, distributed systems, and reliability",
+   "question": "What is a service-level objective?",
+   "options": [
+    "A legal contract with customers.",
+    "A list of all running services.",
+    "A schedule for deploying updates.",
+    "A target for a reliability indicator over a defined window, such as availability or latency."
+   ],
+   "correctIndex": 3,
+   "explanation": "SLOs should drive alerting and error-budget decisions."
+  },
+  {
+   "id": "backend-api-149",
+   "section": "Architecture, distributed systems, and reliability",
+   "question": "What is the difference between logs, metrics, and traces?",
+   "options": [
+    "Logs aggregate numeric behavior; metrics record events; traces store configuration.",
+    "They are identical.",
+    "Traces store counters; metrics store text; logs store spans.",
+    "Logs record events, metrics aggregate numeric behavior, and traces connect spans across a request path."
+   ],
+   "correctIndex": 3,
+   "explanation": "Correlation IDs and trace context help diagnose cross-service latency."
+  },
+  {
+   "id": "backend-api-150",
+   "section": "Architecture, distributed systems, and reliability",
+   "question": "What is a correlation ID?",
+   "options": [
+    "An identifier used to connect logs and events belonging to a request or workflow.",
+    "A password that identifies a user.",
+    "A hash of the request body.",
+    "A key used to sign responses."
+   ],
+   "correctIndex": 0,
+   "explanation": "Validate incoming IDs and avoid using them as authentication credentials."
+  },
+  {
+   "id": "backend-api-151",
+   "section": "Architecture, distributed systems, and reliability",
+   "question": "What is a health check?",
+   "options": [
+    "An endpoint or probe that reports whether a process or service meets a defined health criterion.",
+    "A test that verifies the database schema matches the code.",
+    "A cache that stores recent responses.",
+    "A log entry that records errors."
+   ],
+   "correctIndex": 0,
+   "explanation": "Separate liveness from readiness; avoid making every dependency outage trigger synchronized restarts."
+  },
+  {
+   "id": "backend-api-152",
+   "section": "Architecture, distributed systems, and reliability",
+   "question": "What is load shedding?",
+   "options": [
+    "Compressing responses when the network is slow.",
+    "Caching every response so work can be skipped.",
+    "Retrying failed requests until they succeed.",
+    "Rejecting or deferring work when capacity is exhausted to protect the system."
+   ],
+   "correctIndex": 3,
+   "explanation": "Return clear overload responses and prioritize critical workloads."
+  },
+  {
+   "id": "backend-api-153",
+   "section": "Architecture, distributed systems, and reliability",
+   "question": "What is horizontal scaling?",
+   "options": [
+    "Upgrading a single server to a larger machine.",
+    "Adding more service instances to handle load.",
+    "Adding more CPU cores to a process.",
+    "Splitting a database table across disks."
+   ],
+   "correctIndex": 1,
+   "explanation": "It requires attention to shared state, connection limits, sticky sessions, and distributed coordination."
+  },
+  {
+   "id": "backend-api-154",
+   "section": "Architecture, distributed systems, and reliability",
+   "question": "Why is stateless application design useful?",
+   "options": [
+    "Requests can be served by any healthy instance without relying on local session state.",
+    "Because stateless apps never need a database.",
+    "Because stateless apps run faster on a single machine.",
+    "Because stateless apps never need authentication."
+   ],
+   "correctIndex": 0,
+   "explanation": "Externalize shared state to a database, cache, or token while managing consistency and security."
+  },
+  {
+   "id": "backend-api-155",
+   "section": "Architecture, distributed systems, and reliability",
+   "question": "What is a cache stampede?",
+   "options": [
+    "Many requests simultaneously recompute or fetch an expired popular value.",
+    "A cache that overflows its memory limit.",
+    "A flood of requests from a malicious user.",
+    "A cache that stores incorrect values."
+   ],
+   "correctIndex": 0,
+   "explanation": "Use request coalescing, locks, staggered expiry, stale-while-revalidate, or refresh-ahead strategies."
+  },
+  {
+   "id": "backend-api-156",
+   "section": "Architecture, distributed systems, and reliability",
+   "question": "What is a saga?",
+   "options": [
+    "A sequence of local transactions coordinated across services, with compensating actions for failures.",
+    "A single distributed transaction that locks all services.",
+    "A caching strategy for data shared across services.",
+    "A queue that guarantees exactly-once delivery."
+   ],
+   "correctIndex": 0,
+   "explanation": "Compensation is a business operation, not always a perfect rollback."
+  },
+  {
+   "id": "backend-api-157",
+   "section": "Architecture, distributed systems, and reliability",
+   "question": "What is CQRS?",
+   "options": [
+    "Combining reads and writes into a single model.",
+    "Compressing queries to improve database speed.",
+    "Caching every response at the edge.",
+    "Separating command handling from query/read models."
+   ],
+   "correctIndex": 3,
+   "explanation": "It can help with different scaling or model needs but adds synchronization and operational complexity."
+  },
+  {
+   "id": "backend-api-158",
+   "section": "Testing, debugging, and code quality",
+   "question": "What is the difference between unit, integration, and end-to-end tests?",
+   "options": [
+    "Unit tests exercise full flows; integration tests isolate single functions.",
+    "They are identical.",
+    "Unit tests isolate logic, integration tests verify collaborating components, and end-to-end tests exercise complete user-visible flows.",
+    "End-to-end tests check only code style."
+   ],
+   "correctIndex": 2,
+   "explanation": "Use a balanced test pyramid based on risk and feedback speed."
+  },
+  {
+   "id": "backend-api-159",
+   "section": "Testing, debugging, and code quality",
+   "question": "What is dependency injection's testing benefit?",
+   "options": [
+    "It makes the code run faster in production.",
+    "It lets tests replace databases, external clients, clocks, or other collaborators with controlled implementations.",
+    "It removes the need for a database.",
+    "It makes tests run in parallel automatically."
+   ],
+   "correctIndex": 1,
+   "explanation": "Avoid over-mocking internal implementation details."
+  },
+  {
+   "id": "backend-api-160",
+   "section": "Testing, debugging, and code quality",
+   "question": "How do you test an Express route?",
+   "options": [
+    "Read the route source code and compare it to the spec.",
+    "Use an HTTP testing client against an app instance and assert status, headers, body, and side effects.",
+    "Open the route in a browser by hand.",
+    "Run the route with production data only."
+   ],
+   "correctIndex": 1,
+   "explanation": "Keep app construction separate from binding a production network port."
+  },
+  {
+   "id": "backend-api-161",
+   "section": "Testing, debugging, and code quality",
+   "question": "How do you test a FastAPI route?",
+   "options": [
+    "Use FastAPI's test client or an async client when needed, and override dependencies for controlled resources.",
+    "Check the code visually without running it.",
+    "Run every test against the production database.",
+    "Call routes with a browser only."
+   ],
+   "correctIndex": 0,
+   "explanation": "Test validation, auth failures, and cleanup as well as happy paths."
+  },
+  {
+   "id": "backend-api-162",
+   "section": "Testing, debugging, and code quality",
+   "question": "What is a test fixture?",
+   "options": [
+    "A mock object that replaces production services.",
+    "A test that runs only once.",
+    "A configuration file for the test runner.",
+    "Reusable setup and teardown that creates known state for tests."
+   ],
+   "correctIndex": 3,
+   "explanation": "Fixtures should isolate data and release resources even when assertions fail."
+  },
+  {
+   "id": "backend-api-163",
+   "section": "Testing, debugging, and code quality",
+   "question": "What is contract testing?",
+   "options": [
+    "Testing user interface layouts.",
+    "Testing the performance of a database.",
+    "Verifying code style conventions.",
+    "Verifying that service behavior matches the documented or consumer-required interface."
+   ],
+   "correctIndex": 3,
+   "explanation": "It can catch breaking schema changes before deployment."
+  },
+  {
+   "id": "backend-api-164",
+   "section": "Testing, debugging, and code quality",
+   "question": "What is property-based testing?",
+   "options": [
+    "Writing tests only for properties of the UI.",
+    "Running tests only on properties of the database.",
+    "Generating many inputs from properties or invariants rather than writing only individual examples.",
+    "Generating test names automatically."
+   ],
+   "correctIndex": 2,
+   "explanation": "Useful for parsers, validation, pagination, and stateful business rules."
+  },
+  {
+   "id": "backend-api-165",
+   "section": "Testing, debugging, and code quality",
+   "question": "What is fuzz testing?",
+   "options": [
+    "Testing that the UI renders on different devices.",
+    "Testing the speed of database queries.",
+    "Feeding unexpected or generated inputs to find crashes, hangs, and invalid behavior.",
+    "Checking that code style conventions are followed."
+   ],
+   "correctIndex": 2,
+   "explanation": "Use bounded resource limits and isolate tests for dangerous parsers."
+  },
+  {
+   "id": "backend-api-166",
+   "section": "Testing, debugging, and code quality",
+   "question": "How do you debug a slow API endpoint?",
+   "options": [
+    "Add more servers without measuring.",
+    "Restart the server and check again.",
+    "Disable logging to save time.",
+    "Break down latency across application, database, network, serialization, and downstream calls using traces and profiles."
+   ],
+   "correctIndex": 3,
+   "explanation": "Optimize measured bottlenecks rather than guessing from code appearance."
+  },
+  {
+   "id": "backend-api-167",
+   "section": "Testing, debugging, and code quality",
+   "question": "What is a flaky integration test?",
+   "options": [
+    "A test that always passes regardless of the code.",
+    "A test whose outcome varies due to timing, shared state, external dependencies, or nondeterministic ordering.",
+    "A test that takes a long time but never fails.",
+    "A test that covers too few lines of code."
+   ],
+   "correctIndex": 1,
+   "explanation": "Use deterministic fixtures, controlled clocks, isolation, and condition-based waits."
+  },
+  {
+   "id": "backend-api-168",
+   "section": "Testing, debugging, and code quality",
+   "question": "Why should tests not depend on execution order?",
+   "options": [
+    "Because tests always run in alphabetical order.",
+    "Because test frameworks never allow ordering.",
+    "Because order dependence makes tests faster.",
+    "Order dependence hides shared-state defects and makes parallel or isolated execution unreliable."
+   ],
+   "correctIndex": 3,
+   "explanation": "Each test should establish and clean up its own relevant state."
+  },
+  {
+   "id": "backend-api-169",
+   "section": "Testing, debugging, and code quality",
+   "question": "What is a database test container?",
+   "options": [
+    "An isolated database instance provisioned for integration tests.",
+    "A test that runs against the production database.",
+    "A Docker image that bundles the application code.",
+    "A mock library that replaces SQL queries."
+   ],
+   "correctIndex": 0,
+   "explanation": "It improves realism but adds startup cost and requires deterministic migrations and cleanup."
+  },
+  {
+   "id": "backend-api-170",
+   "section": "Testing, debugging, and code quality",
+   "question": "What is mutation testing?",
+   "options": [
+    "Changing test names to find duplicates.",
+    "Running tests with random inputs to find crashes.",
+    "Running tests on different operating systems.",
+    "Deliberately altering code to see whether the test suite detects the change."
+   ],
+   "correctIndex": 3,
+   "explanation": "It evaluates test effectiveness beyond raw line coverage."
+  },
+  {
+   "id": "backend-api-171",
+   "section": "Testing, debugging, and code quality",
+   "question": "What should an API test suite cover?",
+   "options": [
+    "Only the happy path for each endpoint.",
+    "Only the database queries.",
+    "Only the code style.",
+    "Success paths, validation, authn/authz, boundaries, concurrency, idempotency, rate limits, failures, and compatibility."
+   ],
+   "correctIndex": 3,
+   "explanation": "Prioritize high-risk business invariants and abuse cases."
+  },
+  {
+   "id": "backend-api-172",
+   "section": "Deployment, operations, and performance",
+   "question": "What is the difference between a process manager and a reverse proxy?",
+   "options": [
+    "A process manager routes traffic; a reverse proxy supervises processes.",
+    "A process manager supervises application processes; a reverse proxy routes client traffic to services.",
+    "They are identical.",
+    "A reverse proxy runs only on developer machines."
+   ],
+   "correctIndex": 1,
+   "explanation": "They address different operational layers and are often used together."
+  },
+  {
+   "id": "backend-api-173",
+   "section": "Deployment, operations, and performance",
+   "question": "What is containerization?",
+   "options": [
+    "Packaging an application and its dependencies into an isolated, reproducible runtime image.",
+    "Splitting a large codebase into multiple repositories.",
+    "Encrypting data before it is stored.",
+    "Writing code in a compiled language."
+   ],
+   "correctIndex": 0,
+   "explanation": "Containers do not remove the need for patching, resource limits, and secret management."
+  },
+  {
+   "id": "backend-api-174",
+   "section": "Deployment, operations, and performance",
+   "question": "Why should configuration be externalized?",
+   "options": [
+    "Because configuration should always be hard-coded.",
+    "Because environment variables are faster than constants.",
+    "Because source code cannot contain configuration.",
+    "The same artifact can run in different environments with different endpoints, credentials, and limits."
+   ],
+   "correctIndex": 3,
+   "explanation": "Validate required settings at startup and fail fast on invalid configuration."
+  },
+  {
+   "id": "backend-api-175",
+   "section": "Deployment, operations, and performance",
+   "question": "What is a rolling deployment?",
+   "options": [
+    "Gradually replacing old instances with new ones while keeping service capacity available.",
+    "Replacing all instances at once with downtime.",
+    "Running old and new versions on different machines forever.",
+    "Deploying only to a staging environment."
+   ],
+   "correctIndex": 0,
+   "explanation": "It requires compatibility between app versions and shared database schemas during rollout."
+  },
+  {
+   "id": "backend-api-176",
+   "section": "Deployment, operations, and performance",
+   "question": "What is blue-green deployment?",
+   "options": [
+    "Replacing one instance at a time with the new version.",
+    "Maintaining separate old and new environments and shifting traffic between them.",
+    "Releasing to a small percentage of users first.",
+    "Running tests in two environments."
+   ],
+   "correctIndex": 1,
+   "explanation": "Rollback can be quick, but data migrations and external side effects complicate reversibility."
+  },
+  {
+   "id": "backend-api-177",
+   "section": "Deployment, operations, and performance",
+   "question": "What is a canary deployment?",
+   "options": [
+    "Releasing to a small subset of traffic or users before expanding rollout.",
+    "Switching all traffic at once between two environments.",
+    "Rolling out one instance at a time.",
+    "Running tests in parallel on two clusters."
+   ],
+   "correctIndex": 0,
+   "explanation": "Monitor error rates, latency, and business metrics with a clear rollback threshold."
+  },
+  {
+   "id": "backend-api-178",
+   "section": "Deployment, operations, and performance",
+   "question": "What is graceful shutdown in a containerized service?",
+   "options": [
+    "Stop accepting work, finish or cancel in-flight requests, close resources, and exit before the orchestrator's deadline.",
+    "Kill the process immediately on a stop signal.",
+    "Ignore stop signals until the container is deleted.",
+    "Close the network first and finish requests later."
+   ],
+   "correctIndex": 0,
+   "explanation": "Set termination grace periods and test shutdown under load."
+  },
+  {
+   "id": "backend-api-179",
+   "section": "Deployment, operations, and performance",
+   "question": "How do you size a database connection pool?",
+   "options": [
+    "Consider database capacity, application instance count, concurrency, query duration, and workload mix.",
+    "Always set it to the maximum allowed by the database.",
+    "Always use one connection per request.",
+    "Use a pool of exactly one connection."
+   ],
+   "correctIndex": 0,
+   "explanation": "A per-process pool that seems small can multiply into excessive total connections when scaled horizontally."
+  },
+  {
+   "id": "backend-api-180",
+   "section": "Deployment, operations, and performance",
+   "question": "What is a memory leak in a backend service?",
+   "options": [
+    "Memory remains reachable or allocated longer than intended, causing growing usage over time.",
+    "A bug that crashes the service on startup.",
+    "A process that uses too much CPU.",
+    "A cache that has expired entries."
+   ],
+   "correctIndex": 0,
+   "explanation": "Track heap profiles, object retention, caches, listeners, and unbounded collections."
+  },
+  {
+   "id": "backend-api-181",
+   "section": "Deployment, operations, and performance",
+   "question": "How do you improve API latency?",
+   "options": [
+    "Measure p50/p95/p99, reduce unnecessary round trips, optimize queries, bound payloads, cache safely, and control concurrency.",
+    "Add more logging to every request.",
+    "Increase payload sizes to reduce round trips.",
+    "Disable caching and compression."
+   ],
+   "correctIndex": 0,
+   "explanation": "Average latency alone can hide tail-latency problems."
+  },
+  {
+   "id": "backend-api-182",
+   "section": "Deployment, operations, and performance",
+   "question": "What is p95 latency?",
+   "options": [
+    "The average latency across all requests.",
+    "The slowest latency among all requests.",
+    "The latency of exactly 95% of requests.",
+    "The latency value at or below which 95% of measured requests complete over the selected window."
+   ],
+   "correctIndex": 3,
+   "explanation": "Always define the measurement window, traffic population, and endpoint scope."
+  },
+  {
+   "id": "backend-api-183",
+   "section": "Deployment, operations, and performance",
+   "question": "What is a CDN and when can it help an API?",
+   "options": [
+    "A database that replicates across regions.",
+    "A server that runs background jobs.",
+    "A tool for encrypting API traffic.",
+    "A distributed edge cache primarily useful for cacheable responses and static assets, with carefully configured API caching where safe."
+   ],
+   "correctIndex": 3,
+   "explanation": "Personalized or sensitive responses must not be shared accidentally."
+  },
+  {
+   "id": "backend-api-184",
+   "section": "Deployment, operations, and performance",
+   "question": "What is a secret manager?",
+   "options": [
+    "A database that stores user passwords.",
+    "A tool that encrypts traffic between services.",
+    "A service for storing, controlling access to, and rotating credentials or sensitive configuration.",
+    "A cache for configuration files."
+   ],
+   "correctIndex": 2,
+   "explanation": "Restrict access and avoid leaking secrets through logs, crash dumps, or build output."
+  },
+  {
+   "id": "backend-api-185",
+   "section": "Deployment, operations, and performance",
+   "question": "What should be included in an incident runbook?",
+   "options": [
+    "The full source code of the service.",
+    "A list of all past outages with no instructions.",
+    "Symptoms, dashboards, mitigation steps, rollback criteria, escalation contacts, and recovery verification.",
+    "Only the contact details of the CEO."
+   ],
+   "correctIndex": 2,
+   "explanation": "Keep it actionable and test it during drills."
+  },
+  {
+   "id": "backend-api-186",
+   "section": "Code-reading traps and debugging scenarios",
+   "question": "An Express request hangs forever. What do you inspect first?",
+   "options": [
+    "Whether the database has the latest schema.",
+    "Whether the frontend is using the latest API version.",
+    "Whether the logs are rotated daily.",
+    "Check middleware paths for code that neither sends a response nor calls next, plus awaited operations that never settle."
+   ],
+   "correctIndex": 3,
+   "explanation": "Also inspect streaming responses and downstream calls without timeouts."
+  },
+  {
+   "id": "backend-api-187",
+   "section": "Code-reading traps and debugging scenarios",
+   "question": "An Express endpoint returns a 500 but the error middleware never runs. What might be wrong?",
+   "options": [
+    "An async failure may not be forwarded in Express 4, a callback error may be unhandled, or middleware order/signature may be incorrect.",
+    "The database is down.",
+    "The route has too many parameters.",
+    "The server is running on the wrong port."
+   ],
+   "correctIndex": 0,
+   "explanation": "Express 5 forwards rejected route-handler Promises, but callback-based async APIs still need proper error handling."
+  },
+  {
+   "id": "backend-api-188",
+   "section": "Code-reading traps and debugging scenarios",
+   "question": "An Express API reads req.body as undefined. Why?",
+   "options": [
+    "Because Express stores bodies only in req.query.",
+    "Because req.body is always undefined for POST requests.",
+    "Because the client sends too many headers.",
+    "The body parser may be missing, registered too late, or the request Content-Type/body may not match the parser."
+   ],
+   "correctIndex": 3,
+   "explanation": "Parsing does not validate the resulting object."
+  },
+  {
+   "id": "backend-api-189",
+   "section": "Code-reading traps and debugging scenarios",
+   "question": "A FastAPI async endpoint has low throughput despite many concurrent requests. Why?",
+   "options": [
+    "Because FastAPI always runs on a single thread per request.",
+    "Because async endpoints cannot perform I/O.",
+    "It may call blocking I/O, run CPU-heavy code, use unbounded resource waits, or serialize all work behind a lock.",
+    "Because Pydantic validation is disabled."
+   ],
+   "correctIndex": 2,
+   "explanation": "Profile event-loop delay and downstream wait time."
+  },
+  {
+   "id": "backend-api-190",
+   "section": "Code-reading traps and debugging scenarios",
+   "question": "A FastAPI response unexpectedly includes a sensitive field. What should be reviewed?",
+   "options": [
+    "Output schemas, response_model configuration, custom serializers, and alternate code paths that bypass filtering.",
+    "The database indexes.",
+    "The server's TLS certificate.",
+    "The load balancer configuration."
+   ],
+   "correctIndex": 0,
+   "explanation": "Use explicit public response models and tests for forbidden properties."
+  },
+  {
+   "id": "backend-api-191",
+   "section": "Code-reading traps and debugging scenarios",
+   "question": "Two requests both check that a username is free and then insert it. Why can duplicates occur?",
+   "options": [
+    "Because the database rejects duplicates automatically.",
+    "Because usernames are not unique by nature.",
+    "The check and insert are not atomic, so both requests may observe availability.",
+    "Because HTTP requests always run in order."
+   ],
+   "correctIndex": 2,
+   "explanation": "Enforce a unique database constraint and handle the conflict cleanly."
+  },
+  {
+   "id": "backend-api-192",
+   "section": "Code-reading traps and debugging scenarios",
+   "question": "A retry creates two payment records. What design failed?",
+   "options": [
+    "The database ran out of storage.",
+    "The operation lacked effective idempotency or deduplication across retries.",
+    "The payment provider's API was down.",
+    "The response was cached too long."
+   ],
+   "correctIndex": 1,
+   "explanation": "Persist idempotency state and the business result with appropriate transactional guarantees."
+  },
+  {
+   "id": "backend-api-193",
+   "section": "Code-reading traps and debugging scenarios",
+   "question": "An API is fast locally but slow in production. What do you investigate?",
+   "options": [
+    "Whether the code compiles on production.",
+    "Whether the developers used the right editor.",
+    "Whether the unit tests pass locally.",
+    "Network and DNS, TLS/proxy configuration, database distance and pool saturation, traffic shape, cold starts, cache hit rates, and resource limits."
+   ],
+   "correctIndex": 3,
+   "explanation": "Compare production-like traces and load tests rather than relying on local timings."
+  },
+  {
+   "id": "backend-api-194",
+   "section": "Code-reading traps and debugging scenarios",
+   "question": "A DELETE request is retried after a timeout. Is it safe?",
+   "options": [
+    "No; DELETE can never be retried.",
+    "No; retries always create duplicate records.",
+    "HTTP DELETE is defined as idempotent in intended effect, but implementation-specific side effects and response differences still matter.",
+    "Yes; DELETE is never idempotent."
+   ],
+   "correctIndex": 2,
+   "explanation": "Make deletion semantics and downstream effects retry-safe."
+  },
+  {
+   "id": "backend-api-195",
+   "section": "Code-reading traps and debugging scenarios",
+   "question": "A user can change `/orders/123` to `/orders/124` and view another person's order. What is the flaw?",
+   "options": [
+    "Broken function-level authorization.",
+    "SQL injection.",
+    "Cross-site request forgery.",
+    "Broken object-level authorization."
+   ],
+   "correctIndex": 3,
+   "explanation": "Scope data access to the authenticated principal or explicitly authorize access to the requested object."
+  },
+  {
+   "id": "backend-api-196",
+   "section": "Code-reading traps and debugging scenarios",
+   "question": "A rate limit works on one instance but fails when scaled to five. Why?",
+   "options": [
+    "Because rate limits only work on a single machine by design.",
+    "Because load balancers disable rate limits.",
+    "Because HTTP does not support rate limiting.",
+    "The counter is stored only in each process, so each instance enforces a separate partial limit."
+   ],
+   "correctIndex": 3,
+   "explanation": "Use shared atomic storage or a gateway-level distributed limiter."
+  },
+  {
+   "id": "backend-api-197",
+   "section": "Code-reading traps and debugging scenarios",
+   "question": "A cached response returns the previous user's private data. What failed?",
+   "options": [
+    "The database schema was out of date.",
+    "The TLS certificate expired.",
+    "Cache identity or cache-control policy did not isolate personalized content.",
+    "The user's browser had an old version."
+   ],
+   "correctIndex": 2,
+   "explanation": "Review authorization before cache use and ensure private data is not shared across users."
+  },
+  {
+   "id": "backend-api-198",
+   "section": "Code-reading traps and debugging scenarios",
+   "question": "A background email task disappears during deployment. Why?",
+   "options": [
+    "The email provider was down.",
+    "The email template had a syntax error.",
+    "It was running only in the web process and was not durably queued.",
+    "The recipient's inbox was full."
+   ],
+   "correctIndex": 2,
+   "explanation": "Use a worker queue for important work and design retries and deduplication."
+  },
+  {
+   "id": "backend-api-199",
+   "section": "Code-reading traps and debugging scenarios",
+   "question": "A service has rising latency and then crashes under load. What failure pattern could explain it?",
+   "options": [
+    "Excessive logging slows the database.",
+    "Too few servers cause latency to drop.",
+    "Static assets are cached too aggressively.",
+    "Unbounded concurrency, queue growth, retries, and resource exhaustion can create a positive feedback loop."
+   ],
+   "correctIndex": 3,
+   "explanation": "Apply admission control, timeouts, backpressure, and bounded retries."
+  },
+  {
+   "id": "backend-api-200",
+   "section": "System design and senior-level scenarios",
+   "question": "Design a CRUD API for a multi-tenant SaaS product. What must be addressed?",
+   "options": [
+    "Only the frontend design and colors.",
+    "Only the choice of programming language.",
+    "Only the server's hostname.",
+    "Tenant-aware authorization, schema and validation, data isolation, indexes, pagination, audit logs, rate limits, and consistent errors."
+   ],
+   "correctIndex": 3,
+   "explanation": "Tenant identity must come from trusted authentication context, not merely a client-supplied tenant ID."
+  },
+  {
+   "id": "backend-api-201",
+   "section": "System design and senior-level scenarios",
+   "question": "Design a file upload API for large files. What is the architecture?",
+   "options": [
+    "Use authenticated upload initiation, size/type policy, direct object-storage multipart upload where appropriate, completion verification, and asynchronous scanning/processing.",
+    "Upload the file in a single request through the API server's memory.",
+    "Email the file to the server.",
+    "Store the file in a database column."
+   ],
+   "correctIndex": 0,
+   "explanation": "Do not proxy huge files through the API unless the requirements justify the cost."
+  },
+  {
+   "id": "backend-api-202",
+   "section": "System design and senior-level scenarios",
+   "question": "Design an email notification system. What components are needed?",
+   "options": [
+    "Only an SMTP server.",
+    "Persist intent, enqueue jobs, process with bounded workers, retry transient failures, deduplicate, and track delivery outcomes.",
+    "Only a cron job that sends emails once a day.",
+    "Only a template engine."
+   ],
+   "correctIndex": 1,
+   "explanation": "Do not make the primary user request depend on a slow mail provider unless synchronous delivery is required."
+  },
+  {
+   "id": "backend-api-203",
+   "section": "System design and senior-level scenarios",
+   "question": "Design a reliable payment endpoint. What invariants matter?",
+   "options": [
+    "Speed alone.",
+    "Only the UI's color scheme.",
+    "Only the number of endpoints.",
+    "Authentication, authorization, idempotency, amount/currency validation, transactional state changes, provider reconciliation, auditability, and safe retries."
+   ],
+   "correctIndex": 3,
+   "explanation": "Never trust a client-calculated amount or rely only on disabling a submit button."
+  },
+  {
+   "id": "backend-api-204",
+   "section": "System design and senior-level scenarios",
+   "question": "Design a rate limiter for a distributed API. What choices matter?",
+   "options": [
+    "Define key and quota, algorithm, storage atomicity, burst policy, failure mode, and response headers.",
+    "Only the programming language.",
+    "Only the type of database used.",
+    "Only the hostname of the server."
+   ],
+   "correctIndex": 0,
+   "explanation": "Token bucket permits bursts; sliding windows approximate rolling quotas; fixed windows can allow boundary bursts."
+  },
+  {
+   "id": "backend-api-205",
+   "section": "System design and senior-level scenarios",
+   "question": "Design a public search endpoint resistant to abuse. What controls are useful?",
+   "options": [
+    "No limits so that all users can search freely.",
+    "Bound query size, page size, complexity, execution time, concurrency, and per-identity usage.",
+    "Only a CAPTCHA on the frontend.",
+    "Only caching the responses."
+   ],
+   "correctIndex": 1,
+   "explanation": "Consider indexed search, query allowlists, and overload behavior."
+  },
+  {
+   "id": "backend-api-206",
+   "section": "System design and senior-level scenarios",
+   "question": "Design a webhook consumer that must not lose events. What is the flow?",
+   "options": [
+    "Process the event synchronously and skip persistence.",
+    "Ignore signatures for speed.",
+    "Verify signature, persist event receipt durably, acknowledge according to contract, process asynchronously, and deduplicate by provider event ID.",
+    "Store events only in memory."
+   ],
+   "correctIndex": 2,
+   "explanation": "Retries and out-of-order delivery should be expected unless the provider guarantees otherwise."
+  },
+  {
+   "id": "backend-api-207",
+   "section": "System design and senior-level scenarios",
+   "question": "Design an API for long-running report generation. How should clients interact?",
+   "options": [
+    "Block the request until the report is complete.",
+    "Submit a job, return 202 with a job ID, expose status/result endpoints, and provide expiry and authorization rules.",
+    "Return the report as the response to a 200 request, however long it takes.",
+    "Email the report with no API at all."
+   ],
+   "correctIndex": 1,
+   "explanation": "Use a durable queue and bounded workers; define cancellation and duplicate submission behavior."
+  },
+  {
+   "id": "backend-api-208",
+   "section": "System design and senior-level scenarios",
+   "question": "How would you split a monolith into services?",
+   "options": [
+    "Split by technology layer and rewrite everything at once.",
+    "Split randomly into equal-sized services.",
+    "Identify business boundaries, map data ownership and dependencies, extract one capability, introduce contracts/observability, and migrate incrementally.",
+    "Delete the monolith and start from scratch."
+   ],
+   "correctIndex": 2,
+   "explanation": "Avoid distributed transactions and network calls that merely recreate internal function calls remotely."
+  },
+  {
+   "id": "backend-api-209",
+   "section": "System design and senior-level scenarios",
+   "question": "How would you handle a downstream dependency outage?",
+   "options": [
+    "Set timeouts, bounded retries with jitter, circuit breaking where useful, fallback or degraded behavior, and clear observability.",
+    "Retry forever without delay.",
+    "Return 200 and ignore errors.",
+    "Restart the server repeatedly."
+   ],
+   "correctIndex": 0,
+   "explanation": "Retry only operations whose semantics make retries safe."
+  },
+  {
+   "id": "backend-api-210",
+   "section": "System design and senior-level scenarios",
+   "question": "How would you evolve a database schema without downtime?",
+   "options": [
+    "Take the system offline and run a single migration.",
+    "Drop tables and recreate them.",
+    "Edit the database directly in production.",
+    "Use expand-and-contract: add compatible structures, deploy dual-compatible code, backfill, switch reads/writes, then remove obsolete structures."
+   ],
+   "correctIndex": 3,
+   "explanation": "Coordinate rollout and rollback with multiple application versions in service."
+  },
+  {
+   "id": "backend-api-211",
+   "section": "System design and senior-level scenarios",
+   "question": "How do you decide between synchronous and asynchronous processing?",
+   "options": [
+    "Always use synchronous processing.",
+    "Always use asynchronous processing.",
+    "Use synchronous processing for work whose result is needed immediately and asynchronous processing for durable long-running or bursty work.",
+    "Choose randomly based on team preference."
+   ],
+   "correctIndex": 2,
+   "explanation": "Async adds status tracking, retries, observability, and eventual-consistency tradeoffs."
+  },
+  {
+   "id": "backend-api-212",
+   "section": "System design and senior-level scenarios",
+   "question": "How would you design multi-region API availability?",
+   "options": [
+    "Run one region and hope it stays up.",
+    "Replicate nothing and rely on backups.",
+    "Define consistency and failover objectives, data replication strategy, routing, idempotency, regional dependencies, and recovery procedures.",
+    "Use a single database across all regions without failover."
+   ],
+   "correctIndex": 2,
+   "explanation": "Active-active writes require conflict and ownership strategy, not just DNS routing."
+  },
+  {
+   "id": "backend-api-213",
+   "section": "System design and senior-level scenarios",
+   "question": "What metrics would you monitor for a production API?",
+   "options": [
+    "Only CPU usage.",
+    "Only the number of deployed versions.",
+    "Only the size of the logs.",
+    "Request rate, error rate, latency percentiles, saturation, dependency health, queue lag, database pool usage, cache hit rate, and business outcomes."
+   ],
+   "correctIndex": 3,
+   "explanation": "Alert on actionable symptoms and SLO burn, not every noisy metric."
+  },
+  {
+   "id": "backend-api-214",
+   "section": "System design and senior-level scenarios",
+   "question": "How would you investigate intermittent 502/504 errors?",
+   "options": [
+    "Restart the server and ignore the errors.",
+    "Disable proxies and test locally.",
+    "Increase timeouts to the maximum.",
+    "Correlate proxy and application logs, inspect upstream resets, timeouts, worker saturation, DNS, connection pools, and deploy events."
+   ],
+   "correctIndex": 3,
+   "explanation": "A 504 commonly indicates an upstream timeout; a 502 indicates an invalid upstream response, but infrastructure context matters."
+  },
+  {
+   "id": "backend-api-215",
+   "section": "Python and JavaScript language details for backend work",
+   "question": "What is the difference between JavaScript promises and async/await?",
+   "options": [
+    "Promises are synchronous; async/await is asynchronous.",
+    "async/await is syntax built around Promises that makes asynchronous control flow easier to express.",
+    "async/await replaces Promises and cannot be used with them.",
+    "They are unrelated features."
+   ],
+   "correctIndex": 1,
+   "explanation": "A rejected awaited Promise throws into the surrounding try/catch."
+  },
+  {
+   "id": "backend-api-216",
+   "section": "Python and JavaScript language details for backend work",
+   "question": "What is the difference between CommonJS and ES modules in Node.js?",
+   "options": [
+    "CommonJS uses import/export; ES modules use require/module.exports.",
+    "They are identical.",
+    "ES modules work only in the browser.",
+    "CommonJS uses require/module.exports; ES modules use import/export and have different resolution and execution rules."
+   ],
+   "correctIndex": 3,
+   "explanation": "Package type, file extensions, and runtime version affect interoperability."
+  },
+  {
+   "id": "backend-api-217",
+   "section": "Python and JavaScript language details for backend work",
+   "question": "What is the difference between process.nextTick, queueMicrotask, and setTimeout?",
+   "options": [
+    "They are identical.",
+    "They all run synchronously before any other code.",
+    "They schedule work in different queues/phases with different ordering semantics in Node.js.",
+    "They differ only in the time units used."
+   ],
+   "correctIndex": 2,
+   "explanation": "Avoid relying on incidental ordering without understanding the runtime version and context."
+  },
+  {
+   "id": "backend-api-218",
+   "section": "Python and JavaScript language details for backend work",
+   "question": "What is Python's GIL and does it make code thread-safe?",
+   "options": [
+    "The GIL makes all Python code thread-safe automatically.",
+    "The GIL lets threads run bytecode in parallel across cores.",
+    "The GIL is a lock used only for file access.",
+    "In conventional CPython builds, the Global Interpreter Lock constrains simultaneous execution of Python bytecode by threads."
+   ],
+   "correctIndex": 3,
+   "explanation": "It does not make compound operations or application invariants automatically thread-safe; free-threaded builds change the landscape."
+  },
+  {
+   "id": "backend-api-219",
+   "section": "Python and JavaScript language details for backend work",
+   "question": "What is the difference between a coroutine and a Task in asyncio?",
+   "options": [
+    "A coroutine is an awaitable computation; a Task schedules a coroutine to run concurrently on the event loop.",
+    "A Task is a coroutine that blocks the event loop; a coroutine runs in parallel.",
+    "They are identical.",
+    "A coroutine runs in a thread; a Task runs in a process."
+   ],
+   "correctIndex": 0,
+   "explanation": "Retain and supervise background tasks so exceptions and lifecycle are managed."
+  },
+  {
+   "id": "backend-api-220",
+   "section": "Python and JavaScript language details for backend work",
+   "question": "What is a Python context manager?",
+   "options": [
+    "A class that manages database connections only.",
+    "A function that runs at import time.",
+    "An object or function that manages setup and cleanup through with/async with.",
+    "A decorator that caches results."
+   ],
+   "correctIndex": 2,
+   "explanation": "Use it for files, locks, transactions, and resources that need reliable cleanup."
+  },
+  {
+   "id": "backend-api-221",
+   "section": "Python and JavaScript language details for backend work",
+   "question": "What is the difference between shallow and deep copy?",
+   "options": [
+    "A shallow copy duplicates everything recursively; a deep copy retains references.",
+    "A shallow copy duplicates the outer container but retains references to nested objects; a deep copy recursively copies supported nested values.",
+    "They are identical.",
+    "A deep copy only copies strings."
+   ],
+   "correctIndex": 1,
+   "explanation": "Copies may be expensive or inappropriate for resources and custom objects."
+  },
+  {
+   "id": "backend-api-222",
+   "section": "Python and JavaScript language details for backend work",
+   "question": "Why are mutable default arguments dangerous in Python?",
+   "options": [
+    "Because defaults are re-evaluated at every call.",
+    "Because mutable defaults are not allowed in Python.",
+    "Default values are evaluated once when the function is defined, so a mutable default can be shared across calls.",
+    "Because defaults cannot be changed inside the function."
+   ],
+   "correctIndex": 2,
+   "explanation": "Use None or a sentinel and create a fresh object inside the function."
+  },
+  {
+   "id": "backend-api-223",
+   "section": "Python and JavaScript language details for backend work",
+   "question": "Why should Node.js CPU-heavy work be moved off the event loop?",
+   "options": [
+    "Because Node.js cannot run CPU-bound code.",
+    "Because CPU work uses too much memory.",
+    "Because the event loop uses multiple threads for JavaScript.",
+    "Synchronous CPU work blocks processing of other callbacks and requests."
+   ],
+   "correctIndex": 3,
+   "explanation": "Use worker threads, child processes, a job queue, or another compute service according to the workload."
+  },
+  {
+   "id": "backend-api-224",
+   "section": "Python and JavaScript language details for backend work",
+   "question": "What is the difference between type hints and runtime validation in Python?",
+   "options": [
+    "Type hints are enforced at runtime by the interpreter.",
+    "They are identical.",
+    "Type hints primarily support tooling and static analysis; runtime validation requires explicit code or a library such as Pydantic.",
+    "Runtime validation is performed by the type checker."
+   ],
+   "correctIndex": 2,
+   "explanation": "Never assume a request matches a type hint unless it has passed a validation boundary."
+  }
+ ]
+}

@@ -1,0 +1,2776 @@
+{
+ "title": "React.js and Next.js Mastery Question Bank",
+ "description": "Questions and answers covering React fundamentals, Hooks, rendering, performance, React 19 APIs, Next.js App Router and Pages Router, caching, security, testing, debugging, and architecture scenarios.",
+ "count": 213,
+ "questions": [
+  {
+   "id": "react-next-001",
+   "section": "React fundamentals",
+   "question": "What problem does React solve?",
+   "options": [
+    "It adds server-side database access to JavaScript applications.",
+    "It provides a built-in router and HTTP client for single-page apps.",
+    "It lets developers build declarative, component-based user interfaces that update when data changes.",
+    "It compiles JavaScript into native mobile applications."
+   ],
+   "correctIndex": 2,
+   "explanation": "React reconciles descriptions of UI with the rendered output."
+  },
+  {
+   "id": "react-next-002",
+   "section": "React fundamentals",
+   "question": "What is a component?",
+   "options": [
+    "A reusable unit of UI, commonly a JavaScript function returning React nodes.",
+    "A CSS class that styles a section of the page.",
+    "A JavaScript object that stores application data.",
+    "A server endpoint that returns HTML fragments."
+   ],
+   "correctIndex": 0,
+   "explanation": "Components compose into larger interfaces."
+  },
+  {
+   "id": "react-next-003",
+   "section": "React fundamentals",
+   "question": "What is a React element?",
+   "options": [
+    "An immutable description of a UI node, commonly created by JSX.",
+    "A mutable DOM node that React updates in place.",
+    "A browser event handler attached to a node.",
+    "A CSS rule applied to a component."
+   ],
+   "correctIndex": 0,
+   "explanation": "An element is not the same thing as a component instance."
+  },
+  {
+   "id": "react-next-004",
+   "section": "React fundamentals",
+   "question": "What is JSX?",
+   "options": [
+    "A template language compiled by the server into HTML strings.",
+    "A CSS preprocessor for styling React components.",
+    "Syntax for describing UI with XML-like expressions inside JavaScript.",
+    "A binary format for serializing component trees."
+   ],
+   "correctIndex": 2,
+   "explanation": "Tooling transforms JSX into JavaScript; browsers do not parse JSX directly."
+  },
+  {
+   "id": "react-next-005",
+   "section": "React fundamentals",
+   "question": "What are props?",
+   "options": [
+    "Read-only inputs passed from a parent component.",
+    "Mutable values owned and changed by the child component.",
+    "Values stored in the browser's local storage.",
+    "Functions that run when a component unmounts."
+   ],
+   "correctIndex": 0,
+   "explanation": "A new render can receive new props; children should not mutate them."
+  },
+  {
+   "id": "react-next-006",
+   "section": "React fundamentals",
+   "question": "What is state?",
+   "options": [
+    "Component-owned data that persists across renders and can trigger a new render.",
+    "Read-only data passed down from a parent component.",
+    "Global data shared by every component automatically.",
+    "A CSS-in-JS style object attached to a component."
+   ],
+   "correctIndex": 0,
+   "explanation": "Use it for values that change and affect UI."
+  },
+  {
+   "id": "react-next-007",
+   "section": "React fundamentals",
+   "question": "What is declarative UI?",
+   "options": [
+    "Writing imperative DOM mutation steps for every change.",
+    "Defining components only through class inheritance.",
+    "Describing what the UI should look like for current data instead of manually mutating the DOM.",
+    "Writing HTML templates that the server fills in."
+   ],
+   "correctIndex": 2,
+   "explanation": "React calculates and commits the required updates."
+  },
+  {
+   "id": "react-next-008",
+   "section": "React fundamentals",
+   "question": "What is one-way data flow?",
+   "options": [
+    "Data flows from children to parents through props, and parents notify children with callbacks.",
+    "Data flows in both directions automatically between parent and child.",
+    "Data typically flows from parents to children through props, while callbacks communicate events upward.",
+    "Data is stored globally and read by any component without props."
+   ],
+   "correctIndex": 2,
+   "explanation": "It makes state ownership easier to trace."
+  },
+  {
+   "id": "react-next-009",
+   "section": "React fundamentals",
+   "question": "What is component composition?",
+   "options": [
+    "Building larger interfaces by combining smaller components and passing children or slots.",
+    "Making components inherit behavior from base classes.",
+    "Merging several components' source files into one file.",
+    "Duplicating a component's code wherever it is needed."
+   ],
+   "correctIndex": 0,
+   "explanation": "It is generally favored over inheritance-heavy designs."
+  },
+  {
+   "id": "react-next-010",
+   "section": "React fundamentals",
+   "question": "What does `children` represent?",
+   "options": [
+    "The renderable content nested inside a component's JSX tags.",
+    "The list of CSS classes applied to the component.",
+    "The component's internal state object.",
+    "The component's return value after rendering."
+   ],
+   "correctIndex": 0,
+   "explanation": "It may be text, elements, arrays, or other valid React nodes."
+  },
+  {
+   "id": "react-next-011",
+   "section": "React fundamentals",
+   "question": "What are Fragments?",
+   "options": [
+    "A way to wrap components in a custom DOM element for styling.",
+    "A way to define reusable CSS fragments.",
+    "A way to split a component into several files.",
+    "A way to group children without creating an extra DOM element."
+   ],
+   "correctIndex": 3,
+   "explanation": "Use `<>...</>` or keyed `<Fragment>` when a key is needed."
+  },
+  {
+   "id": "react-next-012",
+   "section": "React fundamentals",
+   "question": "What is reconciliation?",
+   "options": [
+    "Replacing the entire DOM with new HTML on every update.",
+    "Fetching fresh data from the server after each render.",
+    "React's process of comparing the next element tree with the previous one to determine updates.",
+    "Compiling JSX into JavaScript function calls."
+   ],
+   "correctIndex": 2,
+   "explanation": "Type, position, and keys affect reuse and state preservation."
+  },
+  {
+   "id": "react-next-013",
+   "section": "React fundamentals",
+   "question": "What is the virtual DOM?",
+   "options": [
+    "An informal term for React's in-memory UI descriptions.",
+    "The actual browser DOM tree rendered on the screen.",
+    "A separate DOM maintained by the browser for off-screen rendering.",
+    "A server-generated HTML snapshot stored for hydration."
+   ],
+   "correctIndex": 0,
+   "explanation": "It is not a guarantee that React is always faster than direct DOM code."
+  },
+  {
+   "id": "react-next-014",
+   "section": "React fundamentals",
+   "question": "Why must component names be capitalized in JSX?",
+   "options": [
+    "Because JavaScript requires all function names to be capitalized.",
+    "Because lowercase names are reserved for CSS classes.",
+    "Because capitalization controls component rendering order.",
+    "Uppercase JSX names are treated as component references; lowercase names represent host elements."
+   ],
+   "correctIndex": 3,
+   "explanation": "`<Profile />` differs from `<profile />`."
+  },
+  {
+   "id": "react-next-015",
+   "section": "React fundamentals",
+   "question": "What does StrictMode do?",
+   "options": [
+    "It enables production optimizations such as minification.",
+    "It forces components to render only on the server.",
+    "It disables all warnings in development.",
+    "It enables additional development checks to reveal unsafe patterns and lifecycle issues."
+   ],
+   "correctIndex": 3,
+   "explanation": "Some renders or Effect setup/cleanup cycles may be repeated in development."
+  },
+  {
+   "id": "react-next-016",
+   "section": "React fundamentals",
+   "question": "Why are keys needed in lists?",
+   "options": [
+    "Keys let React match sibling items across insertions, deletions, and reordering.",
+    "Keys make list items render faster by skipping the DOM.",
+    "Keys are used to store component state globally.",
+    "Keys are required only for items that contain inputs."
+   ],
+   "correctIndex": 0,
+   "explanation": "Stable keys preserve the association between logical items and component state."
+  },
+  {
+   "id": "react-next-017",
+   "section": "React fundamentals",
+   "question": "Why can array indexes be bad keys?",
+   "options": [
+    "Array indexes are not allowed as keys by the JSX compiler.",
+    "Array indexes make keys too long for React to compare.",
+    "When order or membership changes, React may reuse component instances for the wrong items.",
+    "Array indexes are always duplicated across lists."
+   ],
+   "correctIndex": 2,
+   "explanation": "Index keys are reasonable only for stable lists that do not reorder or change."
+  },
+  {
+   "id": "react-next-018",
+   "section": "React fundamentals",
+   "question": "Is `key` available as a child prop?",
+   "options": [
+    "Yes; it is passed as `props.key` like any other prop.",
+    "No, `key` is a special React field and is not passed as a normal prop.",
+    "Yes, but only in class components.",
+    "Yes, but only when the key is a number."
+   ],
+   "correctIndex": 1,
+   "explanation": "Pass the identifier separately if the child needs it."
+  },
+  {
+   "id": "react-next-019",
+   "section": "React fundamentals",
+   "question": "What is conditional rendering?",
+   "options": [
+    "Rendering all components at once and hiding some with CSS only.",
+    "Loading components from the server on demand.",
+    "Rendering components only on the server.",
+    "Rendering different nodes based on expressions or branches."
+   ],
+   "correctIndex": 3,
+   "explanation": "Remember that `0 && <Panel />` renders `0`."
+  },
+  {
+   "id": "react-next-020",
+   "section": "React fundamentals",
+   "question": "What is a portal?",
+   "options": [
+    "A component that renders inside an iframe.",
+    "A way to render children into a different DOM node while retaining their React-tree context and event propagation.",
+    "A way to share state between two separate React apps.",
+    "A route that loads content from another URL."
+   ],
+   "correctIndex": 1,
+   "explanation": "Useful for dialogs, menus, and overlays."
+  },
+  {
+   "id": "react-next-021",
+   "section": "React fundamentals",
+   "question": "What is an Error Boundary?",
+   "options": [
+    "A component that prevents the user from navigating away from a page.",
+    "A hook that validates form input.",
+    "A utility that logs errors to the console.",
+    "A component boundary that renders fallback UI for eligible descendant rendering errors."
+   ],
+   "correctIndex": 3,
+   "explanation": "Traditional boundaries do not catch arbitrary event-handler or async callback errors."
+  },
+  {
+   "id": "react-next-022",
+   "section": "React fundamentals",
+   "question": "How can you reset a component's local state?",
+   "options": [
+    "Call `forceUpdate()` on the component.",
+    "Change its `key`, or lift state and reset it explicitly.",
+    "Call `useState` again inside the same render.",
+    "Set the state variable to `undefined` in an Effect."
+   ],
+   "correctIndex": 1,
+   "explanation": "A new key tells React to treat it as a new component identity."
+  },
+  {
+   "id": "react-next-023",
+   "section": "JSX and rendering traps",
+   "question": "What does `{0 && <Widget />}` render?",
+   "options": [
+    "Nothing at all.",
+    "It renders `0`.",
+    "The text `false`.",
+    "The `Widget` component."
+   ],
+   "correctIndex": 1,
+   "explanation": "The `&&` operator returns the left operand when it is falsy; React renders numbers."
+  },
+  {
+   "id": "react-next-024",
+   "section": "JSX and rendering traps",
+   "question": "How do you pass a number as a prop?",
+   "options": [
+    "Use an expression such as `count={3}`.",
+    "Use quotes such as `count=\"3\"`.",
+    "Use a template literal such as `count=`3``.",
+    "Numbers cannot be passed as props."
+   ],
+   "correctIndex": 0,
+   "explanation": "`count=\"3\"` passes a string."
+  },
+  {
+   "id": "react-next-025",
+   "section": "JSX and rendering traps",
+   "question": "How do inline styles work in JSX?",
+   "options": [
+    "Pass a CSS string, for example `style=\"margin-top: 8px\"`.",
+    "Pass a class name through `style={'my-class'}`.",
+    "Pass an object, for example `style={{ marginTop: 8, backgroundColor: 'navy' }}`.",
+    "Inline styles are not supported in JSX."
+   ],
+   "correctIndex": 2,
+   "explanation": "Property names are generally camelCased and numeric units depend on the CSS property."
+  },
+  {
+   "id": "react-next-026",
+   "section": "JSX and rendering traps",
+   "question": "What is the difference between `onClick={save}` and `onClick={save()}`?",
+   "options": [
+    "The first invokes `save` during render; the second passes a handler.",
+    "Both pass a handler to the click event.",
+    "Both invoke `save` during render.",
+    "The first passes a handler; the second invokes `save` during render."
+   ],
+   "correctIndex": 3,
+   "explanation": "Invoking during render can trigger unintended work or cause a render loop."
+  },
+  {
+   "id": "react-next-027",
+   "section": "JSX and rendering traps",
+   "question": "Why should you render `<Child />` rather than call `Child(props)`?",
+   "options": [
+    "JSX lets React manage the child as a component with its own identity and Hook call sequence.",
+    "Calling `Child(props)` is faster and always preferred.",
+    "JSX is required because function calls cannot return elements.",
+    "`Child(props)` is not valid JavaScript."
+   ],
+   "correctIndex": 0,
+   "explanation": "Direct function calls can break Hook semantics and component boundaries."
+  },
+  {
+   "id": "react-next-028",
+   "section": "JSX and rendering traps",
+   "question": "What happens when a component returns `null`?",
+   "options": [
+    "It renders no UI at that position.",
+    "It throws an error.",
+    "It renders the text `null`.",
+    "It renders an empty `<div>`."
+   ],
+   "correctIndex": 0,
+   "explanation": "The component can still participate in the React tree and run eligible logic."
+  },
+  {
+   "id": "react-next-029",
+   "section": "JSX and rendering traps",
+   "question": "Can React render arrays?",
+   "options": [
+    "Yes, arrays of valid React nodes can be rendered.",
+    "No; arrays must be wrapped in a `<div>`.",
+    "Only arrays of strings can be rendered.",
+    "Only arrays of numbers can be rendered."
+   ],
+   "correctIndex": 0,
+   "explanation": "Dynamic siblings should have stable keys."
+  },
+  {
+   "id": "react-next-030",
+   "section": "JSX and rendering traps",
+   "question": "Why is `className` used instead of `class`?",
+   "options": [
+    "Because `class` is not allowed in HTML.",
+    "Because `className` is faster to render.",
+    "Because CSS requires the name `className`.",
+    "React DOM JSX uses `className` for the CSS class attribute."
+   ],
+   "correctIndex": 3,
+   "explanation": "JSX follows JavaScript syntax conventions."
+  },
+  {
+   "id": "react-next-031",
+   "section": "JSX and rendering traps",
+   "question": "Why should render be pure?",
+   "options": [
+    "Because render must fetch data before returning JSX.",
+    "Because render must update the DOM directly.",
+    "React may repeat, interrupt, or discard render work; side effects during render can create inconsistent behavior.",
+    "Because render runs only once per component."
+   ],
+   "correctIndex": 2,
+   "explanation": "Keep external synchronization in event handlers or Effects as appropriate."
+  },
+  {
+   "id": "react-next-032",
+   "section": "State, events, and forms",
+   "question": "Why treat state as immutable?",
+   "options": [
+    "Because mutating state is faster than creating new values.",
+    "Because state values cannot be objects.",
+    "Because React copies mutated state automatically on every change.",
+    "Create new arrays or objects rather than mutating existing state."
+   ],
+   "correctIndex": 3,
+   "explanation": "Identity changes help React detect updates and preserve predictable rendering."
+  },
+  {
+   "id": "react-next-033",
+   "section": "State, events, and forms",
+   "question": "Why might calling `setCount(count + 1)` twice increment only once?",
+   "options": [
+    "Because React ignores the second call.",
+    "Both calls can use the same render snapshot of `count`.",
+    "Because `setCount` is asynchronous and cancels earlier calls.",
+    "Because `count` is a ref and does not update."
+   ],
+   "correctIndex": 1,
+   "explanation": "Use `setCount(c => c + 1)` when each update depends on the previous value."
+  },
+  {
+   "id": "react-next-034",
+   "section": "State, events, and forms",
+   "question": "What is a functional state update?",
+   "options": [
+    "A setter that accepts a function component.",
+    "A setter that is memoized with `useCallback`.",
+    "A setter that runs outside of rendering.",
+    "A setter callback that receives pending previous state and returns next state."
+   ],
+   "correctIndex": 3,
+   "explanation": "It is reliable for queued updates and stale-closure-prone callbacks."
+  },
+  {
+   "id": "react-next-035",
+   "section": "State, events, and forms",
+   "question": "Does a state setter change the current variable immediately?",
+   "options": [
+    "No; it queues an update for a subsequent render.",
+    "Yes; the variable changes immediately.",
+    "Yes, but only inside event handlers.",
+    "Yes, if you call `flushSync` first."
+   ],
+   "correctIndex": 0,
+   "explanation": "The current render's state remains a snapshot."
+  },
+  {
+   "id": "react-next-036",
+   "section": "State, events, and forms",
+   "question": "What is batching?",
+   "options": [
+    "Rendering every state update immediately and separately.",
+    "Caching rendered output between renders.",
+    "Combining several components into one DOM node.",
+    "React processes multiple state updates together to reduce unnecessary renders."
+   ],
+   "correctIndex": 3,
+   "explanation": "Modern roots batch many updates, including updates in asynchronous callbacks."
+  },
+  {
+   "id": "react-next-037",
+   "section": "State, events, and forms",
+   "question": "What is a controlled input?",
+   "options": [
+    "An input whose value is managed only by the DOM.",
+    "An input that cannot be edited by the user.",
+    "An input whose current value is driven by React state and an event handler.",
+    "An input that is rendered only on the server."
+   ],
+   "correctIndex": 2,
+   "explanation": "Use `value` for text inputs and `checked` for checkboxes."
+  },
+  {
+   "id": "react-next-038",
+   "section": "State, events, and forms",
+   "question": "What is an uncontrolled input?",
+   "options": [
+    "An input whose value is always driven by React state.",
+    "An input that has no `name` attribute.",
+    "An input that cannot be submitted in a form.",
+    "An input whose current value is managed by the DOM, often accessed through a ref or FormData."
+   ],
+   "correctIndex": 3,
+   "explanation": "`defaultValue` sets the initial value without controlling subsequent edits."
+  },
+  {
+   "id": "react-next-039",
+   "section": "State, events, and forms",
+   "question": "Why can controlled inputs warn about switching modes?",
+   "options": [
+    "Because controlled inputs cannot have default values.",
+    "Because inputs must always be uncontrolled in React.",
+    "An input may begin with an undefined value and later receive a defined value.",
+    "Because React does not support `value` on inputs."
+   ],
+   "correctIndex": 2,
+   "explanation": "Initialize consistently, for example with an empty string, or keep the input uncontrolled."
+  },
+  {
+   "id": "react-next-040",
+   "section": "State, events, and forms",
+   "question": "How should a state object field be updated?",
+   "options": [
+    "Mutate the existing field directly and call the setter.",
+    "Replace the whole state with a primitive value.",
+    "Delete the field and re-add it.",
+    "Create a new object and preserve other fields, often with spread syntax."
+   ],
+   "correctIndex": 3,
+   "explanation": "State setters replace the state value rather than merging objects automatically."
+  },
+  {
+   "id": "react-next-041",
+   "section": "State, events, and forms",
+   "question": "What is state lifting?",
+   "options": [
+    "Moving state into a child component to isolate it.",
+    "Storing state in the URL.",
+    "Moving shared state to the closest common ancestor of components that need to coordinate.",
+    "Copying state into a global variable."
+   ],
+   "correctIndex": 2,
+   "explanation": "Pass the value down and callbacks up."
+  },
+  {
+   "id": "react-next-042",
+   "section": "State, events, and forms",
+   "question": "When is `useReducer` useful?",
+   "options": [
+    "When state transitions are complex or naturally represented as named actions.",
+    "When state is a single boolean.",
+    "When you need to fetch data from the server.",
+    "When you want to avoid using props."
+   ],
+   "correctIndex": 0,
+   "explanation": "Reducers should be pure and must not mutate prior state."
+  },
+  {
+   "id": "react-next-043",
+   "section": "State, events, and forms",
+   "question": "What is a stale closure?",
+   "options": [
+    "A callback uses props or state captured by the render in which it was created.",
+    "A closure that keeps the component from being garbage collected.",
+    "A callback that runs after the component unmounts.",
+    "An event handler that is attached twice."
+   ],
+   "correctIndex": 0,
+   "explanation": "Use correct dependencies, functional updates, or refs when the intended semantics require it."
+  },
+  {
+   "id": "react-next-044",
+   "section": "State, events, and forms",
+   "question": "What is the difference between `preventDefault` and `stopPropagation`?",
+   "options": [
+    "The former stops event propagation; the latter prevents a browser default action.",
+    "Both stop event propagation.",
+    "The former prevents a browser default action; the latter stops event propagation.",
+    "Both prevent a browser default action."
+   ],
+   "correctIndex": 2,
+   "explanation": "They solve different problems."
+  },
+  {
+   "id": "react-next-045",
+   "section": "State, events, and forms",
+   "question": "How does event bubbling work with portals?",
+   "options": [
+    "Events bubble according to the React tree, even if the portal's DOM node is elsewhere.",
+    "Events bubble according to the DOM tree, not the React tree.",
+    "Events do not bubble through portals at all.",
+    "Events bubble only to the portal container."
+   ],
+   "correctIndex": 0,
+   "explanation": "Use propagation controls deliberately when needed."
+  },
+  {
+   "id": "react-next-046",
+   "section": "State, events, and forms",
+   "question": "How should multiple form fields be managed?",
+   "options": [
+    "Use a separate `useState` for every field without exception.",
+    "Use `document.getElementById` to read each input.",
+    "Use named fields to update a state object, or use native form submission and FormData when suitable.",
+    "Use a global variable for each field."
+   ],
+   "correctIndex": 2,
+   "explanation": "Choose one consistent source of truth for each field."
+  },
+  {
+   "id": "react-next-047",
+   "section": "Hooks and effects",
+   "question": "What are the Rules of Hooks?",
+   "options": [
+    "Call Hooks inside loops, conditions, or nested functions.",
+    "Call Hooks only in class components.",
+    "Call Hooks at the top level of function components or custom Hooks, not conditionally or in loops.",
+    "Call Hooks only inside event handlers."
+   ],
+   "correctIndex": 2,
+   "explanation": "Stable call order lets React associate Hook state with the correct call."
+  },
+  {
+   "id": "react-next-048",
+   "section": "Hooks and effects",
+   "question": "What is `useState`?",
+   "options": [
+    "A Hook that stores data in the browser's local storage.",
+    "A Hook that fetches data from a server.",
+    "A Hook that runs code after every render.",
+    "A Hook that stores local state and returns the current snapshot plus a setter."
+   ],
+   "correctIndex": 3,
+   "explanation": "A function initializer supports lazy initialization."
+  },
+  {
+   "id": "react-next-049",
+   "section": "Hooks and effects",
+   "question": "What is `useEffect` for?",
+   "options": [
+    "Computing derived values during render.",
+    "Handling every user click event.",
+    "Declaring component props.",
+    "Synchronizing with external systems such as subscriptions, timers, browser APIs, or imperative widgets."
+   ],
+   "correctIndex": 3,
+   "explanation": "Do not use Effects merely to calculate values that can be derived during render."
+  },
+  {
+   "id": "react-next-050",
+   "section": "Hooks and effects",
+   "question": "When does an Effect cleanup run?",
+   "options": [
+    "Only when the component first mounts.",
+    "After every render, before the DOM updates.",
+    "Before the Effect re-synchronizes with changed dependencies and when the component unmounts.",
+    "Only when the app is closed."
+   ],
+   "correctIndex": 2,
+   "explanation": "Development StrictMode may also run an extra setup/cleanup cycle."
+  },
+  {
+   "id": "react-next-051",
+   "section": "Hooks and effects",
+   "question": "What does an empty dependency array mean?",
+   "options": [
+    "The Effect runs after every render.",
+    "The Effect declares no reactive dependencies and normally runs for that mounted instance, subject to development checks.",
+    "The Effect never runs.",
+    "The Effect runs only on the server."
+   ],
+   "correctIndex": 1,
+   "explanation": "It does not guarantee exactly one setup in every environment."
+  },
+  {
+   "id": "react-next-052",
+   "section": "Hooks and effects",
+   "question": "What happens when an Effect dependency is omitted?",
+   "options": [
+    "The Effect always runs only once.",
+    "The Effect can use stale values, and the dependency linter may warn.",
+    "The component throws a runtime error.",
+    "React fills in the missing dependencies automatically."
+   ],
+   "correctIndex": 1,
+   "explanation": "Declare reactive dependencies or restructure the code to remove unnecessary ones."
+  },
+  {
+   "id": "react-next-053",
+   "section": "Hooks and effects",
+   "question": "When should you avoid an Effect?",
+   "options": [
+    "When you need to subscribe to a WebSocket.",
+    "When you need to start a timer.",
+    "When deriving render data or handling a user event that can be handled directly in the event handler.",
+    "When you need to integrate with a third-party widget."
+   ],
+   "correctIndex": 2,
+   "explanation": "Effects are for synchronization with systems outside render."
+  },
+  {
+   "id": "react-next-054",
+   "section": "Hooks and effects",
+   "question": "What is `useLayoutEffect`?",
+   "options": [
+    "An Effect that runs after DOM mutations but before repaint, useful for layout measurement.",
+    "An Effect that runs before the DOM is updated.",
+    "An Effect that runs only on the server.",
+    "An Effect that runs only once per app."
+   ],
+   "correctIndex": 0,
+   "explanation": "It can block painting, so prefer `useEffect` unless pre-paint work is necessary."
+  },
+  {
+   "id": "react-next-055",
+   "section": "Hooks and effects",
+   "question": "What is `useRef`?",
+   "options": [
+    "A state hook that triggers a re-render when changed.",
+    "A Hook that subscribes to context changes.",
+    "A Hook that memoizes a function.",
+    "A persistent mutable container whose changes do not trigger a render."
+   ],
+   "correctIndex": 3,
+   "explanation": "Use it for DOM nodes and imperative values such as timer IDs."
+  },
+  {
+   "id": "react-next-056",
+   "section": "Hooks and effects",
+   "question": "Why not read or write `ref.current` during render?",
+   "options": [
+    "Refs are mutable and outside the normal reactive render model; render-time access can undermine purity.",
+    "Because refs are read-only.",
+    "Because refs cannot hold DOM nodes.",
+    "Because refs are cleared after every render."
+   ],
+   "correctIndex": 0,
+   "explanation": "Use refs in event handlers and Effects for imperative coordination."
+  },
+  {
+   "id": "react-next-057",
+   "section": "Hooks and effects",
+   "question": "What is `useMemo`?",
+   "options": [
+    "A performance optimization that caches a calculation while dependencies compare equal.",
+    "A Hook that stores state between renders.",
+    "A Hook that fetches data lazily.",
+    "A Hook that synchronizes with external systems."
+   ],
+   "correctIndex": 0,
+   "explanation": "Correctness should not depend on the cache being retained."
+  },
+  {
+   "id": "react-next-058",
+   "section": "Hooks and effects",
+   "question": "What is `useCallback`?",
+   "options": [
+    "A Hook that caches a computed value.",
+    "A Hook that stores mutable values without rendering.",
+    "A Hook that runs an Effect after layout.",
+    "A performance optimization that caches a function identity while dependencies compare equal."
+   ],
+   "correctIndex": 3,
+   "explanation": "Useful when identity affects memoized children or Hook dependencies, but not needed everywhere."
+  },
+  {
+   "id": "react-next-059",
+   "section": "Hooks and effects",
+   "question": "What is `React.memo`?",
+   "options": [
+    "A function that memoizes the component's state.",
+    "A hook that caches an Effect.",
+    "A component wrapper that can skip rendering when props compare equal by default shallow identity comparison.",
+    "A wrapper that renders the component only on the server."
+   ],
+   "correctIndex": 2,
+   "explanation": "Own state and context changes can still cause rendering; it is not a semantic guarantee."
+  },
+  {
+   "id": "react-next-060",
+   "section": "Hooks and effects",
+   "question": "What is a custom Hook?",
+   "options": [
+    "A function starting with `use` that composes Hooks to reuse stateful logic.",
+    "A component that starts with `use`.",
+    "A class that extends React.Component.",
+    "A utility that reads values from the DOM."
+   ],
+   "correctIndex": 0,
+   "explanation": "Each call has its own local state unless it connects to shared state."
+  },
+  {
+   "id": "react-next-061",
+   "section": "Hooks and effects",
+   "question": "What does `useContext` do?",
+   "options": [
+    "Creates a new context provider.",
+    "Reads values from the URL.",
+    "Passes props to a child component.",
+    "Reads the nearest provider's value and subscribes the consumer to changes."
+   ],
+   "correctIndex": 3,
+   "explanation": "Consumers can update when provider value identity changes."
+  },
+  {
+   "id": "react-next-062",
+   "section": "Hooks and effects",
+   "question": "What is `useId` for?",
+   "options": [
+    "Generating stable IDs suitable for accessibility relationships across server and client rendering.",
+    "Generating random IDs for list keys.",
+    "Generating a new ID on every render.",
+    "Storing IDs in local storage."
+   ],
+   "correctIndex": 0,
+   "explanation": "Do not use it as a list key or business identifier."
+  },
+  {
+   "id": "react-next-063",
+   "section": "Hooks and effects",
+   "question": "What is `useTransition`?",
+   "options": [
+    "Marks updates as urgent so they bypass React's scheduler.",
+    "Marks updates as non-urgent and exposes pending state for transition work.",
+    "Defers an Effect until the browser is idle.",
+    "Cancels in-flight network requests."
+   ],
+   "correctIndex": 1,
+   "explanation": "Keep controlled text-input updates urgent."
+  },
+  {
+   "id": "react-next-064",
+   "section": "Hooks and effects",
+   "question": "What is `useDeferredValue`?",
+   "options": [
+    "Delays a state update until the next network request.",
+    "Allows part of the UI to lag behind a rapidly changing value so expensive rendering can be deferred.",
+    "Defers an Effect until the component unmounts.",
+    "Debounces input events at the DOM level."
+   ],
+   "correctIndex": 1,
+   "explanation": "It does not debounce network requests by itself."
+  },
+  {
+   "id": "react-next-065",
+   "section": "Hooks and effects",
+   "question": "What is `useSyncExternalStore`?",
+   "options": [
+    "A Hook for reading context values from multiple providers.",
+    "A Hook for safely subscribing to external stores with a snapshot API.",
+    "A Hook for synchronizing props with state.",
+    "A Hook for managing form state."
+   ],
+   "correctIndex": 1,
+   "explanation": "It is designed to integrate external state with concurrent rendering."
+  },
+  {
+   "id": "react-next-066",
+   "section": "Hooks and effects",
+   "question": "What is `useEffectEvent` in React 19.2+?",
+   "options": [
+    "It reads context values without subscribing to the provider.",
+    "It runs an Effect only once on mount.",
+    "It defines a memoized event handler for the DOM.",
+    "It defines logic callable from Effects that can read latest props/state without causing Effect resynchronization for those values."
+   ],
+   "correctIndex": 3,
+   "explanation": "It is not a general replacement for callbacks or event handlers; verify version support."
+  },
+  {
+   "id": "react-next-067",
+   "section": "Hooks and effects",
+   "question": "What does React's `use` API do?",
+   "options": [
+    "It declares a new Hook inside a conditional block.",
+    "It runs an Effect synchronously during render.",
+    "It reads state from a class component.",
+    "It can read supported resources such as Promises or context during render; a pending Promise can suspend."
+   ],
+   "correctIndex": 3,
+   "explanation": "Its rules differ from ordinary Hooks, and supported contexts are version-dependent."
+  },
+  {
+   "id": "react-next-068",
+   "section": "Hooks and effects",
+   "question": "Why can an Effect fetch display stale results?",
+   "options": [
+    "Because Effects always run in random order.",
+    "A slower old request may complete after a newer request and overwrite the result.",
+    "Because `fetch` cannot be used inside an Effect.",
+    "Because React caches network responses automatically."
+   ],
+   "correctIndex": 1,
+   "explanation": "Abort old work where possible or check whether the response is still relevant."
+  },
+  {
+   "id": "react-next-069",
+   "section": "Hooks and effects",
+   "question": "Why does StrictMode repeat Effect setup in development?",
+   "options": [
+    "To double the performance of the application.",
+    "It tests whether setup and cleanup are correctly symmetrical.",
+    "To simulate a slow network connection.",
+    "To make sure the Effect runs on the server as well."
+   ],
+   "correctIndex": 1,
+   "explanation": "Fix cleanup rather than relying on a fragile run-once ref guard."
+  },
+  {
+   "id": "react-next-070",
+   "section": "Context, performance, and architecture",
+   "question": "When is Context a good fit?",
+   "options": [
+    "For frequently changing values such as input text.",
+    "For values needed by many descendants, such as theme, locale, or user metadata.",
+    "For values used by only one component.",
+    "For values that must be shared between separate React apps."
+   ],
+   "correctIndex": 1,
+   "explanation": "Context transports values but is not a full state-management strategy by itself."
+  },
+  {
+   "id": "react-next-071",
+   "section": "Context, performance, and architecture",
+   "question": "Why can Context trigger many re-renders?",
+   "options": [
+    "Consumers update when the provider value changes identity according to `Object.is`.",
+    "Because Context forces every component to re-render on every state change.",
+    "Because Context stores values in the DOM.",
+    "Because Context always rerenders on the server."
+   ],
+   "correctIndex": 0,
+   "explanation": "Split contexts by update frequency or stabilize values when profiling justifies it."
+  },
+  {
+   "id": "react-next-072",
+   "section": "Context, performance, and architecture",
+   "question": "What is prop drilling?",
+   "options": [
+    "Passing props from a child up to its parent.",
+    "Storing props in a global variable.",
+    "Using `useContext` to read props.",
+    "Passing props through intermediate components that do not need them solely to reach deeper descendants."
+   ],
+   "correctIndex": 3,
+   "explanation": "Composition, Context, or a store can help if they simplify the architecture."
+  },
+  {
+   "id": "react-next-073",
+   "section": "Context, performance, and architecture",
+   "question": "How do client state and server state differ?",
+   "options": [
+    "Client state lives on the server; server state lives in the browser.",
+    "They are the same and always handled with `useState`.",
+    "Server state is only used in class components.",
+    "Client state is local UI/application state; server state is remote data with freshness, caching, and synchronization concerns."
+   ],
+   "correctIndex": 3,
+   "explanation": "They often need different ownership and invalidation strategies."
+  },
+  {
+   "id": "react-next-074",
+   "section": "Context, performance, and architecture",
+   "question": "How do you investigate slow React rendering?",
+   "options": [
+    "Add `React.memo` to every component and measure nothing.",
+    "Replace all state with refs.",
+    "Remove StrictMode and reload the page.",
+    "Profile the interaction with React DevTools, identify expensive renders/calculations, and measure before optimizing."
+   ],
+   "correctIndex": 3,
+   "explanation": "Check state placement, unstable props, long lists, and expensive work."
+  },
+  {
+   "id": "react-next-075",
+   "section": "Context, performance, and architecture",
+   "question": "What is list virtualization?",
+   "options": [
+    "Rendering all list items off-screen at once.",
+    "Paginating the list with server requests.",
+    "Rendering only visible list items plus a small overscan region.",
+    "Compressing the list's data to reduce memory."
+   ],
+   "correctIndex": 2,
+   "explanation": "It reduces DOM work but requires attention to focus, accessibility, and variable row sizes."
+  },
+  {
+   "id": "react-next-076",
+   "section": "Context, performance, and architecture",
+   "question": "What is code splitting?",
+   "options": [
+    "Merging all JavaScript files into a single bundle.",
+    "Removing unused code from the bundle at build time.",
+    "Splitting CSS into separate files per component.",
+    "Breaking code into chunks that can be loaded on demand, often by route or feature."
+   ],
+   "correctIndex": 3,
+   "explanation": "It reduces initial JavaScript but can add loading boundaries and requests."
+  },
+  {
+   "id": "react-next-077",
+   "section": "Context, performance, and architecture",
+   "question": "How does `React.lazy` work?",
+   "options": [
+    "It loads components synchronously at build time.",
+    "It converts a class component into a function component.",
+    "It memoizes a component's rendered output.",
+    "It loads a component from a dynamic import Promise and works with Suspense for pending UI."
+   ],
+   "correctIndex": 3,
+   "explanation": "Handle failed imports with an Error Boundary or framework-level mechanism."
+  },
+  {
+   "id": "react-next-078",
+   "section": "Context, performance, and architecture",
+   "question": "What is Suspense?",
+   "options": [
+    "A boundary that catches rendering errors and shows a fallback.",
+    "A hook that suspends a component's Effects.",
+    "A cache for server responses.",
+    "A boundary that shows fallback UI while supported child work is not ready."
+   ],
+   "correctIndex": 3,
+   "explanation": "It does not automatically catch every arbitrary asynchronous operation."
+  },
+  {
+   "id": "react-next-079",
+   "section": "Context, performance, and architecture",
+   "question": "Why is memoization not always faster?",
+   "options": [
+    "Because memoization always makes the first render slower.",
+    "It adds comparison, memory, and complexity costs; the original computation may be cheap.",
+    "Because memoized values are recomputed on every render.",
+    "Because memoization is disabled in production."
+   ],
+   "correctIndex": 1,
+   "explanation": "Profile and optimize demonstrated bottlenecks."
+  },
+  {
+   "id": "react-next-080",
+   "section": "Context, performance, and architecture",
+   "question": "What is React Compiler?",
+   "options": [
+    "A compiler that converts JSX into plain HTML strings.",
+    "A build-time compiler that can automatically memoize safe component computations and functions.",
+    "A bundler that replaces Webpack in React apps.",
+    "A transpiler that converts class components into hooks at runtime."
+   ],
+   "correctIndex": 1,
+   "explanation": "It depends on toolchain configuration and does not excuse impure render logic."
+  },
+  {
+   "id": "react-next-081",
+   "section": "Context, performance, and architecture",
+   "question": "How should state location be chosen?",
+   "options": [
+    "Put all state in a single global store.",
+    "Use component state for local ephemeral UI, URL state for shareable/navigation state, and shared stores for genuinely cross-cutting state.",
+    "Always use component state, regardless of scope.",
+    "Always put state in the URL."
+   ],
+   "correctIndex": 1,
+   "explanation": "Avoid duplicating the same source of truth in multiple places."
+  },
+  {
+   "id": "react-next-082",
+   "section": "React 18/19 and Server Components",
+   "question": "What did React 18 introduce at a high level?",
+   "options": [
+    "Server Actions and the App Router.",
+    "Class components and PropTypes.",
+    "Concurrent rendering capabilities, automatic batching for modern roots, transitions, and expanded Suspense/server-rendering support.",
+    "The `useEffectEvent` Hook and the React Compiler."
+   ],
+   "correctIndex": 2,
+   "explanation": "Concurrent rendering is a capability, not a promise every render is concurrent."
+  },
+  {
+   "id": "react-next-083",
+   "section": "React 18/19 and Server Components",
+   "question": "What is `createRoot`?",
+   "options": [
+    "The legacy API for rendering into a DOM node.",
+    "An API for creating a server-side stream.",
+    "The modern React DOM API for creating a client root.",
+    "An API for creating a React Native root."
+   ],
+   "correctIndex": 2,
+   "explanation": "It replaced legacy `ReactDOM.render` for modern client entry points."
+  },
+  {
+   "id": "react-next-084",
+   "section": "React 18/19 and Server Components",
+   "question": "What is `hydrateRoot`?",
+   "options": [
+    "The API that renders a component only on the server.",
+    "The API that clears the DOM before rendering.",
+    "The API that hydrates server-rendered HTML with client React behavior.",
+    "The API that replaces `createRoot` in development."
+   ],
+   "correctIndex": 2,
+   "explanation": "Initial client output should match the server markup."
+  },
+  {
+   "id": "react-next-085",
+   "section": "React 18/19 and Server Components",
+   "question": "What is a Server Component?",
+   "options": [
+    "A component that runs only in the browser and has access to `window`.",
+    "A component that must be rendered inside a `<Suspense>` boundary.",
+    "A component that stores state in a server-side session.",
+    "A component rendered on the server in the React Server Components model and not shipped as ordinary client component code."
+   ],
+   "correctIndex": 3,
+   "explanation": "It can access server resources but cannot use client-only Hooks or browser APIs during server rendering."
+  },
+  {
+   "id": "react-next-086",
+   "section": "React 18/19 and Server Components",
+   "question": "What is a Client Component?",
+   "options": [
+    "A component that runs only on the server and has no access to hooks.",
+    "A component that is rendered only during the build.",
+    "A component that cannot receive props.",
+    "A component marked as a client entry point in an RSC-aware framework, commonly with `'use client'`."
+   ],
+   "correctIndex": 3,
+   "explanation": "It can use state, Effects, event handlers, and browser APIs after hydration."
+  },
+  {
+   "id": "react-next-087",
+   "section": "React 18/19 and Server Components",
+   "question": "What does `'use client'` mean?",
+   "options": [
+    "It marks a function as running on the server.",
+    "It enables StrictMode for the module.",
+    "It disables server-side rendering for the whole app.",
+    "It marks a module as a client entry point in an RSC-aware framework."
+   ],
+   "correctIndex": 3,
+   "explanation": "It establishes a client module boundary; not every descendant module needs its own directive."
+  },
+  {
+   "id": "react-next-088",
+   "section": "React 18/19 and Server Components",
+   "question": "What does `'use server'` mean?",
+   "options": [
+    "It marks a component as a Client Component.",
+    "It enables server-side rendering for the module.",
+    "It disables client-side JavaScript for the route.",
+    "It marks a Server Function/Action in supported React framework setups."
+   ],
+   "correctIndex": 3,
+   "explanation": "It does not simply mean the whole file is a Server Component; validate inputs and permissions."
+  },
+  {
+   "id": "react-next-089",
+   "section": "React 18/19 and Server Components",
+   "question": "What are React Actions?",
+   "options": [
+    "Redux-style objects dispatched to a reducer.",
+    "Class component lifecycle methods.",
+    "Browser DOM events with custom names.",
+    "A model for handling async work and mutations, including APIs such as `useActionState` and `useFormStatus`."
+   ],
+   "correctIndex": 3,
+   "explanation": "Frameworks can connect Actions to server execution and cache revalidation."
+  },
+  {
+   "id": "react-next-090",
+   "section": "React 18/19 and Server Components",
+   "question": "What is `useActionState`?",
+   "options": [
+    "A Hook that manages an Action's result state and exposes a dispatch function and pending state.",
+    "A Hook that dispatches Redux actions.",
+    "A Hook that reads the browser's history state.",
+    "A Hook that stores a mutable ref."
+   ],
+   "correctIndex": 0,
+   "explanation": "Check the exact signature for the React version in use."
+  },
+  {
+   "id": "react-next-091",
+   "section": "React 18/19 and Server Components",
+   "question": "What is `useFormStatus`?",
+   "options": [
+    "A React DOM Hook that reads pending status and related information for a parent form submission.",
+    "A Hook that reads the validity of form fields.",
+    "A Hook that stores form values in state.",
+    "A Hook that submits the form automatically."
+   ],
+   "correctIndex": 0,
+   "explanation": "Call it in a descendant component of the form it observes."
+  },
+  {
+   "id": "react-next-092",
+   "section": "React 18/19 and Server Components",
+   "question": "What is `useOptimistic`?",
+   "options": [
+    "A Hook that optimizes bundle size.",
+    "A Hook that memoizes expensive calculations.",
+    "A Hook that defers rendering until the browser is idle.",
+    "A Hook for showing optimistic UI while an Action is pending."
+   ],
+   "correctIndex": 3,
+   "explanation": "Reconcile with the authoritative result and handle failures or rollback."
+  },
+  {
+   "id": "react-next-093",
+   "section": "React 18/19 and Server Components",
+   "question": "What is a Server Function security rule?",
+   "options": [
+    "Treat every argument and invocation as untrusted, even if the function is only called by your UI.",
+    "Trust arguments because only your UI can call it.",
+    "Skip validation when the function is internal.",
+    "Only validate arguments from untrusted users."
+   ],
+   "correctIndex": 0,
+   "explanation": "Validate input, authenticate, authorize the operation, and return only safe data."
+  },
+  {
+   "id": "react-next-094",
+   "section": "React 18/19 and Server Components",
+   "question": "What is `forwardRef` in React 19?",
+   "options": [
+    "It is required in React 19 to pass any prop to a component.",
+    "It memoizes a component's props.",
+    "Historically it passed refs through function components; React 19 supports `ref` as a prop for function components.",
+    "It was introduced in React 19 to replace `useRef`."
+   ],
+   "correctIndex": 2,
+   "explanation": "Library compatibility and older React versions can still make `forwardRef` relevant."
+  },
+  {
+   "id": "react-next-095",
+   "section": "React 18/19 and Server Components",
+   "question": "What is `Activity` in React 19.2+?",
+   "options": [
+    "An API for controlling hidden UI activity while preserving some state and managing work.",
+    "An API for tracking user activity events.",
+    "An API for logging component renders.",
+    "An API for scheduling background network requests."
+   ],
+   "correctIndex": 0,
+   "explanation": "Its exact behavior is version-specific; consult current docs before depending on it."
+  },
+  {
+   "id": "react-next-096",
+   "section": "Next.js routing and fundamentals",
+   "question": "What is Next.js?",
+   "options": [
+    "A CSS framework for styling React apps.",
+    "A state management library for React.",
+    "A React framework that adds routing, rendering strategies, data-fetching conventions, and production integrations.",
+    "A testing library for React components."
+   ],
+   "correctIndex": 2,
+   "explanation": "It complements React rather than replacing it."
+  },
+  {
+   "id": "react-next-097",
+   "section": "Next.js routing and fundamentals",
+   "question": "What is the App Router?",
+   "options": [
+    "The filesystem router based on the `app` directory, nested layouts, Server Components, and route loading/error conventions.",
+    "The router based on the `pages` directory and `getServerSideProps`.",
+    "A client-only router built on `react-router`.",
+    "A router that handles only API routes."
+   ],
+   "correctIndex": 0,
+   "explanation": "It can coexist with the Pages Router in a migrating project."
+  },
+  {
+   "id": "react-next-098",
+   "section": "Next.js routing and fundamentals",
+   "question": "What is the Pages Router?",
+   "options": [
+    "The newer router based on the `app` directory and Server Components.",
+    "A router used only for API routes.",
+    "The older router based on the `pages` directory and APIs such as `getServerSideProps` and `getStaticProps`.",
+    "A router that works only with static export."
+   ],
+   "correctIndex": 2,
+   "explanation": "It remains relevant in legacy applications and migration work."
+  },
+  {
+   "id": "react-next-099",
+   "section": "Next.js routing and fundamentals",
+   "question": "How is an App Router page defined?",
+   "options": [
+    "With a `index.js` file inside the `pages` directory.",
+    "With a `route.ts` file that exports HTTP methods.",
+    "With a `page.js` or `page.tsx` file in a route folder under `app`.",
+    "With a `layout.tsx` file in the root."
+   ],
+   "correctIndex": 2,
+   "explanation": "A folder alone does not expose a page route."
+  },
+  {
+   "id": "react-next-100",
+   "section": "Next.js routing and fundamentals",
+   "question": "What is a layout?",
+   "options": [
+    "A component that always re-mounts on navigation.",
+    "A page-level component rendered only on the server.",
+    "Shared UI around a route segment and its descendants that can persist across navigation.",
+    "A utility that wraps API route handlers."
+   ],
+   "correctIndex": 2,
+   "explanation": "Layouts are useful for persistent shells and shared navigation."
+  },
+  {
+   "id": "react-next-101",
+   "section": "Next.js routing and fundamentals",
+   "question": "What is the root layout?",
+   "options": [
+    "The required top-level App Router layout defining the document's `<html>` and `<body>`.",
+    "The layout used only for the home page.",
+    "The layout that defines the 404 page.",
+    "The layout used for nested dashboards."
+   ],
+   "correctIndex": 0,
+   "explanation": "It is a natural location for global providers, with client boundaries kept deliberate."
+  },
+  {
+   "id": "react-next-102",
+   "section": "Next.js routing and fundamentals",
+   "question": "What is a template versus a layout?",
+   "options": [
+    "A layout re-mounts on navigation; a template preserves state.",
+    "They are identical.",
+    "A layout can preserve state and remain mounted across navigation; a template creates a new instance when its segment is navigated through.",
+    "A template is used only in the Pages Router."
+   ],
+   "correctIndex": 2,
+   "explanation": "Use templates when remounting behavior is desired."
+  },
+  {
+   "id": "react-next-103",
+   "section": "Next.js routing and fundamentals",
+   "question": "What is a dynamic route segment?",
+   "options": [
+    "A folder named with parentheses that is omitted from the URL.",
+    "A folder that holds only API routes.",
+    "A file that exports `generateStaticParams`.",
+    "A folder such as `[slug]` captures a path segment as a parameter."
+   ],
+   "correctIndex": 3,
+   "explanation": "`[...slug]` captures one or more segments; `[[...slug]]` also matches with none."
+  },
+  {
+   "id": "react-next-104",
+   "section": "Next.js routing and fundamentals",
+   "question": "What are route groups?",
+   "options": [
+    "Folders that appear in the URL as grouped segments.",
+    "Folders named with parentheses organize routes without adding that folder name to the URL.",
+    "Folders that disable layouts for their children.",
+    "Folders that make routes private."
+   ],
+   "correctIndex": 1,
+   "explanation": "They can group routes under different layouts."
+  },
+  {
+   "id": "react-next-105",
+   "section": "Next.js routing and fundamentals",
+   "question": "What are parallel routes?",
+   "options": [
+    "Routes that render pages in separate browser tabs.",
+    "Named slots such as `@modal` allow multiple route segments to render within a shared layout.",
+    "Routes that are fetched in parallel by the server.",
+    "Routes that are loaded in a web worker."
+   ],
+   "correctIndex": 1,
+   "explanation": "They support complex dashboard and modal layouts."
+  },
+  {
+   "id": "react-next-106",
+   "section": "Next.js routing and fundamentals",
+   "question": "What are intercepting routes?",
+   "options": [
+    "Routes that intercept HTTP requests on the server.",
+    "Routes that redirect users to the login page.",
+    "A convention that renders a route within another route's layout context, often for modal navigation.",
+    "Routes that block unauthorized access."
+   ],
+   "correctIndex": 2,
+   "explanation": "A detail page can appear as a modal during soft navigation and as a full page on direct access."
+  },
+  {
+   "id": "react-next-107",
+   "section": "Next.js routing and fundamentals",
+   "question": "What does `loading.tsx` do?",
+   "options": [
+    "Defines the 404 page for the segment.",
+    "Defines the page's metadata.",
+    "Defines loading UI and a Suspense boundary for a route segment.",
+    "Defines the route handler for GET requests."
+   ],
+   "correctIndex": 2,
+   "explanation": "It enables immediate feedback while content is pending."
+  },
+  {
+   "id": "react-next-108",
+   "section": "Next.js routing and fundamentals",
+   "question": "What does `error.tsx` do?",
+   "options": [
+    "Defines the loading state for the segment.",
+    "Defines the route handler for errors.",
+    "Defines the layout for 404 pages.",
+    "Defines route-segment fallback UI for eligible errors."
+   ],
+   "correctIndex": 3,
+   "explanation": "It must be a Client Component and typically receives an error and reset callback."
+  },
+  {
+   "id": "react-next-109",
+   "section": "Next.js routing and fundamentals",
+   "question": "What does `not-found.tsx` do?",
+   "options": [
+    "Defines the error boundary for the segment.",
+    "Defines the loading state for the segment.",
+    "Defines not-found UI, often triggered by `notFound()`.",
+    "Defines the redirect for unauthorized users."
+   ],
+   "correctIndex": 2,
+   "explanation": "It is distinct from a generic server error."
+  },
+  {
+   "id": "react-next-110",
+   "section": "Next.js routing and fundamentals",
+   "question": "What is a Route Handler?",
+   "options": [
+    "A component that renders a page.",
+    "A hook that fetches route data.",
+    "A middleware function that runs on every request.",
+    "A `route.ts` file exporting HTTP methods and using Web Request/Response APIs."
+   ],
+   "correctIndex": 3,
+   "explanation": "It is an HTTP endpoint, not a page component."
+  },
+  {
+   "id": "react-next-111",
+   "section": "Next.js routing and fundamentals",
+   "question": "What is the difference between Route Handlers and Server Actions?",
+   "options": [
+    "Route Handlers are only for GET requests; Server Actions are only for POST.",
+    "They are identical.",
+    "Route Handlers expose explicit HTTP endpoints; Server Actions are invoked through React/framework Action mechanisms.",
+    "Server Actions expose public HTTP endpoints; Route Handlers cannot be called from the client."
+   ],
+   "correctIndex": 2,
+   "explanation": "Choose based on API contract, external consumers, and mutation workflow."
+  },
+  {
+   "id": "react-next-112",
+   "section": "Next.js routing and fundamentals",
+   "question": "How do current Next.js versions expose route params?",
+   "options": [
+    "`params` is a plain object in all versions.",
+    "In Next.js 15+, App Router `params` is asynchronous and should be awaited.",
+    "`params` is read through `useParams()` only.",
+    "`params` is a Promise in the Pages Router."
+   ],
+   "correctIndex": 1,
+   "explanation": "Older versions used synchronous params, so answers must be version-aware."
+  },
+  {
+   "id": "react-next-113",
+   "section": "Next.js routing and fundamentals",
+   "question": "How do you read query parameters in an App Router page?",
+   "options": [
+    "Use the page's `searchParams` prop according to the installed version; in newer versions it is asynchronous.",
+    "Use `window.location.search` inside a Server Component.",
+    "Use `useSearchParams` from `next/router`.",
+    "Query parameters are not available in the App Router."
+   ],
+   "correctIndex": 0,
+   "explanation": "Client components can use `useSearchParams` with relevant rendering considerations."
+  },
+  {
+   "id": "react-next-114",
+   "section": "Next.js routing and fundamentals",
+   "question": "What is `usePathname`?",
+   "options": [
+    "A server function that returns the current pathname.",
+    "A Hook that returns the search parameters.",
+    "A Hook that returns the dynamic route params.",
+    "A client Hook that returns the current URL pathname."
+   ],
+   "correctIndex": 3,
+   "explanation": "Rewrites can create hydration considerations."
+  },
+  {
+   "id": "react-next-115",
+   "section": "Next.js routing and fundamentals",
+   "question": "What is `useRouter` from `next/navigation`?",
+   "options": [
+    "A Hook that reads the current layout.",
+    "A Hook that fetches data from the server.",
+    "A Hook that manages form submissions.",
+    "A client Hook for imperative navigation and router operations in the App Router."
+   ],
+   "correctIndex": 3,
+   "explanation": "Do not confuse it with `next/router` from the Pages Router."
+  },
+  {
+   "id": "react-next-116",
+   "section": "Next.js routing and fundamentals",
+   "question": "What is `<Link>` for?",
+   "options": [
+    "A component for creating HTML anchors that reload the full page.",
+    "A component for loading images lazily.",
+    "Framework-aware navigation with client-side routing and prefetching behavior.",
+    "A component for rendering layouts."
+   ],
+   "correctIndex": 2,
+   "explanation": "Use it for normal links; use imperative navigation only when needed."
+  },
+  {
+   "id": "react-next-117",
+   "section": "Next.js routing and fundamentals",
+   "question": "What is middleware or proxy logic used for?",
+   "options": [
+    "Rendering React components on the server.",
+    "Fetching data for a page.",
+    "Defining API route handlers.",
+    "Request-boundary logic such as redirects, rewrites, and header changes."
+   ],
+   "correctIndex": 3,
+   "explanation": "Names and runtimes vary by version; it is not a replacement for authorization at the data operation."
+  },
+  {
+   "id": "react-next-118",
+   "section": "Next.js routing and fundamentals",
+   "question": "What is the difference between rewrite and redirect?",
+   "options": [
+    "A rewrite serves another destination while retaining the visible URL; a redirect instructs the client to navigate to a new URL.",
+    "A rewrite changes the visible URL; a redirect keeps it.",
+    "They are identical.",
+    "A redirect is handled only in the browser."
+   ],
+   "correctIndex": 0,
+   "explanation": "Choose status and caching semantics intentionally."
+  },
+  {
+   "id": "react-next-119",
+   "section": "Next.js routing and fundamentals",
+   "question": "Can App Router and Pages Router coexist?",
+   "options": [
+    "Yes, for incremental migration, as long as route conflicts are avoided.",
+    "No; the two routers cannot be used in the same project.",
+    "Only if both use the same layout file.",
+    "Only in production builds."
+   ],
+   "correctIndex": 0,
+   "explanation": "Migration can proceed route by route."
+  },
+  {
+   "id": "react-next-120",
+   "section": "Next.js rendering and data fetching",
+   "question": "What rendering strategies does Next.js support?",
+   "options": [
+    "Depending on router and configuration, static generation, request-time server rendering, client rendering, streaming, and combinations.",
+    "Only client-side rendering.",
+    "Only static generation.",
+    "Only server-side rendering on every request."
+   ],
+   "correctIndex": 0,
+   "explanation": "Describe where and when each part renders rather than labeling the whole app with one strategy."
+  },
+  {
+   "id": "react-next-121",
+   "section": "Next.js rendering and data fetching",
+   "question": "What is static rendering?",
+   "options": [
+    "Rendering a page on every request.",
+    "Rendering a page only in the browser.",
+    "Rendering a page only on the server during development.",
+    "Producing route output ahead of a request for reuse by a cache or CDN."
+   ],
+   "correctIndex": 3,
+   "explanation": "Useful when output can be shared until a rebuild or revalidation."
+  },
+  {
+   "id": "react-next-122",
+   "section": "Next.js rendering and data fetching",
+   "question": "What is dynamic rendering?",
+   "options": [
+    "Rendering a page once at build time and never again.",
+    "Rendering in response to a request because output depends on request-specific data or dynamic APIs.",
+    "Rendering a page entirely in the browser.",
+    "Rendering a page at the edge only."
+   ],
+   "correctIndex": 1,
+   "explanation": "It supports personalization but can increase server work."
+  },
+  {
+   "id": "react-next-123",
+   "section": "Next.js rendering and data fetching",
+   "question": "What is streaming SSR?",
+   "options": [
+    "Sending the entire page as one HTML response after all data loads.",
+    "Sending JSON data to the client for rendering.",
+    "Rendering pages in a web worker.",
+    "Sending HTML in chunks as parts of the UI become ready."
+   ],
+   "correctIndex": 3,
+   "explanation": "Suspense boundaries can let ready parts appear before slower work completes."
+  },
+  {
+   "id": "react-next-124",
+   "section": "Next.js rendering and data fetching",
+   "question": "What is Partial Prerendering?",
+   "options": [
+    "A strategy combining a prerendered shell with streamed dynamic regions where supported.",
+    "Rendering entire pages only in the browser.",
+    "Prerendering every dynamic page at build time.",
+    "Replacing server rendering with static HTML."
+   ],
+   "correctIndex": 0,
+   "explanation": "Current Next.js 16 Cache Components behavior and configuration are version-sensitive."
+  },
+  {
+   "id": "react-next-125",
+   "section": "Next.js rendering and data fetching",
+   "question": "Can a Server Component use `useState` or `useEffect`?",
+   "options": [
+    "Yes; Server Components can use all Hooks.",
+    "Yes, but only `useState`.",
+    "No; interactive logic belongs in a Client Component.",
+    "Yes, but only inside `Suspense`."
+   ],
+   "correctIndex": 2,
+   "explanation": "Keep client boundaries as small as practical."
+  },
+  {
+   "id": "react-next-126",
+   "section": "Next.js rendering and data fetching",
+   "question": "Can a Client Component directly import a Server Component as a normal module dependency?",
+   "options": [
+    "Not as an ordinary client-module import; server-rendered components can be passed as children or slots from a Server Component.",
+    "Yes; a Client Component can import a Server Component freely.",
+    "Only if the Server Component has no props.",
+    "Never; it is impossible in any form."
+   ],
+   "correctIndex": 0,
+   "explanation": "The module boundary matters, not only the visual JSX nesting."
+  },
+  {
+   "id": "react-next-127",
+   "section": "Next.js rendering and data fetching",
+   "question": "Can ordinary functions be passed from Server Components to Client Components?",
+   "options": [
+    "Generally no, because functions are not serializable across the server/client boundary; supported Server Functions are special.",
+    "Yes; functions are serializable across the boundary.",
+    "Yes, but only arrow functions.",
+    "Yes, but only async functions."
+   ],
+   "correctIndex": 0,
+   "explanation": "Pass serializable data or use a supported Action mechanism."
+  },
+  {
+   "id": "react-next-128",
+   "section": "Next.js rendering and data fetching",
+   "question": "How do you use a browser-only library?",
+   "options": [
+    "Load it inside a client boundary and, if necessary, dynamically import it with SSR disabled for that component.",
+    "Import it at the top of a Server Component.",
+    "Install it only as a devDependency.",
+    "Wrap it in `useEffect` inside a Server Component."
+   ],
+   "correctIndex": 0,
+   "explanation": "Use this selectively rather than disabling SSR for everything."
+  },
+  {
+   "id": "react-next-129",
+   "section": "Next.js rendering and data fetching",
+   "question": "Why can `window` be undefined in Next.js?",
+   "options": [
+    "Because Next.js removes `window` for security.",
+    "Because `window` exists only in Server Components.",
+    "The module or component may be evaluated on the server, where browser globals do not exist.",
+    "Because `window` must be imported from `next/window`."
+   ],
+   "correctIndex": 2,
+   "explanation": "Move access to client-only handlers/effects or use an intentional client-only strategy."
+  },
+  {
+   "id": "react-next-130",
+   "section": "Next.js rendering and data fetching",
+   "question": "What causes hydration mismatch?",
+   "options": [
+    "Using too many components in a layout.",
+    "Having a missing `key` prop in a list.",
+    "Server HTML differs from the initial client render due to nondeterministic values, browser-only reads, locale differences, or invalid markup.",
+    "Running `next build` before `next dev`."
+   ],
+   "correctIndex": 2,
+   "explanation": "Make initial output deterministic or defer browser-specific rendering appropriately."
+  },
+  {
+   "id": "react-next-131",
+   "section": "Next.js rendering and data fetching",
+   "question": "How do you minimize client JavaScript?",
+   "options": [
+    "Keep server-only work in Server Components, reduce client boundaries, inspect bundles, and lazy-load noncritical features.",
+    "Add `'use client'` at the top of every file.",
+    "Move all logic into Client Components.",
+    "Disable server rendering for all routes."
+   ],
+   "correctIndex": 0,
+   "explanation": "Measure route-specific JavaScript and hydration cost."
+  },
+  {
+   "id": "react-next-132",
+   "section": "Next.js rendering and data fetching",
+   "question": "What is `generateStaticParams`?",
+   "options": [
+    "A function that generates metadata for each page.",
+    "A function that fetches data for Client Components.",
+    "A convention for supplying dynamic route parameters that can be generated ahead of time.",
+    "A function that defines route handlers."
+   ],
+   "correctIndex": 2,
+   "explanation": "It supports static generation for known slugs or IDs."
+  },
+  {
+   "id": "react-next-133",
+   "section": "Next.js rendering and data fetching",
+   "question": "What is `generateMetadata`?",
+   "options": [
+    "A convention for generating route metadata, possibly asynchronously from route data.",
+    "A function that generates static HTML for a route.",
+    "A function that defines dynamic route params.",
+    "A function that revalidates cached data."
+   ],
+   "correctIndex": 0,
+   "explanation": "Avoid unnecessary duplicate work when fetches can be reused or memoized."
+  },
+  {
+   "id": "react-next-134",
+   "section": "Next.js rendering and data fetching",
+   "question": "How do you avoid a data-fetch waterfall?",
+   "options": [
+    "Fetch resources one after another with `await`.",
+    "Fetch independent resources concurrently with `Promise.all` or restructure dependencies to start work earlier.",
+    "Always fetch inside Client Components with `useEffect`.",
+    "Disable caching for all requests."
+   ],
+   "correctIndex": 1,
+   "explanation": "Sequential awaits serialize independent requests."
+  },
+  {
+   "id": "react-next-135",
+   "section": "Next.js rendering and data fetching",
+   "question": "How should expected errors differ from unexpected errors?",
+   "options": [
+    "Throw errors for expected outcomes and handle unexpected ones with return values.",
+    "Expected domain outcomes should be modeled as explicit results or UI states; unexpected failures can flow to error boundaries/logging.",
+    "Treat all errors the same way with a single `try/catch`.",
+    "Always show a generic error page for every failure."
+   ],
+   "correctIndex": 1,
+   "explanation": "Do not expose stack traces or secrets."
+  },
+  {
+   "id": "react-next-136",
+   "section": "Next.js caching and mutations",
+   "question": "How does Next.js server `fetch` differ from browser `fetch`?",
+   "options": [
+    "Server `fetch` is identical to browser `fetch`.",
+    "Server `fetch` does not support `async/await`.",
+    "Server `fetch` cannot make HTTPS requests.",
+    "Next.js adds framework caching and revalidation behavior that depends on version and configuration."
+   ],
+   "correctIndex": 3,
+   "explanation": "Do not assume browser defaults or older Next.js defaults apply unchanged."
+  },
+  {
+   "id": "react-next-137",
+   "section": "Next.js caching and mutations",
+   "question": "What is time-based revalidation?",
+   "options": [
+    "Invalidating cache entries on user action.",
+    "A policy to refresh cached data or output according to an interval.",
+    "Refreshing the cache only at build time.",
+    "Disabling the cache after a period of time."
+   ],
+   "correctIndex": 1,
+   "explanation": "It trades freshness against origin cost and must fit business requirements."
+  },
+  {
+   "id": "react-next-138",
+   "section": "Next.js caching and mutations",
+   "question": "What is on-demand revalidation?",
+   "options": [
+    "Refreshing the cache on a fixed interval.",
+    "Refreshing the cache on every request.",
+    "Refreshing the cache only at deployment.",
+    "Invalidating relevant cached data or routes after an event such as a content edit."
+   ],
+   "correctIndex": 3,
+   "explanation": "Use version-appropriate path or tag revalidation APIs."
+  },
+  {
+   "id": "react-next-139",
+   "section": "Next.js caching and mutations",
+   "question": "What is the difference between path and tag revalidation?",
+   "options": [
+    "Path revalidation is for client data; tag revalidation is for server data.",
+    "Path revalidation clears all caches; tag revalidation clears none.",
+    "Path revalidation targets route-associated output; tag revalidation targets cached data labeled with a tag.",
+    "They are identical."
+   ],
+   "correctIndex": 2,
+   "explanation": "Precise freshness semantics evolve, so check the installed version's API docs."
+  },
+  {
+   "id": "react-next-140",
+   "section": "Next.js caching and mutations",
+   "question": "What is `use cache` in Next.js 16?",
+   "options": [
+    "A directive that disables all caching in a file.",
+    "A directive that marks a component as a Client Component.",
+    "A directive in the Cache Components model for caching supported functions or components.",
+    "A directive that runs a function only once at build time."
+   ],
+   "correctIndex": 2,
+   "explanation": "Its use depends on the release and configuration."
+  },
+  {
+   "id": "react-next-141",
+   "section": "Next.js caching and mutations",
+   "question": "What is a cache key?",
+   "options": [
+    "An identity determining which requests or computations can share a cached result.",
+    "A secret value used to encrypt cached data.",
+    "The size of the cache in bytes.",
+    "The expiry time of a cached entry."
+   ],
+   "correctIndex": 0,
+   "explanation": "Every input affecting output must be accounted for to avoid incorrect reuse."
+  },
+  {
+   "id": "react-next-142",
+   "section": "Next.js caching and mutations",
+   "question": "How can caching leak personalized data?",
+   "options": [
+    "Because caches always store data in the browser.",
+    "A shared cache may reuse a user-specific result across users if its scope or identity is wrong.",
+    "Because personalized data is never cached.",
+    "Because cached data cannot include cookies."
+   ],
+   "correctIndex": 1,
+   "explanation": "Correctly scope personalized data or avoid shared caching for it."
+  },
+  {
+   "id": "react-next-143",
+   "section": "Next.js caching and mutations",
+   "question": "What is request memoization?",
+   "options": [
+    "Caching responses across user sessions.",
+    "Deduplicating equivalent work within a defined request/render scope.",
+    "Caching static assets in the browser.",
+    "Storing responses in a service worker."
+   ],
+   "correctIndex": 1,
+   "explanation": "It differs from persistent caching across separate requests."
+  },
+  {
+   "id": "react-next-144",
+   "section": "Next.js caching and mutations",
+   "question": "When should data be fetched in a Client Component?",
+   "options": [
+    "When the data must be fetched during the build.",
+    "When the data is needed to render the initial HTML.",
+    "When it depends on browser interaction or needs ongoing client-side synchronization through a query/cache library.",
+    "When the data is required for SEO."
+   ],
+   "correctIndex": 2,
+   "explanation": "Consider duplicate requests, loading UX, and secret exposure."
+  },
+  {
+   "id": "react-next-145",
+   "section": "Next.js caching and mutations",
+   "question": "How should secrets be handled?",
+   "options": [
+    "Prefix them with `NEXT_PUBLIC_` so every component can read them.",
+    "Commit them to the repository in a config file.",
+    "Store them in `localStorage` in the browser.",
+    "Keep credentials in server-only code and environment variables without `NEXT_PUBLIC_`."
+   ],
+   "correctIndex": 3,
+   "explanation": "Anything exposed to a browser bundle is public."
+  },
+  {
+   "id": "react-next-146",
+   "section": "Next.js caching and mutations",
+   "question": "What does `NEXT_PUBLIC_` mean?",
+   "options": [
+    "The variable is kept secret on the server.",
+    "The variable is intended to be exposed to client-side code, commonly substituted at build time.",
+    "The variable is available only in Server Components.",
+    "The variable is read from the `.env.local` file only."
+   ],
+   "correctIndex": 1,
+   "explanation": "Never store passwords or private tokens there."
+  },
+  {
+   "id": "react-next-147",
+   "section": "Next.js caching and mutations",
+   "question": "What is a Server Action?",
+   "options": [
+    "A function that runs in the browser to update the DOM.",
+    "An async server function invoked through React/Next.js Action infrastructure, often used for form mutations.",
+    "A server-side route handler that returns JSON.",
+    "A cron job that runs periodically."
+   ],
+   "correctIndex": 1,
+   "explanation": "Treat it like a remotely callable endpoint."
+  },
+  {
+   "id": "react-next-148",
+   "section": "Next.js caching and mutations",
+   "question": "How should a Server Action validate input?",
+   "options": [
+    "Trust the client and skip validation.",
+    "Validate every input on the server and enforce authentication and authorization.",
+    "Validate only on the client.",
+    "Validate only the types, not the values."
+   ],
+   "correctIndex": 1,
+   "explanation": "Client validation is only a UX aid."
+  },
+  {
+   "id": "react-next-149",
+   "section": "Next.js caching and mutations",
+   "question": "Is hiding a button sufficient authorization?",
+   "options": [
+    "Yes; if users cannot see the button, they cannot call the action.",
+    "Yes, if the button is hidden with CSS.",
+    "Yes, if the route is not linked anywhere.",
+    "No; the server-side operation must check the caller's permission."
+   ],
+   "correctIndex": 3,
+   "explanation": "Attackers can bypass the UI and invoke endpoints directly."
+  },
+  {
+   "id": "react-next-150",
+   "section": "Next.js caching and mutations",
+   "question": "What is the difference between authentication and authorization?",
+   "options": [
+    "Authentication decides what a user may do; authorization identifies the user.",
+    "Authentication identifies the caller; authorization decides what that caller may do.",
+    "They are the same concept.",
+    "Authentication applies only to APIs; authorization applies only to pages."
+   ],
+   "correctIndex": 1,
+   "explanation": "Both belong in protected server operations."
+  },
+  {
+   "id": "react-next-151",
+   "section": "Next.js caching and mutations",
+   "question": "How should API errors be represented?",
+   "options": [
+    "Always return 200 with an error message in the body.",
+    "Return a raw stack trace so clients can debug.",
+    "Use only 500 for every kind of error.",
+    "Use meaningful HTTP status codes and a stable, non-sensitive response schema."
+   ],
+   "correctIndex": 3,
+   "explanation": "Do not return success status for every failure or expose internal exception messages."
+  },
+  {
+   "id": "react-next-152",
+   "section": "Next.js caching and mutations",
+   "question": "What is rate limiting?",
+   "options": [
+    "Compressing responses to reduce bandwidth.",
+    "Limiting requests by user, token, IP, or resource to reduce abuse and exhaustion.",
+    "Caching responses at the CDN.",
+    "Delaying all requests by a fixed amount."
+   ],
+   "correctIndex": 1,
+   "explanation": "Use shared infrastructure suitable for multiple app instances."
+  },
+  {
+   "id": "react-next-153",
+   "section": "Next.js caching and mutations",
+   "question": "How should a webhook be verified?",
+   "options": [
+    "Check that the request comes from a known IP address only.",
+    "Parse the JSON body and trust the event type.",
+    "Require users to log in before calling the webhook.",
+    "Verify the provider's signature over the raw request body, check replay protections when supported, and process idempotently."
+   ],
+   "correctIndex": 3,
+   "explanation": "Do not trust payload claims alone."
+  },
+  {
+   "id": "react-next-154",
+   "section": "Next.js caching and mutations",
+   "question": "What is idempotency for a mutation?",
+   "options": [
+    "Repeating the same request does not cause unintended duplicate effects.",
+    "Every request creates a new resource with a unique ID.",
+    "The request can run only once per user.",
+    "The request is always cached by the browser."
+   ],
+   "correctIndex": 0,
+   "explanation": "Use idempotency keys or database constraints for payments and retry-prone operations."
+  },
+  {
+   "id": "react-next-155",
+   "section": "Next.js caching and mutations",
+   "question": "How do you secure file uploads?",
+   "options": [
+    "Validate size, content, and access server-side; use safe storage names and scanning/processing where appropriate.",
+    "Trust the client-provided file name and MIME type.",
+    "Store files in the public web root with their original names.",
+    "Validate only on the client."
+   ],
+   "correctIndex": 0,
+   "explanation": "Client filenames and MIME types are not trustworthy."
+  },
+  {
+   "id": "react-next-156",
+   "section": "SEO, assets, deployment, and testing",
+   "question": "What does `next/image` provide?",
+   "options": [
+    "Automatic conversion of images into SVG.",
+    "A built-in image editor for Next.js apps.",
+    "Image optimization integrations such as responsive sizing, format selection, and lazy loading where applicable.",
+    "Server-side image uploads and storage."
+   ],
+   "correctIndex": 2,
+   "explanation": "Configure remote hosts and sizes according to the installed version."
+  },
+  {
+   "id": "react-next-157",
+   "section": "SEO, assets, deployment, and testing",
+   "question": "What is the Metadata API?",
+   "options": [
+    "An API for reading metadata from uploaded files.",
+    "An API for generating API documentation.",
+    "App Router conventions for document metadata such as titles and descriptions.",
+    "An API for storing user preferences."
+   ],
+   "correctIndex": 2,
+   "explanation": "Use static metadata when possible and `generateMetadata` for data-dependent values."
+  },
+  {
+   "id": "react-next-158",
+   "section": "SEO, assets, deployment, and testing",
+   "question": "What is `sitemap.ts`?",
+   "options": [
+    "A convention for generating a CSS stylesheet.",
+    "A convention for generating a site map component in the UI.",
+    "A convention for defining navigation links.",
+    "A convention for generating a sitemap endpoint for crawlers."
+   ],
+   "correctIndex": 3,
+   "explanation": "Include public canonical URLs and exclude private content."
+  },
+  {
+   "id": "react-next-159",
+   "section": "SEO, assets, deployment, and testing",
+   "question": "What is `robots.ts`?",
+   "options": [
+    "A convention for generating a sitemap.xml file.",
+    "A convention for blocking API access.",
+    "A convention for generating route manifests.",
+    "A convention for generating a robots.txt response."
+   ],
+   "correctIndex": 3,
+   "explanation": "Robots rules are not access control for private content."
+  },
+  {
+   "id": "react-next-160",
+   "section": "SEO, assets, deployment, and testing",
+   "question": "What are Core Web Vitals?",
+   "options": [
+    "User-experience metrics including LCP, INP, and CLS.",
+    "Metrics for server uptime, latency, and error rate.",
+    "Metrics for bundle size, memory use, and CPU time.",
+    "Metrics for test coverage, build time, and lint errors."
+   ],
+   "correctIndex": 0,
+   "explanation": "Measure real user performance rather than relying only on local development speed."
+  },
+  {
+   "id": "react-next-161",
+   "section": "SEO, assets, deployment, and testing",
+   "question": "How do you analyze a large client bundle?",
+   "options": [
+    "Use bundle analysis and inspect dependency graphs, route chunks, and client boundaries.",
+    "Add `console.log` statements to every component.",
+    "Count the lines of code in each file.",
+    "Check only the size of the final HTML."
+   ],
+   "correctIndex": 0,
+   "explanation": "Avoid accidental client imports of large server-oriented dependencies."
+  },
+  {
+   "id": "react-next-162",
+   "section": "SEO, assets, deployment, and testing",
+   "question": "What is Node runtime versus Edge runtime?",
+   "options": [
+    "Node is for client code; Edge is for server code.",
+    "They are identical environments with different names.",
+    "Different server execution environments with different APIs, package compatibility, and operational constraints.",
+    "Edge supports every Node.js API; Node does not."
+   ],
+   "correctIndex": 2,
+   "explanation": "Check current framework and platform support before choosing."
+  },
+  {
+   "id": "react-next-163",
+   "section": "SEO, assets, deployment, and testing",
+   "question": "Why test a production build?",
+   "options": [
+    "Bundling, caching, and rendering behavior can differ from development.",
+    "Because production builds are always identical to development.",
+    "Because tests cannot run in development.",
+    "Because production builds skip all optimizations."
+   ],
+   "correctIndex": 0,
+   "explanation": "Test build/start or a deployment preview for important routes and mutations."
+  },
+  {
+   "id": "react-next-164",
+   "section": "SEO, assets, deployment, and testing",
+   "question": "What is React Testing Library for?",
+   "options": [
+    "Testing a component's internal state and implementation details.",
+    "Testing the CSS styles of components.",
+    "Testing server-side API routes.",
+    "Testing component behavior through user-observable interactions and accessible queries."
+   ],
+   "correctIndex": 3,
+   "explanation": "Prefer behavior assertions over implementation-detail assertions."
+  },
+  {
+   "id": "react-next-165",
+   "section": "SEO, assets, deployment, and testing",
+   "question": "What is the difference between unit, integration, and end-to-end tests?",
+   "options": [
+    "Unit tests verify full user flows; end-to-end tests isolate functions.",
+    "They are identical.",
+    "Integration tests are only for backend code.",
+    "Unit tests isolate logic; integration tests test collaborating parts; end-to-end tests verify full user flows."
+   ],
+   "correctIndex": 3,
+   "explanation": "A balanced suite uses fast focused tests plus critical full flows."
+  },
+  {
+   "id": "react-next-166",
+   "section": "SEO, assets, deployment, and testing",
+   "question": "How should asynchronous UI be tested?",
+   "options": [
+    "Use `setTimeout` with a long delay in every test.",
+    "Test only the final state, skipping pending and failure paths.",
+    "Avoid testing async UI altogether.",
+    "Wait for observable state changes with async queries and cover pending, success, and failure paths."
+   ],
+   "correctIndex": 3,
+   "explanation": "Avoid arbitrary sleeps that cause slow and flaky tests."
+  },
+  {
+   "id": "react-next-167",
+   "section": "SEO, assets, deployment, and testing",
+   "question": "What is a flaky test?",
+   "options": [
+    "A test whose result changes inconsistently without a relevant code change.",
+    "A test that always fails.",
+    "A test that is slow to run.",
+    "A test that has no assertions."
+   ],
+   "correctIndex": 0,
+   "explanation": "Common causes include timing, shared state, nondeterministic data, and race conditions."
+  },
+  {
+   "id": "react-next-168",
+   "section": "SEO, assets, deployment, and testing",
+   "question": "What are TypeScript discriminated unions useful for?",
+   "options": [
+    "Enforcing that every variable is nullable.",
+    "Compiling TypeScript into JavaScript faster.",
+    "Replacing runtime validation completely.",
+    "Modeling mutually exclusive UI states such as loading, success, and error with state-specific data."
+   ],
+   "correctIndex": 3,
+   "explanation": "They prevent invalid combinations of unrelated flags."
+  },
+  {
+   "id": "react-next-169",
+   "section": "SEO, assets, deployment, and testing",
+   "question": "What is ESLint's Hook rules plugin for?",
+   "options": [
+    "Detecting invalid Hook call patterns and missing Effect dependencies.",
+    "Formatting code to match a style guide.",
+    "Checking that every component has a test.",
+    "Finding unused CSS classes."
+   ],
+   "correctIndex": 0,
+   "explanation": "Treat warnings as signals to improve design rather than suppressing them blindly."
+  },
+  {
+   "id": "react-next-170",
+   "section": "SEO, assets, deployment, and testing",
+   "question": "What is the difference between a bundler and a framework?",
+   "options": [
+    "A bundler provides routing and rendering; a framework only packages modules.",
+    "A bundler transforms and packages modules; a framework also defines routing, rendering, and application conventions.",
+    "They are identical.",
+    "A bundler runs only on the server."
+   ],
+   "correctIndex": 1,
+   "explanation": "Next.js is a framework that integrates bundling tools."
+  },
+  {
+   "id": "react-next-171",
+   "section": "JavaScript and browser fundamentals",
+   "question": "What is a closure?",
+   "options": [
+    "A function that closes the browser window.",
+    "A function that cannot access outside variables.",
+    "A function together with access to its lexical environment.",
+    "A loop that never terminates."
+   ],
+   "correctIndex": 2,
+   "explanation": "Closures explain how React callbacks capture state from a render."
+  },
+  {
+   "id": "react-next-172",
+   "section": "JavaScript and browser fundamentals",
+   "question": "What is the event loop?",
+   "options": [
+    "A loop that renders React components.",
+    "A runtime model coordinating synchronous JavaScript, task queues, microtasks, and rendering opportunities.",
+    "A mechanism that runs code on multiple threads.",
+    "A scheduler that runs Effects."
+   ],
+   "correctIndex": 1,
+   "explanation": "It helps explain Promise callbacks, timers, and UI responsiveness."
+  },
+  {
+   "id": "react-next-173",
+   "section": "JavaScript and browser fundamentals",
+   "question": "What is the difference between `==` and `===`?",
+   "options": [
+    "`===` compares without type coercion; `==` may coerce operands.",
+    "`==` compares without coercion; `===` may coerce operands.",
+    "They are identical.",
+    "`===` works only on strings."
+   ],
+   "correctIndex": 0,
+   "explanation": "Explicit strict comparisons are usually easier to reason about."
+  },
+  {
+   "id": "react-next-174",
+   "section": "JavaScript and browser fundamentals",
+   "question": "What is immutability?",
+   "options": [
+    "Mutating data in place for performance.",
+    "Making data unchangeable by freezing the entire page.",
+    "Storing data only in the browser.",
+    "Treating data as values to replace rather than mutate after creation."
+   ],
+   "correctIndex": 3,
+   "explanation": "Shallow copies do not clone nested objects."
+  },
+  {
+   "id": "react-next-175",
+   "section": "JavaScript and browser fundamentals",
+   "question": "What is the difference between `map`, `filter`, and `reduce`?",
+   "options": [
+    "`map` selects items, `filter` transforms items, and `reduce` splits items.",
+    "`map` transforms items, `filter` selects items, and `reduce` combines items into an accumulator.",
+    "They are identical.",
+    "`reduce` returns an array of the same length as the input."
+   ],
+   "correctIndex": 1,
+   "explanation": "They are common for deriving UI data without mutating source state."
+  },
+  {
+   "id": "react-next-176",
+   "section": "JavaScript and browser fundamentals",
+   "question": "What is the difference between `??` and `||`?",
+   "options": [
+    "`??` falls back only for null/undefined; `||` also falls back for 0, false, and empty string.",
+    "`??` falls back for any falsy value; `||` only for null/undefined.",
+    "They are identical.",
+    "`??` is only valid in TypeScript."
+   ],
+   "correctIndex": 0,
+   "explanation": "This matters for counts and intentionally empty strings."
+  },
+  {
+   "id": "react-next-177",
+   "section": "JavaScript and browser fundamentals",
+   "question": "What is a Promise?",
+   "options": [
+    "An object representing eventual fulfillment or rejection of an asynchronous operation.",
+    "A function that runs synchronously and returns a value.",
+    "A callback that runs on every render.",
+    "A global variable that holds a result."
+   ],
+   "correctIndex": 0,
+   "explanation": "An async function returns a Promise; `await` pauses that function until settlement."
+  },
+  {
+   "id": "react-next-178",
+   "section": "JavaScript and browser fundamentals",
+   "question": "What is debouncing versus throttling?",
+   "options": [
+    "Debouncing waits for activity to pause; throttling limits how frequently work runs during continuous activity.",
+    "Debouncing runs work at a fixed rate; throttling waits for activity to stop.",
+    "They are identical.",
+    "Debouncing cancels all calls; throttling runs them all."
+   ],
+   "correctIndex": 0,
+   "explanation": "Choose based on UX and event pattern."
+  },
+  {
+   "id": "react-next-179",
+   "section": "JavaScript and browser fundamentals",
+   "question": "What is CORS?",
+   "options": [
+    "A server-side policy that encrypts cross-origin requests.",
+    "A JavaScript library for cross-origin messaging.",
+    "A CSS rule for loading external stylesheets.",
+    "A browser-enforced policy controlling whether scripts can read cross-origin responses."
+   ],
+   "correctIndex": 3,
+   "explanation": "CORS is not authentication; server authorization is still necessary."
+  },
+  {
+   "id": "react-next-180",
+   "section": "JavaScript and browser fundamentals",
+   "question": "What is XSS?",
+   "options": [
+    "A server attack that overloads a site with requests.",
+    "An attack that steals passwords from a database.",
+    "Cross-site scripting is execution of untrusted content as script in a user's browser.",
+    "A browser feature for cross-site scripting protection."
+   ],
+   "correctIndex": 2,
+   "explanation": "Escape output, sanitize intentionally allowed HTML, and avoid unsafe DOM APIs."
+  },
+  {
+   "id": "react-next-181",
+   "section": "Debugging and code scenarios",
+   "question": "Why is `items.push(x); setItems(items)` a bug?",
+   "options": [
+    "Because `push` is not defined for arrays.",
+    "Because `setItems` cannot accept arrays.",
+    "Because `push` is asynchronous.",
+    "It mutates and reuses the same array reference."
+   ],
+   "correctIndex": 3,
+   "explanation": "Use `setItems(prev => [...prev, x])`."
+  },
+  {
+   "id": "react-next-182",
+   "section": "Debugging and code scenarios",
+   "question": "Why does a log immediately after a state setter show old state?",
+   "options": [
+    "Because `setState` is slow.",
+    "Because the log is run before the page loads.",
+    "Because state is stored in the DOM.",
+    "The current render's state is a snapshot and the setter queues a later render."
+   ],
+   "correctIndex": 3,
+   "explanation": "Observe the value in a subsequent render or use a functional update."
+  },
+  {
+   "id": "react-next-183",
+   "section": "Debugging and code scenarios",
+   "question": "A child wrapped in `memo` still renders. Why?",
+   "options": [
+    "Props may have new object/function identities, or its own state/context changed.",
+    "Because `memo` only works with class components.",
+    "Because `memo` is disabled in development.",
+    "Because `memo` never compares props."
+   ],
+   "correctIndex": 0,
+   "explanation": "Use the Profiler to identify the reason before optimizing."
+  },
+  {
+   "id": "react-next-184",
+   "section": "Debugging and code scenarios",
+   "question": "An input's value appears to move to another row after sorting. Why?",
+   "options": [
+    "Because the browser caches input values by position.",
+    "Because sorting is not supported with inputs.",
+    "Because inputs cannot be rendered inside lists.",
+    "Index keys can associate reused component state with the wrong logical item."
+   ],
+   "correctIndex": 3,
+   "explanation": "Use a stable data ID as the key."
+  },
+  {
+   "id": "react-next-185",
+   "section": "Debugging and code scenarios",
+   "question": "An Effect loops forever. What are likely causes?",
+   "options": [
+    "The Effect has an empty dependency array.",
+    "It updates state that changes a dependency, or depends on a newly created object/function each render.",
+    "The Effect does not use any state.",
+    "The Effect is declared inside a conditional."
+   ],
+   "correctIndex": 1,
+   "explanation": "Reconsider the Effect and restructure dependencies rather than blindly suppressing lint."
+  },
+  {
+   "id": "react-next-186",
+   "section": "Debugging and code scenarios",
+   "question": "Search results sometimes revert to an old query. Why?",
+   "options": [
+    "A stale network response can finish after a newer response and overwrite it.",
+    "Because the browser caches the first response.",
+    "Because the server returns results in random order.",
+    "Because React does not support async requests."
+   ],
+   "correctIndex": 0,
+   "explanation": "Cancel or ignore outdated requests."
+  },
+  {
+   "id": "react-next-187",
+   "section": "Debugging and code scenarios",
+   "question": "A Next.js page throws `window is not defined`. What is likely wrong?",
+   "options": [
+    "Browser-only code runs during server evaluation or rendering.",
+    "The page is missing a layout.",
+    "The page needs `'use server'` at the top.",
+    "`window` must be imported from `next`."
+   ],
+   "correctIndex": 0,
+   "explanation": "Move it into client-only logic or a targeted client-only import."
+  },
+  {
+   "id": "react-next-188",
+   "section": "Debugging and code scenarios",
+   "question": "Dates differ between server and browser. Why?",
+   "options": [
+    "Different time zones or evaluation times produce different initial output.",
+    "Because the server and browser always use different locales and time zones by design.",
+    "Because dates cannot be serialized.",
+    "Because JavaScript Date objects are immutable."
+   ],
+   "correctIndex": 0,
+   "explanation": "Render deterministic initial data, then localize after hydration if needed."
+  },
+  {
+   "id": "react-next-189",
+   "section": "Debugging and code scenarios",
+   "question": "One user's data appears in another user's page. What should you inspect?",
+   "options": [
+    "Browser extensions installed by the user.",
+    "The user's CSS styles.",
+    "The image sizes on the page.",
+    "Shared cache scope, cache keys, request memoization assumptions, and authorization."
+   ],
+   "correctIndex": 3,
+   "explanation": "Personalized data must not leak through shared caches."
+  },
+  {
+   "id": "react-next-190",
+   "section": "Debugging and code scenarios",
+   "question": "A mutation succeeds but the page remains stale. What is missing?",
+   "options": [
+    "The mutation must be run twice.",
+    "Relevant cache invalidation, revalidation, or refresh after the mutation.",
+    "The page needs `'use client'` at the top.",
+    "The browser's cookies must be cleared."
+   ],
+   "correctIndex": 1,
+   "explanation": "Use the installed version's cache APIs and test affected routes."
+  },
+  {
+   "id": "react-next-191",
+   "section": "Debugging and code scenarios",
+   "question": "An input becomes laggy after its state update is wrapped in a transition. Why?",
+   "options": [
+    "Because transitions are disabled for inputs.",
+    "Because inputs cannot be rendered in transitions.",
+    "Controlled input updates should be urgent, not deferred.",
+    "Because transitions always run on the server."
+   ],
+   "correctIndex": 2,
+   "explanation": "Update the input synchronously and transition expensive dependent UI."
+  },
+  {
+   "id": "react-next-192",
+   "section": "Debugging and code scenarios",
+   "question": "Why can a portal click invoke a React parent handler?",
+   "options": [
+    "Event propagation follows the React tree rather than only physical DOM ancestry.",
+    "Because portals copy the handler into the DOM node.",
+    "Because portals disable event propagation.",
+    "Because the DOM tree is re-created on each click."
+   ],
+   "correctIndex": 0,
+   "explanation": "Use `stopPropagation` when appropriate."
+  },
+  {
+   "id": "react-next-193",
+   "section": "Debugging and code scenarios",
+   "question": "A server-rendered page is still slow. What do you measure?",
+   "options": [
+    "Only the HTML size.",
+    "Only the number of components.",
+    "Only the number of Effects.",
+    "Server latency, data waterfalls, client JavaScript, hydration, image sizes, cache hits, and Core Web Vitals."
+   ],
+   "correctIndex": 3,
+   "explanation": "Server rendering does not eliminate browser work or backend bottlenecks."
+  },
+  {
+   "id": "react-next-194",
+   "section": "System design scenarios",
+   "question": "Design a filtered product listing page. What matters?",
+   "options": [
+    "Store filters in local component state only.",
+    "URL-backed filters, pagination semantics, server/client boundaries, cache freshness, loading states, and accessibility.",
+    "Fetch all products on the client and filter in the browser.",
+    "Use a single hard-coded query."
+   ],
+   "correctIndex": 1,
+   "explanation": "Keep shareable state in the URL when useful and avoid duplicated sources of truth."
+  },
+  {
+   "id": "react-next-195",
+   "section": "System design scenarios",
+   "question": "Design an authenticated dashboard. What belongs on the server?",
+   "options": [
+    "Only the UI components and their styles.",
+    "Only click handlers and form state.",
+    "Session verification, authorization, secret-dependent work, and sensitive data access should remain server-side where possible.",
+    "Only animations and transitions."
+   ],
+   "correctIndex": 2,
+   "explanation": "Client components can provide interaction but must not be the security boundary."
+  },
+  {
+   "id": "react-next-196",
+   "section": "System design scenarios",
+   "question": "How would you implement optimistic comments?",
+   "options": [
+    "Wait for the server before showing anything.",
+    "Reload the page after every comment.",
+    "Show a temporary item, submit the mutation, reconcile with the server response, and roll back or mark failure when needed.",
+    "Store comments only in the browser."
+   ],
+   "correctIndex": 2,
+   "explanation": "Handle duplicate submissions, retries, and ordering."
+  },
+  {
+   "id": "react-next-197",
+   "section": "System design scenarios",
+   "question": "How would you structure a large React codebase?",
+   "options": [
+    "Put all components in one directory.",
+    "Organize by feature/domain with clear UI, data, and shared infrastructure boundaries.",
+    "Group files by file type, such as all hooks together.",
+    "Put every component into a single file."
+   ],
+   "correctIndex": 1,
+   "explanation": "Avoid both a giant shared folder and needless abstraction."
+  },
+  {
+   "id": "react-next-198",
+   "section": "System design scenarios",
+   "question": "How would you build robust search-as-you-type?",
+   "options": [
+    "Send a request on every keystroke and show the latest result.",
+    "Control request frequency, ignore stale responses, show pending/error/empty states, and consider URL synchronization and accessibility.",
+    "Disable the input while requests are in flight.",
+    "Fetch all data in advance and filter on the server."
+   ],
+   "correctIndex": 1,
+   "explanation": "Transitions can help rendering but do not replace request management."
+  },
+  {
+   "id": "react-next-199",
+   "section": "System design scenarios",
+   "question": "How would you migrate Pages Router to App Router?",
+   "options": [
+    "Rewrite the entire application at once.",
+    "Remove the Pages Router and fix errors afterward.",
+    "Copy files to the `app` folder without changes.",
+    "Migrate incrementally, establish layouts, adapt data fetching, and test routing, caching, authentication, and SEO per route."
+   ],
+   "correctIndex": 3,
+   "explanation": "Do not mechanically translate APIs without understanding changed semantics."
+  },
+  {
+   "id": "react-next-200",
+   "section": "System design scenarios",
+   "question": "How would you reduce client JavaScript in Next.js?",
+   "options": [
+    "Mark every component as a Client Component.",
+    "Move all logic into `useEffect`.",
+    "Use Server Components for server work, minimize client boundaries, inspect bundles, and lazy-load noncritical features.",
+    "Bundle all dependencies into one file."
+   ],
+   "correctIndex": 2,
+   "explanation": "Measure route-specific bundle and hydration costs."
+  },
+  {
+   "id": "react-next-201",
+   "section": "System design scenarios",
+   "question": "How would you prevent duplicate payment submissions?",
+   "options": [
+    "Disable the submit button forever.",
+    "Use only client-side checks.",
+    "Enforce idempotency and transactional consistency on the server; make pending/retry behavior clear in the UI.",
+    "Refresh the page after the user clicks."
+   ],
+   "correctIndex": 2,
+   "explanation": "A disabled button alone cannot guarantee exactly-once processing."
+  },
+  {
+   "id": "react-next-202",
+   "section": "System design scenarios",
+   "question": "How would you design an accessible modal?",
+   "options": [
+    "Use a `<div>` and a `z-index` only.",
+    "Use dialog semantics, keyboard support, focus trapping/restoration, Escape behavior, and scroll management.",
+    "Ignore keyboard users since modals are visual.",
+    "Render the modal without focus management."
+   ],
+   "correctIndex": 1,
+   "explanation": "Visual correctness alone is insufficient."
+  },
+  {
+   "id": "react-next-203",
+   "section": "System design scenarios",
+   "question": "How would you cache edited content safely?",
+   "options": [
+    "Clear the entire cache of the app on every request.",
+    "Disable caching for all content.",
+    "Cache content permanently with no invalidation.",
+    "Identify dependent cached data/routes and invalidate the appropriate tags or paths after mutation."
+   ],
+   "correctIndex": 3,
+   "explanation": "Test both editor and public views against the chosen cache model."
+  },
+  {
+   "id": "react-next-204",
+   "section": "Legacy and version-sensitive topics",
+   "question": "Are React class components still supported?",
+   "options": [
+    "No; they were removed in React 19.",
+    "Only in development builds.",
+    "Yes, but function components and Hooks are the usual default for new code.",
+    "Only inside Next.js."
+   ],
+   "correctIndex": 2,
+   "explanation": "Class lifecycles remain relevant in legacy systems and some Error Boundary implementations."
+  },
+  {
+   "id": "react-next-205",
+   "section": "Legacy and version-sensitive topics",
+   "question": "What were `getServerSideProps` and `getStaticProps` for?",
+   "options": [
+    "Client-side data fetching and API route handling.",
+    "Defining layouts and route groups.",
+    "Image optimization and font loading.",
+    "Pages Router APIs for request-time server rendering and static generation respectively."
+   ],
+   "correctIndex": 3,
+   "explanation": "They are not the primary App Router data-fetching APIs."
+  },
+  {
+   "id": "react-next-206",
+   "section": "Legacy and version-sensitive topics",
+   "question": "What is `getStaticPaths`?",
+   "options": [
+    "A Pages Router API that supplies dynamic paths to pre-render with a fallback policy.",
+    "A Pages Router API that fetches data on every request.",
+    "An API that defines middleware for routes.",
+    "An API that configures the build output."
+   ],
+   "correctIndex": 0,
+   "explanation": "The App Router commonly uses `generateStaticParams` for related work."
+  },
+  {
+   "id": "react-next-207",
+   "section": "Legacy and version-sensitive topics",
+   "question": "What is `next/router` versus `next/navigation`?",
+   "options": [
+    "`next/router` is for the App Router; `next/navigation` is for the Pages Router.",
+    "They are identical.",
+    "`next/router` is for server code; `next/navigation` is for client code.",
+    "`next/router` is for Pages Router; `next/navigation` is for App Router."
+   ],
+   "correctIndex": 3,
+   "explanation": "Use the API matching the router in the current file."
+  },
+  {
+   "id": "react-next-208",
+   "section": "Legacy and version-sensitive topics",
+   "question": "Why is `ReactDOM.render` legacy?",
+   "options": [
+    "Because it only works on the server.",
+    "Because it was never part of React.",
+    "Because it cannot render function components.",
+    "Modern client roots use `createRoot`, while server-rendered HTML uses `hydrateRoot`."
+   ],
+   "correctIndex": 3,
+   "explanation": "Legacy roots do not enable the same modern root behavior."
+  },
+  {
+   "id": "react-next-209",
+   "section": "Legacy and version-sensitive topics",
+   "question": "What is the current status of Create React App?",
+   "options": [
+    "It was deprecated for new apps in 2025; current guidance favors a framework or a build tool such as Vite when a framework is not suitable.",
+    "It is the recommended default for all new apps.",
+    "It was removed from npm.",
+    "It is maintained as the official React framework."
+   ],
+   "correctIndex": 0,
+   "explanation": "For existing apps, discuss maintenance and migration choices."
+  },
+  {
+   "id": "react-next-210",
+   "section": "Legacy and version-sensitive topics",
+   "question": "What should you know about React/Next.js compatibility?",
+   "options": [
+    "Any React version works with any Next.js version.",
+    "Next.js ships without React.",
+    "React must always be the latest canary release.",
+    "Next.js integrates supported React versions; compatibility should be checked against the installed framework release."
+   ],
+   "correctIndex": 3,
+   "explanation": "Do not assume every latest React minor works with every Next.js version."
+  },
+  {
+   "id": "react-next-211",
+   "section": "Legacy and version-sensitive topics",
+   "question": "Why do React Server Components security advisories matter to Next.js developers?",
+   "options": [
+    "Next.js integrates RSC mechanisms that may be affected by React or protocol vulnerabilities.",
+    "They do not affect Next.js because it uses its own renderer.",
+    "They only affect React Native apps.",
+    "They only affect apps with no server code."
+   ],
+   "correctIndex": 0,
+   "explanation": "Keep supported framework and React versions patched and follow official advisories."
+  },
+  {
+   "id": "react-next-212",
+   "section": "Legacy and version-sensitive topics",
+   "question": "What changed around params in Next.js 15?",
+   "options": [
+    "`params` was removed completely from the App Router.",
+    "`params` became a global variable.",
+    "Several App Router request APIs, including `params` and `searchParams`, moved toward asynchronous access; caching defaults also changed.",
+    "Caching became permanently disabled."
+   ],
+   "correctIndex": 2,
+   "explanation": "Check migration docs for exact behavior."
+  },
+  {
+   "id": "react-next-213",
+   "section": "Legacy and version-sensitive topics",
+   "question": "What are Cache Components in Next.js 16?",
+   "options": [
+    "A set of utilities for caching images.",
+    "A way to cache only the static assets.",
+    "A component library for caching UI.",
+    "A newer caching model using explicit cache directives and related rendering behavior, including partial prerendering capabilities."
+   ],
+   "correctIndex": 3,
+   "explanation": "Exact setup and semantics are release-specific."
+  }
+ ]
+}

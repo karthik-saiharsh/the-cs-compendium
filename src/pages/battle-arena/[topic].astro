@@ -1,0 +1,854 @@
+---
+import Base from "../../layout/Base.astro";
+import { assertValidBanks } from "../../lib/validate-bank";
+
+type Question = {
+  id: string | number;
+  section: string;
+  question: string;
+  options: string[];
+  correctIndex: number;
+  explanation: string;
+};
+type Bank = {
+  title: string;
+  description?: string;
+  questions: Question[];
+};
+
+export function getStaticPaths() {
+  const bankModules = import.meta.glob<Bank>("./questions_banks/mcq/*.json", {
+    eager: true,
+    import: "default",
+  });
+
+  assertValidBanks(bankModules);
+
+  return Object.entries(bankModules).map(([path, bank]) => ({
+    params: { topic: path.split("/").pop()!.replace(/\.json$/, "") },
+    props: { bank },
+  }));
+}
+
+const { bank } = Astro.props as { bank: Bank };
+
+// Inline the questions as JSON; escape "<" so the data can't close the script tag.
+const payload = JSON.stringify({
+  title: bank.title,
+  questions: bank.questions,
+}).replace(/</g, "\\u003c");
+---
+
+<Base
+  title={`${bank.title} - Battle Arena`}
+  className="min-h-screen w-screen flex flex-col gap-6 items-center px-6 py-10"
+>
+  <h1
+    class="text-primary-fgt font-departure text-4xl max-md:text-3xl font-bold text-center text-balance"
+  >
+    {bank.title}
+  </h1>
+
+  <div id="app" class="w-full max-w-5xl font-ibm-mono text-primary-fgo"></div>
+
+  <noscript>
+    <p class="font-departure">The exam needs JavaScript to run.</p>
+  </noscript>
+
+  <script id="exam-data" type="application/json" set:html={payload} />
+</Base>
+
+<style is:global>
+  .ba-panel {
+    border-radius: 1.5rem;
+    border: 1px solid rgb(138 167 136 / 0.35);
+    background: rgb(255 255 255 / 0.75);
+    box-shadow: 0 6px 18px rgb(0 0 0 / 0.06);
+    padding: 1.5rem;
+  }
+  .ba-label {
+    font-family: departure;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-primary-fgth);
+  }
+  .ba-seg {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .ba-seg button,
+  .ba-select {
+    font-family: departure;
+    font-size: 0.85rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: 0.6rem;
+    border: 2px solid var(--color-primary-fgo);
+    background: var(--color-primary-bg);
+    cursor: pointer;
+  }
+  .ba-seg button[aria-pressed="true"] {
+    background: var(--color-primary-fgt);
+    color: white;
+  }
+  .ba-option {
+    display: flex;
+    gap: 0.75rem;
+    width: 100%;
+    text-align: left;
+    padding: 0.8rem 1rem;
+    border-radius: 0.9rem;
+    border: 2px solid rgb(68 68 68 / 0.35);
+    background: white;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1.6;
+    transition: border-color 0.15s, background-color 0.15s;
+  }
+  .ba-option:hover:not(:disabled) {
+    border-color: var(--color-primary-fgt);
+  }
+  .ba-option:disabled {
+    cursor: default;
+  }
+  .ba-option .key {
+    font-family: departure;
+    flex: none;
+  }
+  .ba-option .txt {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .ba-option.picked {
+    border-color: var(--color-primary-fgt);
+    background: rgb(138 167 136 / 0.22);
+  }
+  .ba-option.correct {
+    border-color: #3f8f4f;
+    background: rgb(63 143 79 / 0.16);
+  }
+  .ba-option.wrong {
+    border-color: #b94a48;
+    background: rgb(185 74 72 / 0.14);
+  }
+  .ba-explain {
+    margin-top: 1rem;
+    padding: 0.9rem 1rem;
+    border-radius: 0.9rem;
+    background: rgb(138 167 136 / 0.15);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  .ba-nav-btn {
+    width: 2.4rem;
+    height: 2.4rem;
+    font-family: departure;
+    font-size: 0.8rem;
+    border-radius: 0.6rem;
+    border: 2px solid rgb(68 68 68 / 0.4);
+    background: white;
+    cursor: pointer;
+  }
+  .ba-nav-btn.answered {
+    background: rgb(138 167 136 / 0.35);
+  }
+  .ba-nav-btn.correct {
+    background: rgb(63 143 79 / 0.3);
+    border-color: #3f8f4f;
+  }
+  .ba-nav-btn.wrong {
+    background: rgb(185 74 72 / 0.25);
+    border-color: #b94a48;
+  }
+  .ba-nav-btn.current {
+    outline: 3px solid var(--color-primary-fgo);
+    outline-offset: 1px;
+  }
+  .ba-bar {
+    height: 0.6rem;
+    border-radius: 999px;
+    background: rgb(68 68 68 / 0.15);
+    overflow: hidden;
+    min-width: 6rem;
+  }
+  .ba-bar > span {
+    display: block;
+    height: 100%;
+    background: var(--color-primary-fgt);
+  }
+  .ba-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .ba-table th,
+  .ba-table td {
+    text-align: left;
+    padding: 0.5rem 0.6rem;
+    border-bottom: 1px solid rgb(68 68 68 / 0.12);
+    vertical-align: middle;
+  }
+  .ba-review {
+    border: 1px solid rgb(68 68 68 / 0.2);
+    border-radius: 0.9rem;
+    padding: 0.75rem 1rem;
+    background: white;
+  }
+  .ba-review summary {
+    cursor: pointer;
+    font-size: 0.95rem;
+  }
+  .next-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+  }
+</style>
+
+<script>
+  type Question = {
+    id: string | number;
+    section: string;
+    question: string;
+    options: string[];
+    correctIndex: number;
+    explanation: string;
+  };
+  type Choice = { text: string; correct: boolean };
+  type Item = { q: Question; choices: Choice[]; picked: number | null };
+  type Settings = {
+    section: string;
+    count: number | "all";
+    timer: boolean;
+    reveal: "instant" | "end";
+  };
+
+  const data: { title: string; questions: Question[] } = JSON.parse(
+    document.getElementById("exam-data")!.textContent ?? "{}",
+  );
+  const app = document.getElementById("app")!;
+  const ALL = "__all__";
+  const sections = [...new Set(data.questions.map((q) => q.section))];
+  const COUNT_STEPS = [10, 25, 50, 100];
+  const LETTERS = "ABCD";
+
+  let settings: Settings = {
+    section: ALL,
+    count: 25,
+    timer: false,
+    reveal: "end",
+  };
+  let phase: "setup" | "exam" | "results" = "setup";
+  let items: Item[] = [];
+  let index = 0;
+  let confirmingSubmit = false;
+  let startedAt = 0;
+  let elapsedMs = 0;
+  let timerId: number | undefined;
+  let timerEl: HTMLElement | null = null;
+
+  // ---------- helpers ----------
+
+  type Child = Node | string | null | false;
+  function h(
+    tag: string,
+    props: Record<string, unknown> = {},
+    ...children: Child[]
+  ): HTMLElement {
+    const el = document.createElement(tag);
+    for (const [key, value] of Object.entries(props)) {
+      if (value === undefined || value === null || value === false) continue;
+      if (key.startsWith("on") && typeof value === "function") {
+        el.addEventListener(key.slice(2), value as EventListener);
+      } else if (key === "class") {
+        el.className = String(value);
+      } else {
+        el.setAttribute(key, value === true ? "" : String(value));
+      }
+    }
+    for (const child of children) {
+      if (child === null || child === false) continue;
+      el.append(child);
+    }
+    return el;
+  }
+
+  function shuffle<T>(arr: T[]): T[] {
+    const copy = [...arr];
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  }
+
+  function formatTime(ms: number): string {
+    const total = Math.floor(ms / 1000);
+    const hrs = Math.floor(total / 3600);
+    const mins = Math.floor((total % 3600) / 60);
+    const secs = total % 60;
+    const mm = String(mins).padStart(2, "0");
+    const ss = String(secs).padStart(2, "0");
+    return hrs > 0 ? `${hrs}:${mm}:${ss}` : `${mm}:${ss}`;
+  }
+
+  function pool(): Question[] {
+    return settings.section === ALL
+      ? data.questions
+      : data.questions.filter((q) => q.section === settings.section);
+  }
+
+  function stopTimer() {
+    if (timerId !== undefined) {
+      clearInterval(timerId);
+      timerId = undefined;
+    }
+  }
+
+  function segmented<T extends string | number | boolean>(
+    options: { label: string; value: T }[],
+    current: T,
+    onPick: (value: T) => void,
+  ): HTMLElement {
+    return h(
+      "div",
+      { class: "ba-seg" },
+      ...options.map((o) =>
+        h(
+          "button",
+          {
+            type: "button",
+            "aria-pressed": String(o.value === current),
+            onclick: () => onPick(o.value),
+          },
+          o.label,
+        ),
+      ),
+    );
+  }
+
+  function field(label: string, control: HTMLElement, hint?: string) {
+    return h(
+      "div",
+      { class: "flex flex-col gap-2" },
+      h("span", { class: "ba-label" }, label),
+      control,
+      hint ? h("p", { class: "text-sm opacity-75" }, hint) : null,
+    );
+  }
+
+  // ---------- setup ----------
+
+  function renderSetup() {
+    const available = pool().length;
+    if (settings.count !== "all" && settings.count > available) {
+      settings.count = "all";
+    }
+
+    const sectionSelect = h(
+      "select",
+      {
+        class: "ba-select max-w-full",
+        onchange: (e: Event) => {
+          settings.section = (e.target as HTMLSelectElement).value;
+          render();
+        },
+      },
+      h("option", { value: ALL }, `All sections (${data.questions.length})`),
+      ...sections.map((s) => {
+        const n = data.questions.filter((q) => q.section === s).length;
+        return h("option", { value: s }, `${s} (${n})`);
+      }),
+    ) as HTMLSelectElement;
+    sectionSelect.value = settings.section;
+
+    const counts = COUNT_STEPS.filter((n) => n < available).map((n) => ({
+      label: String(n),
+      value: n as number | "all",
+    }));
+    counts.push({ label: `All (${available})`, value: "all" });
+
+    app.replaceChildren(
+      h(
+        "div",
+        { class: "ba-panel flex flex-col gap-6 max-w-3xl mx-auto" },
+        h(
+          "p",
+          { class: "text-base leading-8" },
+          `${data.questions.length} multiple choice questions. Set up your attempt, then start the exam.`,
+        ),
+        field("Section", sectionSelect),
+        field(
+          "Number of questions",
+          segmented(counts, settings.count, (v) => {
+            settings.count = v;
+            render();
+          }),
+          "Questions are picked at random from the selected section.",
+        ),
+        field(
+          "Timer",
+          segmented(
+            [
+              { label: "Off", value: false },
+              { label: "On", value: true },
+            ],
+            settings.timer,
+            (v) => {
+              settings.timer = v;
+              render();
+            },
+          ),
+          "Not used for grading. Just shows how long you took.",
+        ),
+        field(
+          "Show answers",
+          segmented(
+            [
+              { label: "At the end", value: "end" as const },
+              { label: "After each question", value: "instant" as const },
+            ],
+            settings.reveal,
+            (v) => {
+              settings.reveal = v;
+              render();
+            },
+          ),
+          settings.reveal === "instant"
+            ? "You see the answer right after choosing. Each choice is final and cannot be changed."
+            : "Answers are revealed after you submit. You can change your choices until then.",
+        ),
+        h(
+          "div",
+          { class: "flex flex-wrap gap-4" },
+          h(
+            "button",
+            { type: "button", class: "next-button", onclick: startExam },
+            "Start Exam",
+          ),
+          h("a", { href: "/battle-arena/contents", class: "next-button" }, "All Topics"),
+        ),
+      ),
+    );
+  }
+
+  // ---------- exam ----------
+
+  function startExam() {
+    const chosen = shuffle(pool());
+    const picked =
+      settings.count === "all" ? chosen : chosen.slice(0, settings.count);
+    items = picked.map((q) => ({
+      q,
+      picked: null,
+      choices: shuffle(
+        q.options.map((text, i) => ({ text, correct: i === q.correctIndex })),
+      ),
+    }));
+    index = 0;
+    confirmingSubmit = false;
+    elapsedMs = 0;
+    phase = "exam";
+    stopTimer();
+    startedAt = Date.now();
+    if (settings.timer) {
+      timerId = window.setInterval(() => {
+        if (timerEl) timerEl.textContent = formatTime(Date.now() - startedAt);
+      }, 1000);
+    }
+    render();
+  }
+
+  function isLocked(item: Item): boolean {
+    return settings.reveal === "instant" && item.picked !== null;
+  }
+
+  function pick(choiceIndex: number) {
+    const item = items[index];
+    if (isLocked(item)) return;
+    item.picked = choiceIndex;
+    confirmingSubmit = false;
+    render();
+  }
+
+  function goTo(i: number) {
+    if (i < 0 || i >= items.length) return;
+    index = i;
+    confirmingSubmit = false;
+    render();
+  }
+
+  function submit() {
+    stopTimer();
+    elapsedMs = Date.now() - startedAt;
+    phase = "results";
+    render();
+    window.scrollTo({ top: 0 });
+  }
+
+  function navClass(item: Item, i: number): string {
+    const cls = ["ba-nav-btn"];
+    if (item.picked !== null) {
+      if (settings.reveal === "instant") {
+        cls.push(item.choices[item.picked].correct ? "correct" : "wrong");
+      } else {
+        cls.push("answered");
+      }
+    }
+    if (i === index) cls.push("current");
+    return cls.join(" ");
+  }
+
+  function renderExam() {
+    const item = items[index];
+    const answered = items.filter((it) => it.picked !== null).length;
+    const locked = isLocked(item);
+    const reveal = locked;
+
+    timerEl = settings.timer
+      ? h("span", { class: "font-departure" }, formatTime(Date.now() - startedAt))
+      : null;
+
+    const header = h(
+      "div",
+      { class: "flex flex-wrap items-center justify-between gap-3 font-departure text-sm" },
+      h("span", {}, `Question ${index + 1} / ${items.length}`),
+      h("span", {}, `Answered ${answered} / ${items.length}`),
+      timerEl ? h("span", {}, "Time ", timerEl) : null,
+    );
+
+    const options = item.choices.map((choice, i) => {
+      const cls = ["ba-option"];
+      if (reveal) {
+        if (choice.correct) cls.push("correct");
+        else if (item.picked === i) cls.push("wrong");
+      } else if (item.picked === i) {
+        cls.push("picked");
+      }
+      return h(
+        "button",
+        {
+          type: "button",
+          class: cls.join(" "),
+          disabled: locked,
+          "aria-pressed": String(item.picked === i),
+          onclick: () => pick(i),
+        },
+        h("span", { class: "key" }, `${LETTERS[i]}.`),
+        h("span", { class: "txt" }, choice.text),
+      );
+    });
+
+    let feedback: HTMLElement | null = null;
+    if (reveal) {
+      const correctIdx = item.choices.findIndex((c) => c.correct);
+      const right = item.picked === correctIdx;
+      feedback = h(
+        "div",
+        { class: "ba-explain", role: "status" },
+        h(
+          "strong",
+          {},
+          right ? "Correct." : `Incorrect. Correct answer: ${LETTERS[correctIdx]}.`,
+        ),
+        item.q.explanation ? h("p", { class: "mt-1" }, item.q.explanation) : null,
+      );
+    }
+
+    const question = h(
+      "div",
+      { class: "ba-panel flex flex-col gap-4" },
+      h("p", { class: "ba-label" }, item.q.section),
+      h(
+        "p",
+        { class: "text-xl font-semibold leading-8", style: "white-space: pre-wrap; overflow-wrap: anywhere" },
+        item.q.question,
+      ),
+      h("div", { class: "flex flex-col gap-3" }, ...options),
+      feedback,
+      settings.reveal === "end" && item.picked !== null
+        ? h(
+            "button",
+            {
+              type: "button",
+              class: "self-start text-sm underline cursor-pointer",
+              onclick: () => {
+                item.picked = null;
+                render();
+              },
+            },
+            "Clear my answer",
+          )
+        : null,
+    );
+
+    const unanswered = items.length - answered;
+    const submitArea = confirmingSubmit
+      ? h(
+          "div",
+          { class: "ba-panel flex flex-col gap-3" },
+          h(
+            "p",
+            {},
+            unanswered > 0
+              ? `${unanswered} question${unanswered === 1 ? " is" : "s are"} unanswered and will count as incorrect. Submit anyway?`
+              : "Submit your exam now?",
+          ),
+          h(
+            "div",
+            { class: "flex gap-3 flex-wrap" },
+            h("button", { type: "button", class: "next-button", onclick: submit }, "Yes, submit"),
+            h(
+              "button",
+              {
+                type: "button",
+                class: "next-button",
+                onclick: () => {
+                  confirmingSubmit = false;
+                  render();
+                },
+              },
+              "Keep going",
+            ),
+          ),
+        )
+      : null;
+
+    const nav = h(
+      "div",
+      { class: "flex flex-wrap items-center gap-3" },
+      h(
+        "button",
+        { type: "button", class: "next-button", disabled: index === 0, onclick: () => goTo(index - 1) },
+        "← Previous",
+      ),
+      h(
+        "button",
+        {
+          type: "button",
+          class: "next-button",
+          disabled: index === items.length - 1,
+          onclick: () => goTo(index + 1),
+        },
+        "Next →",
+      ),
+      h(
+        "button",
+        {
+          type: "button",
+          class: "next-button ml-auto",
+          onclick: () => {
+            confirmingSubmit = true;
+            render();
+          },
+        },
+        "Submit Exam",
+      ),
+    );
+
+    const overview = h(
+      "aside",
+      { class: "ba-panel flex flex-col gap-3 h-fit lg:sticky lg:top-6" },
+      h("p", { class: "ba-label" }, "Overview"),
+      h(
+        "div",
+        { class: "flex flex-wrap gap-2" },
+        ...items.map((it, i) =>
+          h(
+            "button",
+            {
+              type: "button",
+              class: navClass(it, i),
+              "aria-label": `Go to question ${i + 1}${it.picked !== null ? " (answered)" : ""}`,
+              "aria-current": i === index ? "true" : null,
+              onclick: () => goTo(i),
+            },
+            String(i + 1),
+          ),
+        ),
+      ),
+      h(
+        "p",
+        { class: "text-xs opacity-75" },
+        settings.reveal === "instant"
+          ? "Green = correct, red = incorrect, plain = unanswered."
+          : "Shaded = answered, plain = unanswered.",
+      ),
+    );
+
+    app.replaceChildren(
+      h(
+        "div",
+        { class: "grid gap-6 lg:grid-cols-[1fr_16rem] items-start" },
+        h("div", { class: "flex flex-col gap-4 min-w-0" }, header, question, nav, submitArea),
+        overview,
+      ),
+    );
+  }
+
+  // ---------- results ----------
+
+  function renderResults() {
+    const total = items.length;
+    const correct = items.filter((it) => it.picked !== null && it.choices[it.picked].correct).length;
+    const skipped = items.filter((it) => it.picked === null).length;
+    const wrong = total - correct - skipped;
+    const pct = total === 0 ? 0 : Math.round((correct / total) * 100);
+
+    const bySection = new Map<string, { total: number; correct: number; skipped: number }>();
+    for (const it of items) {
+      const row = bySection.get(it.q.section) ?? { total: 0, correct: 0, skipped: 0 };
+      row.total++;
+      if (it.picked === null) row.skipped++;
+      else if (it.choices[it.picked].correct) row.correct++;
+      bySection.set(it.q.section, row);
+    }
+
+    const stat = (label: string, value: string) =>
+      h(
+        "div",
+        { class: "flex flex-col gap-1" },
+        h("span", { class: "ba-label" }, label),
+        h("span", { class: "font-departure text-2xl" }, value),
+      );
+
+    const summary = h(
+      "div",
+      { class: "ba-panel flex flex-col gap-5" },
+      h("p", { class: "ba-label" }, "Result"),
+      h(
+        "p",
+        { class: "font-departure text-5xl text-primary-fgt" },
+        `${correct} / ${total}`,
+      ),
+      h(
+        "div",
+        { class: "grid grid-cols-2 sm:grid-cols-4 gap-4" },
+        stat("Score", `${pct}%`),
+        stat("Incorrect", String(wrong)),
+        stat("Skipped", String(skipped)),
+        settings.timer ? stat("Time taken", formatTime(elapsedMs)) : null,
+      ),
+    );
+
+    const sectionRows = [...bySection.entries()]
+      .sort((a, b) => a[0].localeCompare(b[0]))
+      .map(([name, r]) => {
+        const p = Math.round((r.correct / r.total) * 100);
+        return h(
+          "tr",
+          {},
+          h("td", {}, name),
+          h("td", { class: "whitespace-nowrap" }, `${r.correct} / ${r.total}`),
+          h("td", { class: "whitespace-nowrap" }, `${p}%`),
+          h("td", {}, h("div", { class: "ba-bar" }, h("span", { style: `width:${p}%` }))),
+        );
+      });
+
+    const breakdown = h(
+      "div",
+      { class: "ba-panel flex flex-col gap-3 overflow-x-auto" },
+      h("p", { class: "ba-label" }, "Section breakdown"),
+      h(
+        "table",
+        { class: "ba-table" },
+        h(
+          "thead",
+          {},
+          h("tr", {}, h("th", {}, "Section"), h("th", {}, "Correct"), h("th", {}, "%"), h("th", {}, "")),
+        ),
+        h("tbody", {}, ...sectionRows),
+      ),
+    );
+
+    const review = h(
+      "div",
+      { class: "ba-panel flex flex-col gap-3" },
+      h("p", { class: "ba-label" }, "Review"),
+      ...items.map((it, i) => {
+        const correctIdx = it.choices.findIndex((c) => c.correct);
+        const status =
+          it.picked === null ? "Skipped" : it.picked === correctIdx ? "Correct" : "Incorrect";
+        const details = h(
+          "details",
+          { class: "ba-review" },
+          h(
+            "summary",
+            {},
+            h("strong", {}, `${i + 1}. [${status}] `),
+            it.q.question,
+          ),
+          h(
+            "div",
+            { class: "mt-3 flex flex-col gap-2" },
+            ...it.choices.map((c, ci) => {
+              const cls = ["ba-option"];
+              if (c.correct) cls.push("correct");
+              else if (it.picked === ci) cls.push("wrong");
+              const tag = c.correct ? " (correct)" : it.picked === ci ? " (your answer)" : "";
+              return h(
+                "div",
+                { class: cls.join(" ") },
+                h("span", { class: "key" }, `${LETTERS[ci]}.`),
+                h("span", { class: "txt" }, c.text + tag),
+              );
+            }),
+            it.q.explanation ? h("div", { class: "ba-explain" }, it.q.explanation) : null,
+          ),
+        );
+        return details;
+      }),
+    );
+
+    app.replaceChildren(
+      h(
+        "div",
+        { class: "flex flex-col gap-6 max-w-3xl mx-auto" },
+        summary,
+        breakdown,
+        review,
+        h(
+          "div",
+          { class: "flex flex-wrap gap-4" },
+          h("button", { type: "button", class: "next-button", onclick: startExam }, "Retry (same settings)"),
+          h(
+            "button",
+            {
+              type: "button",
+              class: "next-button",
+              onclick: () => {
+                phase = "setup";
+                render();
+              },
+            },
+            "Change settings",
+          ),
+          h("a", { href: "/battle-arena/contents", class: "next-button" }, "All Topics"),
+        ),
+      ),
+    );
+  }
+
+  // ---------- wiring ----------
+
+  function render() {
+    if (phase === "setup") renderSetup();
+    else if (phase === "exam") renderExam();
+    else renderResults();
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (phase !== "exam" || e.metaKey || e.ctrlKey || e.altKey) return;
+    const target = e.target as HTMLElement;
+    if (target.closest("select, input, textarea")) return;
+    if (e.key === "ArrowLeft") goTo(index - 1);
+    else if (e.key === "ArrowRight") goTo(index + 1);
+    else if (e.key >= "1" && e.key <= "4") {
+      const i = Number(e.key) - 1;
+      if (i < items[index].choices.length) pick(i);
+    }
+  });
+
+  render();
+</script>
