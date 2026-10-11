@@ -1,0 +1,1086 @@
+{
+  "title": "Authentication, Sessions, Tokens, OAuth, and API Security ",
+  "description": "A conceptual question bank covering HTTP statelessness, authentication versus authorization, password verification, sessions and cookies, JWT signing and validation, OAuth 2.0 and OpenID Connect, magic links, MFA and passkeys, browser storage, API credentials, mobile/backend architecture, service authentication, and threat modeling.",
+  "count": 83,
+  "questions": [
+    {
+      "id": "FOUND-001",
+      "section": "Foundations: HTTP, identity, and access control",
+      "question": "HTTP is stateless by default. How can a server associate a new request with a previously authenticated user?",
+      "options": [
+        "HTTP remembers the user automatically",
+        "The request presents a credential or identifier that the server validates or looks up",
+        "The client IP address uniquely proves identity",
+        "The URL path always identifies the user"
+      ],
+      "correctIndex": 1,
+      "explanation": "HTTP does not automatically carry application login state between requests. A request must present suitable proof or a reference to state the server can validate."
+    },
+    {
+      "id": "FOUND-002",
+      "section": "Foundations: HTTP, identity, and access control",
+      "question": "What is the distinction between authentication and authorization?",
+      "options": [
+        "Authentication decides permissions; authorization checks identity",
+        "Authentication verifies a principal; authorization decides what that principal may do",
+        "They are synonyms",
+        "Authorization is performed only by the frontend"
+      ],
+      "correctIndex": 1,
+      "explanation": "Authentication asks who or what is making the request. Authorization evaluates whether that principal may perform a particular action on a resource."
+    },
+    {
+      "id": "FOUND-003",
+      "section": "Foundations: HTTP, identity, and access control",
+      "question": "A frontend hides an admin button, but the API does not check the caller’s role. What is the main flaw?",
+      "options": [
+        "The page needs a different CSS framework",
+        "The hidden button prevents direct API calls",
+        "The backend must enforce permissions because clients can call endpoints directly",
+        "The API can trust a role sent in the request body"
+      ],
+      "correctIndex": 2,
+      "explanation": "Frontend restrictions are user-interface behavior, not a security boundary. Every protected operation needs server-side authorization."
+    },
+    {
+      "id": "FOUND-004",
+      "section": "Foundations: HTTP, identity, and access control",
+      "question": "What does HTTPS provide, assuming certificates are correctly validated?",
+      "options": [
+        "It proves every user is authorized",
+        "Transport encryption, integrity protection, and authentication of the server endpoint",
+        "It prevents every application vulnerability",
+        "It creates a permanent user session"
+      ],
+      "correctIndex": 1,
+      "explanation": "TLS protects traffic in transit and authenticates the server under the certificate trust model. It does not itself log in the end user or grant permissions."
+    },
+    {
+      "id": "FOUND-005",
+      "section": "Foundations: HTTP, identity, and access control",
+      "question": "A request has a valid login credential. What else must the API decide before returning a private document?",
+      "options": [
+        "Nothing; authentication grants access to all documents",
+        "Whether the authenticated principal is authorized to read that specific document",
+        "Whether the frontend displayed a link to it",
+        "Whether the user knows the server IP address"
+      ],
+      "correctIndex": 1,
+      "explanation": "Authentication alone does not imply access to every resource. The server must apply object-level and action-level permission checks."
+    },
+    {
+      "id": "PWD-001",
+      "section": "Passwords and credential verification",
+      "question": "Why should a service store a password hash instead of the original password?",
+      "options": [
+        "A hash lets the server decrypt the original later",
+        "A database leak then does not directly reveal stored plaintext passwords",
+        "Hashing makes guessing mathematically impossible",
+        "A hash proves the user is a real person"
+      ],
+      "correctIndex": 1,
+      "explanation": "The server verifies a submitted password using the configured password-hashing process. Stolen hashes can still be guessed offline, so secure algorithms and parameters matter."
+    },
+    {
+      "id": "PWD-002",
+      "section": "Passwords and credential verification",
+      "question": "Why use a deliberately expensive password-hashing algorithm such as Argon2id, scrypt, or bcrypt?",
+      "options": [
+        "To make every login take several minutes",
+        "To make large-scale guessing of stolen password hashes more costly",
+        "To encrypt passwords so they can be decrypted",
+        "To prevent users choosing weak passwords"
+      ],
+      "correctIndex": 1,
+      "explanation": "Password hashing is designed to make each guess expensive. It should be paired with other controls such as rate limiting and MFA where appropriate."
+    },
+    {
+      "id": "PWD-003",
+      "section": "Passwords and credential verification",
+      "question": "What is the purpose of a salt in password hashing?",
+      "options": [
+        "It is a secret key that must never be stored",
+        "It makes identical passwords hash differently and frustrates precomputed attacks",
+        "It allows the password to be decrypted",
+        "It replaces the need for a slow hash function"
+      ],
+      "correctIndex": 1,
+      "explanation": "A salt is typically unique per password and stored with the hash. It need not be secret; it prevents identical passwords from sharing identical stored hash values."
+    },
+    {
+      "id": "PWD-004",
+      "section": "Passwords and credential verification",
+      "question": "During login, how should the server normally verify a submitted password?",
+      "options": [
+        "Decrypt the stored hash",
+        "Compare the submitted password to the hash as plain text",
+        "Use the stored salt and parameters to verify the submitted password with the password-hashing library",
+        "Send the password to the browser to verify it there"
+      ],
+      "correctIndex": 2,
+      "explanation": "Secure password hashes are not decrypted. A verification function recomputes the appropriate result and compares it safely with the stored value."
+    },
+    {
+      "id": "PWD-005",
+      "section": "Passwords and credential verification",
+      "question": "Why should passwords generally not be reused across sites?",
+      "options": [
+        "A unique salt stops an attacker trying leaked credentials elsewhere",
+        "A password leaked at one site may be tried at another site where it was reused",
+        "HTTPS makes reuse safe",
+        "Changing the username prevents credential stuffing"
+      ],
+      "correctIndex": 1,
+      "explanation": "Credential stuffing uses credentials exposed in unrelated breaches. Unique passwords, password managers, MFA, and passkeys reduce the risk."
+    },
+    {
+      "id": "PWD-006",
+      "section": "Passwords and credential verification",
+      "question": "Which is a sound property for a password-reset token?",
+      "options": [
+        "Predictable and valid forever",
+        "High entropy, short-lived, limited to reset purpose, and single-use where practical",
+        "Identical to the current password",
+        "Publicly listed so support staff can retrieve it"
+      ],
+      "correctIndex": 1,
+      "explanation": "Reset links are bearer credentials. They should be hard to guess, expire, be purpose-bound, and be invalidated after use."
+    },
+    {
+      "id": "SESS-001",
+      "section": "Sessions and cookies",
+      "question": "In a common server-side session design, what does the browser session cookie contain?",
+      "options": [
+        "The user password in reversible form",
+        "An opaque session identifier that the server maps to session state",
+        "The entire user database",
+        "A guarantee of administrator access"
+      ],
+      "correctIndex": 1,
+      "explanation": "The browser sends the session identifier; the server looks it up to find the associated session and principal. Authorization remains a separate check."
+    },
+    {
+      "id": "SESS-002",
+      "section": "Sessions and cookies",
+      "question": "What is the best distinction between a cookie and a session?",
+      "options": [
+        "They are always the same object",
+        "A cookie is browser-managed storage and request behavior; a session is application state associated with a client or user",
+        "Sessions must be stored in localStorage",
+        "Cookies are always encrypted and unreadable by JavaScript"
+      ],
+      "correctIndex": 1,
+      "explanation": "A cookie may carry a session ID, a token, or other data. The term session describes application state or a login period, not a particular browser storage mechanism."
+    },
+    {
+      "id": "SESS-003",
+      "section": "Sessions and cookies",
+      "question": "What does the HttpOnly cookie attribute do?",
+      "options": [
+        "It allows the cookie only over HTTP, not HTTPS",
+        "It prevents ordinary page JavaScript from directly reading the cookie value",
+        "It makes the cookie expire after one minute",
+        "It prevents the browser sending the cookie to the server"
+      ],
+      "correctIndex": 1,
+      "explanation": "The browser can still send an HttpOnly cookie with matching requests. HttpOnly reduces direct cookie theft through script but does not eliminate the impact of XSS."
+    },
+    {
+      "id": "SESS-004",
+      "section": "Sessions and cookies",
+      "question": "What does the Secure cookie attribute do?",
+      "options": [
+        "It prevents the user copying the cookie",
+        "It instructs the browser to send the cookie only over secure HTTPS connections, subject to browser rules",
+        "It encrypts the server database",
+        "It hides the cookie from the server"
+      ],
+      "correctIndex": 1,
+      "explanation": "Secure limits transmission to secure connections; it does not independently encrypt the cookie value or prevent all forms of theft."
+    },
+    {
+      "id": "SESS-005",
+      "section": "Sessions and cookies",
+      "question": "Why does cookie-based authentication need to consider CSRF?",
+      "options": [
+        "Browsers never send cookies automatically",
+        "Browsers may attach cookies automatically to requests initiated from contexts an attacker controls",
+        "Password hashes are reversible",
+        "JWT signatures disappear after page reload"
+      ],
+      "correctIndex": 1,
+      "explanation": "Cookies are ambient credentials. SameSite policy, anti-CSRF tokens, Origin checks, and careful request design can help prevent cross-site request forgery."
+    },
+    {
+      "id": "SESS-006",
+      "section": "Sessions and cookies",
+      "question": "A user clears browser cookies. What can be concluded about a server-side session?",
+      "options": [
+        "The server-side record is necessarily deleted instantly",
+        "The browser loses its cookie copy, but the server-side record may remain until expiry or revocation",
+        "The session turns into a JWT",
+        "The server learns the user password"
+      ],
+      "correctIndex": 1,
+      "explanation": "Clearing a cookie removes the browser’s usual way to present that session ID. It does not necessarily invalidate a copied cookie or delete the server record."
+    },
+    {
+      "id": "SESS-007",
+      "section": "Sessions and cookies",
+      "question": "Why invalidate the server-side session during logout?",
+      "options": [
+        "It can make the session identifier unusable even if someone copied it",
+        "It automatically logs out every device in all cases",
+        "It changes the password",
+        "It removes all cookies from every browser"
+      ],
+      "correctIndex": 0,
+      "explanation": "Deleting or revoking the corresponding session record can invalidate that session. Other devices and tokens require separate handling if they should also be revoked."
+    },
+    {
+      "id": "SESS-008",
+      "section": "Sessions and cookies",
+      "question": "Which cookie setup is generally appropriate for a sensitive first-party browser session over HTTPS?",
+      "options": [
+        "A JavaScript-readable cookie with broad domain scope",
+        "A Secure, HttpOnly cookie with a suitable SameSite policy, narrow scope, and deliberate lifetime",
+        "A cookie containing a plaintext password",
+        "A cookie sent to every domain"
+      ],
+      "correctIndex": 1,
+      "explanation": "These attributes reduce exposure, but the correct SameSite and scope settings depend on the app’s flows. They do not replace authorization or XSS defenses."
+    },
+    {
+      "id": "SESS-009",
+      "section": "Sessions and cookies",
+      "question": "Can a cookie contain a JWT instead of an opaque session ID?",
+      "options": [
+        "No, cookies can contain only session IDs",
+        "Yes; a cookie is a transport/storage mechanism and may contain different kinds of values",
+        "Yes, but only if the JWT is encrypted by default",
+        "No, JWTs can only be sent in URL parameters"
+      ],
+      "correctIndex": 1,
+      "explanation": "Cookie and token formats are separate concepts. A JWT in a cookie still needs validation and cookie-based CSRF protections where applicable."
+    },
+    {
+      "id": "JWT-001",
+      "section": "JWTs, signatures, and token validation",
+      "question": "What does a typical signed JWT provide when correctly validated?",
+      "options": [
+        "Confidentiality of every claim by default",
+        "Integrity and authenticity of the signed contents, plus claims the verifier can evaluate",
+        "Proof that the user is trustworthy",
+        "Automatic revocation when the browser closes"
+      ],
+      "correctIndex": 1,
+      "explanation": "A signed JWT is usually readable by anyone who obtains it. Signing protects integrity and links the token to a signing key; it does not automatically encrypt or authorize every action."
+    },
+    {
+      "id": "JWT-002",
+      "section": "JWTs, signatures, and token validation",
+      "question": "Why should a secret not be placed in an ordinary signed JWT payload?",
+      "options": [
+        "JWT payloads cannot contain strings",
+        "Base64url encoding is not encryption, so the payload is generally readable",
+        "The signature removes all secrets automatically",
+        "JWTs can only be stored on servers"
+      ],
+      "correctIndex": 1,
+      "explanation": "The usual JWT format encodes its header and payload rather than encrypting them. Do not put confidential values in a signed-only token."
+    },
+    {
+      "id": "JWT-003",
+      "section": "JWTs, signatures, and token validation",
+      "question": "What should a resource server typically check before accepting a JWT access token?",
+      "options": [
+        "Only that it has three dot-separated parts",
+        "Signature with an allowed algorithm and trusted key, expected issuer and audience, expiry, and relevant claims/scopes",
+        "Only the username in the payload",
+        "Only that it arrived over HTTPS"
+      ],
+      "correctIndex": 1,
+      "explanation": "JWT validation is more than parsing. The verifier must check the token against its trust policy and intended use, including temporal and authorization claims."
+    },
+    {
+      "id": "JWT-004",
+      "section": "JWTs, signatures, and token validation",
+      "question": "What is the purpose of the aud (audience) claim?",
+      "options": [
+        "It names the cryptographic algorithm",
+        "It identifies the intended recipient or recipients of the token",
+        "It stores a password hash",
+        "It states the token’s expiration time"
+      ],
+      "correctIndex": 1,
+      "explanation": "Audience checking helps prevent a token issued for one service or client from being accepted by an unintended recipient."
+    },
+    {
+      "id": "JWT-005",
+      "section": "JWTs, signatures, and token validation",
+      "question": "A JWT has a valid signature but its exp claim is in the past. What should a verifier normally do?",
+      "options": [
+        "Accept it because a signature overrides expiry",
+        "Reject it as expired, allowing only explicitly configured clock-skew tolerance",
+        "Extend its expiry automatically",
+        "Treat it as encrypted"
+      ],
+      "correctIndex": 1,
+      "explanation": "A valid signature does not make every claim acceptable. Expiration and other claims must be validated according to the token profile and policy."
+    },
+    {
+      "id": "JWT-006",
+      "section": "JWTs, signatures, and token validation",
+      "question": "What is the key difference between HS256 and RS256?",
+      "options": [
+        "HS256 uses a shared secret for signing and verification; RS256 uses a private signing key and public verification key",
+        "HS256 encrypts claims while RS256 does not",
+        "RS256 requires the browser to know the private key",
+        "HS256 tokens cannot expire"
+      ],
+      "correctIndex": 0,
+      "explanation": "With HMAC, every verifier holding the shared secret can also mint tokens. With RSA, a verifier can hold only the public key and cannot create signatures."
+    },
+    {
+      "id": "JWT-007",
+      "section": "JWTs, signatures, and token validation",
+      "question": "In an asymmetric JWT system, where should the private signing key normally live?",
+      "options": [
+        "Inside every mobile app",
+        "On the trusted issuer/signing system, protected from clients and ordinary verifiers",
+        "In the JWT header",
+        "In a public JWKS document"
+      ],
+      "correctIndex": 1,
+      "explanation": "The issuer uses the private key to sign. Verifiers use the public key; exposing the private key would let others mint apparently valid tokens."
+    },
+    {
+      "id": "JWT-008",
+      "section": "JWTs, signatures, and token validation",
+      "question": "How does a verifier commonly obtain public keys for tokens from a trusted identity provider?",
+      "options": [
+        "Trust any public key embedded in the token",
+        "Use the configured issuer’s trusted JWKS endpoint and often select a key using kid",
+        "Derive the key from the username",
+        "Ask the user to paste a private key"
+      ],
+      "correctIndex": 1,
+      "explanation": "Key discovery must be anchored to a trusted issuer. A token-supplied arbitrary key is not a trust anchor; key rotation and caching need to be handled."
+    },
+    {
+      "id": "JWT-009",
+      "section": "JWTs, signatures, and token validation",
+      "question": "Why can revoking a self-contained JWT be harder than invalidating a server-side session?",
+      "options": [
+        "JWTs can never expire",
+        "A JWT may remain valid until expiry unless the system adds revocation state or online checks",
+        "JWTs cannot be signed",
+        "A server-side session cannot be deleted"
+      ],
+      "correctIndex": 1,
+      "explanation": "Systems can add deny-lists, token-version checks, introspection, or refresh-token revocation, but these add state or checks. Short lifetimes limit exposure."
+    },
+    {
+      "id": "JWT-010",
+      "section": "JWTs, signatures, and token validation",
+      "question": "Where can a JWT be stored?",
+      "options": [
+        "Only localStorage",
+        "Only an HttpOnly cookie",
+        "In various places depending on architecture, such as memory, storage, cookies, secure mobile storage, or a backend",
+        "Only in a relational database"
+      ],
+      "correctIndex": 2,
+      "explanation": "JWT defines a token format, not storage rules. Storage choice affects persistence, XSS exposure, CSRF, and revocation trade-offs."
+    },
+    {
+      "id": "JWT-011",
+      "section": "JWTs, signatures, and token validation",
+      "question": "Why use a short-lived access token with a longer-lived refresh token?",
+      "options": [
+        "To make the access token never expire",
+        "To limit the useful lifetime of a stolen access token while allowing controlled issuance of new ones",
+        "To avoid authenticating the refresh token",
+        "To make API calls anonymous"
+      ],
+      "correctIndex": 1,
+      "explanation": "Refresh tokens are valuable credentials and need careful storage and often rotation/reuse detection and revocation. Short access-token lifetimes reduce, but do not eliminate, exposure."
+    },
+    {
+      "id": "JWT-012",
+      "section": "JWTs, signatures, and token validation",
+      "question": "What is the safest interpretation of a token’s sub claim?",
+      "options": [
+        "It is automatically proof of authorization for every resource",
+        "It identifies the subject according to the issuer’s token profile, but the application must still validate the token and check permissions",
+        "It is always the user’s email address",
+        "It is the signature algorithm"
+      ],
+      "correctIndex": 1,
+      "explanation": "Claims have meanings defined by the token’s issuer and profile. Do not trust a subject value from an unvalidated token or assume it grants access by itself."
+    },
+    {
+      "id": "OAUTH-001",
+      "section": "OAuth 2.0 and OpenID Connect",
+      "question": "What is OAuth 2.0 primarily designed to enable?",
+      "options": [
+        "Standardized login in every scenario, by itself",
+        "Delegated authorization to access protected resources",
+        "Secure password hashing",
+        "Encryption of stored files"
+      ],
+      "correctIndex": 1,
+      "explanation": "OAuth 2.0 is an authorization framework. By itself it does not define the complete standardized identity layer provided by OpenID Connect."
+    },
+    {
+      "id": "OAUTH-002",
+      "section": "OAuth 2.0 and OpenID Connect",
+      "question": "What does OpenID Connect add to OAuth 2.0?",
+      "options": [
+        "An identity/authentication layer, including ID tokens and identity claims",
+        "A requirement to store tokens in localStorage",
+        "A replacement for HTTPS",
+        "Automatic permission checks for every API"
+      ],
+      "correctIndex": 0,
+      "explanation": "OIDC standardizes identity information and authentication semantics on top of OAuth 2.0. APIs still need to validate access credentials and enforce authorization."
+    },
+    {
+      "id": "OAUTH-003",
+      "section": "OAuth 2.0 and OpenID Connect",
+      "question": "What is the best distinction between an OIDC ID token and an OAuth access token?",
+      "options": [
+        "They are interchangeable and have the same audience",
+        "An ID token conveys authentication/identity information to the client; an access token is used to access a resource server",
+        "An access token is always a JWT and an ID token is always opaque",
+        "An ID token is the user’s password"
+      ],
+      "correctIndex": 1,
+      "explanation": "Their intended recipient and use differ. Access tokens may be JWTs or opaque strings; an ID token should not be casually treated as an API access token."
+    },
+    {
+      "id": "OAUTH-004",
+      "section": "OAuth 2.0 and OpenID Connect",
+      "question": "In Authorization Code flow, what is normally returned through the redirect URI?",
+      "options": [
+        "The user’s password",
+        "A short-lived authorization code that the client exchanges for tokens",
+        "The issuer’s private signing key",
+        "A permanent API key for every provider"
+      ],
+      "correctIndex": 1,
+      "explanation": "The code flow returns a code through the browser redirect and then exchanges it at the token endpoint, rather than exposing tokens in the front-channel redirect."
+    },
+    {
+      "id": "OAUTH-005",
+      "section": "OAuth 2.0 and OpenID Connect",
+      "question": "What does PKCE protect against in the authorization-code flow?",
+      "options": [
+        "It replaces TLS encryption",
+        "It binds code redemption to possession of a verifier corresponding to the challenge sent earlier",
+        "It makes an embedded mobile client secret confidential",
+        "It grants administrator rights"
+      ],
+      "correctIndex": 1,
+      "explanation": "PKCE makes an intercepted authorization code insufficient by itself to redeem tokens. It is especially important for native apps and other public clients."
+    },
+    {
+      "id": "OAUTH-006",
+      "section": "OAuth 2.0 and OpenID Connect",
+      "question": "Why should the client validate OAuth state on the callback?",
+      "options": [
+        "To look up the user’s weather",
+        "To correlate the callback to the login attempt and help prevent forged or cross-site authorization responses",
+        "To verify an RSA signature directly",
+        "To set a password"
+      ],
+      "correctIndex": 1,
+      "explanation": "State links the callback to the request initiated by the client. OIDC nonce has a related but distinct role in binding an ID token to an authentication request and mitigating replay."
+    },
+    {
+      "id": "OAUTH-007",
+      "section": "OAuth 2.0 and OpenID Connect",
+      "question": "Why is a client secret embedded in a distributed mobile app not reliably secret?",
+      "options": [
+        "Mobile apps cannot use HTTPS",
+        "Users can inspect or instrument the app and extract the shared value",
+        "OAuth forbids client IDs in mobile apps",
+        "A client secret is the user’s password"
+      ],
+      "correctIndex": 1,
+      "explanation": "Native apps are public clients because they cannot reliably protect a shared secret distributed to users. Authorization Code with PKCE is the usual pattern."
+    },
+    {
+      "id": "OAUTH-008",
+      "section": "OAuth 2.0 and OpenID Connect",
+      "question": "In a typical “Sign in with Google” flow, what happens after Google authenticates the user?",
+      "options": [
+        "Google gives the website Google’s private signing key",
+        "The website validates the OIDC response and establishes its own local session",
+        "The website receives and stores the Google password",
+        "The website must reuse Google’s cookie as its own session"
+      ],
+      "correctIndex": 1,
+      "explanation": "The application validates the identity response, including issuer, audience, signature, and expiry, then normally creates its own session. Provider login and app login are separate layers."
+    },
+    {
+      "id": "OAUTH-009",
+      "section": "OAuth 2.0 and OpenID Connect",
+      "question": "Why should an application validate an ID token’s audience against its registered client ID?",
+      "options": [
+        "To confirm the token was intended for that client",
+        "To check whether the user’s display name is unique",
+        "To prove the token is in localStorage",
+        "To compare the client secret to the provider’s signing key"
+      ],
+      "correctIndex": 0,
+      "explanation": "Audience validation prevents accepting a valid token issued for a different client. Signature, issuer, expiry, and other required checks are also needed."
+    },
+    {
+      "id": "OAUTH-010",
+      "section": "OAuth 2.0 and OpenID Connect",
+      "question": "In a typical Auth.js/NextAuth Google setup, which statement about the app session is correct?",
+      "options": [
+        "It must be exactly Google’s ID token",
+        "The app establishes its own session; configuration may use a cookie-based JWT session or a database-backed session",
+        "Google stores the app’s local session database",
+        "The Google client secret is the session ID"
+      ],
+      "correctIndex": 1,
+      "explanation": "Federated sign-in and the app’s own session are distinct. The local session strategy depends on configuration; provider tokens may be retained if needed for provider APIs."
+    },
+    {
+      "id": "OAUTH-011",
+      "section": "OAuth 2.0 and OpenID Connect",
+      "question": "What is a client ID normally used for in OAuth/OIDC?",
+      "options": [
+        "Identifying the registered client; it is generally not a secret",
+        "Serving as the private signing key",
+        "Serving as the user’s password",
+        "Proving the client device is uncompromised"
+      ],
+      "correctIndex": 0,
+      "explanation": "Client IDs are commonly visible in authorization requests and app binaries. Public clients cannot protect a shared secret merely by embedding it."
+    },
+    {
+      "id": "OAUTH-012",
+      "section": "OAuth 2.0 and OpenID Connect",
+      "question": "A backend needs to call an API on its own behalf rather than on behalf of a user. Which OAuth pattern may fit?",
+      "options": [
+        "Client credentials, if supported by the provider and appropriate to the use case",
+        "A magic link sent to an administrator",
+        "A browser-only cookie from an unrelated site",
+        "Using an ID token as a universal API key"
+      ],
+      "correctIndex": 0,
+      "explanation": "Client credentials is a machine-to-machine grant for confidential clients. The service must protect its client authentication and request only appropriate scopes."
+    },
+    {
+      "id": "MFA-001",
+      "section": "Magic links, MFA, OTPs, and passkeys",
+      "question": "What does a magic-link login generally demonstrate?",
+      "options": [
+        "That the person remembers a password",
+        "That the person can access the mailbox or channel where the link was delivered, subject to the flow’s assumptions",
+        "That the person’s legal identity is proven",
+        "That the device has no malware"
+      ],
+      "correctIndex": 1,
+      "explanation": "A magic link is a bearer proof delivered through a channel. Control of an inbox is not necessarily the same as verified legal identity or exclusive account control."
+    },
+    {
+      "id": "MFA-002",
+      "section": "Magic links, MFA, OTPs, and passkeys",
+      "question": "Which set of properties is appropriate for a magic-link token?",
+      "options": [
+        "Predictable, reusable, and valid forever",
+        "High entropy, short-lived, purpose-bound, and single-use where practical",
+        "The same as the user password",
+        "Publicly searchable"
+      ],
+      "correctIndex": 1,
+      "explanation": "These properties reduce guessing and replay. Implementations should also consider link scanners and leakage through logs, analytics, and referrer headers."
+    },
+    {
+      "id": "MFA-003",
+      "section": "Magic links, MFA, OTPs, and passkeys",
+      "question": "Why might a magic-link flow avoid consuming a token on the first GET request?",
+      "options": [
+        "GET requests cannot contain URLs",
+        "Automated email security scanners may open links before the user, so a confirmation step can avoid accidental consumption",
+        "Tokens do not need validation",
+        "The link should work forever"
+      ],
+      "correctIndex": 1,
+      "explanation": "A landing page can validate the link and require an explicit follow-up action before consuming it, while still ensuring that the final use is single-use and protected."
+    },
+    {
+      "id": "MFA-004",
+      "section": "Magic links, MFA, OTPs, and passkeys",
+      "question": "Which is an example of multi-factor authentication using different factor categories?",
+      "options": [
+        "Password plus a second password",
+        "Password plus fingerprint",
+        "Two memorized security answers",
+        "Username plus email address"
+      ],
+      "correctIndex": 1,
+      "explanation": "MFA combines distinct categories such as something you know, have, or are. Two knowledge-based items do not necessarily count as separate factors."
+    },
+    {
+      "id": "MFA-005",
+      "section": "Magic links, MFA, OTPs, and passkeys",
+      "question": "What is a TOTP code generally based on?",
+      "options": [
+        "A shared secret and a time-derived counter used to calculate a short code",
+        "A random value that the user invents and the server never checks",
+        "The IP address alone",
+        "A public key sent with each keystroke"
+      ],
+      "correctIndex": 0,
+      "explanation": "TOTP uses a shared secret and time step to calculate matching short-lived codes. Servers allow limited clock drift and should handle replay appropriately."
+    },
+    {
+      "id": "MFA-006",
+      "section": "Magic links, MFA, OTPs, and passkeys",
+      "question": "Why are SMS codes generally weaker than phishing-resistant passkeys?",
+      "options": [
+        "SMS codes are never delivered",
+        "SMS can be exposed to SIM-swap and social-engineering attacks and does not cryptographically bind authentication to the legitimate site",
+        "Passkeys require password reuse",
+        "SMS always uses public-key signatures"
+      ],
+      "correctIndex": 1,
+      "explanation": "SMS may be better than password-only in some settings, but has weaknesses. WebAuthn/passkeys use origin-bound public-key credentials and can resist phishing."
+    },
+    {
+      "id": "MFA-007",
+      "section": "Magic links, MFA, OTPs, and passkeys",
+      "question": "At a high level, how does a WebAuthn/passkey login work?",
+      "options": [
+        "The server stores the user’s private key in plaintext",
+        "An authenticator signs a challenge with a private key and the server verifies it using the registered public key",
+        "The user sends one static password to every site",
+        "The server accepts a token from any website"
+      ],
+      "correctIndex": 1,
+      "explanation": "The private key remains with the authenticator or passkey provider. The server verifies the challenge response and checks origin, relying-party, and protocol data."
+    },
+    {
+      "id": "STORE-001",
+      "section": "Browser storage, XSS, CSRF, and BFF architecture",
+      "question": "What is a major security difference between localStorage and an HttpOnly cookie?",
+      "options": [
+        "JavaScript can ordinarily read localStorage values but cannot directly read an HttpOnly cookie",
+        "localStorage is always encrypted and cookies are not",
+        "HttpOnly cookies are never sent to servers",
+        "localStorage prevents XSS"
+      ],
+      "correctIndex": 0,
+      "explanation": "JavaScript-readable storage exposes tokens to injected scripts. HttpOnly limits direct reads, although XSS may still issue authenticated requests from the page."
+    },
+    {
+      "id": "STORE-002",
+      "section": "Browser storage, XSS, CSRF, and BFF architecture",
+      "question": "What does HttpOnly do and not do in the presence of XSS?",
+      "options": [
+        "It makes XSS impossible",
+        "It can block direct script reads of the cookie, but injected script may still make authenticated requests",
+        "It replaces output encoding and content security controls",
+        "It prevents all malicious requests"
+      ],
+      "correctIndex": 1,
+      "explanation": "HttpOnly reduces one path for credential theft but does not neutralize malicious code executing in the trusted origin."
+    },
+    {
+      "id": "STORE-003",
+      "section": "Browser storage, XSS, CSRF, and BFF architecture",
+      "question": "Why is localStorage not a universal solution to CSRF?",
+      "options": [
+        "Manually attached tokens may reduce classic ambient-cookie CSRF, but JavaScript-readable tokens can be stolen or used by XSS",
+        "localStorage credentials are automatically attached to every cross-site request",
+        "CSRF and XSS are the same vulnerability",
+        "localStorage makes every request anonymous"
+      ],
+      "correctIndex": 0,
+      "explanation": "Storage changes the threat model rather than eliminating security problems. JavaScript-readable bearer tokens are exposed to same-origin script compromise."
+    },
+    {
+      "id": "STORE-004",
+      "section": "Browser storage, XSS, CSRF, and BFF architecture",
+      "question": "What is a Backend-for-Frontend (BFF) pattern commonly intended to achieve?",
+      "options": [
+        "Move all provider tokens permanently into browser JavaScript",
+        "Keep provider tokens on a backend while the browser uses a protected first-party session to call that backend",
+        "Remove the need for permission checks",
+        "Replace HTTPS with local storage"
+      ],
+      "correctIndex": 1,
+      "explanation": "A BFF holds sensitive downstream credentials and mediates API calls. Browser session cookies still need appropriate CSRF-aware configuration and server-side authorization."
+    },
+    {
+      "id": "STORE-005",
+      "section": "Browser storage, XSS, CSRF, and BFF architecture",
+      "question": "Why is putting a bearer credential in a URL query string usually discouraged?",
+      "options": [
+        "URLs cannot use HTTPS",
+        "URLs can leak through history, logs, analytics, screenshots, and referrer data",
+        "Query strings are automatically hashed",
+        "Servers cannot read query strings"
+      ],
+      "correctIndex": 1,
+      "explanation": "Credentials in URLs may be copied into multiple logging and navigation channels. Prefer an appropriate header or protected cookie according to the architecture."
+    },
+    {
+      "id": "API-001",
+      "section": "API keys, mobile apps, and service-to-service authentication",
+      "question": "What does an API key commonly represent?",
+      "options": [
+        "Necessarily the individual human who typed a password",
+        "An application, project, account, or client context to which provider policy and quotas apply",
+        "A biometric identity",
+        "A certificate authority"
+      ],
+      "correctIndex": 1,
+      "explanation": "Provider semantics vary. An API key often identifies a project or app and does not automatically identify the end user who initiated a request."
+    },
+    {
+      "id": "API-002",
+      "section": "API keys, mobile apps, and service-to-service authentication",
+      "question": "A mobile app needs a weather provider’s private API key. What is the usual safe architecture?",
+      "options": [
+        "Compile the key into the app and obfuscate it",
+        "Have the app call your backend, which stores the key and calls the weather provider",
+        "Publish the key in a repository and delete the line later",
+        "Send the key to each user after login"
+      ],
+      "correctIndex": 1,
+      "explanation": "A distributed binary can be inspected. A backend or serverless function keeps the private key off devices and can enforce limits and return only necessary data."
+    },
+    {
+      "id": "API-003",
+      "section": "API keys, mobile apps, and service-to-service authentication",
+      "question": "Why is a secret embedded in a mobile app not reliable proof that a request came from your genuine app?",
+      "options": [
+        "Mobile apps cannot make authenticated requests",
+        "An attacker can inspect or instrument the app and extract the shared secret",
+        "All mobile traffic is unencrypted",
+        "API keys only work in browsers"
+      ],
+      "correctIndex": 1,
+      "explanation": "The client is under the user’s control. Obfuscation can raise effort but does not make a distributed shared value a dependable secret."
+    },
+    {
+      "id": "API-004",
+      "section": "API keys, mobile apps, and service-to-service authentication",
+      "question": "When might a key be acceptable in a browser or mobile client?",
+      "options": [
+        "Whenever it is named “secret”",
+        "When the provider explicitly supports public/client-side keys and suitable restrictions, quotas, and exposure assumptions are applied",
+        "Whenever HTTPS is used",
+        "When it is Base64-encoded"
+      ],
+      "correctIndex": 1,
+      "explanation": "Some keys are intended to be public identifiers or restricted client keys. HTTPS and encoding do not hide a key from the client owner."
+    },
+    {
+      "id": "API-005",
+      "section": "API keys, mobile apps, and service-to-service authentication",
+      "question": "What is a common difference between an API key and a user access token?",
+      "options": [
+        "They always mean the same thing",
+        "An API key often represents an app/project context, while a user access token often represents delegated authority or scopes",
+        "An access token is always public",
+        "An API key always contains identity claims"
+      ],
+      "correctIndex": 1,
+      "explanation": "Their exact semantics depend on the provider, but they often represent different principals and policy models. Do not assume an API key identifies the end user."
+    },
+    {
+      "id": "API-006",
+      "section": "API keys, mobile apps, and service-to-service authentication",
+      "question": "Why add rate limiting and caching to a public backend endpoint that proxies a paid weather API?",
+      "options": [
+        "To expose the provider key to the client",
+        "To reduce abuse and control request volume and costs",
+        "To validate a JWT signature automatically",
+        "To eliminate authorization checks everywhere"
+      ],
+      "correctIndex": 1,
+      "explanation": "A public endpoint can be called by scripts or modified clients. Rate limits, caching, validation, quotas, and sometimes user authentication control abuse and expense."
+    },
+    {
+      "id": "API-007",
+      "section": "API keys, mobile apps, and service-to-service authentication",
+      "question": "Which is a reasonable service-to-service authentication mechanism?",
+      "options": [
+        "A hidden frontend button",
+        "Workload identity, mTLS, or a properly configured OAuth client-credentials flow",
+        "Trusting any public X-Admin header",
+        "Storing passwords in plaintext"
+      ],
+      "correctIndex": 1,
+      "explanation": "Machine identities can use workload identity, certificates, client credentials, or signed requests. Credentials must be validated and access scoped."
+    },
+    {
+      "id": "API-008",
+      "section": "API keys, mobile apps, and service-to-service authentication",
+      "question": "What does HMAC request signing commonly let a server verify?",
+      "options": [
+        "That a request was signed by someone possessing a shared secret and that covered request fields have not changed",
+        "That every response is encrypted automatically",
+        "That a human is physically present",
+        "That replay is impossible without additional measures"
+      ],
+      "correctIndex": 0,
+      "explanation": "A defined canonical request can be signed using a shared secret. Timestamps, nonces, and replay defenses may also be necessary."
+    },
+    {
+      "id": "API-009",
+      "section": "API keys, mobile apps, and service-to-service authentication",
+      "question": "A private API key was committed to a public repository. What should the team do first?",
+      "options": [
+        "Delete the line and assume the key is safe",
+        "Revoke or rotate the exposed key, review usage, and move the replacement to secure secret storage",
+        "Rename the variable",
+        "Base64-encode the same key"
+      ],
+      "correctIndex": 1,
+      "explanation": "Once exposed, treat the key as compromised. Removing the text does not erase copies, forks, caches, or repository history."
+    },
+    {
+      "id": "ARCH-001",
+      "section": "Architecture, protocol choices, and threat modeling",
+      "question": "A team says JWT means authentication is stateless and requires no database. What is the best response?",
+      "options": [
+        "Correct; JWT always eliminates server state",
+        "JWT is a token format; the architecture may still use databases, deny-lists, refresh records, or other state",
+        "JWTs need no signature verification",
+        "JWTs cannot work without a database"
+      ],
+      "correctIndex": 1,
+      "explanation": "Statelessness is a design choice. Revocation, refresh flows, permissions, and audit requirements can still require state."
+    },
+    {
+      "id": "ARCH-002",
+      "section": "Architecture, protocol choices, and threat modeling",
+      "question": "Why does CORS not protect an API from unauthorized callers in general?",
+      "options": [
+        "CORS replaces access tokens",
+        "CORS is a browser-enforced cross-origin policy, not general authentication for arbitrary clients",
+        "CORS encrypts requests",
+        "CORS prevents command-line tools from calling APIs"
+      ],
+      "correctIndex": 1,
+      "explanation": "Non-browser clients can call the endpoint without being governed by browser CORS enforcement. The server must authenticate and authorize independently."
+    },
+    {
+      "id": "ARCH-003",
+      "section": "Architecture, protocol choices, and threat modeling",
+      "question": "A signed-in user changes `/users/123` to `/users/124` in a request. What should the API do?",
+      "options": [
+        "Return user 124 because the session is valid",
+        "Check resource-level authorization and deny access unless the principal may read user 124",
+        "Trust the ID because it came from the browser",
+        "Disable authentication for profile routes"
+      ],
+      "correctIndex": 1,
+      "explanation": "A valid session does not grant access to every object. Object-level checks prevent insecure direct object reference and broken access control."
+    },
+    {
+      "id": "ARCH-004",
+      "section": "Architecture, protocol choices, and threat modeling",
+      "question": "Why should the backend not trust a role or user ID merely because it appears in a client-supplied JSON body?",
+      "options": [
+        "JSON cannot be parsed securely",
+        "The caller can modify client-controlled fields; identity must come from validated credentials and permissions from trusted policy",
+        "Roles can only be stored in cookies",
+        "The server cannot read JSON"
+      ],
+      "correctIndex": 1,
+      "explanation": "Client input is untrusted. Derive the principal from validated credentials and perform permission checks using trusted data or validated claims."
+    },
+    {
+      "id": "ARCH-005",
+      "section": "Architecture, protocol choices, and threat modeling",
+      "question": "Why might a first-party browser app choose an HttpOnly session cookie rather than a long-lived localStorage bearer token?",
+      "options": [
+        "Cookies eliminate every security risk",
+        "HttpOnly reduces direct script access to the credential and server-side sessions can be revoked; CSRF still needs consideration",
+        "localStorage does not exist in browsers",
+        "A session cookie automatically checks all business permissions"
+      ],
+      "correctIndex": 1,
+      "explanation": "This is a trade-off, not a universal rule. HttpOnly reduces direct token reads, while XSS and CSRF still require appropriate defenses."
+    },
+    {
+      "id": "ARCH-006",
+      "section": "Architecture, protocol choices, and threat modeling",
+      "question": "What should primarily determine whether an application uses sessions, JWTs, or opaque access tokens?",
+      "options": [
+        "Which term is most fashionable",
+        "Trust boundaries, client type, revocation needs, protocol requirements, and operational constraints",
+        "Whether the token can be placed in a URL",
+        "The assumption JWT is always more secure"
+      ],
+      "correctIndex": 1,
+      "explanation": "Each option has trade-offs. Choose based on requirements and implement correct validation, storage, authorization, lifetimes, and revocation."
+    },
+    {
+      "id": "ARCH-007",
+      "section": "Architecture, protocol choices, and threat modeling",
+      "question": "Why might a user remain signed in to an identity provider for months even if access tokens are short-lived?",
+      "options": [
+        "The access token must also last months",
+        "Persistent provider sessions may renew or reissue shorter-lived tokens, and different session layers have different lifetimes",
+        "The provider does not use credentials",
+        "The password is stored in browser history"
+      ],
+      "correctIndex": 1,
+      "explanation": "Identity-provider cookies, app sessions, access tokens, and refresh mechanisms can have different lifetimes. Visible login persistence does not reveal one token’s expiry."
+    },
+    {
+      "id": "ARCH-008",
+      "section": "Architecture, protocol choices, and threat modeling",
+      "question": "What is the purpose of token scopes and permissions?",
+      "options": [
+        "To make the token unreadable",
+        "To express or constrain what operations or resources the token is intended to authorize, subject to server enforcement",
+        "To extend expiry automatically",
+        "To prove the user is not a bot"
+      ],
+      "correctIndex": 1,
+      "explanation": "Scopes express granted authority, but the resource server must interpret and enforce them. A scope string alone does not enforce access."
+    },
+    {
+      "id": "ARCH-009",
+      "section": "Architecture, protocol choices, and threat modeling",
+      "question": "What is the safest interpretation of a successful authentication result?",
+      "options": [
+        "The caller may now access every resource",
+        "The credential was accepted for a principal; each operation still requires applicable authorization checks",
+        "The request is guaranteed harmless",
+        "The device is guaranteed free of malware"
+      ],
+      "correctIndex": 1,
+      "explanation": "Authentication is one part of a secure request path. Authorization, input validation, rate limiting, and logging may also be needed."
+    },
+    {
+      "id": "ARCH-010",
+      "section": "Architecture, protocol choices, and threat modeling",
+      "question": "Which statement about logout across an app and an identity provider is most accurate?",
+      "options": [
+        "Closing one tab necessarily revokes every credential",
+        "Logout must account for separate app sessions, provider sessions, access tokens, and refresh tokens; clearing local storage alone may not revoke copied credentials",
+        "Clearing one cookie revokes every JWT",
+        "Provider and app sessions are always identical"
+      ],
+      "correctIndex": 1,
+      "explanation": "Multiple credential layers may coexist. The application should define which layers logout affects and revoke server-side credentials where supported."
+    },
+    {
+      "id": "ARCH-011",
+      "section": "Architecture, protocol choices, and threat modeling",
+      "question": "Why should a JWT verifier check the expected issuer as well as the signature?",
+      "options": [
+        "Signatures have no mathematical meaning",
+        "A valid signature alone does not establish that the token came from the authority the application intended to trust",
+        "Issuer claims are always encrypted",
+        "Issuer checks expose the token publicly"
+      ],
+      "correctIndex": 1,
+      "explanation": "Validation must be anchored to the expected issuer and trusted keys. Otherwise a token from an unintended authority may be accepted."
+    },
+    {
+      "id": "ARCH-012",
+      "section": "Architecture, protocol choices, and threat modeling",
+      "question": "What does HTTP Basic authentication typically send?",
+      "options": [
+        "Username and password encoded with Base64 in an Authorization header",
+        "An encrypted password that needs no TLS",
+        "A signed JWT by definition",
+        "A cookie that cannot be copied"
+      ],
+      "correctIndex": 0,
+      "explanation": "Base64 is encoding, not encryption. Basic credentials must be protected with TLS and handled carefully."
+    },
+    {
+      "id": "ARCH-013",
+      "section": "Architecture, protocol choices, and threat modeling",
+      "question": "What is a bearer token?",
+      "options": [
+        "A credential that works only with the user’s password",
+        "A credential whose possession is generally enough to use it within its scope, so theft can enable impersonation",
+        "A token that cannot be copied",
+        "A token that never grants access"
+      ],
+      "correctIndex": 1,
+      "explanation": "Bearer tokens do not inherently prove the presenter’s identity. Protect them in transit and storage, limit their scope and lifetime, and revoke where possible."
+    },
+    {
+      "id": "ARCH-014",
+      "section": "Architecture, protocol choices, and threat modeling",
+      "question": "What is the main idea of mutual TLS (mTLS)?",
+      "options": [
+        "Only the server can present a certificate",
+        "Both sides authenticate using TLS certificates, so a server can authenticate the client certificate too",
+        "It sends passwords in plaintext",
+        "It replaces application authorization"
+      ],
+      "correctIndex": 1,
+      "explanation": "mTLS can provide strong client/workload authentication at the transport layer. The application still needs to map identities to permissions and manage certificates."
+    },
+    {
+      "id": "ARCH-015",
+      "section": "Architecture, protocol choices, and threat modeling",
+      "question": "What is SAML commonly used for?",
+      "options": [
+        "Federated identity and enterprise single sign-on",
+        "Password hashing",
+        "Cookie configuration",
+        "Encrypting weather responses"
+      ],
+      "correctIndex": 0,
+      "explanation": "SAML is an XML-based federation protocol used especially in enterprise SSO. It is distinct from OAuth 2.0 and OIDC."
+    },
+    {
+      "id": "ARCH-016",
+      "section": "Architecture, protocol choices, and threat modeling",
+      "question": "What is the purpose of a short-lived workload identity credential compared with a static shared key?",
+      "options": [
+        "It can reduce the exposure window and support centrally managed identity-based access",
+        "Static keys cannot be stolen",
+        "It eliminates all authorization checks",
+        "It does not need validation"
+      ],
+      "correctIndex": 0,
+      "explanation": "Short-lived workload credentials can reduce long-lived secret distribution and improve auditability and least privilege when configured correctly."
+    },
+    {
+      "id": "ARCH-017",
+      "section": "Architecture, protocol choices, and threat modeling",
+      "question": "Which sequence best describes a backend-proxied weather request?",
+      "options": [
+        "App embeds private provider key → provider responds directly to app",
+        "App requests your backend → backend validates/limits request and uses server-held key → provider responds to backend → backend returns needed data",
+        "App sends its password to the weather provider for every query",
+        "Backend returns the provider key to the app before each call"
+      ],
+      "correctIndex": 1,
+      "explanation": "A trusted backend keeps private credentials off distributed clients and can enforce usage policy. It should return only the data the client needs."
+    },
+    {
+      "id": "ARCH-018",
+      "section": "Architecture, protocol choices, and threat modeling",
+      "question": "Why is obfuscating a private key inside a mobile binary insufficient?",
+      "options": [
+        "Obfuscation always corrupts the key",
+        "An attacker can instrument the app or observe the value when used; obfuscation raises effort but does not create a trustworthy secret boundary",
+        "Mobile apps cannot store strings",
+        "TLS requires keys to be public"
+      ],
+      "correctIndex": 1,
+      "explanation": "Anything distributed to an untrusted client should be treated as potentially extractable. Keep private server credentials on a trusted backend."
+    }
+  ]
+}
