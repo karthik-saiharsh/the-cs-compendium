@@ -1,0 +1,839 @@
+{
+  "title": "Design Patterns: Creational Patterns (GoF)",
+  "description": "A conceptual question bank on the five creational patterns from the Gang of Four book (Factory Method, Abstract Factory, Builder, Prototype, Singleton). Questions test intent, trade-offs, failure modes and pattern selection in realistic scenarios rather than recall of names or definitions.",
+  "count": 64,
+  "questions": [
+    {
+      "id": "FM-001",
+      "section": "Factory Method",
+      "question": "A document-editing framework's Application class knows when a new document must be created (File > New), but only applications built on the framework know which Document class to instantiate. Which design resolves this?",
+      "options": [
+        "Application inherits from Document so it can instantiate its own subtype when needed",
+        "Application exposes a public Document constructor and each client calls it with the class it wants",
+        "Application contains a switch over document type names and is edited whenever a new application type appears",
+        "Application declares an abstract createDocument() that it calls itself; each concrete application subclass overrides it to return its own Document type"
+      ],
+      "correctIndex": 3,
+      "explanation": "This is the core of Factory Method: the framework (creator) owns the workflow and the moment of creation, while subclasses decide the concrete class. The framework never names application-specific classes."
+    },
+    {
+      "id": "FM-002",
+      "section": "Factory Method",
+      "question": "A team has a static method `ShapeFactory.create(String type)` containing a switch that returns Circle, Square or Triangle. A colleague says this is the Factory Method pattern. What is the most accurate response?",
+      "options": [
+        "Correct: any method that returns a new object chosen by a parameter is the Factory Method pattern",
+        "Not quite: it is a simple factory that centralises the decision in one place; Factory Method varies the created class through subclass overrides",
+        "Correct, and the switch is exactly what lets subclasses decide which class to instantiate",
+        "Not quite: Factory Method requires the method to be static so it can be called without a creator object"
+      ],
+      "correctIndex": 1,
+      "explanation": "A simple factory is a useful idiom, but adding a new type means editing the switch (open/closed violation). Factory Method moves the decision into overridable methods so new creators can be added without touching existing code."
+    },
+    {
+      "id": "FM-003",
+      "section": "Factory Method",
+      "question": "A Logistics class has planDelivery(), which builds a route and then does `new Truck()` to carry the cargo. The business now wants sea freight too. After refactoring to Factory Method (abstract createTransport() overridden in RoadLogistics and SeaLogistics), what is true of planDelivery()?",
+      "options": [
+        "It must now be duplicated in every subclass because each subclass creates a different transport",
+        "It can no longer call any Transport methods because it does not know the concrete class",
+        "It must still check which Logistics subclass is running so that it can pick the right transport methods",
+        "It works only against the Transport interface and needs no change when a new Logistics subclass is added"
+      ],
+      "correctIndex": 3,
+      "explanation": "The shared workflow stays in the creator and talks to the abstract Transport. Only the creation step varies, so the code that uses the product is decoupled from concrete product classes."
+    },
+    {
+      "id": "FM-004",
+      "section": "Factory Method",
+      "question": "After adopting Factory Method, a codebase has 25 products and 25 Creator subclasses whose only job is to return one product each. Which known weakness of the pattern is this?",
+      "options": [
+        "The pattern cannot create objects at runtime, so a creator must be written for every case at compile time",
+        "The pattern forces Creator and Product to be in the same class, so they must be split into many classes",
+        "Clients may be forced to subclass Creator just to get a particular product, producing a parallel hierarchy of creators mirroring the products",
+        "The pattern can only create one instance of each product, so many creators are needed for many instances"
+      ],
+      "correctIndex": 2,
+      "explanation": "Subclassing Creator is the price of the pattern. Parameterised factory methods, or configuring the creator with a product class or prototype, are the usual ways to reduce the class count."
+    },
+    {
+      "id": "FM-005",
+      "section": "Factory Method",
+      "question": "A parameterised factory method `createProduct(id)` in Creator returns MINE or YOURS for those ids. A subclass overrides it, handles a new id 'THEIRS', and calls the parent's version for every other id. What does this arrangement give you?",
+      "options": [
+        "Automatic caching, so each id yields the same product instance every time",
+        "One creator can produce several product kinds, and subclasses can add or replace some of them while inheriting the rest",
+        "A compile-time guarantee that only valid ids are ever passed to createProduct",
+        "A way to avoid the Product interface entirely, since the id identifies the product"
+      ],
+      "correctIndex": 1,
+      "explanation": "The identifier makes a single factory method flexible, and falling back on super keeps previously supported products working. The cost is that ids are not checked by the compiler."
+    },
+    {
+      "id": "FM-006",
+      "section": "Factory Method",
+      "question": "Why might a Creator provide a default (non-abstract) implementation of its factory method instead of declaring it abstract?",
+      "options": [
+        "Because abstract factory methods cannot return an object of an interface type",
+        "So the creator is usable as is, and the factory method acts as a hook subclasses override only when they need a different product",
+        "Because the compiler requires every method called from another method of the same class to be concrete",
+        "Because a default implementation makes the factory method thread-safe"
+      ],
+      "correctIndex": 1,
+      "explanation": "Both styles are valid. A default makes the Creator a complete, usable class and keeps subclassing optional; an abstract method forces every subclass to make a choice."
+    },
+    {
+      "id": "FM-007",
+      "section": "Factory Method",
+      "question": "In Java, a Creator's constructor calls its own overridable factory method to build a Product. A subclass overrides the factory method and the override uses a field the subclass initialises in its own constructor. What goes wrong, and what is the usual fix?",
+      "options": [
+        "The compiler rejects the call; move the factory call into a separate Product constructor",
+        "The override is never called from the constructor, so the base product is always used; make the factory method static",
+        "Two products are created, one by the base and one by the subclass; make the Creator a Singleton",
+        "The override runs before the subclass's fields are initialised, so the field is null or default; create the product lazily on first use instead"
+      ],
+      "correctIndex": 3,
+      "explanation": "Calling overridable methods from a constructor is risky because the subclass is not yet fully built (in C++ the override is not even reached). Lazy initialisation inside an accessor sidesteps the ordering problem."
+    },
+    {
+      "id": "FM-008",
+      "section": "Factory Method",
+      "question": "Which requirement is Factory Method, used alone, handling poorly?",
+      "options": [
+        "Letting a creator return a cached or pooled object instead of always allocating a new one",
+        "Letting a framework class create objects whose concrete class is chosen by an application subclass",
+        "Letting a base class defer the decision of which product class to instantiate to subclasses",
+        "Guaranteeing that a Button, Checkbox and Scrollbar created for a window always belong to the same visual theme"
+      ],
+      "correctIndex": 3,
+      "explanation": "Factory Method varies a single product at a time. Making several related products consistent with each other is the reason Abstract Factory exists."
+    },
+    {
+      "id": "FM-009",
+      "section": "Factory Method",
+      "question": "OrderProcessor.process() contains `new SmtpMailer()` and sends real emails, which makes unit tests impossible. How can Factory Method help with minimal change to production behaviour?",
+      "options": [
+        "Make process() static so tests can call it without constructing an OrderProcessor",
+        "Mark SmtpMailer final so it cannot be created more than once during a test run",
+        "Extract the instantiation into an overridable createMailer(); the test subclasses OrderProcessor and returns a fake mailer",
+        "Move the `new SmtpMailer()` call into the OrderProcessor constructor so it only happens once"
+      ],
+      "correctIndex": 2,
+      "explanation": "Isolating `new` behind a factory method creates a seam. Production code keeps its default, and tests override just that seam, without touching the rest of process()."
+    },
+    {
+      "id": "FM-010",
+      "section": "Factory Method",
+      "question": "Factory Method often appears together with Template Method. Which description of their relationship is correct?",
+      "options": [
+        "The template method is a static method that selects which factory method to call using a type parameter",
+        "The template method fixes the algorithm's steps in the base class, and one of those steps is a factory method whose product type is supplied by a subclass",
+        "They are alternatives: a class that uses a factory method must not define other steps in terms of it",
+        "The factory method fixes the algorithm's steps, and the template method decides which product class is created"
+      ],
+      "correctIndex": 1,
+      "explanation": "The base class owns the skeleton and calls the factory method as one of its steps. Subclasses fill that step in, so the same workflow can run with different product classes."
+    },
+    {
+      "id": "AF-001",
+      "section": "Abstract Factory",
+      "question": "A UI toolkit supports a Windows look and a macOS look. Bugs show up where a Windows scrollbar appears next to a macOS button. How does Abstract Factory prevent this class of bug?",
+      "options": [
+        "The client obtains every widget from one factory object, and each concrete factory only produces widgets of its own family",
+        "Each widget checks the operating system at runtime and adjusts its appearance when it is constructed",
+        "The client receives a Builder that assembles widgets of different families in a fixed order",
+        "A Singleton widget manager stores the most recently created widget and returns it to every caller"
+      ],
+      "correctIndex": 0,
+      "explanation": "Consistency is enforced by construction. The client never picks classes individually; it asks a single factory, so a mismatched combination cannot be requested."
+    },
+    {
+      "id": "AF-002",
+      "section": "Abstract Factory",
+      "question": "A toolkit built on Abstract Factory has 3 families (Windows, macOS, Linux) and 4 product types. The team now wants to add a fifth product type, Tooltip. What is the consequence?",
+      "options": [
+        "Nothing changes in the factories, because clients create products directly through their constructors",
+        "Only the Linux factory changes, because new product types are always added to the newest family",
+        "The abstract factory interface must gain createTooltip(), forcing a change in every concrete factory, so supporting new product kinds is hard",
+        "Client code must be recompiled, but the factory classes are unaffected because they are interfaces"
+      ],
+      "correctIndex": 2,
+      "explanation": "Abstract Factory makes adding new families easy and adding new product types hard, since the set of products is fixed in the factory interface."
+    },
+    {
+      "id": "AF-003",
+      "section": "Abstract Factory",
+      "question": "Using the same toolkit, the team wants to add a fourth family, Android. What work does Abstract Factory require?",
+      "options": [
+        "Edit every client that creates widgets so it handles the extra case in its type check",
+        "Edit the abstract factory interface and every existing concrete factory to add Android-specific methods",
+        "Create the new product classes and one new concrete factory; client code that uses the abstract factory is untouched",
+        "Replace the factory hierarchy with a single factory containing a switch on the platform name"
+      ],
+      "correctIndex": 2,
+      "explanation": "Adding a family is the axis Abstract Factory optimises for: it is purely additive, and clients depend only on the abstract interfaces."
+    },
+    {
+      "id": "AF-004",
+      "section": "Abstract Factory",
+      "question": "Where should the decision of which concrete factory to use be made in a well-structured Abstract Factory design?",
+      "options": [
+        "Every time a product is requested, using an if-else chain on the platform in the calling code",
+        "Inside the abstract factory interface, which should contain the logic that selects its implementation",
+        "Inside each product constructor, so every product can pick the matching sibling products on its own",
+        "In one place at startup (for example from configuration), then the chosen factory is passed to or reachable by the code that needs products"
+      ],
+      "correctIndex": 3,
+      "explanation": "Centralising the choice keeps the rest of the application unaware of concrete families. Scattering platform checks recreates the coupling the pattern was meant to remove."
+    },
+    {
+      "id": "AF-005",
+      "section": "Abstract Factory",
+      "question": "An AbstractFactory interface declares createButton(), createCheckbox() and createScrollbar(). How do these methods relate to another creational pattern?",
+      "options": [
+        "Each of them is a factory method: the concrete factory subclass decides which class to instantiate for that product type",
+        "Each of them is a singleton accessor, because every concrete factory returns the same instance",
+        "Each of them is a prototype, because the concrete factory clones the previous product it created",
+        "Each of them is a builder step, because together they assemble one complex object"
+      ],
+      "correctIndex": 0,
+      "explanation": "Abstract Factories are commonly implemented as a set of factory methods, one per product type. The patterns are layered, not competitors."
+    },
+    {
+      "id": "AF-006",
+      "section": "Abstract Factory",
+      "question": "A game has 40 themed product families, and the team has written 40 concrete factory subclasses that differ only in which classes they instantiate. How can the design be changed to reduce this?",
+      "options": [
+        "Merge all 40 factories into a Singleton that creates products using a switch on the theme name",
+        "Implement one concrete factory configured with a prototype of each product, which it clones to create products for the selected theme",
+        "Convert each factory into a Builder so that the theme is assembled incrementally",
+        "Remove the abstract product interfaces so that a single factory can return any product as a generic object"
+      ],
+      "correctIndex": 1,
+      "explanation": "Pairing Abstract Factory with Prototype swaps a hierarchy of factory classes for one data-driven class. This is the trade-off GoF describes for avoiding factory subclass explosion."
+    },
+    {
+      "id": "AF-007",
+      "section": "Abstract Factory",
+      "question": "Which requirement most strongly points to Abstract Factory rather than a lone Factory Method?",
+      "options": [
+        "Several different kinds of objects must be created together and always come from the same variant, such as a matching header, table and footer for the selected export format",
+        "An object has 20 optional settings and the caller wants to specify only a few of them",
+        "Exactly one object of a class must exist, and every part of the program must find it easily",
+        "One kind of object must be created, but which subclass is chosen depends on the creator subclass"
+      ],
+      "correctIndex": 0,
+      "explanation": "The distinguishing signal is a family of related products that must be used together. The other options describe Factory Method, Builder and Singleton respectively."
+    },
+    {
+      "id": "AF-008",
+      "section": "Abstract Factory",
+      "question": "A mobile family of an Abstract Factory design needs a HapticFeedback product that makes no sense on desktop. What is the main design tension this causes?",
+      "options": [
+        "Abstract Factory prohibits product types that exist in only one family and the compiler rejects them",
+        "The factory interface fixes the set of products, so desktop factories must return a no-op or null object, or the interface must be split",
+        "Haptic feedback must then be created by a Singleton instead of by the factory",
+        "Mobile products must be created by Builder, because only builders support family-specific parts"
+      ],
+      "correctIndex": 1,
+      "explanation": "Abstract Factory assumes every family implements the same product set. Family-specific extras either burden other families with stubs (e.g. a Null Object) or call for separate interfaces."
+    },
+    {
+      "id": "AF-009",
+      "section": "Abstract Factory",
+      "question": "An application obtains its database Connection, Command and Reader from a DatabaseFactory interface. How does this help automated testing?",
+      "options": [
+        "It lets the tests modify the concrete factory source code for each test run",
+        "A test can pass an in-memory factory that supplies a consistent set of fakes without changing any client code",
+        "It guarantees tests run faster, because abstract factories cache every product they create",
+        "It lets tests skip creating a Connection, since factories always pool them"
+      ],
+      "correctIndex": 1,
+      "explanation": "Because clients depend only on the abstract factory and abstract products, swapping the whole family is a single substitution at the composition point."
+    },
+    {
+      "id": "AF-010",
+      "section": "Abstract Factory",
+      "question": "A team applies Abstract Factory to an app that has one product type, Logger, with two variants (Console and File). Which assessment is most accurate?",
+      "options": [
+        "It is over-engineered: with a single product there is no family to keep consistent, so a plain factory method or simple factory is enough",
+        "It is ideal: Abstract Factory is the recommended default for any case that has more than one variant",
+        "It is fine only if the Logger is also implemented as a Singleton",
+        "It is wrong because Abstract Factory can only be used with exactly three product types"
+      ],
+      "correctIndex": 0,
+      "explanation": "Abstract Factory pays off when several related products must vary together. With one product it adds an interface and classes without delivering the consistency benefit."
+    },
+    {
+      "id": "BLD-001",
+      "section": "Builder",
+      "question": "A `new Pizza(size, cheese, pepperoni, mushrooms, onions, bacon, extraSauce, crust)` constructor is used with many `false`/`null` placeholders. How does Builder improve this?",
+      "options": [
+        "It makes all options required, so no placeholders are needed",
+        "It makes the Pizza fields public so callers can set them directly after construction",
+        "It adds one overloaded constructor for every possible combination of options",
+        "The caller names and sets only the options it cares about in separate steps, and a final build() produces the object"
+      ],
+      "correctIndex": 3,
+      "explanation": "Builder replaces long positional argument lists with readable, step-by-step configuration, so optional parts can be skipped without telescoping constructors."
+    },
+    {
+      "id": "BLD-002",
+      "section": "Builder",
+      "question": "A converter reads an RTF document token by token. For each token a Director calls builder.convertCharacter(), convertFontChange() or convertParagraph(). Different builders produce plain text, TeX, or an on-screen widget. What is the Director's role?",
+      "options": [
+        "To choose the right output class by creating the concrete builder when the first token is read",
+        "To format the final product, so builders only have to store raw tokens",
+        "To encode the parsing/ordering logic once, independent of which representation a concrete builder produces",
+        "To store the finished text, TeX or widget so the client can retrieve it directly from the director"
+      ],
+      "correctIndex": 2,
+      "explanation": "The classic Builder separates the construction process (director) from the representation (concrete builder). Add a new output format by writing a new builder; the parsing logic does not change."
+    },
+    {
+      "id": "BLD-003",
+      "section": "Builder",
+      "question": "In the GoF Builder the abstract Builder interface has construction steps but typically no getResult(); the client calls getResult() on the concrete builder. Why?",
+      "options": [
+        "getResult() would let the director read the product, which Builder forbids for security reasons",
+        "Abstract classes in object-oriented languages are not allowed to have methods that return values",
+        "The product should be returned through the constructor of the director instead",
+        "Products from different concrete builders (text vs widget) may share no common interface, so the abstract builder cannot declare a single return type"
+      ],
+      "correctIndex": 3,
+      "explanation": "A Builder may build products that are not related by a common supertype, so the retrieval method lives on the concrete builder, which knows the actual type."
+    },
+    {
+      "id": "BLD-004",
+      "section": "Builder",
+      "question": "How does the intent of Builder differ from that of Abstract Factory?",
+      "options": [
+        "Builder constructs one complex object step by step and returns it at the end; Abstract Factory returns families of products immediately in a single call each",
+        "Builder creates a family of related objects, while Abstract Factory creates one complex object",
+        "Builder ensures a single instance exists, while Abstract Factory allows many instances",
+        "Builder copies existing objects, while Abstract Factory creates them from scratch"
+      ],
+      "correctIndex": 0,
+      "explanation": "Builder emphasises the multi-step construction of one product, with a result available at the end. Abstract Factory emphasises product families, with each product returned immediately."
+    },
+    {
+      "id": "BLD-005",
+      "section": "Builder",
+      "question": "A Money-transfer request is immutable and has invariants spanning several fields (source != destination, amount > 0, currency matches both accounts). Why is Builder a good fit?",
+      "options": [
+        "The builder lets callers modify the object's fields after build(), so invariants can be fixed later",
+        "The builder removes the need to validate, because each setter on the builder checks one field and the rest need not be checked",
+        "The builder makes the object mutable internally so that frameworks can set fields by reflection",
+        "The builder collects values over several calls and validates them together in build(), so the immutable object only exists in a valid state"
+      ],
+      "correctIndex": 3,
+      "explanation": "Cross-field invariants cannot be checked in individual setters. Gathering everything in the builder and validating in build() ensures the product is never half-configured."
+    },
+    {
+      "id": "BLD-006",
+      "section": "Builder",
+      "question": "An HttpRequest builder requires a URL, but a caller forgets to set it and the program only fails when build() runs in production. What weakness of the pattern does this show?",
+      "options": [
+        "Builders force every field to be optional, so required fields cannot exist",
+        "Builders cannot validate anything, so invalid objects are always created silently",
+        "Required parameters are checked at runtime rather than compile time, unlike a constructor with required arguments (unless you use staged/typed builders)",
+        "Builders always create objects in the wrong order when optional steps are skipped"
+      ],
+      "correctIndex": 2,
+      "explanation": "A plain fluent builder trades compile-time completeness checks for readability. Step builders or required-argument factory methods can recover the safety, at the cost of more code."
+    },
+    {
+      "id": "BLD-007",
+      "section": "Builder",
+      "question": "Which class is the weakest candidate for a Builder?",
+      "options": [
+        "A Point with two required coordinates, no optional settings and a clear two-argument constructor",
+        "A document tree that must be assembled in a specific order from a parsed input stream",
+        "A Computer assembled from CPU, RAM, storage and GPU, where some components are optional",
+        "A Report with 12 fields, 8 of which are optional and several mutually dependent"
+      ],
+      "correctIndex": 0,
+      "explanation": "Builders carry a cost: an extra class and a more verbose use. They pay off with many options, staged construction or validation; a two-field value type has none of those."
+    },
+    {
+      "id": "BLD-008",
+      "section": "Builder",
+      "question": "A Director drives a MazeBuilder (buildRoom, buildDoor). The internal representation of the Maze changes from objects to a compact grid array. Which code is affected?",
+      "options": [
+        "Only the director, because it is responsible for how the maze is stored",
+        "Every concrete builder and the abstract builder interface, because the grid changes all of their signatures",
+        "The director and all of its clients, because they must pass the new layout in each call",
+        "Only the concrete builder that creates the representation; the director and its clients are unaffected"
+      ],
+      "correctIndex": 3,
+      "explanation": "Hiding the product's internal representation behind the builder interface is a key benefit: construction logic and representation vary independently."
+    },
+    {
+      "id": "BLD-009",
+      "section": "Builder",
+      "question": "Many codebases use fluent builders (`new Email.Builder().to(..).subject(..).build()`) without any Director. When is dropping the Director acceptable, and what is lost?",
+      "options": [
+        "Acceptable when the client itself decides the configuration for one representation; what is lost is a reusable, named construction recipe shared by many clients",
+        "Never acceptable, since without a Director the pattern is no longer Builder",
+        "Acceptable only for immutable objects, and what is lost is thread-safety",
+        "Always acceptable, since the Director has no role beyond calling build()"
+      ],
+      "correctIndex": 0,
+      "explanation": "The Director encodes a construction recipe that can be reused across builders. When there is a single representation and each caller picks its own options, the fluent builder alone delivers most of the value."
+    },
+    {
+      "id": "BLD-010",
+      "section": "Builder",
+      "question": "A builder keeps a `List<String> tags` and passes that same list reference to the product in build(). The code calls build() twice, adding a tag to the builder in between. The first product's tags unexpectedly change. What is the correct fix?",
+      "options": [
+        "Call build() only once per program run and throw an exception on the second call in all builders",
+        "Copy the mutable state in build() (or reset the builder), so each product owns its own data",
+        "Make the builder a Singleton so that only one product can ever share the list",
+        "Make the list public in the product so the caller can fix the tags afterwards"
+      ],
+      "correctIndex": 1,
+      "explanation": "Aliasing mutable builder state in products breaks the product's independence, and defeats immutability. Defensive copying (or a fresh builder per product) fixes it."
+    },
+    {
+      "id": "PRO-001",
+      "section": "Prototype",
+      "question": "A music-notation editor has a palette of symbols (quarter note, rest, clef...). Rather than writing a tool subclass per symbol, each tool holds one preconfigured symbol object and, on each click, places a copy of it on the score. Which idea is being used?",
+      "options": [
+        "Deferring the choice of class to a subclass of the tool via an overridden factory method",
+        "Creating a family of related symbols through a single abstract interface",
+        "Parameterising the tool with an instance and creating new objects by cloning it, instead of by subclassing or naming a class",
+        "Ensuring there is exactly one instance of each symbol, shared among all uses"
+      ],
+      "correctIndex": 2,
+      "explanation": "That is Prototype: a prototypical instance is the thing configured, and new objects are made by copying it. The number of classes does not grow with the number of symbol variants."
+    },
+    {
+      "id": "PRO-002",
+      "section": "Prototype",
+      "question": "A Document holds a List<Paragraph>. clone() is implemented by copying the fields into a new Document, including the list reference. Editing a paragraph of the clone also changes the original. Why?",
+      "options": [
+        "Clones are always linked to their prototype by design, so edits propagate back",
+        "The clone is shallow: it shares the same list and paragraph objects with the original, so the mutable parts must be deep-copied",
+        "The clone is deep, which means every object is shared again after copying",
+        "The list is copied but the paragraphs are final, so the original is changed on write"
+      ],
+      "correctIndex": 1,
+      "explanation": "A shallow copy duplicates only the top-level object. Prototype implementations must decide per field what to copy deeply and what can be shared safely (e.g. immutable data)."
+    },
+    {
+      "id": "PRO-003",
+      "section": "Prototype",
+      "question": "A prototype's object graph contains a cycle: Folder -> children -> File -> parent -> Folder. A naive recursive deep-clone is run. What happens and how is it resolved?",
+      "options": [
+        "It copies each object once, because object graphs cannot be cyclic in object-oriented languages",
+        "It clones the parent only, since the child's parent reference is skipped by design",
+        "It recurses forever (or duplicates nodes) because it revisits the same objects; keep a map of already-cloned objects and reuse them",
+        "It throws an error immediately, which is the signal to switch to Builder"
+      ],
+      "correctIndex": 2,
+      "explanation": "Deep-copying a graph needs identity tracking to preserve its shape. This is one reason cloning complex structures is harder than it looks."
+    },
+    {
+      "id": "PRO-004",
+      "section": "Prototype",
+      "question": "A game designer edits a config file listing 500 enemy variants. All are the same Enemy class and differ only in stats, sprites and AI parameters, and the list is only known at runtime. Why is Prototype preferable to Factory Method here?",
+      "options": [
+        "Classes are not needed per variant: each variant is a configured instance that is registered and cloned, so new variants need no code",
+        "Prototype generates a new class for every variant at compile time, so the compiler can optimise each one",
+        "Factory Method cannot create objects of the same class more than once",
+        "Prototype is the only pattern that can read configuration files"
+      ],
+      "correctIndex": 0,
+      "explanation": "When variation is in state rather than in behaviour, and variants are defined at runtime, 500 creator subclasses would be absurd. Clone-and-tweak scales with data, not code."
+    },
+    {
+      "id": "PRO-005",
+      "section": "Prototype",
+      "question": "A system uses a registry that maps names such as \"heavy-orc\" to prototype objects. Clients look up a prototype by name and clone it. What does this prototype manager enable?",
+      "options": [
+        "Prototypes can be added, removed and looked up at runtime, so clients need not know concrete classes or compile-time details",
+        "It guarantees every clone is identical to every other, since all clients use the same registry entry",
+        "It makes cloning unnecessary, since clients can use the registry's objects directly",
+        "It ensures each prototype is cloned at most once, for memory efficiency"
+      ],
+      "correctIndex": 0,
+      "explanation": "A prototype manager is the runtime catalogue that makes the pattern flexible. Clients refer to prototypes by key and still receive independent copies."
+    },
+    {
+      "id": "PRO-006",
+      "section": "Prototype",
+      "question": "Building a ReportTemplate requires a 2-second database and network load. The application needs 1,000 variants that differ only in a title and date. When does Prototype make sense here, and what is the caveat?",
+      "options": [
+        "Load once, then clone and adjust each copy, provided copying is genuinely cheaper than rebuilding (and mutable state is deep-copied correctly)",
+        "Never: Prototype only works for objects with no external dependencies",
+        "Always: cloning is guaranteed faster than construction for any class",
+        "Yes, but only when every clone shares the same database connection and mutable state with the prototype"
+      ],
+      "correctIndex": 0,
+      "explanation": "Cloning can avoid costly initialisation, but it is not automatically cheap: deep copies of large graphs can cost real time, and sharing mutable state risks subtle bugs."
+    },
+    {
+      "id": "PRO-007",
+      "section": "Prototype",
+      "question": "A class holds an open network socket and a file handle. Why is implementing clone() for it problematic?",
+      "options": [
+        "It is unclear what copying a live resource means: sharing the handle ties two objects to one resource, while duplicating it needs explicit semantics",
+        "Prototype forbids classes with fields that refer to anything outside the program's memory",
+        "Sockets and file handles cannot be referenced by an object in a language with garbage collection",
+        "clone() automatically closes the original's resources, so the prototype becomes unusable"
+      ],
+      "correctIndex": 0,
+      "explanation": "Prototype works best for plain data-like objects. Objects owning external resources require a deliberate decision (reopen, share with reference counting, or forbid cloning)."
+    },
+    {
+      "id": "PRO-008",
+      "section": "Prototype",
+      "question": "A prototype Order contains a unique orderId. After clone(), two orders in the database share the same id. What does the pattern's guidance suggest?",
+      "options": [
+        "Make orderId static so that all clones automatically receive distinct values",
+        "Never put identity fields in a prototype; use Singleton for orders",
+        "Give the clone a post-clone initialisation step that resets identity and other per-instance fields",
+        "Clone the orderId into every field of the order so that duplicates can be detected"
+      ],
+      "correctIndex": 2,
+      "explanation": "A clone is a copy of state, including state that should be unique. Prototypes commonly offer an initialise/reset operation for the parts that must differ per instance."
+    },
+    {
+      "id": "PRO-009",
+      "section": "Prototype",
+      "question": "A client holds a `Shape` reference that may be a Circle, Square or Group. Why is a polymorphic shape.clone() better than the client writing `new Shape(shape)` with a copy constructor?",
+      "options": [
+        "The client doesn't know the concrete class, and clone() dispatches to the actual subclass so the copy has the correct runtime type",
+        "A copy constructor cannot copy fields, whereas clone() always can",
+        "A copy constructor is slower than clone() in every language",
+        "clone() allows the client to specify the class of the copy independently of the original"
+      ],
+      "correctIndex": 0,
+      "explanation": "Copy constructors are tied to a compile-time class. Prototype's virtual clone() lets code duplicate objects knowing only their interface."
+    },
+    {
+      "id": "PRO-010",
+      "section": "Prototype",
+      "question": "Users of a diagram editor assemble nested, decorated widgets (a Border around a ScrollPane around a Group of Buttons) and want a \"Duplicate\" command. Why is Prototype a natural fit?",
+      "options": [
+        "Such composite/decorated structures are tedious to rebuild step by step, but cloning the root object duplicates the whole configured structure",
+        "Because Prototype ensures that the duplicate is the same object as the original",
+        "Because Prototype generates the required decorator classes from the original at runtime",
+        "Because Prototype disallows composite structures, which keeps the duplicate light"
+      ],
+      "correctIndex": 0,
+      "explanation": "GoF notes that designs using Composite and Decorator often benefit from Prototype: configured structures are copied as units instead of being reconstructed."
+    },
+    {
+      "id": "SNG-001",
+      "section": "Singleton",
+      "question": "Two modules each execute `new Logger(\"app.log\")` and the interleaved writes corrupt the file. Which part of the Singleton pattern addresses the root cause?",
+      "options": [
+        "A Builder so each module constructs the Logger with the correct file name",
+        "A public constructor with a comment telling developers to create the Logger only once",
+        "Making the log file name a global constant so both modules write to the same place",
+        "A private constructor plus a static accessor, so the class itself controls instantiation and clients cannot create a second one"
+      ],
+      "correctIndex": 3,
+      "explanation": "The guarantee comes from the class, not from convention. Removing the public constructor is what makes accidental duplication impossible."
+    },
+    {
+      "id": "SNG-002",
+      "section": "Singleton",
+      "question": "Why might a Singleton be preferred over a plain global variable that holds the object?",
+      "options": [
+        "A global variable is thread-safe only when the object is a Singleton",
+        "A global does not stop others from creating more instances, whereas a Singleton enforces uniqueness and can defer creation until first use",
+        "A global variable cannot hold an object, only primitive values",
+        "A Singleton is not global, so it avoids all coupling to the rest of the code"
+      ],
+      "correctIndex": 1,
+      "explanation": "The two pattern benefits that globals lack are controlled instantiation (exactly one) and lazy initialisation. Note, however, that Singleton still provides global access."
+    },
+    {
+      "id": "SNG-003",
+      "section": "Singleton",
+      "question": "A lazily initialised Singleton uses `if (instance == null) instance = new Config();` inside getInstance(), and it is called from several threads at startup. What can happen?",
+      "options": [
+        "Nothing, because only one thread can evaluate the condition at a time in modern languages",
+        "The second thread receives an exception, so exactly one instance still exists",
+        "Two threads can both see null and each create an instance, breaking the guarantee, so creation must be synchronised or done eagerly/through a safe holder",
+        "Both threads receive the same instance, since the constructor is private"
+      ],
+      "correctIndex": 2,
+      "explanation": "The check-then-act sequence is a race. Options include synchronisation, double-checked locking with proper memory semantics, an eagerly created instance, or a language-guaranteed lazy holder."
+    },
+    {
+      "id": "SNG-004",
+      "section": "Singleton",
+      "question": "Business logic calls `Settings.getInstance().getTimeout()` in 40 classes. Unit tests fail intermittently depending on the test order. What is the underlying problem?",
+      "options": [
+        "The dependency is hidden and global, so state left by one test persists into the next, and tests cannot easily substitute a fake Settings",
+        "The getTimeout() method is too slow, so tests time out in random order",
+        "The Singleton is not final, so tests are replacing the class at runtime",
+        "The tests are too independent of each other and need shared setup code"
+      ],
+      "correctIndex": 0,
+      "explanation": "Singletons keep state for the entire process and bypass constructor signatures, so tests inherit each other's changes and can't inject doubles."
+    },
+    {
+      "id": "SNG-005",
+      "section": "Singleton",
+      "question": "Classes A and B never reference each other, but a change that A makes to a mutable Singleton breaks B's behaviour. Which criticism of Singleton does this illustrate?",
+      "options": [
+        "It makes classes depend on each other through inheritance, which is the root of tight coupling",
+        "It violates the Liskov Substitution Principle by changing return types of overridden methods",
+        "It is global mutable state that creates hidden coupling between code that appears to be unrelated",
+        "It creates too many instances, so A and B each have a separate view of the state"
+      ],
+      "correctIndex": 2,
+      "explanation": "The coupling is real but invisible in A's and B's interfaces. Immutable Singletons, or explicit passing, make dependencies visible."
+    },
+    {
+      "id": "SNG-006",
+      "section": "Singleton",
+      "question": "A team keeps the requirement of \"only one instance of AppConfig exists\" but wants to remove global access. Which approach achieves that?",
+      "options": [
+        "Make AppConfig's constructor public so that each class can create one when needed",
+        "Create the single instance once at startup (in the composition root) and pass it to the classes that need it through constructors",
+        "Store the instance in a public static field so classes can reach it more easily",
+        "Make every method of AppConfig static so no instance is needed"
+      ],
+      "correctIndex": 1,
+      "explanation": "Dependency injection keeps single-instance lifetime without the global access point. The trade-off is that uniqueness is no longer enforced by the class itself, only by how the application is wired."
+    },
+    {
+      "id": "SNG-007",
+      "section": "Singleton",
+      "question": "Which of these is the most defensible candidate for a Singleton?",
+      "options": [
+        "A RequestContext, so that every request shares the same user data",
+        "A ShoppingCart, so that all customers see the same cart",
+        "A Customer entity, so that all code refers to the same customer",
+        "The sole in-process gateway to a physical device, such as a hardware sensor driver that cannot be opened twice"
+      ],
+      "correctIndex": 3,
+      "explanation": "A Singleton is justified when the real-world resource is truly unique. Objects that represent per-user, per-request or per-record state must have many instances."
+    },
+    {
+      "id": "SNG-008",
+      "section": "Singleton",
+      "question": "A system needs a unique Database connection manager, but whether it is the MySQL or PostgreSQL subclass should be chosen at startup. Why can't a static getInstance() on the base class simply be overridden in each subclass?",
+      "options": [
+        "A Singleton's subclass is chosen at compile time by the compiler, so there is nothing to override",
+        "Static methods can be overridden, but the constructor cannot be inherited by subclasses",
+        "Static methods are not polymorphic, so getInstance() must instead consult configuration or a registry of named singletons to decide which subclass to create",
+        "Subclasses of a Singleton are forbidden because they would break the one-instance rule"
+      ],
+      "correctIndex": 2,
+      "explanation": "GoF discusses subclassing a Singleton: the usual solutions are a registry or a lookup in the accessor, since the choice cannot be dispatched virtually from a static call."
+    },
+    {
+      "id": "SNG-009",
+      "section": "Singleton",
+      "question": "A RateLimiter Singleton enforces 100 requests per minute, but the service runs on 4 servers behind a load balancer and users get up to 400 requests per minute through. What is the lesson?",
+      "options": [
+        "The limit must be divided by four, because Singleton splits its counter among servers",
+        "A Singleton is only unique when it is eagerly rather than lazily initialised",
+        "A Singleton guarantees one instance per process (or class loader), not per system; a distributed limit needs shared external state",
+        "The Singleton was implemented incorrectly, since a correct one is shared across all machines"
+      ],
+      "correctIndex": 2,
+      "explanation": "Language-level uniqueness stops at the process boundary. Cross-node coordination needs a shared store or service, not an in-memory object."
+    },
+    {
+      "id": "SNG-010",
+      "section": "Singleton",
+      "question": "Which statement best explains why Singleton is often criticised as breaking the Single Responsibility Principle?",
+      "options": [
+        "The class has to be both a subclass and a superclass of itself",
+        "The class contains more than one static field and a private constructor",
+        "The class creates several other classes at once through its accessor",
+        "The class does its own domain job and also manages its own creation and lifetime"
+      ],
+      "correctIndex": 3,
+      "explanation": "Singleton couples business behaviour with a lifecycle policy (\"exactly one\"). Separating the two, e.g. via a container that manages lifetimes, keeps the class focused."
+    },
+    {
+      "id": "SNG-011",
+      "section": "Singleton",
+      "question": "A Singleton wraps a resource that takes 8 seconds to initialise and is used only in rare admin screens. Which initialisation strategy fits and why?",
+      "options": [
+        "No initialisation; the Singleton should be created on every access to keep it current",
+        "Lazy initialisation (done thread-safely), so users who never open the admin screens never pay the startup cost",
+        "Eager initialisation at class-load time, so that the cost is paid by the first user of the admin screen",
+        "Eager initialisation inside every client's constructor, so the instance is ready when each client starts"
+      ],
+      "correctIndex": 1,
+      "explanation": "Lazy creation defers cost to first use, which suits rarely used, expensive resources. Eager creation is better for cheap objects or when you want startup failures to surface early."
+    },
+    {
+      "id": "SEL-001",
+      "section": "Choosing and comparing creational patterns",
+      "question": "A cross-platform game must supply an audio engine, a renderer and an input handler for each platform, and mixing a DirectX renderer with an OpenGL-based input layer would crash the game. Which pattern fits best?",
+      "options": [
+        "Prototype",
+        "Abstract Factory",
+        "Builder",
+        "Factory Method"
+      ],
+      "correctIndex": 1,
+      "explanation": "Several related products must come from the same variant; that is the family-consistency problem Abstract Factory solves."
+    },
+    {
+      "id": "SEL-002",
+      "section": "Choosing and comparing creational patterns",
+      "question": "A base Exporter class runs an export workflow (validate, open writer, write rows, close). Each exporter subtype (CSV, JSON) needs a different Writer, and new exporters are added by third parties. Which pattern fits best?",
+      "options": [
+        "Abstract Factory",
+        "Singleton",
+        "Factory Method",
+        "Prototype"
+      ],
+      "correctIndex": 2,
+      "explanation": "A single product is deferred to subclasses within a fixed workflow. Third parties extend by subclassing Exporter and overriding the writer-creation method."
+    },
+    {
+      "id": "SEL-003",
+      "section": "Choosing and comparing creational patterns",
+      "question": "A search library lets callers assemble queries from a base table, optional filters, sorting, pagination and joins, in varying combinations, then submit an immutable Query. Which pattern fits best?",
+      "options": [
+        "Builder",
+        "Abstract Factory",
+        "Prototype",
+        "Singleton"
+      ],
+      "correctIndex": 0,
+      "explanation": "A complex object assembled in stages, with many optional parts and validation at the end, is the standard Builder use case."
+    },
+    {
+      "id": "SEL-004",
+      "section": "Choosing and comparing creational patterns",
+      "question": "A spreadsheet application creates cells with a style that comes from a loaded template, and thousands of cells differ in only one or two attributes. Constructing and fully configuring each from scratch is slow. Which pattern fits best?",
+      "options": [
+        "Factory Method",
+        "Builder",
+        "Singleton",
+        "Prototype"
+      ],
+      "correctIndex": 3,
+      "explanation": "Objects that differ slightly from a configured example are well served by cloning that example and altering the differences."
+    },
+    {
+      "id": "SEL-005",
+      "section": "Choosing and comparing creational patterns",
+      "question": "A team needs to create a family of mock objects for testing and also needs to ensure that all the mocks are consistent and replaceable with real objects without changing client code. Which choice is the best?",
+      "options": [
+        "A Builder with a toMock() method on every product",
+        "A Prototype that clones each real object into a mock",
+        "An Abstract Factory interface with a real factory and a test factory",
+        "A Singleton holding a map of all the mock objects"
+      ],
+      "correctIndex": 2,
+      "explanation": "A test factory and a production factory implement the same interface, so the whole family is swapped in one place."
+    },
+    {
+      "id": "SEL-006",
+      "section": "Choosing and comparing creational patterns",
+      "question": "GoF says Factory Method uses class inheritance, while Abstract Factory, Builder and Prototype rely on object composition. What does this mean in practice?",
+      "options": [
+        "Factory Method uses no classes; the other three require a class per product",
+        "With Factory Method the creator's subclass chooses what is made; with the others, a client delegates creation to another object (a factory, builder or prototype) that it holds",
+        "Factory Method can only create one object, while the others always create several",
+        "Factory Method creates objects at compile time; the other three create objects only at runtime"
+      ],
+      "correctIndex": 1,
+      "explanation": "Subclass-based variation is fixed when the class is chosen. Object-based variation can be swapped at runtime by giving the client a different factory, builder or prototype."
+    },
+    {
+      "id": "SEL-007",
+      "section": "Choosing and comparing creational patterns",
+      "question": "A team starts with Factory Method. They find they have many Creator subclasses that differ only in which product they return, and that products from different creators need to stay consistent. What does GoF suggest about how such designs tend to evolve?",
+      "options": [
+        "Move toward Abstract Factory (possibly with prototypes), because the extra flexibility is now needed",
+        "Replace Factory Method with a switch statement, which is more maintainable at scale",
+        "Abandon creational patterns and use direct constructors, because flexibility has been exceeded",
+        "Replace all the creators with one Singleton that stores every product"
+      ],
+      "correctIndex": 0,
+      "explanation": "Designs often begin simple and evolve toward the more flexible (and more complex) creational patterns once the need becomes concrete."
+    },
+    {
+      "id": "SEL-008",
+      "section": "Choosing and comparing creational patterns",
+      "question": "Consider the maze example: you want a CountingMazeBuilder that doesn't produce a maze but just counts rooms and doors in the generation process. Which pattern supports this naturally, and why?",
+      "options": [
+        "Prototype: each counter is a clone of a Maze prototype that tracks its own count",
+        "Abstract Factory: every factory must produce real Room and Door objects, which are then counted",
+        "Singleton: a single counting Maze instance receives all the construction steps",
+        "Builder: construction steps are separated from representation, so the 'product' can be a count rather than a maze"
+      ],
+      "correctIndex": 3,
+      "explanation": "Builder's interface describes how to build, not what is built. This is exactly what allows radically different results (even non-maze ones) from the same process."
+    },
+    {
+      "id": "SEL-009",
+      "section": "Choosing and comparing creational patterns",
+      "question": "Which statement about why factory-style creational patterns can do things that a direct constructor call cannot is correct?",
+      "options": [
+        "A factory method can run faster than a constructor in every language, since it skips initialisation",
+        "A factory method can return a different type from the one it declares, because return types are not checked",
+        "A factory method can create objects without ever calling any constructor",
+        "A factory method can return a cached or pooled instance, or a subtype, and can have a descriptive name, while `new` always allocates exactly the named class"
+      ],
+      "correctIndex": 3,
+      "explanation": "Because the caller does not write `new ConcreteClass`, the factory is free to choose what to return and to reuse instances."
+    },
+    {
+      "id": "SEL-010",
+      "section": "Choosing and comparing creational patterns",
+      "question": "A UI theme system must produce Buttons, Menus and Dialogs for the selected theme, and there must be exactly one active theme object for the whole application. Which combination is most appropriate?",
+      "options": [
+        "Factory Method for each widget and a separate Singleton for each widget class",
+        "Abstract Factory for the theme's product family, with the chosen concrete factory held as a single shared instance (e.g. a Singleton or injected)",
+        "Prototype for the whole application, cloned for each window",
+        "Builder for the widgets, with a Prototype to produce the theme"
+      ],
+      "correctIndex": 1,
+      "explanation": "Patterns complement each other: the family-consistency problem is solved by Abstract Factory, and the one-per-application requirement by limiting how many factory instances exist."
+    },
+    {
+      "id": "SEL-011",
+      "section": "Choosing and comparing creational patterns",
+      "question": "A developer proposes using Singleton in place of passing a factory object around because it 'saves parameters'. What is the best assessment?",
+      "options": [
+        "It is an improvement: Singleton always reduces coupling by removing parameters",
+        "It is impossible, since a Singleton cannot create other objects",
+        "It is equivalent: a Singleton and an injected factory have identical effects on testability",
+        "It trades explicit dependencies for hidden global access, making testing and substituting implementations harder, often not worth the saved parameters"
+      ],
+      "correctIndex": 3,
+      "explanation": "Global access hides what code depends on. Passing a factory explicitly documents the dependency and lets you substitute it."
+    },
+    {
+      "id": "SEL-012",
+      "section": "Choosing and comparing creational patterns",
+      "question": "A 30-line class has an 18-argument constructor, but a team member suggests Abstract Factory to fix the problem. What is the better recommendation and why?",
+      "options": [
+        "Abstract Factory, because every large constructor represents a family of products",
+        "Builder, because the issue is assembling one complex object with many optional values, not producing families of related products",
+        "Prototype, because 18 arguments always mean that clones are required",
+        "Singleton, because a constructor that large should be run only once"
+      ],
+      "correctIndex": 1,
+      "explanation": "Diagnose the problem first: what varies and what hurts. Constructor overload with a single product points at Builder."
+    },
+    {
+      "id": "SEL-013",
+      "section": "Choosing and comparing creational patterns",
+      "question": "What does the family of creational patterns achieve as a whole?",
+      "options": [
+        "They make every object immutable so it can be freely shared between threads",
+        "They make object creation faster by pooling every object in the system",
+        "They hide which concrete classes are created and how and when, so the system doesn't depend on how its objects are made",
+        "They remove the need for interfaces and abstract classes in the rest of the system"
+      ],
+      "correctIndex": 2,
+      "explanation": "All five patterns encapsulate knowledge of concrete classes and the creation process, so code can vary what, who, how and when objects are created without changing the code that uses them."
+    }
+  ]
+}
