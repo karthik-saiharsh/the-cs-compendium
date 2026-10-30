@@ -1,0 +1,787 @@
+{
+  "title": "Design Patterns: Applying the Right Pattern (GoF)",
+  "description": "A scenario-based question bank covering all 23 Gang of Four design patterns (creational, structural and behavioral). Every question is independent: read a short real-world situation and choose the pattern that best addresses it. Distractors are deliberately the nearest look-alike patterns, so the questions test whether you understand intent and trade-offs, not names.",
+  "count": 60,
+  "questions": [
+    {
+      "id": "C-01",
+      "section": "Creational scenarios",
+      "question": "A furniture retailer's ordering app sells complete room sets in styles such as Victorian and Modern. A set always contains a chair, a sofa and a coffee table, and mixing a Victorian chair with a Modern table must never happen. A new style is introduced every year, but the types of furniture in a set almost never change. Which pattern best fits the way objects are created?",
+      "options": [
+        "Abstract Factory",
+        "Factory Method",
+        "Builder",
+        "Prototype"
+      ],
+      "correctIndex": 0,
+      "explanation": "Several related product types must come from one consistent variant, and new variants are added often while the product types stay stable, which is exactly where Abstract Factory is strongest. Factory Method varies one product at a time and cannot guarantee a matching set."
+    },
+    {
+      "id": "C-02",
+      "section": "Creational scenarios",
+      "question": "A service talks to cloud storage, a message queue and a secrets vault. Each of the three must be accessed through the same cloud vendor, and the company wants to switch the whole service from one vendor to another by changing a single configuration value, without editing business code. Which pattern should the creation of these clients follow?",
+      "options": [
+        "Singleton",
+        "Abstract Factory",
+        "Factory Method",
+        "Bridge"
+      ],
+      "correctIndex": 1,
+      "explanation": "One configuration choice has to yield a whole family of vendor-matched clients. Abstract Factory provides that. Bridge could separate abstraction from vendor implementation, but the question is about who creates the matching clients."
+    },
+    {
+      "id": "C-03",
+      "section": "Creational scenarios",
+      "question": "An insurance system builds Quote objects that may include up to 25 optional coverages. Some coverage combinations are illegal and must be rejected, and a finished Quote must be immutable. Callers currently use a constructor with 25 arguments, most of them null. What should the team introduce?",
+      "options": [
+        "Prototype",
+        "Factory Method",
+        "Builder",
+        "Abstract Factory"
+      ],
+      "correctIndex": 2,
+      "explanation": "A single complex object assembled in steps, with optional parts and validation before the final immutable object is produced, is the classic Builder case. Abstract Factory is for families of products, not for one object with many options."
+    },
+    {
+      "id": "C-04",
+      "section": "Creational scenarios",
+      "question": "A tool reads a structured document and must emit either HTML, Markdown or PDF. The reading and traversal logic is identical in all three cases; only the way output pieces (heading, paragraph, table) are assembled differs. The team wants to add output formats without touching the reader. Which pattern organises the creation of the output?",
+      "options": [
+        "Builder",
+        "Abstract Factory",
+        "Template Method",
+        "Visitor"
+      ],
+      "correctIndex": 0,
+      "explanation": "The reader acts as the director, calling a common set of construction steps, and each output format is a concrete builder. Template Method could share the reading algorithm via inheritance, but it does not separate construction from representation as cleanly, and Abstract Factory creates products immediately rather than assembling one result step by step."
+    },
+    {
+      "id": "C-05",
+      "section": "Creational scenarios",
+      "question": "A data-import framework provides a base ImportJob that handles scheduling, retries and logging. Each concrete job type (CSV, XML, etc.) needs its own Parser object, and third parties will add new job types by extending ImportJob. The framework code must create the parser at the right moment without ever naming a concrete parser class. Which pattern applies?",
+      "options": [
+        "Prototype",
+        "Singleton",
+        "Factory Method",
+        "Abstract Factory"
+      ],
+      "correctIndex": 2,
+      "explanation": "The framework knows when a parser is needed but not which one, so it declares an overridable creation method. Only one product is involved, so Abstract Factory would be unnecessary."
+    },
+    {
+      "id": "C-05b",
+      "section": "Creational scenarios",
+      "question": "A PaymentFlow base class validates the cart, charges the customer and sends a receipt. The charging step needs a GatewayClient, and the right client depends on the country-specific subclass (IndiaPaymentFlow, GermanyPaymentFlow). Tests also want a subclass that supplies a fake client. The base class must not mention any concrete client. How should it obtain the client?",
+      "options": [
+        "Singleton",
+        "Factory Method",
+        "Abstract Factory",
+        "Proxy"
+      ],
+      "correctIndex": 1,
+      "explanation": "The base class keeps the workflow and calls an overridable creation method, and each subclass decides which single product to make, which also gives tests a seam. Abstract Factory would suit several related products, not one."
+    },
+    {
+      "id": "C-06",
+      "section": "Creational scenarios",
+      "question": "A tabletop-RPG tool lets game masters design their own monster templates at runtime, each template being just a Monster object with edited stats and abilities. When a battle starts, the GM presses 'spawn 20' and gets 20 independent monsters that start identical to the template and then diverge. There can be hundreds of templates and no code exists for them. Which creational pattern fits?",
+      "options": [
+        "Factory Method",
+        "Abstract Factory",
+        "Prototype",
+        "Builder"
+      ],
+      "correctIndex": 2,
+      "explanation": "Variants are configured instances defined at runtime, and new objects start as copies of them. Factory Method would need a creator class per template, which cannot exist because templates are created by users."
+    },
+    {
+      "id": "C-07",
+      "section": "Creational scenarios",
+      "question": "In a vector-graphics editor the 'Duplicate' command must copy whatever the user has selected: a circle, a text box, or a group containing nested groups of shapes. The command code only holds references to the shapes' common interface and must produce an independent copy of the same concrete type. Which pattern should the shapes support?",
+      "options": [
+        "Prototype",
+        "Memento",
+        "Factory Method",
+        "Composite"
+      ],
+      "correctIndex": 0,
+      "explanation": "Copying through the common interface and getting the correct runtime type back is what a polymorphic clone gives. Composite describes the nested structure, but not how copies are made."
+    },
+    {
+      "id": "C-08",
+      "section": "Creational scenarios",
+      "question": "Firmware for a device controls a single physical motor driver. If two parts of the program each opened their own driver object and sent commands, the hardware would receive conflicting signals. Every part of the program must reach the same driver object. Which pattern is intended?",
+      "options": [
+        "Singleton",
+        "Flyweight",
+        "Proxy",
+        "Facade"
+      ],
+      "correctIndex": 0,
+      "explanation": "The real-world resource is unique, so the class itself should guarantee one instance and give access to it. Flyweight shares many small objects to save memory, which is a different problem."
+    },
+    {
+      "id": "C-09",
+      "section": "Creational scenarios",
+      "question": "A desktop OS has a print spooler. Applications from many processes queue jobs, and the spooler must serialise them. The design requires that all callers inside the spooler process use the same queue object, so jobs cannot be lost into separate queues. Which pattern describes access to that queue object?",
+      "options": [
+        "Observer",
+        "Mediator",
+        "Flyweight",
+        "Singleton"
+      ],
+      "correctIndex": 3,
+      "explanation": "A single shared queue instance with a well-known access point is the intent of Singleton. Mediator coordinates interactions between objects, but the problem here is simply guaranteeing one shared instance."
+    },
+    {
+      "id": "S-01",
+      "section": "Structural scenarios",
+      "question": "Your app calls an analytics library through `track(eventName, properties)` in 300 places. The company is switching vendors, and the new SDK offers only `send(Payload)`. Neither the 300 call sites nor the vendor's SDK can be modified. What is the minimal-change solution?",
+      "options": [
+        "Adapter",
+        "Bridge",
+        "Decorator",
+        "Facade"
+      ],
+      "correctIndex": 0,
+      "explanation": "A class that exposes the old interface and translates calls to the new SDK makes incompatible interfaces work together. Facade simplifies a subsystem but does not exist to match an existing expected interface."
+    },
+    {
+      "id": "S-02",
+      "section": "Structural scenarios",
+      "question": "A new service layer is written against a `CustomerRepository` interface that returns clean objects. The company's data actually lives behind a legacy SOAP service that returns XML with its own method names. The legacy service cannot be changed. Which pattern should connect them?",
+      "options": [
+        "Bridge",
+        "Proxy",
+        "Facade",
+        "Adapter"
+      ],
+      "correctIndex": 3,
+      "explanation": "The legacy service has a useful behaviour but the wrong interface; an adapter implements the expected interface by converting calls and data. A Proxy keeps the same interface as its subject, which is not the case here."
+    },
+    {
+      "id": "S-03",
+      "section": "Structural scenarios",
+      "question": "A notification system has message kinds (Alert, Reminder, Receipt) and delivery channels (Email, SMS, Push). Subclassing every combination would produce nine classes, and each new kind or channel multiplies that number. The team wants to add kinds and channels independently of each other. Which pattern should structure this?",
+      "options": [
+        "Bridge",
+        "Decorator",
+        "Adapter",
+        "Strategy"
+      ],
+      "correctIndex": 0,
+      "explanation": "Two dimensions of variation are separated into two hierarchies connected by composition, so they can grow independently. Strategy swaps one algorithm and would not model a second hierarchy that also evolves."
+    },
+    {
+      "id": "S-04",
+      "section": "Structural scenarios",
+      "question": "A product line has Remote controls (Basic, Advanced) and Devices (TV, Radio, Projector). Each remote's behaviours are defined in terms of an abstract device operations interface, and engineers on separate teams extend remotes and devices. Which pattern fits this arrangement?",
+      "options": [
+        "Adapter",
+        "Bridge",
+        "Facade",
+        "State"
+      ],
+      "correctIndex": 1,
+      "explanation": "The abstraction (remote) holds a reference to the implementor (device), letting both hierarchies vary separately. Adapter would be used to retrofit existing mismatched classes, not to plan two independent hierarchies."
+    },
+    {
+      "id": "S-05",
+      "section": "Structural scenarios",
+      "question": "A file manager must compute the total size of a selection that may include single files and folders, and folders can contain further folders. The code that asks for the size should be identical whether it is holding a file or a deeply nested folder. Which pattern?",
+      "options": [
+        "Iterator",
+        "Decorator",
+        "Visitor",
+        "Composite"
+      ],
+      "correctIndex": 3,
+      "explanation": "Part-whole tree structures in which clients treat leaves and containers uniformly are Composite's territory. Iterator or Visitor may traverse such a tree, but neither defines the uniform leaf/container structure."
+    },
+    {
+      "id": "S-06",
+      "section": "Structural scenarios",
+      "question": "A company's budget is computed per employee, and a manager's budget is their own cost plus all their subordinates' budgets. Subordinates may themselves be managers. Report code should call the same `cost()` method on any employee. Which pattern models this?",
+      "options": [
+        "Chain of Responsibility",
+        "Decorator",
+        "Mediator",
+        "Composite"
+      ],
+      "correctIndex": 3,
+      "explanation": "A recursive tree in which individuals and groups share one interface is Composite. Chain of Responsibility passes a request along a line, which is not what is needed for aggregation."
+    },
+    {
+      "id": "S-07",
+      "section": "Structural scenarios",
+      "question": "A data stream class reads bytes. Depending on configuration, streams must be able to add buffering, compression and encryption in any combination and order, decided at runtime. Subclassing for every combination is impractical, and all variants must still be used as plain streams. Which pattern?",
+      "options": [
+        "Proxy",
+        "Decorator",
+        "Composite",
+        "Adapter"
+      ],
+      "correctIndex": 1,
+      "explanation": "Wrapping an object with objects of the same interface that each add behaviour, stacked freely, is Decorator. A Proxy also wraps, but its purpose is to control access rather than add stackable responsibilities."
+    },
+    {
+      "id": "S-08",
+      "section": "Structural scenarios",
+      "question": "A reporting team wants to add execution-time measurement to some Report objects but not others, decided per instance at runtime. The report class must not change, callers keep using the same report interface, and the measurement may need to be combined with other optional extras. What is the fitting design?",
+      "options": [
+        "Adapter",
+        "State",
+        "Chain of Responsibility",
+        "Decorator"
+      ],
+      "correctIndex": 3,
+      "explanation": "Each optional extra is a wrapper with the same interface that adds a responsibility to a single instance dynamically. State changes behaviour as internal state changes, which is not the aim."
+    },
+    {
+      "id": "S-09",
+      "section": "Structural scenarios",
+      "question": "Starting a movie in a home-theatre app requires eight calls in the right order: dim the lights, power the amp, set its input, turn on the projector, lower the screen, and so on. The mobile UI should expose one `watchMovie()` button, while power users can still address components individually. Which pattern fits?",
+      "options": [
+        "Mediator",
+        "Command",
+        "Facade",
+        "Adapter"
+      ],
+      "correctIndex": 2,
+      "explanation": "A simple entry point to a complex set of components, without removing direct access to them, is Facade. Mediator would be for components that talk to each other, here the subsystem objects remain unaware of the entry point."
+    },
+    {
+      "id": "S-10",
+      "section": "Structural scenarios",
+      "question": "Your team has adopted a video-conversion library containing about 40 classes (codecs, containers, filters). The team's code only ever needs `convert(inputFile, targetFormat)` with sensible defaults, and the rest of the application should not depend on the library's internals. What should you write?",
+      "options": [
+        "Proxy",
+        "Adapter",
+        "Builder",
+        "Facade"
+      ],
+      "correctIndex": 3,
+      "explanation": "A narrow, task-oriented interface over a large subsystem is Facade. Adapter is about matching a specific expected interface, which is not the situation described."
+    },
+    {
+      "id": "S-11",
+      "section": "Structural scenarios",
+      "question": "A text editor stores a document with a million characters, each as an object holding glyph outline, font metrics, and its position in the document. Memory usage is enormous even though the document uses only three fonts and a few hundred distinct glyph shapes. Which pattern reduces the memory cost?",
+      "options": [
+        "Proxy",
+        "Singleton",
+        "Flyweight",
+        "Prototype"
+      ],
+      "correctIndex": 2,
+      "explanation": "Sharing the intrinsic, repeated data (glyph and font) between objects and passing the extrinsic data (position) from outside is Flyweight. Prototype would make copies, increasing memory use rather than reducing it."
+    },
+    {
+      "id": "S-12",
+      "section": "Structural scenarios",
+      "question": "A game renders a forest of 200,000 trees from only six species. The mesh and textures for each species are identical, and only each tree's position, scale and rotation differ. The renderer is running out of memory. What is the appropriate pattern?",
+      "options": [
+        "Prototype",
+        "Composite",
+        "Factory Method",
+        "Flyweight"
+      ],
+      "correctIndex": 3,
+      "explanation": "Large numbers of fine-grained objects with mostly shared state call for Flyweight: share the species data and store the per-tree data externally. Composite could organise the forest but would not remove duplicated mesh data."
+    },
+    {
+      "id": "S-13",
+      "section": "Structural scenarios",
+      "question": "A document viewer lists hundreds of high-resolution images. Loading all of them at start-up takes too long, so each image should be loaded only when it scrolls into view. The rest of the code must keep using the same Image interface and not know whether the image is loaded. Which pattern?",
+      "options": [
+        "Proxy",
+        "Decorator",
+        "Adapter",
+        "Flyweight"
+      ],
+      "correctIndex": 0,
+      "explanation": "A stand-in with the same interface that controls when the real object is created is a virtual Proxy. A Decorator would add responsibilities rather than control creation and access."
+    },
+    {
+      "id": "S-14",
+      "section": "Structural scenarios",
+      "question": "A bank has an AccountService that must not be called by unauthorised users. Permission checks should be added without modifying AccountService and without callers changing how they call it. Some calls also need to be logged for auditing. Which pattern provides the access control?",
+      "options": [
+        "Decorator",
+        "Facade",
+        "Proxy",
+        "Adapter"
+      ],
+      "correctIndex": 2,
+      "explanation": "A surrogate that implements the same interface and decides whether to forward the request is a protection Proxy. A Decorator could technically wrap the call, but the intent here is controlling access to the service."
+    },
+    {
+      "id": "B-01",
+      "section": "Behavioral scenarios",
+      "question": "An expense system routes claims: up to $100 can be approved by a team lead, up to $1,000 by a manager, and larger ones by a director. The submitter should not know who approves, handlers may change or be reordered by configuration, and each handler either approves or passes on. Which pattern?",
+      "options": [
+        "Mediator",
+        "Command",
+        "Chain of Responsibility",
+        "State"
+      ],
+      "correctIndex": 2,
+      "explanation": "A request travels along a chain until a handler deals with it, with the sender decoupled from the receiver. State would apply if one object's behaviour changed with internal state, which is not the case."
+    },
+    {
+      "id": "B-02",
+      "section": "Behavioral scenarios",
+      "question": "A web framework processes every request through a sequence of units: authentication, rate limiting, logging and compression. Any unit can reject the request and stop processing, and the application owner wants to add, remove or reorder units without code changes in the others. Which pattern?",
+      "options": [
+        "Iterator",
+        "Decorator",
+        "Chain of Responsibility",
+        "Observer"
+      ],
+      "correctIndex": 2,
+      "explanation": "Each unit decides whether to handle or forward, and a unit may stop the flow. That is Chain of Responsibility. Decorators always delegate to the wrapped object and don't typically stop the flow."
+    },
+    {
+      "id": "B-03",
+      "section": "Behavioral scenarios",
+      "question": "A smart-home remote has buttons that users can map to arbitrary actions (lights on, set thermostat, start vacuum). The remote's code must not know what the actions do. Actions also need to be queued and undone. Which pattern should represent each action?",
+      "options": [
+        "Command",
+        "State",
+        "Strategy",
+        "Chain of Responsibility"
+      ],
+      "correctIndex": 0,
+      "explanation": "Turning a request into an object with an execute (and undo) operation decouples the invoker from the receiver and supports queueing and undo. Strategy swaps algorithms but does not model queued requests."
+    },
+    {
+      "id": "B-04",
+      "section": "Behavioral scenarios",
+      "question": "A design tool records every user action so that they can be saved to disk, replayed later, logged for auditing, and sent to a background worker for execution. The recorder is generic and has no idea what an action does. How should each action be represented?",
+      "options": [
+        "Strategy",
+        "Command",
+        "Memento",
+        "Observer"
+      ],
+      "correctIndex": 1,
+      "explanation": "Representing requests as first-class objects lets them be stored, serialised, queued, logged and replayed. Memento captures state snapshots, not operations."
+    },
+    {
+      "id": "B-05",
+      "section": "Behavioral scenarios",
+      "question": "Marketing staff write targeting rules in a small text syntax, for example `country = 'IN' AND (age > 30 OR vip)`. The application must evaluate these rules against user records. The grammar is small and stable, and developers want each grammar rule to map to a class. Which pattern?",
+      "options": [
+        "Visitor",
+        "Interpreter",
+        "Composite",
+        "Strategy"
+      ],
+      "correctIndex": 1,
+      "explanation": "A simple language represented as a class hierarchy of grammar rules, each knowing how to interpret itself, is Interpreter. The resulting expression tree is a Composite, but the pattern that gives it meaning is Interpreter."
+    },
+    {
+      "id": "B-06",
+      "section": "Behavioral scenarios",
+      "question": "An admin dashboard lets analysts type filter expressions such as `status:open AND (owner:me OR priority:high)`. The expressions need parsing into a tree whose nodes evaluate themselves against a ticket. The grammar will remain small. Which pattern models the evaluation?",
+      "options": [
+        "State",
+        "Interpreter",
+        "Facade",
+        "Chain of Responsibility"
+      ],
+      "correctIndex": 1,
+      "explanation": "A tiny recurring language whose sentences are evaluated against a context fits Interpreter. For large, evolving grammars a parser generator is more appropriate."
+    },
+    {
+      "id": "B-07",
+      "section": "Behavioral scenarios",
+      "question": "A social-network library stores friends in a graph, and different clients want to walk it breadth-first, depth-first or by closeness, one friend at a time. The library must not reveal how the graph is stored internally. What should it offer?",
+      "options": [
+        "Visitor",
+        "Proxy",
+        "Iterator",
+        "Composite"
+      ],
+      "correctIndex": 2,
+      "explanation": "Sequential access to the elements without exposing the structure, possibly with several traversal strategies, is Iterator. Visitor would apply an operation to elements, which is not the need described."
+    },
+    {
+      "id": "B-08",
+      "section": "Behavioral scenarios",
+      "question": "A client library wraps a paginated REST API. Callers want to write `for record in results` and get all records one after another, with pages fetched lazily in the background, without knowing about pages or tokens. Which pattern provides this?",
+      "options": [
+        "Observer",
+        "Iterator",
+        "Proxy",
+        "Adapter"
+      ],
+      "correctIndex": 1,
+      "explanation": "A uniform sequential-access interface that hides the underlying storage and fetch details is Iterator. A lazy Proxy might defer loading, but the defining need here is traversal."
+    },
+    {
+      "id": "B-09",
+      "section": "Behavioral scenarios",
+      "question": "Aircraft at a busy airport currently radio each other to coordinate landing order, so each plane must know about all other planes and adding a plane means updating everyone. The airport wants to centralise this coordination so planes only talk to one party. Which pattern describes the redesign?",
+      "options": [
+        "Chain of Responsibility",
+        "Mediator",
+        "Facade",
+        "Observer"
+      ],
+      "correctIndex": 1,
+      "explanation": "Peers that communicate in complex many-to-many ways are decoupled by routing everything through a central coordinator, which is Mediator. Observer is one-way broadcast and would not contain the coordination logic."
+    },
+    {
+      "id": "B-10",
+      "section": "Behavioral scenarios",
+      "question": "A settings dialog has a dropdown, six checkboxes and several text fields. Choosing 'Custom' in the dropdown enables three fields and disables two checkboxes, and many other controls react to each other. The controls currently reference each other directly, which makes them impossible to reuse. How can the interaction logic be reorganised?",
+      "options": [
+        "Mediator",
+        "Observer",
+        "Command",
+        "State"
+      ],
+      "correctIndex": 0,
+      "explanation": "Move the interaction rules into a dialog-level coordinator that knows all controls, which now only know the coordinator. Observer would scatter the logic across many subscriptions."
+    },
+    {
+      "id": "B-11",
+      "section": "Behavioral scenarios",
+      "question": "A game wants checkpoints. At a checkpoint the world's complete state is stored, and after a failure the player returns to it. The Player object's fields are private, and the save system must not be able to read or modify them directly. Which pattern allows this?",
+      "options": [
+        "Proxy",
+        "Prototype",
+        "Memento",
+        "Command"
+      ],
+      "correctIndex": 2,
+      "explanation": "The object itself produces an opaque snapshot of its state that an external caretaker stores and later hands back to restore it, without breaking encapsulation. Prototype could copy the object, but a copy does not restore the original and exposes its whole interface."
+    },
+    {
+      "id": "B-12",
+      "section": "Behavioral scenarios",
+      "question": "A drawing app autosaves its document's internal state every 30 seconds so that after a crash the user can resume. The saving component must treat the saved data as a black box, because the Document class is the only code allowed to know its layout. Which pattern fits?",
+      "options": [
+        "Command",
+        "Iterator",
+        "Facade",
+        "Memento"
+      ],
+      "correctIndex": 3,
+      "explanation": "A snapshot that only the originator can interpret, stored by a caretaker, is Memento. Command records operations, not state."
+    },
+    {
+      "id": "B-13",
+      "section": "Behavioral scenarios",
+      "question": "A stock-quote service must notify a variable number of parties (a dashboard, an alert engine, a logger) whenever a price changes. The service must not know who listens or how many, and listeners can join and leave while the system runs. Which pattern?",
+      "options": [
+        "Observer",
+        "Mediator",
+        "Chain of Responsibility",
+        "Command"
+      ],
+      "correctIndex": 0,
+      "explanation": "A one-to-many dependency where subjects publish changes to subscribers they know nothing about is Observer. Mediator centralises two-way coordination, which is not required here."
+    },
+    {
+      "id": "B-14",
+      "section": "Behavioral scenarios",
+      "question": "In a spreadsheet, a chart and a 'total' cell must stay up to date whenever any of the underlying numbers change, and the cells should not have to know which charts or totals depend on them. Which pattern gives this automatic propagation?",
+      "options": [
+        "Iterator",
+        "Strategy",
+        "Visitor",
+        "Observer"
+      ],
+      "correctIndex": 3,
+      "explanation": "Dependents register their interest and are updated automatically when the subject changes. Iterator or Visitor would need something to pull values explicitly."
+    },
+    {
+      "id": "B-15",
+      "section": "Behavioral scenarios",
+      "question": "A document workflow has the statuses Draft, InReview and Published. The same operations (edit, submit, publish) behave differently in each status: editing is forbidden after publishing, and publishing is impossible from Draft. Today these rules are a huge if/else on a status field in every method, and statuses move automatically as operations succeed. What restructuring is suitable?",
+      "options": [
+        "Chain of Responsibility",
+        "Template Method",
+        "Strategy",
+        "State"
+      ],
+      "correctIndex": 3,
+      "explanation": "Behaviour depends on an internal status, and the object moves between statuses itself. Each status becomes its own class. Strategy is chosen by a client and does not usually transition by itself."
+    },
+    {
+      "id": "B-16",
+      "section": "Behavioral scenarios",
+      "question": "A media player has Stopped, Playing and Paused modes. Pressing the single 'play/pause' button should start playing when stopped, pause when playing, and resume when paused, and some buttons are ignored in certain modes. The conditional logic is getting hard to extend. What pattern should replace it?",
+      "options": [
+        "State",
+        "Command",
+        "Mediator",
+        "Strategy"
+      ],
+      "correctIndex": 0,
+      "explanation": "The object appears to change its class as its mode changes, with each mode handling the same events differently and triggering transitions. This is State."
+    },
+    {
+      "id": "B-17",
+      "section": "Behavioral scenarios",
+      "question": "A route-planning app offers fastest, shortest and scenic routing. The user selects one in settings, which can change at any time. All three accept the same inputs and return a route, and new algorithms are added regularly. How should the planner hold the algorithm?",
+      "options": [
+        "Template Method",
+        "Factory Method",
+        "State",
+        "Strategy"
+      ],
+      "correctIndex": 3,
+      "explanation": "Interchangeable algorithms behind a common interface, chosen by the client and swapped at runtime, are Strategy. State would imply that the planner changes algorithm by itself as it moves between modes."
+    },
+    {
+      "id": "B-18",
+      "section": "Behavioral scenarios",
+      "question": "An e-commerce platform computes shipping fees differently for each carrier, and the carrier is chosen per order. The calculation code is now a giant conditional that grows with every new carrier. Calculation of each fee uses the same inputs. What is the best fit?",
+      "options": [
+        "Template Method",
+        "Chain of Responsibility",
+        "Strategy",
+        "Visitor"
+      ],
+      "correctIndex": 2,
+      "explanation": "Encapsulating each carrier's calculation as an interchangeable object removes the conditional and lets new carriers be added without edits. Template Method would fix the steps through inheritance rather than allow runtime selection."
+    },
+    {
+      "id": "B-19",
+      "section": "Behavioral scenarios",
+      "question": "A data-mining tool processes CSV, PDF and database sources. Each follows the same sequence: open the source, extract data, parse, analyse, produce a report, close. Analysis and reporting are identical across sources, while open, extract and parse differ. The team wants to guarantee the sequence cannot be reordered by subclass authors. Which pattern?",
+      "options": [
+        "Builder",
+        "Factory Method",
+        "Template Method",
+        "Strategy"
+      ],
+      "correctIndex": 2,
+      "explanation": "A base class defines the fixed skeleton and lets subclasses fill in specific steps. Strategy would swap the whole algorithm, but would not enforce a shared skeleton in the same way."
+    },
+    {
+      "id": "B-20",
+      "section": "Behavioral scenarios",
+      "question": "A test framework must run every test as: set up fixtures, run the test body, tear down fixtures, and tear-down must happen even when the body fails. Test authors should only write the body (and optionally set-up/tear-down). Which pattern gives the framework control of the order?",
+      "options": [
+        "Command",
+        "Chain of Responsibility",
+        "Observer",
+        "Template Method"
+      ],
+      "correctIndex": 3,
+      "explanation": "The framework owns the invariant ordering and calls overridable steps, which is the Hollywood principle at the heart of Template Method."
+    },
+    {
+      "id": "B-21",
+      "section": "Behavioral scenarios",
+      "question": "A compiler represents programs as an abstract syntax tree with about 15 stable node classes. New operations on the tree (type checking, pretty-printing, code generation, metrics) are added every few months, and the team does not want to keep adding methods to all 15 node classes. Which pattern?",
+      "options": [
+        "Iterator",
+        "Visitor",
+        "Composite",
+        "Interpreter"
+      ],
+      "correctIndex": 1,
+      "explanation": "Adding new operations over a stable class hierarchy without modifying the classes is the purpose of Visitor. Iterator only traverses, and Composite describes the tree structure, not new operations."
+    },
+    {
+      "id": "B-22",
+      "section": "Behavioral scenarios",
+      "question": "An insurance system has stable object types (LifeInsurance, AutoInsurance, HealthInsurance) in a portfolio. Auditors regularly request new reports, each of which must do something different for each type. The product classes should not be edited for every new report. Which pattern?",
+      "options": [
+        "Template Method",
+        "Iterator",
+        "Visitor",
+        "Strategy"
+      ],
+      "correctIndex": 2,
+      "explanation": "Per-type behaviour for a new operation kept outside the classes, with double dispatch, is Visitor. Strategy would help vary an algorithm of one object, but not per-type dispatch across a heterogeneous structure."
+    },
+    {
+      "id": "L-01",
+      "section": "Look-alike patterns",
+      "question": "A text editor lets users pick a word-wrapping algorithm (greedy, optimal, none) in preferences. The editor never changes the algorithm by itself, and the chosen algorithm only affects how paragraphs are laid out. Which pattern is being used?",
+      "options": [
+        "State",
+        "Strategy",
+        "Bridge",
+        "Template Method"
+      ],
+      "correctIndex": 1,
+      "explanation": "The client chooses an interchangeable algorithm and the host never switches it itself, so it is Strategy. If the object transitioned among behaviours on its own as its state evolved, State would be the answer."
+    },
+    {
+      "id": "L-02",
+      "section": "Look-alike patterns",
+      "question": "A team owns all 12 classes of an in-house pricing module and finds client code needs 5 calls to price a basket. They add one class with `priceBasket()` that calls those classes internally. The existing classes' interfaces remain unchanged and are still available. Which pattern is this, and not Adapter?",
+      "options": [
+        "Facade",
+        "Adapter",
+        "Proxy",
+        "Mediator"
+      ],
+      "correctIndex": 0,
+      "explanation": "The aim is a simpler interface to a subsystem, not conversion of one interface to another that a client expects. That is Facade. Adapter is used when an existing interface needs to be made compatible with an expected one."
+    },
+    {
+      "id": "L-03",
+      "section": "Look-alike patterns",
+      "question": "Before writing any code, a team designing a drawing library foresees shapes (Circle, Square) and rendering back-ends (Vector, Raster) that will evolve separately. They want both to extend independently from day one. Which pattern, and not Adapter, matches their intent?",
+      "options": [
+        "Decorator",
+        "Abstract Factory",
+        "Adapter",
+        "Bridge"
+      ],
+      "correctIndex": 3,
+      "explanation": "Bridge is planned up front to let abstraction and implementation vary independently. Adapter is a retrofit that makes existing, unrelated, incompatible classes work together."
+    },
+    {
+      "id": "L-04",
+      "section": "Look-alike patterns",
+      "question": "An editor must support undo by recording, for each user action, the operation performed together with the parameters needed to reverse it (for example 'inserted 'abc' at position 10'). Undoing runs the inverse operation. Which pattern is the best foundation, and not Memento?",
+      "options": [
+        "Memento",
+        "Command",
+        "Observer",
+        "State"
+      ],
+      "correctIndex": 1,
+      "explanation": "Representing each operation as an object that can execute and un-execute fits Command, and it is cheap when inverses are easy to compute. Memento stores whole state snapshots, which is better when inverses are hard but costs more memory."
+    },
+    {
+      "id": "L-05",
+      "section": "Look-alike patterns",
+      "question": "A subsystem is made of 8 audio components that never need to talk to each other. Outside code only needs a single simple entry point to play and stop sound. Which pattern, rather than Mediator, applies?",
+      "options": [
+        "Mediator",
+        "Proxy",
+        "Adapter",
+        "Facade"
+      ],
+      "correctIndex": 3,
+      "explanation": "Components that are unaware of each other and a one-way simplifying interface for outsiders is Facade. A Mediator exists to handle interaction between the components themselves."
+    },
+    {
+      "id": "L-06",
+      "section": "Look-alike patterns",
+      "question": "A designer asks for a design in which one object announces 'I changed' to anyone who cares, with no knowledge of who is listening. There is no desire for central coordination logic, and listeners do not interact with each other. Which pattern, and not Mediator?",
+      "options": [
+        "Command",
+        "Mediator",
+        "Observer",
+        "Chain of Responsibility"
+      ],
+      "correctIndex": 2,
+      "explanation": "One-way broadcast to unknown subscribers is Observer. Mediator centralises the rules of interaction between colleagues who talk both ways."
+    },
+    {
+      "id": "L-07",
+      "section": "Look-alike patterns",
+      "question": "A graphics engine creates a million Particle objects. Most particles share identical sprite data and differ in position and velocity only. A developer suggests Prototype to create particles quickly by cloning, but memory is the actual bottleneck. Which pattern solves the real problem?",
+      "options": [
+        "Prototype",
+        "Factory Method",
+        "Flyweight",
+        "Singleton"
+      ],
+      "correctIndex": 2,
+      "explanation": "Cloning makes each particle carry its own copy of the sprite data and worsens memory use. Sharing the intrinsic state across all particles is Flyweight."
+    },
+    {
+      "id": "L-08",
+      "section": "Look-alike patterns",
+      "question": "A wrapper class implements the same interface as a payment gateway. Its only purpose is to check that the caller has the required role before forwarding the call, and to refuse the call otherwise. It adds no new features to the payment behaviour. Which pattern, rather than Decorator?",
+      "options": [
+        "Proxy",
+        "Adapter",
+        "Facade",
+        "Decorator"
+      ],
+      "correctIndex": 0,
+      "explanation": "When the wrapper's role is controlling access to the subject, it is Proxy. Decorator is about attaching extra, stackable responsibilities."
+    },
+    {
+      "id": "L-09",
+      "section": "Look-alike patterns",
+      "question": "Each of the 7 subclasses of ReportGenerator repeats the same sequence: load data, validate, format, save. Only the 'format' step differs, and the others are copy-pasted. The team wants to remove the duplication using inheritance. Which pattern?",
+      "options": [
+        "Template Method",
+        "Factory Method",
+        "Command",
+        "Strategy"
+      ],
+      "correctIndex": 0,
+      "explanation": "Pulling the invariant sequence into a base class and leaving the varying step to subclasses is Template Method. Strategy would solve it with composition instead of inheritance."
+    },
+    {
+      "id": "L-10",
+      "section": "Look-alike patterns",
+      "question": "A pipeline passes a request through several handlers, but unlike a stack of wrappers, any handler may decide to completely stop processing and answer the request itself, and often no later handler ever sees it. Which pattern, and not Decorator?",
+      "options": [
+        "Observer",
+        "Decorator",
+        "Composite",
+        "Chain of Responsibility"
+      ],
+      "correctIndex": 3,
+      "explanation": "Handlers that may end the traversal and respond are the signature of Chain of Responsibility. Decorators normally delegate to the wrapped component and add to its behaviour."
+    },
+    {
+      "id": "L-11",
+      "section": "Look-alike patterns",
+      "question": "A construction tool assembles a robot in an ordered series of steps (build chassis, add arms, add sensors). By swapping the component that performs the steps, the same sequence yields a combat robot or a cleaning robot. The sequence itself is reused. Which pattern, and not Abstract Factory?",
+      "options": [
+        "Template Method",
+        "Builder",
+        "Factory Method",
+        "Abstract Factory"
+      ],
+      "correctIndex": 1,
+      "explanation": "A stepwise construction of one product, with the same process producing different representations, is Builder. Abstract Factory returns finished members of a product family from each call."
+    },
+    {
+      "id": "L-12",
+      "section": "Look-alike patterns",
+      "question": "A file-system library offers files and directories under one interface so that `delete()` works on both. Separately, the library needs a way to walk through all entries of a directory one by one without exposing how directories store their children. Which two patterns are respectively involved?",
+      "options": [
+        "Facade for the uniform interface, Observer for the walking",
+        "Composite for the uniform interface, Iterator for the walking",
+        "Decorator for the uniform interface, Visitor for the walking",
+        "Bridge for the uniform interface, Iterator for the walking"
+      ],
+      "correctIndex": 1,
+      "explanation": "Treating leaves and containers uniformly is Composite. Traversing without exposing internal representation is Iterator. Composite structures and Iterator are often combined."
+    },
+    {
+      "id": "L-13",
+      "section": "Look-alike patterns",
+      "question": "A class needs to run the same operation on objects of ten different types, with different behaviour per type. Types are rarely added, but new operations are added often. A teammate suggests adding an abstract method to each type for every new operation. Which pattern improves extensibility along the axis that is actually changing?",
+      "options": [
+        "Strategy",
+        "Visitor",
+        "Decorator",
+        "Template Method"
+      ],
+      "correctIndex": 1,
+      "explanation": "When operations change more than classes, Visitor lets you add operations without touching the classes. Visitor is a poor fit when new classes appear frequently."
+    },
+    {
+      "id": "L-14",
+      "section": "Look-alike patterns",
+      "question": "A multiplayer game has a Player whose behaviour depends on the status Idle, Running, Jumping or Falling. Events such as pressing a key or hitting the ground automatically move the player to a new status, and which action is valid depends on the current one. Which pattern, rather than Strategy?",
+      "options": [
+        "State",
+        "Command",
+        "Strategy",
+        "Chain of Responsibility"
+      ],
+      "correctIndex": 0,
+      "explanation": "The behaviour set changes as the object's own state evolves through event-driven transitions, which is State. In Strategy, the context does not normally switch strategies itself."
+    }
+  ]
+}
